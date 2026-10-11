@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "mantaVersion": "0.1.0",
+  "axeVersion": "4.14.0",
+  "at": "2026-10-11T06-50-59-333Z",
+  "ruleset": {
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa"
+    ],
+    "extended": false,
+    "experimental": false
+  },
+  "pages": {
+    "/": {
+      "keys": [
+        "/|::|color-contrast|::|#last-updated",
+        "/|::|image-alt|::|#hero-image",
+        "/|::|link-name|::|#social-fb",
+        "/|::|link-name|::|#social-x",
+        "/|::|link-name|::|#social-yt"
+      ],
+      "counts": {
+        "color-contrast": 1,
+        "image-alt": 1,
+        "link-name": 3
+      }
+    },
+    "/apply": {
+      "keys": [
+        "/apply|::|color-contrast|::|#last-updated",
+        "/apply|::|label|::|#ssn",
+        "/apply|::|link-name|::|#social-fb",
+        "/apply|::|link-name|::|#social-x",
+        "/apply|::|link-name|::|#social-yt",
+        "/apply|::|select-name|::|#household-size"
+      ],
+      "counts": {
+        "color-contrast": 1,
+        "label": 1,
+        "link-name": 3,
+        "select-name": 1
+      }
+    },
+    "/signin": {
+      "keys": [
+        "/signin|::|color-contrast|::|#last-updated",
+        "/signin|::|link-name|::|#social-fb",
+        "/signin|::|link-name|::|#social-x",
+        "/signin|::|link-name|::|#social-yt"
+      ],
+      "counts": {
+        "color-contrast": 1,
+        "link-name": 3
+      }
+    },
+    "/status": {
+      "keys": [
+        "/status|::|button-name|::|#refresh",
+        "/status|::|color-contrast|::|#last-updated",
+        "/status|::|color-contrast|::|.badge-pending",
+        "/status|::|link-name|::|#social-fb",
+        "/status|::|link-name|::|#social-x",
+        "/status|::|link-name|::|#social-yt"
+      ],
+      "counts": {
+        "button-name": 1,
+        "color-contrast": 2,
+        "link-name": 3
+      }
+    },
+    "/status?upload=BP-2026-10882": {
+      "keys": [
+        "/status?upload=BP-2026-10882|::|button-name|::|#refresh",
+        "/status?upload=BP-2026-10882|::|color-contrast|::|#last-updated",
+        "/status?upload=BP-2026-10882|::|color-contrast|::|.badge-pending",
+        "/status?upload=BP-2026-10882|::|link-name|::|#social-fb",
+        "/status?upload=BP-2026-10882|::|link-name|::|#social-x",
+        "/status?upload=BP-2026-10882|::|link-name|::|#social-yt"
+      ],
+      "counts": {
+        "button-name": 1,
+        "color-contrast": 2,
+        "link-name": 3
+      }
+    }
+  },
+  "rules": {
+    "button-name": {
+      "impact": "critical",
+      "summary": "Buttons must have discernible text."
+    },
+    "color-contrast": {
+      "impact": "serious",
+      "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text)."
+    },
+    "image-alt": {
+      "impact": "critical",
+      "summary": "Images must have alternative text."
+    },
+    "label": {
+      "impact": "critical",
+      "summary": "Form inputs must have associated labels."
+    },
+    "link-name": {
+      "impact": "serious",
+      "summary": "Links must have discernible text."
+    },
+    "select-name": {
+      "impact": "critical",
+      "summary": "Select element must have an accessible name"
+    }
+  }
+}
