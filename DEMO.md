@@ -270,46 +270,37 @@ The command prints the run tokens it copied. See `demo-data/README.md` for how e
 
 ## Setup Tyler does once
 
-1. **The repository.** Public, under `tyler-maddox-gdit`, named `MANTA-demo`. Push `main`,
-   `feature/upload-documents` and `golden/upload-documents`.
-2. **`MANTA_READ_TOKEN`** (repo secret): a fine-grained personal access token, resource owner
+Most of this was done on 2026-10-11 when the repository was built. What is left is the part only the account owner can do — three secrets, a deploy key and a ruleset — and `demo/setup-wizard.sh` walks through it stage by stage (run it from this checkout with `gh` signed in as `tyler-maddox-gdit`: `bash demo/setup-wizard.sh`). The list, so the wizard can be checked against it:
+
+**Done already** — the repository (public, under `tyler-maddox-gdit`) with `main`, `feature/upload-documents` and `golden/upload-documents` pushed; the baseline `main` tolerates and its badge, committed; the story tags `story/main` and `story/feature`; the `pr` snapshot (the feature branch's gated run, its cluster and fix artifacts and the patch, made on the Mac with the `claude-code` provider) and the `nightly` snapshot (a nightly run of the golden branch made on the Mac the same way CI makes it — `--extended --paths` through the Sign in path — with the full AI pass added); the golden PR, opened and labelled `golden`, with MANTA's post written onto it once from the `pr` snapshot.
+
+**Still to do (the wizard's stages)**
+
+1. **`MANTA_READ_TOKEN`** (repo secret): a fine-grained personal access token, resource owner
    `tyler-maddox-gdit`, repository access **only** `MANTA`, permission **Contents: read-only**. It lets `npm ci`
-   install MANTA from its private repository. **Expires: ____-__-__** — write the date here and on the day-of
-   checklist when you make it.
-3. **`MANTA_SECRET_DEMO_PW`** (repo secret): `benefits-demo`, the demo site's sign-in password. The nightly's
+   install MANTA from its private repository. MANTA_READ_TOKEN expires: ____-__-__ (the wizard writes the date here).
+   Until it exists every workflow run fails at `npm ci`.
+2. **`MANTA_SECRET_DEMO_PW`** (repo secret): `benefits-demo`, the demo site's sign-in password. The nightly's
    Sign in path types it; without it the path is held and the nightly warns.
-4. **`MANTA_DEMO_DEPLOY_KEY`** (repo secret) and the deploy key: run
-   `ssh-keygen -t ed25519 -C "MANTA-demo baseline" -f manta-demo-deploy -N ""`; add `manta-demo-deploy.pub`
-   under Settings → Deploy keys with **Allow write access**; paste the private file `manta-demo-deploy` into the
-   secret; delete both files.
-5. **The ruleset on `main`**: Settings → Rules → Rulesets → New branch ruleset, targeting the default branch:
-   require the status check **MANTA gate**, block force pushes. Bypass list: **Deploy keys** (so the Baseline
-   workflow can commit the baseline) and **Repository admin** (so `npm run demo -- reset` can force-push `main`
-   when a rehearsal moved it).
-6. **The first baseline.** The first push to `main` runs the Baseline workflow, which commits
-   `.manta/baseline.json` and `.manta/badge.svg` as `github-actions[bot]`. Pull it.
-7. **The pr snapshot.** On `feature/upload-documents`: `npm run build`, `npm run preview`, then
-   `npx manta gate --base http://localhost:4173 --skills cluster,fix --scope new --provider claude-code` on the
-   Mac. Check out `main` and run `npm run demo -- snapshot pr`.
-8. **The nightly snapshot.** Start a nightly on the golden branch, where the upload dialog exists (main lists the page but has no dialog):
-   `gh workflow run nightly.yml -R tyler-maddox-gdit/MANTA-demo --ref golden/upload-documents`. When it is
-   green: `npm run demo -- snapshot nightly <run id> --artifact manta-nightly`. Then add the AI notes on the Mac,
-   from inside `demo-data/nightly`:
-   `node $MANTA/node_modules/tsx/dist/cli.mjs $MANTA/ai/cli.ts --skills cluster,fix,explain,summary,adjudicate,acr --provider claude-code --run <token>`
-   (`$MANTA` is your MANTA checkout). Commit `demo-data/` to `main`.
-9. **The story tags.** Rebase the feature onto the new `main`
-   (`git rebase main feature/upload-documents`), point the golden branch at the same commit
-   (`git branch -f golden/upload-documents feature/upload-documents`), force-push both, then
-   `git tag -f story/main main`, `git tag -f story/feature feature/upload-documents` and
-   `git push -f origin story/main story/feature`.
-10. **The golden PR.** Open a pull request from `golden/upload-documents` onto `main`, titled
-    "Upload documents (golden PR — MANTA pre-run)", labelled `golden`. Post MANTA's output onto it once, from
-    `demo-data/pr` on the Mac:
-    `GITHUB_REPOSITORY=tyler-maddox-gdit/MANTA-demo GITHUB_TOKEN=$(gh auth token) npx manta post --pr <n> --run <token>`.
-    Never close it, never push to its branch, never press Commit suggestion.
-11. **The pivot (optional): `ANTHROPIC_API_KEY`** (repo secret). With it set, the gate also proposes fixes for
-    the new violations (`--skills cluster,fix --scope new`) and the nightly runs the full AI pass; the live PR
-    then gets its own suggestions. Say "the fix skill ran in this job and posted these itself". Remove the
-    secret to go back to the pre-run story. Nothing else changes.
+3. **`MANTA_DEMO_DEPLOY_KEY`** (repo secret) and the deploy key with write access: the wizard generates the pair,
+   shows the public half to paste under Settings → Deploy keys, stores the private half in the secret and deletes
+   the local files.
+4. **The ruleset on `main`**: a branch ruleset targeting the default branch, requiring the status check **gate**
+   (offered in the picker only once the gate workflow has run on a pull request — open a throwaway PR or wait for
+   the first rehearsal), blocking force pushes for everyone but the bypass list: **Deploy keys** (so the Baseline
+   workflow can commit the baseline) and **Repository admin** (so `npm run demo -- reset` can force-push `main`).
+5. **Actions and code scanning**: Actions allowed; code scanning needs no setup on a public repository.
+6. **The pivot (optional): `ANTHROPIC_API_KEY`** (repo secret). With it set, the gate also proposes fixes for
+   the new violations (`--skills cluster,fix --scope new`) and the nightly runs the full AI pass; the live PR
+   then gets its own suggestions. Say "the fix skill ran in this job and posted these itself". Remove the
+   secret to go back to the pre-run story. Nothing else changes.
+
+**Refreshing what was done** — the commands, should a snapshot or the golden PR ever need remaking:
+
+- The baseline: on `main`, `npm run build`, `npm run preview`, `npx manta baseline --base http://localhost:4173`, `node .github/scripts/badge.mjs`, commit `.manta/`.
+- The pr snapshot: on `feature/upload-documents`, build and preview, `npx manta gate --base http://localhost:4173`, then the pass on the Mac from the repo root: `node $MANTA/node_modules/tsx/dist/cli.mjs $MANTA/ai/cli.ts --skills cluster,fix --scope new --provider claude-code` (`$MANTA` is your MANTA checkout; the gate itself takes `--skills … --scope new --provider` in one go once a provider is on the PATH of a CI runner). Then `npm run demo -- snapshot pr` and commit `demo-data/pr` to `main`.
+- The nightly snapshot: on `golden/upload-documents` (the dialog exists there; `main` lists the page but has no dialog), build and preview, `MANTA_SECRET_DEMO_PW=benefits-demo npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name Nightly`, then the full pass (`--skills cluster,fix,explain,summary,adjudicate,acr --provider claude-code`), then `npm run demo -- snapshot nightly` and commit to `main`. A CI-made one works the same: `gh workflow run nightly.yml --ref golden/upload-documents`, then `npm run demo -- snapshot nightly <run id> --artifact manta-nightly` and the pass over it.
+- The story tags: rebase the feature onto the new `main`, point the golden branch at the same commit, force-push both, `git tag -f story/main main`, `git tag -f story/feature feature/upload-documents`, `git push -f origin story/main story/feature`.
+- The golden PR's post: `GITHUB_REPOSITORY=tyler-maddox-gdit/MANTA-demo GITHUB_TOKEN=$(gh auth token) npx manta post --pr <n> --run <token>` from the repo root with the pr snapshot's `reports/` copied to `reports/`. Never close the PR, never push to its branch, never press Commit suggestion.
 
 The repo is public: the workflows, the golden PR and the committed snapshots are visible to anyone.
