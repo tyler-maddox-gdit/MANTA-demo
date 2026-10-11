@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "/",
+    "/apply",
+    "/status",
+    "/signin",
+    "/status?upload=BP-2026-10882"
+  ],
+  "tags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa"
+  ],
+  "extended": false,
+  "failOn": "minor",
+  "styles": [
+    "src/styles.css"
+  ]
+}

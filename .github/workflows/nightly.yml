@@ -1,0 +1,71 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+concurrency: nightly
+
+permissions:
+  contents: read
+
+jobs:
+  nightly:
+    name: MANTA nightly
+    runs-on: ubuntu-latest
+    env:
+      MANTA_SECRET_DEMO_PW: ${{ secrets.MANTA_SECRET_DEMO_PW }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - name: Check the sign-in secret
+        if: env.MANTA_SECRET_DEMO_PW == ''
+        run: |
+          echo "::warning::MANTA_SECRET_DEMO_PW is not set; the sign-in path will be held."
+
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Let npm read MANTA
+        run: git config --global url."https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
+      - run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install chromium --with-deps --only-shell
+
+      - run: npm run build
+
+      - name: Serve the build on localhost:4173
+        run: |
+          nohup npm run preview > preview.log 2>&1 &
+          node -e "const t=Date.now();(async()=>{for(;;){try{if((await fetch('http://localhost:4173')).ok)return}catch{}if(Date.now()-t>60000){console.error('The preview server did not answer on http://localhost:4173 within 60 s.');process.exit(1)}await new Promise(r=>setTimeout(r,1000))}})()"
+
+      # 5d1e7a42 is the "Sign in" path in sites/http_localhost_4173.json.
+      - name: Scan, with the AI pass
+        if: env.ANTHROPIC_API_KEY != ''
+        run: npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name "Nightly" --skills cluster,fix,explain,summary,adjudicate,acr --provider anthropic-api --no-nudge
+
+      - name: Scan
+        if: env.ANTHROPIC_API_KEY == ''
+        run: npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name "Nightly" --no-nudge
+
+      - name: Name the artifact
+        if: always()
+        run: |
+          echo "Artifact: manta-nightly" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the run
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: manta-nightly
+          retention-days: 30
+          path: |
+            reports/
+            run-records/
+            sites/

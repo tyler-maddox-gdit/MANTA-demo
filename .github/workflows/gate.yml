@@ -1,0 +1,83 @@
+name: Gate
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+  security-events: write
+
+jobs:
+  gate:
+    name: MANTA gate
+    runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      MANTA_ARTIFACT_NAME: manta-run
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Let npm read MANTA
+        run: git config --global url."https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
+      - run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install chromium --with-deps --only-shell
+
+      - run: npm run build
+
+      - name: Serve the build on localhost:4173
+        run: |
+          nohup npm run preview > preview.log 2>&1 &
+          node -e "const t=Date.now();(async()=>{for(;;){try{if((await fetch('http://localhost:4173')).ok)return}catch{}if(Date.now()-t>60000){console.error('The preview server did not answer on http://localhost:4173 within 60 s.');process.exit(1)}await new Promise(r=>setTimeout(r,1000))}})()"
+
+      # The pivot: with ANTHROPIC_API_KEY set the gate also proposes fixes for the new violations.
+      - name: Gate, with AI fixes
+        id: gate_ai
+        if: env.ANTHROPIC_API_KEY != ''
+        continue-on-error: false
+        run: npx manta gate --base http://localhost:4173 --skills cluster,fix --scope new --provider anthropic-api --no-nudge
+
+      - name: Gate
+        id: gate
+        if: env.ANTHROPIC_API_KEY == ''
+        continue-on-error: false
+        run: npx manta gate --base http://localhost:4173 --no-nudge
+
+      # The steps below run whatever the gate said; a failed gate step still fails the job.
+      - name: Post to the pull request
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npx manta post --pr ${{ github.event.pull_request.number }}
+
+      - name: Upload the run
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: manta-run
+          path: |
+            reports/
+            run-records/
+            sites/
+
+      - name: Find the SARIF file
+        id: sarif
+        if: always()
+        # Run tokens are ISO timestamps, so the last name sorted is the newest run's.
+        run: echo "file=$(find reports -maxdepth 1 -name 'gate-*.sarif' 2>/dev/null | sort | tail -n 1)" >> "$GITHUB_OUTPUT"
+
+      - name: Upload to code scanning
+        if: always() && steps.sarif.outputs.file != ''
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: ${{ steps.sarif.outputs.file }}
+          category: manta

@@ -1,0 +1,71 @@
+name: Baseline
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: baseline
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  baseline:
+    name: MANTA baseline
+    runs-on: ubuntu-latest
+    steps:
+      # The deploy key is the ruleset's bypass: it may push to main without the gate check.
+      # A deploy-key push starts workflows (only a GITHUB_TOKEN push does not), so the commit says [skip ci].
+      - uses: actions/checkout@v7
+        with:
+          ssh-key: ${{ secrets.MANTA_DEMO_DEPLOY_KEY }}
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Let npm read MANTA
+        run: git config --global url."https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
+      - run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install chromium --with-deps --only-shell
+
+      - run: npm run build
+
+      - name: Serve the build on localhost:4173
+        run: |
+          nohup npm run preview > preview.log 2>&1 &
+          node -e "const t=Date.now();(async()=>{for(;;){try{if((await fetch('http://localhost:4173')).ok)return}catch{}if(Date.now()-t>60000){console.error('The preview server did not answer on http://localhost:4173 within 60 s.');process.exit(1)}await new Promise(r=>setTimeout(r,1000))}})()"
+
+      - name: Baseline
+        run: npx manta baseline --base http://localhost:4173 --no-nudge
+
+      - name: Draw the badge
+        run: node .github/scripts/badge.mjs
+
+      - name: Commit the baseline and the badge
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .manta/baseline.json .manta/badge.svg
+          if git diff --cached --quiet; then
+            echo "The baseline and the badge are unchanged; nothing to commit."
+          else
+            git commit -m "Baseline: tolerated debt as measured on main [skip ci]"
+            git push origin HEAD:main
+          fi
+
+      - name: Upload the run
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: manta-run
+          path: |
+            reports/
+            run-records/
+            sites/
