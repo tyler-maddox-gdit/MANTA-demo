@@ -91,13 +91,16 @@ npx manta gate --base http://localhost:5173
 ```
 
 **See.** `git apply` prints nothing; `git diff --stat` would show `src/pages/Status.jsx` and `src/styles.css`
-changed. The gate runs again and ends with **New 0** and a passing verdict, plus the report's link.
+changed. The gate runs again and ends with **New 0**, **Fixed 2**, **Tolerated** two fewer than the badge, and a
+passing verdict, plus the report's link.
 
 **Say.**
 - "MANTA's fix skill proposed these fixes as a **patch**: a file listing exact line changes to the source code,
   which `git apply` applies in one step."
 - "The fix is a change to the source file and line that wrote the element, not an instruction about the page.
   MANTA applied nothing. The developer did, in one line, and can read every change first."
+- "Fixed 2 is a bonus: the patch also fixes the old refresh button beside the page title, debt from the baseline. The
+  number went down."
 - "This patch was **pre-run** from a snapshot of this branch. With an AI key in CI, the same fix is written in
   the pull request's own run."
 
@@ -121,10 +124,10 @@ npm run demo -- scene 4
 **See.** In the browser, the **live PR**: the red **MANTA gate** check; MANTA's comment — `MANTA gate · failed:
 3 new violations at or above minor`, the New / Fixed / Tolerated lines, the three new ones in a table, and
 `AI fixes: none proposed — this run had no AI provider.`; the warnings in the check's summary. Then switch to
-the **golden PR** tab: the same comment with `AI fixes: 4 proposed, 3 as suggestions below`, a review with three
+the **golden PR** tab: the same comment with `AI fixes: 3 proposed, 3 as suggestions below`, a review with three
 suggestions on the dialog's lines (the file field's label and the close button's name in `Status.jsx`, the hint
 colour in `styles.css`), each with a **Commit suggestion** button, an "Also fixable" section holding the
-footer links' fix, and the `git apply` line.
+refresh button's fix, and the `git apply` line.
 
 **Say.**
 - "A **pull request** is how a change asks to join the main code: the team reviews it, and automated checks
@@ -137,8 +140,8 @@ footer links' fix, and the `git apply` line.
   time. It is **pre-run**."
 - "Each **suggestion** is a proposed edit attached to exact lines of the change. Anyone with write access
   accepts it with one click on Commit suggestion." Point at the button; never press it.
-- "The footer links are old debt, outside this change, so MANTA lists their fix under Also fixable instead of
-  attaching it to lines the change never touched."
+- "The refresh button beside the page title is old debt, outside the lines this change touched, so MANTA
+  lists its fix under Also fixable instead of attaching it to lines the change never touched."
 - The golden PR's comment and review carry Tyler's name, not a bot's: they were posted from his machine.
 
 **If it goes wrong.** CI is slow or the live PR will not open: show the golden PR alone. That is why it exists.

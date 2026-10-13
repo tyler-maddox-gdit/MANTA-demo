@@ -13,9 +13,9 @@ fresh scan. What a snapshot shows as AI output is **pre-run**.
 
 - **`pr/`** — a gated run of `feature/upload-documents` with `cluster` and `fix --scope new` added on the Mac:
   `gate-<token>.json`, the fix proposals with source edits for the upload dialog's three new defects and the
-  footer links, and `reports/fix-<token>.patch`, which scene 3 applies with `git apply`. The golden PR was
+  refresh button's old debt, and `reports/fix-<token>.patch`, which scene 3 applies with `git apply`. The golden PR was
   posted from this run.
-- **`nightly/`** — one nightly run downloaded from Actions (`--extended`, the Sign in path replayed to
+- **`nightly/`** — one nightly run of `golden/upload-documents`, made on the Mac as CI makes it (`--extended`, the Sign in path replayed to
   `/account`, the upload page included), with `cluster,fix,explain,summary,adjudicate,acr` added on the Mac
   afterwards. Scenes 6 and 7 open it.
 
