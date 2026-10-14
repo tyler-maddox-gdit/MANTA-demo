@@ -128,9 +128,10 @@ in `styles.css`. Read one aloud (the close button's `aria-label="Close"`).
 - "Each suggestion is an edit to the exact source line that wrote the element. The contrast fix goes to the
   stylesheet, where the colour is set, not to the page."
 
-At the top of the review, a green **Tip**: "One click applies all 3", and under it the box **☐ Apply all 3 suggested
-fixes**. Tick it. Within about half a minute a commit appears, "Apply MANTA's suggested fixes (…)", made in your
-name, and the tip turns into a **Note**: "Applied all 3 of MANTA's suggested fixes in …". (The demo's **Apply fixes** workflow does it: it writes the three
+Right under the review, a comment with a green **Tip**: "One click applies all 3 of MANTA's suggested fixes", and
+under it the box **☐ Apply all 3 suggested fixes**. Tick it. Within about half a minute a commit appears, "Apply
+MANTA's suggested fixes (…)", made in your name, and the tip turns into a **Note**: "Applied all 3 of MANTA's
+suggested fixes in …". (The demo's **Apply fixes** workflow does it: it writes the three
 suggestions into one commit, so the gate runs once. Committing them one by one with **Commit suggestion** works
 too, but each commit starts the gate again.)
 - "MANTA changed nothing. A person with write access accepted three fixes, with one click, in one commit."

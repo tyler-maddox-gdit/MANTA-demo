@@ -1,6 +1,6 @@
 // The demo's one-click apply of MANTA's suggestions: one commit, so the gate runs once.
 //   offer        Run by gate.yml after MANTA posts: when its review holds suggestions on the pull request's
-//                head commit, add to that review a callout and a checkbox that applies them all.
+//                head commit, add one comment under it: a callout and a checkbox that applies them all.
 //   apply <dir>  Run by apply-fixes.yml once that box is ticked: write every suggestion into the checkout in
 //                <dir> (the pull request's branch), commit it as the person who ticked, and push.
 // Pure Node; reads and writes GitHub through fetch with GITHUB_TOKEN. It runs no code from the pull request:
@@ -41,36 +41,28 @@ async function suggestionsOn(sha) {
   return found;
 }
 
-/** MANTA's review of `sha`: the one `manta post` marks with that commit. */
-async function reviewOf(sha) {
-  const reviews = await api('/pulls/' + PR + '/reviews?per_page=100');
-  return reviews.find((r) => r.user?.login === BOT && r.body.includes('manta-post review ' + sha));
-}
-
-const offerBlock = (n, sha) =>
-  '> [!TIP]\n> **One click applies all ' + n + '.** Tick the box below: MANTA\'s fixes go into one commit, made in your name, and the gate runs once on it.\n\n' +
+const offerBody = (n, sha) =>
+  '> [!TIP]\n> **One click applies all ' + n + ' of MANTA\'s suggested fixes.** Tick the box below: they go into one commit, made in your name, and the gate runs once on it.\n\n' +
   '- [ ] **Apply all ' + n + ' suggested fixes**\n\n' + marker(sha);
 
 async function offer() {
   const sha = process.env.HEAD_SHA;
   const suggestions = await suggestionsOn(sha);
-  const review = await reviewOf(sha);
-  if (!suggestions.length || !review) return console.log('No review with suggestions from MANTA on ' + sha + ': nothing to offer.');
-  if (review.body.includes(marker(sha))) return console.log('Already offered for ' + sha + '.');
-  const body = review.body + '\n\n' + offerBlock(suggestions.length, sha);
-  await api('/pulls/' + PR + '/reviews/' + review.id, { method: 'PUT', body: JSON.stringify({ body }) });
-  console.log('Offered to apply ' + suggestions.length + ' suggestions on ' + sha + ', in MANTA\'s review.');
+  if (!suggestions.length) return console.log('No suggestions from MANTA on ' + sha + ': nothing to offer.');
+  const issueComments = await api('/issues/' + PR + '/comments?per_page=100');
+  if (issueComments.some((c) => c.body.includes(marker(sha)))) return console.log('Already offered for ' + sha + '.');
+  // A comment, not an edit to MANTA's review: ticking a box in a review starts no workflow, a comment's does.
+  await api('/issues/' + PR + '/comments', { method: 'POST', body: JSON.stringify({ body: offerBody(suggestions.length, sha) }) });
+  console.log('Offered to apply ' + suggestions.length + ' suggestions on ' + sha + '.');
 }
 
 async function apply(dir) {
-  const reviewId = process.env.REVIEW_ID;
-  const review = await api('/pulls/' + PR + '/reviews/' + reviewId);
-  const offered = /<!-- manta-apply-all ([0-9a-f]{40}) -->/.exec(review.body)?.[1];
+  const commentId = process.env.COMMENT_ID;
+  const comment = await api('/issues/comments/' + commentId);
+  const offered = /<!-- manta-apply-all ([0-9a-f]{40}) -->/.exec(comment.body)?.[1];
   const pr = await api('/pulls/' + PR);
-  // The review keeps what MANTA wrote above the offer; the offer becomes a note saying what happened.
-  const cut = review.body.indexOf('> [!TIP]');
-  const head = (cut < 0 ? review.body.replace(/<!-- manta-apply-all [0-9a-f]{40} -->/, '') : review.body.slice(0, cut)).trimEnd();
-  const say = (text) => api('/pulls/' + PR + '/reviews/' + reviewId, { method: 'PUT', body: JSON.stringify({ body: head + '\n\n> [!NOTE]\n> ' + text + '\n\n' + (offered ? marker(offered) : '') }) });
+  // The offer becomes a note saying what happened.
+  const say = (text) => api('/issues/comments/' + commentId, { method: 'PATCH', body: JSON.stringify({ body: '> [!NOTE]\n> ' + text + '\n\n' + (offered ? marker(offered) : '') }) });
   if (pr.head.ref === GOLDEN) return say("The golden pull request's fixes are pre-run and kept as they are: nothing applied.");
   if (!offered || pr.head.sha !== offered) return say('The branch has moved since these fixes were offered: nothing applied.');
   const suggestions = await suggestionsOn(offered);
