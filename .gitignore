@@ -1,7 +1,7 @@
 node_modules
 dist
-reports/
-run-records/
-ci-run/
+/reports/
+/run-records/
+/ci-run/
 sites/*
 !sites/http_localhost_4173.json

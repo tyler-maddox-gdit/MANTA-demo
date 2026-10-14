@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "sourceReportTimestamp": "2026-10-11T06-52-50-206Z",
+  "adjudications": [
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#dob",
+      "verdict": "cannot-tell",
+      "rationale": "The check reports the outline at 1.66:1 and nothing else about this date input's focused appearance. Whether another cue (ring width, offset, box-shadow, fill shift) identifies focus cannot be read from the payload."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#first-name",
+      "verdict": "cannot-tell",
+      "rationale": "The only cue in the payload is the outline measured at 1.66:1 (rgb(255,190,46) on white). Whether the focused input also gains thickness, offset, a shadow ring or a fill/border change is a rendered-appearance fact the payload does not carry."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#household-size",
+      "verdict": "cannot-tell",
+      "rationale": "For this select the only datum is the 1.66:1 outline against white. A native select's focused rendering and any added cue (shadow, border or fill change) are not described in the payload."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#income",
+      "verdict": "cannot-tell",
+      "rationale": "Measured: outline rgb(255,190,46) on white, 1.66:1. Nothing else in the node speaks to this input's focused appearance, so whether a second visual cue identifies focus requires seeing it rendered."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#last-name",
+      "verdict": "cannot-tell",
+      "rationale": "Only one aspect was measured: a 1.66:1 yellow outline on white. Nothing in the html, ancestors or check data says whether the focused state of this input adds a second visual cue, so the second-cue question needs the rendered view."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#ssn",
+      "verdict": "cannot-tell",
+      "rationale": "The single measurement is outline rgb(255,190,46) on white at 1.66:1. The payload holds no focused-state styling for this input beyond that, so whether a further visual cue marks focus is undecidable here."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "The link targets #main-content, but after Enter no element has that id or name; this page's landmark is main#main (seen in the form fields' ancestors). The one bypass control in the header is inert for a keyboard user."
+    },
+    {
+      "key": "http://localhost:4173/signin|::|non-text-contrast-border|::|#email",
+      "verdict": "cannot-tell",
+      "rationale": "The one measurement is outline rgb(255,190,46) on white at 1.66:1. Whether the focused email field also shows a second cue — ring thickness, offset, shadow, fill or border change — is not in the payload."
+    },
+    {
+      "key": "http://localhost:4173/signin|::|non-text-contrast-border|::|#password",
+      "verdict": "cannot-tell",
+      "rationale": "Only the 1.66:1 yellow outline was measured for this password field. The payload carries no other focused-state styling, so whether another visual cue identifies focus needs the rendered state."
+    },
+    {
+      "key": "http://localhost:4173/signin|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "href=\"#main-content\" with no element having that id or name after Enter; the sign-in page's landmark is main#main per the #email ancestors. The header skip control cannot reach main, leaving no bypass control that works."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "First-cell case link in table.cases, and this very page state (?upload=BP-2026-10882) matches its fragment — the anchor drives case state inside content rather than serving as a control for bypassing repeated blocks."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(2) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Per-row case link (#BP-2026-10431) in the first td of table.cases inside div.page. A link in a data table cell is content navigation, not a bypass-blocks mechanism for this page."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(3) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Per-row case link (#BP-2026-09977) in table.cases. Its position in tabular content shows it is not the control offered for skipping the repeated header, so the bypass question does not hinge on it."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(4) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Per-row case link (#BP-2026-09120) in the first cell of table.cases inside div.page — content navigation within the results table, not a mechanism presented to bypass the repeated blocks above it."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "In this upload state the header a.skip still targets #main-content and after Enter no element carries that id or name, so the sole bypass control in the header moves focus nowhere."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "A link in the first cell of a row in table.cases, inside div.page — a case-id link in tabular content, not a control offered to bypass repeated blocks. The scan's own /status?upload=BP-2026-10882 state shows this id drives page state."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(2) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Row-level case link (#BP-2026-10431) in the first td of table.cases. Its place in a data table makes it content navigation, not the mechanism a user reaches to skip the repeated header and nav."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(3) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Another per-row case link (#BP-2026-09977) in table.cases inside div.page. Links in table cells are not bypass-blocks controls, so the page's bypass question does not rest on this anchor."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(4) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Fourth per-row case link (#BP-2026-09120) in the first cell of table.cases. It is content navigation within the results table, not a mechanism presented for bypassing the repeated header blocks."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "After Enter no element on /status has the id or name \"main-content\", so the header's a.skip moves focus nowhere. The only control this page presents for getting past the repeated header does nothing when activated."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "After Enter no element has the id or name \"main-content\"; the page's main landmark is id=\"main\" (visible in the sibling news nodes' ancestors), so the header's only skip control moves focus nowhere and nothing is offered to a sighted keyboard user."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|main#main > section:nth-of-type(3) > ul > li:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "This anchor is a list-item link inside section.news, deep in main content, not a control offered at the top of the page to bypass the repeated header; the page's bypass mechanism is the header a.skip, not this link."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|main#main > section:nth-of-type(3) > ul > li:nth-of-type(2) > a",
+      "verdict": "likely-pass",
+      "rationale": "A second list-item link inside section.news, in the middle of main content. It is not the mechanism a user would reach to skip the repeated header, so the bypass-blocks question does not turn on this anchor."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|main#main > section:nth-of-type(3) > ul > li:nth-of-type(3) > a",
+      "verdict": "likely-pass",
+      "rationale": "A third list-item link inside section.news, nested in main > section > ul > li. Its position in content shows it is a content anchor, not a control presented for bypassing the repeated blocks above main."
+    }
+  ],
+  "skipped": [],
+  "counts": {
+    "likelyViolation": 5,
+    "likelyPass": 11,
+    "cannotTell": 8,
+    "skipped": 0
+  },
+  "provenance": {
+    "provider": "claude-code",
+    "endpoint": "api.anthropic.com",
+    "tier": "thorough",
+    "requested": {
+      "model": "claude-opus-5",
+      "effort": "xhigh"
+    },
+    "model": "claude-opus-5",
+    "mechanism": "structured_outputs"
+  }
+}

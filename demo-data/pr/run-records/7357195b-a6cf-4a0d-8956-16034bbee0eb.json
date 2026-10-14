@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "7357195b-a6cf-4a0d-8956-16034bbee0eb",
+  "startedAt": "2026-10-11T06:10:01.798Z",
+  "urls": [
+    "http://localhost:4173/",
+    "http://localhost:4173/apply",
+    "http://localhost:4173/status",
+    "http://localhost:4173/signin",
+    "http://localhost:4173/status?upload=BP-2026-10882"
+  ],
+  "options": {
+    "headless": true,
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa"
+    ]
+  },
+  "status": "finished",
+  "token": "2026-10-11T06-10-09-665Z",
+  "finishedAt": "2026-10-11T06:10:09.759Z",
+  "pages": [
+    {
+      "url": "http://localhost:4173/"
+    },
+    {
+      "url": "http://localhost:4173/apply"
+    },
+    {
+      "url": "http://localhost:4173/status"
+    },
+    {
+      "url": "http://localhost:4173/signin"
+    },
+    {
+      "url": "http://localhost:4173/status?upload=BP-2026-10882"
+    }
+  ]
+}

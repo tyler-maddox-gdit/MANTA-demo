@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "sourceReportTimestamp": "2026-10-11T06-52-50-206Z",
+  "skill": {
+    "id": "explain",
+    "label": "Explain the barrier"
+  },
+  "unit": "cluster",
+  "grouping": "cluster",
+  "entries": [
+    {
+      "key": "cluster-1",
+      "text": "Someone listening with a screen reader tabs into the footer on any page and hears only \"link, link, link\" three times, with no hint that these are Facebook, X and YouTube. The same silent trio repeats on the home, apply, sign-in and status pages, so a listener reaches three dead stops in every footer and can only guess by activating one and leaving the benefits site."
+    },
+    {
+      "key": "cluster-2",
+      "text": "The \"Last updated October 3, 2026\" line sits as pale grey on white at small size, so someone with low vision, or anyone on a glare-washed screen, sees the date fade into the page and cannot read it without zooming or leaning in. It appears this faintly on the home, apply, sign-in and both status pages, so a person checking whether their benefits information is current never gets that answer."
+    },
+    {
+      "key": "cluster-3",
+      "text": "On the status page, a screen reader user tabs onto the refresh control and hears just \"button\" with nothing more; the same happens for the close control on the upload view. Someone listening cannot tell whether pressing it reloads their claim status or dismisses the upload, so they either avoid it or press blind and risk losing the view they were reading."
+    }
+  ],
+  "coverage": {
+    "groups": 3,
+    "findings": 23
+  },
+  "provenance": {
+    "provider": "claude-code",
+    "endpoint": "api.anthropic.com",
+    "tier": "standard",
+    "requested": {
+      "model": "claude-opus-5"
+    },
+    "model": "claude-opus-5",
+    "mechanism": "structured_outputs"
+  }
+}

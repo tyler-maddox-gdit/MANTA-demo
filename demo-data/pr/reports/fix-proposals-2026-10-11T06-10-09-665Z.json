@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 2,
+  "sourceReportTimestamp": "2026-10-11T06-10-09-665Z",
+  "proposals": [
+    {
+      "id": "proposal-1",
+      "scope": "cluster",
+      "scopeId": "cluster-3",
+      "stack": "react",
+      "kind": "source-diff",
+      "fixTarget": {
+        "kind": "selector",
+        "value": "button.icon-btn"
+      },
+      "members": [
+        "http://localhost:4173/status?upload=BP-2026-10882|::|button-name|::|#refresh",
+        "http://localhost:4173/status?upload=BP-2026-10882|::|button-name|::|#upload-close",
+        "http://localhost:4173/status|::|button-name|::|#refresh"
+      ],
+      "conventionsDetected": [
+        "Utility-ish button class naming: .btn, .btn-primary, .btn-small, .icon-btn",
+        "Inline SVG icons marked aria-hidden=\"true\" with stroke=\"currentColor\"",
+        "Stable string ids on interactive elements (id=\"refresh\", id=\"upload-close\", id=\"upload-dialog\") and aria-labelledby pointing at an h2 id",
+        "{/* DEBT <ruleId>: ... */} comments marking known accessibility debt"
+      ],
+      "domSpec": {
+        "domInstruction": "Every `button.icon-btn` in src/pages/Status.jsx wraps only an `aria-hidden=\"true\"` inline SVG, so the accessible name is empty; make an explicit aria-label part of the icon-btn pattern. Set aria-label=\"Refresh case list\" on the `#refresh` button in Status and aria-label=\"Close\" on the `#upload-close` button in UploadModal, keeping the SVGs aria-hidden so the label is the only name. The stale `{/* DEBT button-name: icon-only refresh button */}` comment above #refresh is no longer true and goes away with the fix.",
+        "testAssertion": "React Testing Library: render(<Toggle />); expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false').",
+        "verificationAssertion": "Re-run axe rules button-name against the 3 listed selectors; all must pass.",
+        "verifySelectors": [
+          "#refresh",
+          "#upload-close",
+          "#refresh"
+        ]
+      },
+      "edits": [
+        {
+          "file": "src/pages/Status.jsx",
+          "startLine": 18,
+          "endLine": 18,
+          "original": "          <button type=\"button\" className=\"icon-btn\" id=\"upload-close\" onClick={onClose}><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" strokeWidth=\"2\"/></svg></button>",
+          "replacement": "          <button type=\"button\" className=\"icon-btn\" id=\"upload-close\" aria-label=\"Close\" onClick={onClose}><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" strokeWidth=\"2\"/></svg></button>",
+          "context": {
+            "before": [
+              "      <div className=\"modal\" role=\"dialog\" aria-labelledby=\"upload-title\" id=\"upload-dialog\">",
+              "        <div className=\"title-row\">",
+              "          <h2 id=\"upload-title\">Upload documents</h2>"
+            ],
+            "after": [
+              "        </div>",
+              "        <p>Case {caseId}. We accept PDF, JPG and PNG.</p>",
+              "        <input type=\"file\" id=\"upload-file\" />"
+            ]
+          }
+        },
+        {
+          "file": "src/pages/Status.jsx",
+          "startLine": 40,
+          "endLine": 41,
+          "original": "        {/* DEBT button-name: icon-only refresh button */}\n        <button type=\"button\" className=\"icon-btn\" id=\"refresh\"><svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 18 18\"><path d=\"M3 9a6 6 0 1 1 2 4.5\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\"/><path d=\"M3 14v-4h4\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\"/></svg></button>",
+          "replacement": "        <button type=\"button\" className=\"icon-btn\" id=\"refresh\" aria-label=\"Refresh case list\"><svg aria-hidden=\"true\" width=\"18\" height=\"18\" viewBox=\"0 0 18 18\"><path d=\"M3 9a6 6 0 1 1 2 4.5\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\"/><path d=\"M3 14v-4h4\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\"/></svg></button>",
+          "context": {
+            "before": [
+              "    <div className=\"page\">",
+              "      <div className=\"title-row\">",
+              "        <h1>Check a case</h1>"
+            ],
+            "after": [
+              "      </div>",
+              "      <table className=\"cases\">",
+              "        <thead><tr><th scope=\"col\">Case</th><th scope=\"col\">Program</th><th scope=\"col\">Filed</th><th scope=\"col\">Status</th><th scope=\"col\">We still need</th><th scope=\"col\">Documents</th></tr></thead>"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "proposal-2",
+      "scope": "standalone",
+      "scopeId": "color-contrast",
+      "stack": "react",
+      "kind": "source-diff",
+      "fixTarget": {
+        "kind": "selector",
+        "value": ".hint"
+      },
+      "members": [
+        "http://localhost:4173/status?upload=BP-2026-10882|::|color-contrast|::|#upload-hint"
+      ],
+      "conventionsDetected": [
+        "Design-intent colours are declared as CSS custom properties on `:root` (`--navy`, `--ink`, `--paper`, `--muted-bad`), while one-off text greys stay hard-coded hex literals in component rules (`.hint`, `.brand small`, `time`)",
+        "Flat hyphenated class names with a base-plus-variant pattern (`.btn` / `.btn-primary` / `.btn-small`, `.badge` / `.badge-pending`)",
+        "Stylesheet grouped by section comments (`/* forms */`, `/* table and badges */`, `/* upload dialog */`), with the dialog's rules under `/* upload dialog */`"
+      ],
+      "domSpec": {
+        "domInstruction": "In the shared `.hint` rule in src/styles.css, replace the hard-coded `color: #a0a0a0` (2.61:1 against the dialog's `#fff` background at 14.4px normal) with `color: #595959`, which reaches 7.0:1 on white and clears the 4.5:1 threshold. Leave `font-size: .9rem` and the markup of `<p className=\"hint\" id=\"upload-hint\">` untouched — the single selector change covers every `.hint` paragraph, including this one inside `#upload-dialog`.",
+        "testAssertion": "React Testing Library: render(<Toggle />); expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false').",
+        "verificationAssertion": "Re-run axe rules color-contrast against the 1 listed selector; all must pass.",
+        "verifySelectors": [
+          "#upload-hint"
+        ]
+      },
+      "edits": [
+        {
+          "file": "src/styles.css",
+          "startLine": 61,
+          "endLine": 61,
+          "original": ".hint { color: #a0a0a0; font-size: .9rem; }",
+          "replacement": ".hint { color: #595959; font-size: .9rem; }",
+          "context": {
+            "before": [
+              ".modal { background: #fff; padding: 1.5rem; border-radius: 8px; width: min(480px, 90vw); }",
+              ".modal h2 { margin-top: 0; }",
+              ".modal .actions { margin-top: 1rem; }"
+            ],
+            "after": [
+              "",
+              "/* home — federal classic */",
+              ".hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; padding: 2rem 0; }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "proposal-3",
+      "scope": "standalone",
+      "scopeId": "label",
+      "stack": "react",
+      "kind": "source-diff",
+      "fixTarget": {
+        "kind": "component",
+        "value": "UploadModal (src/pages/Status.jsx)"
+      },
+      "members": [
+        "http://localhost:4173/status?upload=BP-2026-10882|::|label|::|#upload-file"
+      ],
+      "conventionsDetected": [
+        "`.field` wrapper (flex column, .25rem gap, max-width 420px) is the shared form-row container in src/styles.css",
+        "Hyphenated ids scoped to the dialog: upload-dialog, upload-title, upload-close, upload-file, upload-hint",
+        "`.hint` paragraph carrying an id is the established helper-text pattern in the modal",
+        "`btn` / `btn-primary` / `btn-small` / `icon-btn` class-naming system for controls"
+      ],
+      "domSpec": {
+        "domInstruction": "In UploadModal, give the file input an explicit visible label: wrap it in the project's `.field` column and add `<label htmlFor=\"upload-file\">Choose files</label>` immediately before `<input type=\"file\" id=\"upload-file\" />`, so the existing `id=\"upload-file\"` becomes the label's target. While there, point the input at the hint already in the dialog with aria-describedby=\"upload-hint\" so \"Max 10 MB per file. Up to 5 files.\" is announced with the control; the dialog's own `aria-labelledby=\"upload-title\"` stays as is.",
+        "testAssertion": "React Testing Library: render(<Toggle />); expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false').",
+        "verificationAssertion": "Re-run axe rules label against the 1 listed selector; all must pass.",
+        "verifySelectors": [
+          "#upload-file"
+        ]
+      },
+      "edits": [
+        {
+          "file": "src/pages/Status.jsx",
+          "startLine": 21,
+          "endLine": 21,
+          "original": "        <input type=\"file\" id=\"upload-file\" />",
+          "replacement": "        <div className=\"field\">\n          <label htmlFor=\"upload-file\">Choose files</label>\n          <input type=\"file\" id=\"upload-file\" aria-describedby=\"upload-hint\" />\n        </div>",
+          "context": {
+            "before": [
+              "          <button type=\"button\" className=\"icon-btn\" id=\"upload-close\" onClick={onClose}><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" strokeWidth=\"2\"/></svg></button>",
+              "        </div>",
+              "        <p>Case {caseId}. We accept PDF, JPG and PNG.</p>"
+            ],
+            "after": [
+              "        <p className=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+              "        <div className=\"actions\">",
+              "          <button type=\"button\" className=\"btn btn-primary\" onClick={onClose}>Upload</button>"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "orphans": [],
+  "coverage": {
+    "clusters": 1,
+    "ruleGroups": 2,
+    "violations": 5
+  },
+  "total": {
+    "clusters": 1,
+    "ruleGroups": 2,
+    "violations": 5
+  },
+  "provenance": {
+    "provider": "claude-code",
+    "endpoint": "api.anthropic.com",
+    "tier": "standard",
+    "requested": {
+      "model": "claude-opus-5"
+    },
+    "model": "claude-opus-5",
+    "mechanism": "structured_outputs",
+    "scope": "new",
+    "iterations": 3,
+    "groupMembers": {
+      "standalone:color-contrast": [
+        "http://localhost:4173/status?upload=BP-2026-10882|::|color-contrast|::|#upload-hint"
+      ],
+      "standalone:label": [
+        "http://localhost:4173/status?upload=BP-2026-10882|::|label|::|#upload-file"
+      ]
+    }
+  }
+}

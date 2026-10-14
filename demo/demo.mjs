@@ -240,6 +240,8 @@ function status() {
     const local = revParse('refs/heads/' + branch);
     const remote = revParse('refs/remotes/origin/' + branch);
     if (!t) say(false, tag + ' is missing (set once, after the first baseline run)');
+    // A fresh clone has no local feature branch yet: scene 2's checkout makes it from origin's.
+    else if (!local && remote === t) say(true, branch + ' on origin at ' + tag + ' (made locally by its first checkout)');
     else say(local === t && remote === t, branch + (local === t ? ' at ' : ' NOT at ') + tag + (remote === t ? ', origin too' : ', origin differs: run reset'));
   }
   say(Boolean(revParse('refs/remotes/origin/' + GOLDEN_BRANCH)), GOLDEN_BRANCH + ' on origin');

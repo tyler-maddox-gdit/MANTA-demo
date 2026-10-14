@@ -1,0 +1,434 @@
+{
+  "schemaVersion": 1,
+  "sourceReportTimestamp": "2026-10-11T06-10-09-665Z",
+  "baseline": {
+    "at": "2026-10-11T06-09-42-602Z"
+  },
+  "ruleset": {
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa"
+    ],
+    "extended": false,
+    "experimental": false
+  },
+  "failOn": "minor",
+  "new": [
+    {
+      "page": "/status?upload=BP-2026-10882",
+      "ruleId": "button-name",
+      "target": "#upload-close",
+      "impact": "critical",
+      "priority": "P1",
+      "summary": "Buttons must have discernible text.",
+      "source": {
+        "file": "src/pages/Status.jsx",
+        "startLine": 18,
+        "endLine": 18
+      }
+    },
+    {
+      "page": "/status?upload=BP-2026-10882",
+      "ruleId": "color-contrast",
+      "target": "#upload-hint",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
+      "source": {
+        "file": "src/pages/Status.jsx",
+        "startLine": 22,
+        "endLine": 22
+      }
+    },
+    {
+      "page": "/status?upload=BP-2026-10882",
+      "ruleId": "label",
+      "target": "#upload-file",
+      "impact": "critical",
+      "priority": "P1",
+      "summary": "Form inputs must have associated labels.",
+      "source": {
+        "file": "src/pages/Status.jsx",
+        "startLine": 21,
+        "endLine": 21
+      }
+    }
+  ],
+  "fixed": [],
+  "tolerated": [
+    {
+      "page": "/",
+      "ruleId": "color-contrast",
+      "target": "#last-updated",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 36,
+        "endLine": 36
+      }
+    },
+    {
+      "page": "/",
+      "ruleId": "image-alt",
+      "target": "#hero-image",
+      "impact": "critical",
+      "priority": "P1",
+      "summary": "Images must have alternative text.",
+      "source": {
+        "file": "src/pages/Home.jsx",
+        "startLine": 27,
+        "endLine": 27
+      }
+    },
+    {
+      "page": "/",
+      "ruleId": "link-name",
+      "target": "#social-fb",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 31,
+        "endLine": 31
+      }
+    },
+    {
+      "page": "/",
+      "ruleId": "link-name",
+      "target": "#social-x",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "page": "/",
+      "ruleId": "link-name",
+      "target": "#social-yt",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 32,
+        "endLine": 32
+      }
+    },
+    {
+      "page": "/apply",
+      "ruleId": "color-contrast",
+      "target": "#last-updated",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 36,
+        "endLine": 36
+      }
+    },
+    {
+      "page": "/apply",
+      "ruleId": "label",
+      "target": "#ssn",
+      "impact": "critical",
+      "priority": "P1",
+      "summary": "Form inputs must have associated labels.",
+      "source": {
+        "file": "src/pages/Apply.jsx",
+        "startLine": 19,
+        "endLine": 19
+      }
+    },
+    {
+      "page": "/apply",
+      "ruleId": "link-name",
+      "target": "#social-fb",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 31,
+        "endLine": 31
+      }
+    },
+    {
+      "page": "/apply",
+      "ruleId": "link-name",
+      "target": "#social-x",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "page": "/apply",
+      "ruleId": "link-name",
+      "target": "#social-yt",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 32,
+        "endLine": 32
+      }
+    },
+    {
+      "page": "/apply",
+      "ruleId": "select-name",
+      "target": "#household-size",
+      "impact": "critical",
+      "priority": "P1",
+      "summary": "Select element must have an accessible name",
+      "source": {
+        "file": "src/pages/Apply.jsx",
+        "startLine": 25,
+        "endLine": 25
+      }
+    },
+    {
+      "page": "/signin",
+      "ruleId": "color-contrast",
+      "target": "#last-updated",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 36,
+        "endLine": 36
+      }
+    },
+    {
+      "page": "/signin",
+      "ruleId": "link-name",
+      "target": "#social-fb",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 31,
+        "endLine": 31
+      }
+    },
+    {
+      "page": "/signin",
+      "ruleId": "link-name",
+      "target": "#social-x",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "page": "/signin",
+      "ruleId": "link-name",
+      "target": "#social-yt",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 32,
+        "endLine": 32
+      }
+    },
+    {
+      "page": "/status",
+      "ruleId": "button-name",
+      "target": "#refresh",
+      "impact": "critical",
+      "priority": "P1",
+      "summary": "Buttons must have discernible text.",
+      "source": {
+        "file": "src/pages/Status.jsx",
+        "startLine": 41,
+        "endLine": 41
+      }
+    },
+    {
+      "page": "/status",
+      "ruleId": "color-contrast",
+      "target": "#last-updated",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 36,
+        "endLine": 36
+      }
+    },
+    {
+      "page": "/status",
+      "ruleId": "color-contrast",
+      "target": ".badge-pending",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
+      "source": {
+        "file": "src/pages/Status.jsx",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "page": "/status",
+      "ruleId": "link-name",
+      "target": "#social-fb",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 31,
+        "endLine": 31
+      }
+    },
+    {
+      "page": "/status",
+      "ruleId": "link-name",
+      "target": "#social-x",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "page": "/status",
+      "ruleId": "link-name",
+      "target": "#social-yt",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 32,
+        "endLine": 32
+      }
+    },
+    {
+      "page": "/status?upload=BP-2026-10882",
+      "ruleId": "button-name",
+      "target": "#refresh",
+      "impact": "critical",
+      "priority": "P1",
+      "summary": "Buttons must have discernible text.",
+      "source": {
+        "file": "src/pages/Status.jsx",
+        "startLine": 41,
+        "endLine": 41
+      }
+    },
+    {
+      "page": "/status?upload=BP-2026-10882",
+      "ruleId": "color-contrast",
+      "target": "#last-updated",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 36,
+        "endLine": 36
+      }
+    },
+    {
+      "page": "/status?upload=BP-2026-10882",
+      "ruleId": "color-contrast",
+      "target": ".badge-pending",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
+      "source": {
+        "file": "src/pages/Status.jsx",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "page": "/status?upload=BP-2026-10882",
+      "ruleId": "link-name",
+      "target": "#social-fb",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 31,
+        "endLine": 31
+      }
+    },
+    {
+      "page": "/status?upload=BP-2026-10882",
+      "ruleId": "link-name",
+      "target": "#social-x",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "page": "/status?upload=BP-2026-10882",
+      "ruleId": "link-name",
+      "target": "#social-yt",
+      "impact": "serious",
+      "priority": "P2",
+      "summary": "Links must have discernible text.",
+      "source": {
+        "file": "src/Shell.jsx",
+        "startLine": 32,
+        "endLine": 32
+      }
+    }
+  ],
+  "totals": {
+    "new": {
+      "P1": 2,
+      "P2": 1,
+      "P3": 0,
+      "P4": 0
+    },
+    "fixed": {
+      "P1": 0,
+      "P2": 0,
+      "P3": 0,
+      "P4": 0
+    },
+    "tolerated": {
+      "P1": 5,
+      "P2": 22,
+      "P3": 0,
+      "P4": 0
+    }
+  },
+  "exitCode": 1
+}
