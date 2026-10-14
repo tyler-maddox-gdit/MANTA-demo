@@ -25,7 +25,11 @@ jobs:
           cache: npm
 
       - name: Let npm read MANTA
-        run: git config --global url."https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/".insteadOf "https://github.com/"
+        # npm writes the lockfile's MANTA as git+ssh, so the SSH forms are rewritten to the token too.
+        run: |
+          git config --global url."https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git config --global --add url."https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/".insteadOf "ssh://git@github.com/"
+          git config --global --add url."https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/".insteadOf "git@github.com:"
 
       - run: npm ci
 

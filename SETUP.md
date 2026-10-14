@@ -111,7 +111,7 @@ nightly.
 
 3. Prove the workflows now run. Start a nightly and watch it:
    ```
-   gh workflow run nightly.yml -R tyler-maddox-gdit/MANTA-demo --ref golden/upload-documents
+   gh workflow run nightly.yml -R tyler-maddox-gdit/MANTA-demo --ref main
    gh run watch -R tyler-maddox-gdit/MANTA-demo
    ```
    Pick the newest **Nightly** run. **Expect** every step green, the Sign in path replayed, ending on
