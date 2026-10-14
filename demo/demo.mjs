@@ -33,8 +33,8 @@ const workbenchLine = (name) => 'npm run demo -- workbench ' + name + '   (opens
 const CUES = {
   1: { title: 'Scene 1 · Conception (1 min)', type: [], next: 'Show the slide: a criterion row\'s checklist in the Workbench. Then: npm run demo -- scene 2' },
   2: { title: 'Scene 2 · The developer scans localhost (4 min)', type: ['npm run dev        (in a second terminal; leave it running)', GATE_LINE], next: 'Expect New 3 on /status?upload=BP-2026-10882 and "Gate failed", exit 1. Then: npm run demo -- scene 3' },
-  3: { title: 'Scene 3 · The pull request (8 min)', type: [], next: 'On the live PR: watch Checks → MANTA gate run, then show the comment, the Pre-run comment and the review (say "pre-run"). Files changed → Add suggestion to batch on all three → Commit suggestions. Expect the gate to run again and go green. Then: npm run demo -- scene 4' },
-  4: { title: 'Scene 4 · Nightly through login (3 min)', type: ['gh run watch <run> -R ' + REPO], next: 'Expect the Sign in path replayed, ending on /account. Then: npm run demo -- scene 5' },
+  3: { title: 'Scene 3 · The pull request (8 min)', type: [], next: 'Open the live PR: Checks → MANTA gate, watch it fail on 3 new. Conversation: the comment, the Pre-run comment (say "pre-run"), the alerts, the review. On each suggestion: Add suggestion to batch, then Commit suggestions. Expect the gate to run again and go green. Then: npm run demo -- scene 4' },
+  4: { title: 'Scene 4 · Nightly through login (2 min)', type: ['gh run view <run> -R ' + REPO + ' --web'], next: 'Last night\'s run, finished: show the Sign in path ending on /account and the manta-nightly artifact. Then: npm run demo -- scene 5' },
   5: { title: 'Scene 5 · QA in the Workbench (5 min)', type: ['npm run build', 'npm run preview    (in this repo, a second terminal; Rescan reloads pages from localhost:4173)', workbenchLine('nightly')], next: 'Open the URL it prints, then the Nightly run\'s report. Then: npm run demo -- scene 6' },
   6: { title: 'Scene 6 · Release (2 min)', type: [], next: 'In the same Workbench, press Export on the Nightly run: the ACR draft (docx) and the USPS defects. The end.' },
 };
@@ -149,16 +149,14 @@ function scene(n) {
       live = r.stdout.split('\n').pop();
     }
     const golden = openPrs(GOLDEN_BRANCH)[0]?.url;
-    // The nightly starts now so it has finished by scene 4.
-    must('gh', ['workflow', 'run', NIGHTLY_WORKFLOW, '-R', REPO, '--ref', MAIN.branch]);
     console.log('\nLive PR:              ' + live);
     console.log('Golden PR (fallback): ' + (golden ?? 'none open: see DEMO.md, Setup Tyler does once'));
-    console.log('Nightly started:      watched in scene 4.');
   }
   if (n === 4) {
-    const latest = latestRun(NIGHTLY_WORKFLOW);
-    if (!latest) console.log('[WARN] No nightly run found. Start one: gh workflow run ' + NIGHTLY_WORKFLOW + ' -R ' + REPO);
-    else console.log('Latest nightly: run ' + latest.databaseId + ', ' + latest.status + (latest.conclusion ? ' (' + latest.conclusion + ')' : '') + ', started ' + latest.createdAt + '.');
+    // Last night's scheduled run, finished: scene 4 shows it, nothing is started live.
+    const latest = ghJson(['run', 'list', '--workflow', NIGHTLY_WORKFLOW, '--status', 'success', '--limit', '1', '--json', 'databaseId,createdAt,event'])?.[0];
+    if (!latest) console.log('[WARN] No green nightly run found. Start one the day before: gh workflow run ' + NIGHTLY_WORKFLOW + ' -R ' + REPO + ' --ref main');
+    else console.log('Latest green nightly: run ' + latest.databaseId + ' (' + latest.event + '), started ' + latest.createdAt + '.');
     return printCue(4, { run: latest ? String(latest.databaseId) : undefined });
   }
   printCue(n);

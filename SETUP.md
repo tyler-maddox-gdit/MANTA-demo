@@ -92,7 +92,7 @@ run the MANTA that `npm ci` installed.
 The repo's secrets, deploy key and ruleset were set on 2026-10-13, all but one: **`MANTA_READ_TOKEN`**, which
 lets the workflows install MANTA. GitHub lets no script create it, so it is yours. Until it exists every
 workflow run fails at `npm ci`: scene 3's live PR check stays red for the wrong reason and scene 4 has no
-nightly.
+nightly to show.
 
 1. ```
    npm run demo -- setup-github
@@ -152,20 +152,20 @@ opens is one of the things to note.
 ```
 npm run demo -- scene 3
 ```
-**Expect** three lines: the live PR's link, the golden PR's link (the fallback) and "Nightly started". Open the
-live PR. On its **Checks** tab, watch **MANTA gate** run (about a minute and a half) and end red. On the
-**Conversation** tab: MANTA's comment with its table of the three new violations, a comment headed **Pre-run AI
-fixes**, and MANTA's review, `3 suggested fixes from MANTA.`. Then the **Files changed** tab: **Add suggestion to
-batch** on each of the three, then **Commit suggestions** → **Commit changes**. **Expect** the gate to run again
-and turn green, and MANTA's comment to say `passed: no new violations`. Never tick the admin's "Merge without
-waiting" box, and never press anything on the golden PR.
+**Expect** two lines: the live PR's link and the golden PR's link (the fallback). Open the live PR. On its
+**Checks** tab, watch **MANTA gate** run (about a minute and a half) and end red. On the **Conversation** tab:
+MANTA's comment with its table of the three new violations, a comment headed **Pre-run AI fixes**, the code
+scanning alerts, and MANTA's review, `3 suggested fixes from MANTA.`. On each of the three suggestions press **Add
+suggestion to batch**, then **Commit suggestions** → **Commit changes**. **Expect** the gate to run again and turn
+green, and MANTA's comment to say `passed: no new violations`. Never tick the admin's "Merge without waiting" box,
+and never press anything on the golden PR.
 
 **Scene 4** — the nightly (tab 2):
 ```
 npm run demo -- scene 4
 ```
-It prints a `gh run watch <number> …` line: type that line. **Expect** the log to show the Sign in path and end
-green.
+It prints a `gh run view <number> … --web` line: type that line. **Expect** the browser to open the latest green
+Nightly run, its Scan log showing the Sign in path ending on `/account`.
 
 **Scene 5** — QA in the Workbench:
 ```

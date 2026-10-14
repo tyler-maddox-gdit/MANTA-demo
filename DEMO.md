@@ -84,86 +84,99 @@ npx manta gate --base http://localhost:5173
 
 ## Scene 3 · The pull request (8 min)
 
-**Setup.** The scene command pushes the feature branch, opens a live pull request, starts the nightly run for
-scene 4 and prints the pull request's link. The dev server from scene 2 can keep running; nothing here needs it.
+The one live GitHub Action of the demo: the gate runs on a pull request, MANTA posts what it found and the fixes,
+the fixes are applied from the pull request's Conversation tab, and the gate goes green.
 
-**Type.**
+**Setup.** Scene 2 is done: the terminal is on the feature branch with a clean tree. The browser is signed in to
+GitHub, with the golden PR open in a background tab as the fallback (`npm run demo -- status` prints its link).
+
+**1 · Push and open the pull request.** Type:
 ```
 npm run demo -- scene 3
 ```
-Open the live PR's link. On its **Checks** tab, open **MANTA gate** and watch it run (about a minute and a half).
+It pushes the feature branch, opens the live PR and prints its link and the golden PR's.
+- "The developer is happy enough to share the change: they push it and open a pull request."
 
-**See.** The gate job step by step: install, build, then the same scan the developer ran on the laptop, ending
-`Gate failed: 3 new violations at or above minor`. Back on the **Conversation** tab:
-- the red **MANTA gate** check, marked Required;
-- MANTA's comment — `MANTA gate · failed: 3 new violations at or above minor`, the New / Fixed / Tolerated
-  lines, the three new ones in a table, and `AI fixes: none proposed — this run had no AI provider.`;
-- a comment headed **Pre-run AI fixes**, saying no AI ran in this job and that the suggestions were written ahead
-  of time on a snapshot of this branch;
-- MANTA's review, `3 suggested fixes from MANTA.`: one suggestion on each of the three lines (the close button's
-  name and the file field's label in `Status.jsx`, the hint colour in `styles.css`);
-- a second red check, **Code scanning results / MANTA**: the same three as alerts on the changed lines. (The
-  first live PR after code scanning starts also gets GitHub's one-time "Code Scanning has recently been set up"
-  comment.)
+**2 · The pull request.** Open the live PR's link (**Conversation** tab). The checks area shows a yellow dot: running.
+- "A **pull request** is how a change asks to join the main code: the team reviews it, and automated checks run
+  on it."
+- "A **pull request check** is one of those results, a green tick or a red cross beside the change. MANTA's gate
+  is a required one: while it is red, this change cannot merge."
 
-**Type (in the browser).** The **Files changed** tab: on each of the three suggestions press **Add suggestion to
-batch**, then **Commit suggestions** at the top, then **Commit changes**.
+**3 · Watch the gate run** (about a minute and a half). **Checks** tab → **MANTA gate**; expand the **Gate** step
+as it goes. It ends `Gate failed: 3 new violations at or above minor`.
+- "The same command the developer ran on the laptop, now on GitHub's machines: install, build the site, scan
+  every page, compare against the baseline."
+- "The same three problems the developer saw. Now the team sees them too."
 
-**See.** A new commit on the PR, "Apply suggestions from code review", and the gate running again (about a minute
-and a half). Then the check turns green, MANTA's comment rewrites itself to `MANTA gate · passed: no new
-violations`, and the code scanning alerts close. Tolerated stays 27: the old debt was not part of this change.
+**4 · What MANTA posted.** Back to **Conversation** (refresh if it has not updated). Point at each, in order:
+- The red **MANTA gate** check, marked **Required**: "Blocked: it cannot merge."
+- MANTA's comment, `MANTA gate · failed: 3 new violations at or above minor`: "New 3, Tolerated 27. The old debt
+  is tolerated, the new debt is not, and each one names the source file and line that wrote it."
+- The comment headed **Pre-run AI fixes**: "These fixes are **pre-run**: MANTA's AI wrote them ahead of time, on a
+  snapshot of this same branch, because this repository has no AI key today. With a key, this job writes them
+  itself, in the run you just watched."
+- The alerts from **github-advanced-security** on the changed lines, and the second red check, **Code scanning
+  results / MANTA**: "The same findings also go to GitHub's code scanning, in SARIF, the format code scanners
+  share. Accessibility lands in the Security tab beside every other scanner, tracked the same way."
+- Skip GitHub's long "Code Scanning has recently been set up" comment if it is there: it comes once, on the first
+  pull request.
 
-**Say.**
-- "A **pull request** is how a change asks to join the main code: the team reviews it, and automated checks
-  run on it."
-- "A **pull request check** is one of those automated results, a green tick or a red cross beside the change.
-  The gate is one required check: while it is red, this change cannot merge."
-- "MANTA ran in this pull request exactly as it ran on the developer's laptop, on GitHub's machines, and wrote
-  what it found into the pull request."
-- "These suggestions are **pre-run**: MANTA's fix skill wrote them ahead of time, on a snapshot of this same
-  branch, because this repository has no AI key today. The comment above says so. With a key, this job writes
-  them itself, in the run you just watched."
-- "Each **suggestion** is an edit to the exact source line that wrote the element, not an instruction about the
-  page. MANTA changed nothing: someone with write access accepts it, with one click."
-- "And the gate is green. Legacy debt tolerated, new debt blocked, and this time fixed before it landed."
-- "The same findings also arrive as code scanning alerts, in the Security tab beside every other scanner."
-- Signed in as an admin, the page offers **Merge without waiting for requirements to be met (bypass rules)**.
-  Never tick it and never merge the live PR: the reset closes it and undoes the committed suggestions.
+**5 · Apply the fixes, in the Conversation tab.** MANTA's review, `3 suggested fixes from MANTA.`, shows each
+suggestion on its lines: the close button's name and the file field's label in `Status.jsx`, the hint colour in
+`styles.css`. Read one aloud (the close button's `aria-label="Close"`).
+- "Each suggestion is an edit to the exact source line that wrote the element. The contrast fix goes to the
+  stylesheet, where the colour is set, not to the page."
 
-**If it goes wrong.** CI is slow, or the suggestions do not appear: open the **golden PR** (`npm run demo --
-status` prints its link), the same change with the same suggestions posted ahead of time — **pre-run**. Show its
-review, but never press Commit suggestion there: the golden PR is kept as it is for every demo.
+On each of the three press **Add suggestion to batch**, then **Commit suggestions** (the button the batch puts at
+the top of the page), then **Commit changes**.
+- "MANTA changed nothing. A person with write access accepted three fixes, in one commit."
 
-**With an AI key.** When the repo secret `ANTHROPIC_API_KEY` is set ("Setup Tyler does once", item 6), there is
-no Pre-run comment: the gate job runs MANTA's fix skill itself (a minute or two longer) and posts its own
-suggestions. Say "the fix skill ran in this job and posted these itself". Their wording differs from run to run.
+**6 · Green** (about a minute and a half). A new commit, "Apply suggestions from code review", appears and the gate
+runs again. The check turns green, MANTA's comment rewrites itself to `MANTA gate · passed: no new violations`, and
+the code scanning alerts show as fixed.
+- "Legacy debt tolerated, new debt blocked, and this time fixed before it ever landed."
+
+Never press **Merge**, and never tick **Merge without waiting for requirements to be met (bypass rules)**, which
+appears because you are an admin: the reset closes this pull request and undoes the commit.
+
+**If it goes wrong.** The gate takes over about three minutes, or the suggestions never appear: switch to the
+golden PR tab. "This is the same change, with MANTA's fixes posted ahead of time: **pre-run**." Show its comment
+and review, and press nothing there. The re-run comes back red: "it measures every push; here is what it found",
+read the comment, and move on.
+
+**With an AI key.** When the repo secret `ANTHROPIC_API_KEY` is set ("Setup Tyler does once", item 6), there is no
+Pre-run comment: the gate job runs MANTA's fix skill itself (a minute or two longer) and posts its own suggestions.
+Say "the fix skill ran in this job and posted these itself". Their wording differs from run to run.
 
 ---
 
-## Scene 4 · Nightly through login (3 min)
+## Scene 4 · Nightly through login (2 min)
 
-**Setup.** `npm run demo -- scene 4` names the nightly run scene 3 started.
+**Setup.** Nothing runs live here: the Nightly workflow runs on its own every morning (06:17 UTC), and this scene
+opens the latest green one. `npm run demo -- scene 4` prints its run number.
 
 **Type.**
 ```
-gh run watch <run> -R tyler-maddox-gdit/MANTA-demo
+gh run view <run> -R tyler-maddox-gdit/MANTA-demo --web
 ```
 
-**See.** The run's log: the Sign in path replayed (Email, Password, Sign in), the line
-`Scanned along "Sign in": ends on http://localhost:4173/account`, MANTA's extended rules (the ones that press
-keys) step by step, then the summary. In the browser, the run's page lists the artifact `manta-nightly`.
+**See.** The run's page in the browser. Open the **Scan** step's log: the Sign in path replayed (Email, Password,
+Sign in), the line `Scanned along "Sign in": ends on http://localhost:4173/account`, MANTA's extended rules (the
+ones that press keys) step by step, then the summary. The run's summary lists the artifact `manta-nightly`.
 
 **Say.**
-- "A **workflow run** is one execution of an automated job on GitHub's machines. This one runs every night, and
-  we started one by hand twenty minutes ago."
+- "A **workflow run** is one execution of an automated job on GitHub's machines. This one runs every night on its
+  own; this is last night's."
 - "Every night MANTA scans what no pull request touches: the account page behind the login, reached by a saved
   path that signs in with a password kept as a secret, never written in the repository."
 - "It also runs MANTA's extended rules, the ones that press keys and walk the focus through the page."
 - "Everything the run found is kept as an **artifact**: a bundle of files the run leaves behind. QA downloads it
   and opens it in the Workbench, which is the next scene."
 
-**If it goes wrong.** The run is late or failed: open last night's **Nightly** run in the Actions tab; the
-schedule guarantees there is one.
+**If it goes wrong.** No green nightly: open the Actions tab and show the most recent Nightly run, whatever its
+state. Start one the day before if the schedule has not run yet: `gh workflow run nightly.yml -R
+tyler-maddox-gdit/MANTA-demo --ref main`.
 
 ---
 
@@ -221,8 +234,7 @@ It is read-only (no verdicts or rescans), but every finding and the Focus order 
 
 For a room without developers: scenes **1, 2, 3, 5, 6**. Drop scene 4 (the nightly log). In scene 3, the
 suggestions and the gate turning green are the AI moment; in scene 5, the Focus order picture stands for the
-nightly. After scene 3, go straight to `npm run demo -- scene 5`. The nightly still starts in scene 3; nobody
-watches it.
+nightly. After scene 3, go straight to `npm run demo -- scene 5`.
 
 ---
 
