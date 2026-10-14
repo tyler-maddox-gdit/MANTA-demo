@@ -63,6 +63,31 @@ jobs:
         run: npx manta gate --base http://localhost:4173 --no-nudge
 
       # The steps below run whatever the gate said; a failed gate step still fails the job.
+      # The keyless demo. No AI runs in this job without ANTHROPIC_API_KEY, so on the demo's own feature branch
+      # the fix skill's pre-run output (demo-data/pr: a snapshot of this branch, its fixes written on the Mac) is
+      # posted as a review the presenter can apply, with a comment saying it is pre-run. Only while those fixes
+      # still apply: the run after they are committed posts nothing. Before the live post, which then rewrites
+      # MANTA's comment with this job's own result.
+      - name: Post the pre-run AI fixes (demo, no key)
+        if: always() && env.ANTHROPIC_API_KEY == '' && github.head_ref == 'feature/upload-documents'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          patch=$(ls demo-data/pr/reports/fix-*.patch)
+          token=$(basename "$patch" .patch); token=${token#fix-}
+          if ! git apply --check "$patch" 2>/dev/null; then
+            echo "The pre-run fixes no longer apply to this branch: nothing posted."
+            exit 0
+          fi
+          dir="$RUNNER_TEMP/prerun"
+          mkdir -p "$dir/reports"
+          cp demo-data/pr/reports/* "$dir/reports/"
+          (cd "$dir" && GITHUB_STEP_SUMMARY= node "$GITHUB_WORKSPACE/node_modules/@usps/508-toolkit/bin/manta.mjs" post --pr "$PR" --run "$token" > /dev/null)
+          gh pr comment "$PR" -R "$GITHUB_REPOSITORY" --body "**Pre-run AI fixes.** No AI ran in this job: the repository has no \`ANTHROPIC_API_KEY\`. The suggestions in MANTA's review were written by MANTA's fix skill ahead of time, on a snapshot of this branch (run \`$token\`, kept in \`demo-data/pr\`), and posted here so they can be applied. With a key set, this job writes its own."
+          echo "Posted the pre-run fixes of run $token."
+
       - name: Post to the pull request
         if: always()
         env:
