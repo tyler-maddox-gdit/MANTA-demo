@@ -64,7 +64,7 @@ Sign in as **tyler-maddox-gdit**. That account owns the repo: it can read MANTA'
    cd MANTA-demo
    ```
 
-2. Install the site and MANTA (several minutes; MANTA comes from its private repository, pinned at `v1`):
+2. Install the site and MANTA (several minutes; MANTA comes from its private repository, pinned at `v1.2`):
    ```
    npm ci
    ```
@@ -207,7 +207,8 @@ for anything that failed, the command and the exact error text (copy it from Ter
 |---|---|
 | `npm` : "running scripts is disabled on this system" | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, or type `npm.cmd` in place of `npm`. |
 | `npm ci`: "Repository not found" / "Authentication failed" for `tyler-maddox-gdit/MANTA` | `gh auth status` must show tyler-maddox-gdit active; then `gh auth setup-git` and `npm ci` again. |
-| `npm ci`: `EPERM`, `ENAMETOOLONG`, "Filename too long" | Clone under `C:\demo`, run `git config --global core.longpaths true`, close editors that hold `node_modules` open, and try again. Antivirus scanning `node_modules` makes it slow, not fail. |
+| `npm ci`: `EPERM` | A file in `node_modules` is in use, so `npm ci` cannot delete it. Stop anything running from this folder (Ctrl+C on `npm run dev`, `npm run preview`, `npm run demo -- workbench`) and close editors open on it. Then `Get-Process node -ErrorAction SilentlyContinue`: if any are listed, `Stop-Process -Name node` (this also stops a MANTA GUI started from another folder). Run `npm ci` again. Still failing: `Remove-Item node_modules -Recurse -Force`, then `npm ci`; a file `Remove-Item` cannot delete names what holds it. |
+| `npm ci`: `ENAMETOOLONG`, "Filename too long" | Clone under `C:\demo`, run `git config --global core.longpaths true`, and try again. Antivirus scanning `node_modules` makes `npm ci` slow, not fail. |
 | `npm run install-browser-gdit`: "unable to get local issuer certificate" | The network re-signs HTTPS with a company certificate Node does not trust, and the script's `--use-system-ca` did not cover it. Check `node --version` is 22.15 or later. Failing that, `npm config get cafile`: if it names a file, `$env:NODE_EXTRA_CA_CERTS = "<that file>"` (or the `.pem` IT gives you), then install again. Last resort, for that one download only: `$env:NODE_TLS_REJECT_UNAUTHORIZED = "0"`, install, close the window. |
 | A scan or the Workbench: `Executable doesn't exist at …\ms-playwright\chromium_headless_shell-<build>\…` | The browser was installed by another Playwright version than MANTA's. Run `npm run install-browser-gdit` in this folder. |
 | `npm run install-browser-gdit` hangs or fails | The network blocks the download: set `$env:HTTPS_PROXY`, or ask IT to allow Playwright's download hosts. `npm run demo -- status` says when Chromium is missing. |
