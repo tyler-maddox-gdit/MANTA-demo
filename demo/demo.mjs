@@ -4,7 +4,8 @@
 // Usage: npm run demo -- <command>   (or: node demo/demo.mjs <command>). `help` lists the commands.
 // The cue strings below are the ones DEMO.md prints; change them in both places.
 import { spawnSync } from 'node:child_process';
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -22,19 +23,20 @@ const ARTIFACTS = { 'manta-run': GATE_WORKFLOW, 'manta-nightly': NIGHTLY_WORKFLO
 const RUN_DIRS = ['reports', 'run-records', 'sites']; // what a --data-dir holds
 const DEV_ORIGIN = 'http://localhost:5173';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-// Where MANTA itself is checked out: the reviewer GUI (npm run manta) runs from there, not from this repo.
-const MANTA_HOME = process.env.MANTA_HOME || (process.platform === 'win32' ? 'C:\\demo\\MANTA' : join(ROOT, '..', 'MANTA'));
+// MANTA as npm ci installed it: the Workbench (MANTA's reviewer GUI) runs from here, so no MANTA checkout is needed.
+const MANTA_PKG = join(ROOT, 'node_modules', '@usps', '508-toolkit');
+const WORKBENCH_PORT = 3508;
 
 // ── The cues (DEMO.md says the same) ───────────────────────────────────────
 const GATE_LINE = 'npx manta gate --base ' + DEV_ORIGIN;
-const workbench = (dataDir) => ['cd ' + MANTA_HOME + '   (your MANTA checkout, not this repo)', 'npm run manta -- --data-dir ' + join(ROOT, dataDir)];
+const workbenchLine = (name) => 'npm run demo -- workbench ' + name + '   (opens the Workbench on it; Ctrl+C stops it)';
 const CUES = {
   1: { title: 'Scene 1 · Conception (1 min)', type: [], next: 'Show the slide: a criterion row\'s checklist in the Workbench. Then: npm run demo -- scene 2' },
   2: { title: 'Scene 2 · The developer scans localhost (4 min)', type: ['npm run dev        (in a second terminal; leave it running)', GATE_LINE], next: 'Expect New 3 on /status?upload=BP-2026-10882 and "Gate failed", exit 1. Then: npm run demo -- scene 3' },
   3: { title: 'Scene 3 · The developer applies an AI fix (3 min)', type: ['git apply <patch>', GATE_LINE], next: 'Say: "This patch was pre-run from a snapshot of this branch." Expect New 0. Then: git checkout .   and   npm run demo -- scene 4' },
   4: { title: 'Scene 4 · The pull request (6 min)', type: [], next: 'Show the live PR (red check, the comment), then switch to the golden PR (pre-run). Then: npm run demo -- scene 5' },
   5: { title: 'Scene 5 · Nightly through login (3 min)', type: ['gh run watch <run> -R ' + REPO], next: 'Expect the Sign in path replayed, ending on /account. Then: npm run demo -- scene 6' },
-  6: { title: 'Scene 6 · QA in the Workbench (5 min)', type: ['npm run build', 'npm run preview    (in this repo, a second terminal; Rescan reloads pages from localhost:4173)', ...workbench(join('demo-data', 'nightly'))], next: 'Open the URL it prints, then the Nightly run\'s report. Then: npm run demo -- scene 7' },
+  6: { title: 'Scene 6 · QA in the Workbench (5 min)', type: ['npm run build', 'npm run preview    (in this repo, a second terminal; Rescan reloads pages from localhost:4173)', workbenchLine('nightly')], next: 'Open the URL it prints, then the Nightly run\'s report. Then: npm run demo -- scene 7' },
   7: { title: 'Scene 7 · Release (2 min)', type: [], next: 'In the same Workbench, press Export on the Nightly run: the ACR draft (docx) and the USPS defects. The end.' },
 };
 
@@ -202,8 +204,27 @@ function ciRun(runId, flags) {
   must('gh', ['run', 'download', runId, '-R', REPO, '-n', artifact, '-D', dest]);
   const tokens = tokensIn(join(dest, 'reports'));
   console.log('[DONE] ci-run/ holds run ' + runId + "'s " + artifact + ': ' + (tokens.join(', ') || 'no run'));
-  console.log('Open it in the Workbench, from your MANTA checkout (not this repo):');
-  for (const line of workbench('ci-run')) console.log('  ' + line);
+  console.log('Open it in the Workbench: ' + workbenchLine('ci-run'));
+}
+
+/** The Workbench on one snapshot (demo-data/<name>) or on ci-run/, from the MANTA package npm ci installed. */
+function workbench(name = 'nightly', flags) {
+  const dataDir = name === 'ci-run' ? join(ROOT, 'ci-run') : join(ROOT, 'demo-data', name);
+  if (!existsSync(join(dataDir, 'reports'))) die('No reports/ in ' + dataDir + ': name a snapshot (nightly or pr) or ci-run.');
+  if (!existsSync(join(MANTA_PKG, 'ui', 'cli.ts'))) die('MANTA is not installed here: run npm ci first.');
+  const tsx = createRequire(join(MANTA_PKG, 'package.json')).resolve('tsx/cli');
+  console.log('Workbench on ' + dataDir + '. Open the URL below, then the run\'s report. Ctrl+C stops it.');
+  const r = spawnSync(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(flags.port ?? WORKBENCH_PORT), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit', shell: false });
+  process.exitCode = r.status ?? 0;
+}
+
+/** Whether the Chromium MANTA scans with is installed, asked of MANTA's own Playwright. */
+function chromiumInstalled() {
+  try {
+    return existsSync(createRequire(join(MANTA_PKG, 'package.json'))('playwright').chromium.executablePath());
+  } catch {
+    return false;
+  }
 }
 
 function status() {
@@ -238,9 +259,12 @@ function status() {
   console.log('Tools');
   const major = Number(process.versions.node.split('.')[0]);
   say(major >= 20, 'node ' + process.version + (major >= 20 ? '' : ' (20 or later needed)'));
-  say(existsSync(MANTA_HOME), 'MANTA checkout at ' + MANTA_HOME + (process.env.MANTA_HOME ? '' : ' (set MANTA_HOME to move it)'));
-  const auth = run('gh', ['auth', 'status']);
-  say(auth.ok, 'gh auth status');
+  const installed = existsSync(join(MANTA_PKG, 'package.json'));
+  say(installed, installed ? 'MANTA ' + JSON.parse(readFileSync(join(MANTA_PKG, 'package.json'), 'utf8')).version + ' installed' : 'MANTA not installed: run npm ci');
+  say(installed && chromiumInstalled(), 'Chromium for scanning' + (installed && chromiumInstalled() ? '' : ': run npx playwright install chromium'));
+  const login = out('gh', ['api', 'user', '--jq', '.login']);
+  const admin = login && out('gh', ['api', 'repos/' + REPO, '--jq', '.permissions.admin']) === 'true';
+  say(Boolean(admin), login ? 'gh signed in as ' + login + (admin ? ', a repo admin' : ', not a repo admin: reset cannot force-push main. gh auth switch -u tyler-maddox-gdit') : 'gh is not signed in: gh auth login');
   console.log(ok ? '\nReady.' : '\nNot ready: fix the lines marked FIX.');
   process.exitCode = ok ? 0 : 1;
 }
@@ -255,10 +279,13 @@ function help() {
          [--artifact a]    (manta-run by default, or manta-nightly), else this folder's reports/, run-records/, sites/.
   ci-run [run]             Download a workflow run's artifact into ci-run/ (the latest nightly by default)
          [--artifact a]    and print the command that opens it in the Workbench.
-  status                   The day-of check: branches against tags, open PRs, changes, snapshots, gh, node.
+  workbench [name]         The Workbench on demo-data/<name> (nightly by default, or pr), or on ci-run.
+         [--port n]        Port 3508 unless given.
+  status                   The day-of check: branches against tags, open PRs, changes, snapshots, tools, gh.
+  setup-github             The one-time GitHub setup: secrets, deploy key, ruleset (needs a repo admin).
   help                     This list.
 
-Repo ${REPO} · sign-in path ${SIGN_IN_PATH} · MANTA checkout ${MANTA_HOME}`);
+Repo ${REPO} · sign-in path ${SIGN_IN_PATH} · Workbench port ${WORKBENCH_PORT}`);
 }
 
 // ── Arguments ───────────────────────────────────────────────────────────────
@@ -268,6 +295,7 @@ const words = [];
 for (let i = 0; i < argv.length; i++) {
   if (argv[i] === '--force') flags.force = true;
   else if (argv[i] === '--artifact') flags.artifact = argv[++i];
+  else if (argv[i] === '--port') flags.port = Number(argv[++i]);
   else if (argv[i].startsWith('--')) die('Unknown flag ' + argv[i] + '. Try: npm run demo -- help');
   else words.push(argv[i]);
 }
@@ -277,7 +305,9 @@ switch (command) {
   case 'scene': scene(Number(a)); break;
   case 'snapshot': snapshot(a, b, flags); break;
   case 'ci-run': ciRun(a, flags); break;
+  case 'workbench': workbench(a, flags); break;
   case 'status': status(); break;
+  case 'setup-github': await import('./setup-github.mjs'); break;
   case 'help': case undefined: help(); break;
   default: die('Unknown command ' + command + '. Try: npm run demo -- help');
 }

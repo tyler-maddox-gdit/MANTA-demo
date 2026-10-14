@@ -12,7 +12,10 @@ debt `main` tolerates; the second is the gate. The presenter's runbook is [DEMO.
 npm run dev                                    # the site at http://localhost:5173
 npx manta gate --base http://localhost:5173    # gate it against .manta/baseline.json
 npm run demo -- status                         # is the demo ready?
+npm run demo -- workbench nightly              # MANTA's Workbench on the nightly snapshot
 ```
+
+Setting up a PC to present from, step by step: [SETUP.md](SETUP.md).
 
 To check the committed site store (`sites/http_localhost_4173.json`, the Sign in path) against MANTA's own
 readers, run from a MANTA checkout: `npx tsx <this repo>/demo/check-site-store.mjs`.

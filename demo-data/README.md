@@ -4,8 +4,7 @@ Committed **snapshot runs**: each folder is one MANTA run with its artifacts, la
 (`reports/`, `run-records/`, `sites/`), so MANTA's Workbench opens it offline:
 
 ```
-cd C:\demo\MANTA                       (a MANTA checkout, not this repo)
-npm run manta -- --data-dir <this repo>\demo-data\<name>
+npm run demo -- workbench <name>       (nightly or pr; runs the MANTA that npm ci installed)
 ```
 
 Every AI artifact in a snapshot is gated on its run's token: it belongs to that run and cannot sit beside a

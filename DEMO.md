@@ -6,7 +6,8 @@ without an AI key. Where the audience sees AI output that was produced earlier, 
 never describe pre-run output as live.
 
 The words in `code` are typed. `npm run demo -- scene <n>` sets each scene up and prints the same lines as
-this page. On the demo PC, MANTA itself is checked out at `C:\demo\MANTA`; this repo is wherever you cloned it.
+this page. To set up the PC you present from, follow [SETUP.md](SETUP.md) first: it ends with a dry run of
+every scene.
 
 ---
 
@@ -14,6 +15,7 @@ this page. On the demo PC, MANTA itself is checked out at `C:\demo\MANTA`; this 
 
 Do these before the audience arrives, in this order.
 
+- [ ] The PC was set up with [SETUP.md](SETUP.md), and its dry run went through every scene.
 - [ ] The night before: `npm run demo -- reset` ran once and ended with scene 1's cue.
 - [ ] `npm run demo -- status` ends with **Ready.**: both story branches at their tags, no open live PR, a clean
       working tree, both snapshots listing a run token, `gh` signed in, Node 20 or later.
@@ -184,12 +186,11 @@ beside it.
 **Type.**
 ```
 npm run build
-npm run preview    (in this repo, a second terminal)
-cd C:\demo\MANTA
-npm run manta -- --data-dir <this repo>\demo-data\nightly
+npm run preview    (a second terminal; leave it running)
+npm run demo -- workbench nightly
 ```
-(`npm run demo -- scene 6` prints the last two lines with the real paths.) Open the URL it prints, then the
-Nightly run's report.
+The Workbench runs from the MANTA that `npm ci` installed; no MANTA checkout is needed. Open the URL it prints
+(http://127.0.0.1:3508/), then the Nightly run's report.
 
 **See.** The run's report: add an issue on the account page; give a verdict on an issue; rescan the Pending
 badge's contrast issue on `/status` (still failing); attest a criterion; open a criterion's checklist. Then the
@@ -273,27 +274,27 @@ The command prints the run tokens it copied. See `demo-data/README.md` for how e
 
 ## Setup Tyler does once
 
-Most of this was done on 2026-10-11 when the repository was built. What is left is the part only the account owner can do — three secrets, a deploy key and a ruleset — and `demo/setup-wizard.sh` walks through it stage by stage (run it from this checkout with `gh` signed in as `tyler-maddox-gdit`: `bash demo/setup-wizard.sh`). The list, so the wizard can be checked against it:
+The repository, its branches, tags, snapshots and golden PR were built on 2026-10-11/13. The account-level
+setup is `npm run demo -- setup-github`, run from any checkout with `gh` signed in as `tyler-maddox-gdit` (a repo
+admin). It is pure Node, so it runs on Windows or a Mac. Each stage looks first and skips what is already there,
+so it is safe to run again: when the read token expires, or to make a fresh deploy key.
 
-**Done already** — the repository (public, under `tyler-maddox-gdit`) with `main`, `feature/upload-documents` and `golden/upload-documents` pushed; the baseline `main` tolerates and its badge, committed; the story tags `story/main` and `story/feature`; the `pr` snapshot (the feature branch's gated run, its cluster and fix artifacts and the patch, made on the Mac with the `claude-code` provider) and the `nightly` snapshot (a nightly run of the golden branch made on the Mac the same way CI makes it — `--extended --paths` through the Sign in path — with the full AI pass added); the golden PR, opened and labelled `golden`, with MANTA's post written onto it once from the `pr` snapshot.
-
-**Still to do (the wizard's stages)**
-
-1. **`MANTA_READ_TOKEN`** (repo secret): a fine-grained personal access token, resource owner
+1. **Actions** enabled. If pushes and pull requests never start a run but a manual run does, turn Actions off
+   and on again (SETUP.md, Troubleshooting). That happened once, on 2026-10-13: the repo was created empty.
+2. **`MANTA_READ_TOKEN`** (repo secret): a fine-grained personal access token, resource owner
    `tyler-maddox-gdit`, repository access **only** `MANTA`, permission **Contents: read-only**. It lets `npm ci`
-   install MANTA from its private repository. MANTA_READ_TOKEN expires: ____-__-__ (the wizard writes the date here).
-   Until it exists every workflow run fails at `npm ci`.
-2. **`MANTA_SECRET_DEMO_PW`** (repo secret): `benefits-demo`, the demo site's sign-in password. The nightly's
-   Sign in path types it; without it the path is held and the nightly warns.
-3. **`MANTA_DEMO_DEPLOY_KEY`** (repo secret) and the deploy key with write access: the wizard generates the pair,
-   shows the public half to paste under Settings → Deploy keys, stores the private half in the secret and deletes
-   the local files.
-4. **The ruleset on `main`**: a branch ruleset targeting the default branch, requiring the status check **gate**
-   (offered in the picker only once the gate workflow has run on a pull request — open a throwaway PR or wait for
-   the first rehearsal), blocking force pushes for everyone but the bypass list: **Deploy keys** (so the Baseline
-   workflow can commit the baseline) and **Repository admin** (so `npm run demo -- reset` can force-push `main`).
-5. **Actions and code scanning**: Actions allowed; code scanning needs no setup on a public repository.
-6. **The pivot (optional): `ANTHROPIC_API_KEY`** (repo secret). With it set, the gate also proposes fixes for
+   install MANTA from its private repository. GitHub lets no script create one: the stage opens the page, lists
+   the settings, and `gh` takes the token at a hidden prompt. MANTA_READ_TOKEN expires: ____-__-__ (the stage
+   writes the date here). Until it exists every workflow run fails at `npm ci`.
+3. **`MANTA_SECRET_DEMO_PW`** (repo secret): `benefits-demo`, the demo site's sign-in password. The nightly's
+   Sign in path types it; without it the path is held and the nightly warns. Set 2026-10-13.
+4. **`MANTA_DEMO_DEPLOY_KEY`** (repo secret) and the deploy key **baseline job** with write access: generated by
+   `ssh-keygen`, the public half added as a deploy key, the private half only in the secret. Set 2026-10-13.
+5. **The ruleset `main`** on the default branch: the check **MANTA gate** (the gate workflow's job) required,
+   force pushes blocked, bypassed by **Repository admin** (so `npm run demo -- reset` can force-push `main`;
+   present signed in as `tyler-maddox-gdit`) and **Deploy keys** (so the Baseline workflow can commit the
+   baseline). Created 2026-10-13.
+6. **Optional, the pivot: `ANTHROPIC_API_KEY`** (repo secret). With it set, the gate also proposes fixes for
    the new violations (`--skills cluster,fix --scope new`) and the nightly runs the full AI pass; the live PR
    then gets its own suggestions. Say "the fix skill ran in this job and posted these itself". Remove the
    secret to go back to the pre-run story. Nothing else changes.
