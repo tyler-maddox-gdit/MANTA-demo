@@ -21,7 +21,7 @@ Do these before the audience arrives, in this order.
       working tree, both snapshots listing a run token, `gh` signed in, Node 20 or later.
 - [ ] `gh auth status` shows you signed in as a collaborator on `tyler-maddox-gdit/MANTA-demo`.
 - [ ] The repo secret `MANTA_SECRET_DEMO_PW` is set (Settings → Secrets and variables → Actions).
-- [ ] The repo secret `MANTA_READ_TOKEN` has not expired. It expires on: **____-__-__** (see "Setup Tyler does once").
+- [ ] The repo secret `MANTA_READ_TOKEN` has not expired. It expires on: **2099-01-01** (see "Setup Tyler does once").
 - [ ] Chromium is installed: `npx playwright install chromium`.
 - [ ] `npm run dev` opens the site at http://localhost:5173. Stop it again (Ctrl+C).
 - [ ] The golden PR is open (its link is in `npm run demo -- status`).
@@ -284,7 +284,7 @@ so it is safe to run again: when the read token expires, or to make a fresh depl
 2. **`MANTA_READ_TOKEN`** (repo secret): a fine-grained personal access token, resource owner
    `tyler-maddox-gdit`, repository access **only** `MANTA`, permission **Contents: read-only**. It lets `npm ci`
    install MANTA from its private repository. GitHub lets no script create one: the stage opens the page, lists
-   the settings, and `gh` takes the token at a hidden prompt. MANTA_READ_TOKEN expires: ____-__-__ (the stage
+   the settings, and `gh` takes the token at a hidden prompt. MANTA_READ_TOKEN expires: 2099-01-01 (the stage
    writes the date here). Until it exists every workflow run fails at `npm ci`.
 3. **`MANTA_SECRET_DEMO_PW`** (repo secret): `benefits-demo`, the demo site's sign-in password. The nightly's
    Sign in path types it; without it the path is held and the nightly warns. Set 2026-10-13.
