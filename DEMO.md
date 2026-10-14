@@ -125,7 +125,10 @@ npm run demo -- scene 4
 
 **See.** In the browser, the **live PR**: the red **MANTA gate** check; MANTA's comment — `MANTA gate · failed:
 3 new violations at or above minor`, the New / Fixed / Tolerated lines, the three new ones in a table, and
-`AI fixes: none proposed — this run had no AI provider.`; the warnings in the check's summary. Then switch to
+`AI fixes: none proposed — this run had no AI provider.`; the warnings in the check's summary; and a second red
+check, **Code scanning results / MANTA**, with the same three violations as alerts on the changed lines. (The
+first live PR after code scanning starts also gets GitHub's one-time "Code Scanning has recently been set up"
+comment.) Then switch to
 the **golden PR** tab: the same comment with `AI fixes: 3 proposed, 3 as suggestions below`, a review with three
 suggestions on the dialog's lines (the file field's label and the close button's name in `Status.jsx`, the hint
 colour in `styles.css`), each with a **Commit suggestion** button, an "Also fixable" section holding the
@@ -144,7 +147,10 @@ refresh button's fix, and the `git apply` line.
   accepts it with one click on Commit suggestion." Point at the button; never press it.
 - "The refresh button beside the page title is old debt, outside the lines this change touched, so MANTA
   lists its fix under Also fixable instead of attaching it to lines the change never touched."
+- "The same findings also arrive as code scanning alerts, in the Security tab beside every other scanner."
 - The golden PR's comment and review carry Tyler's name, not a bot's: they were posted from his machine.
+- Signed in as an admin, the page offers **Merge without waiting for requirements to be met (bypass rules)**.
+  Never tick it and never merge the live PR: the reset closes it.
 
 **If it goes wrong.** CI is slow or the live PR will not open: show the golden PR alone. That is why it exists.
 
