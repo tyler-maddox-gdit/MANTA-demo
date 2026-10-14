@@ -122,14 +122,16 @@ as it goes. It ends `Gate failed: 3 new violations at or above minor`.
 - Skip GitHub's long "Code Scanning has recently been set up" comment if it is there: it comes once, on the first
   pull request.
 
-**5 · Apply the fixes, in the Conversation tab.** MANTA's review, `3 suggested fixes from MANTA.`, shows each
-suggestion on its lines: the close button's name and the file field's label in `Status.jsx`, the hint colour in
+**5 · Apply the fixes.** MANTA's review, `3 suggested fixes from MANTA.`, shows each suggestion on its lines in the
+Conversation tab: the close button's name and the file field's label in `Status.jsx`, the hint colour in
 `styles.css`. Read one aloud (the close button's `aria-label="Close"`).
 - "Each suggestion is an edit to the exact source line that wrote the element. The contrast fix goes to the
   stylesheet, where the colour is set, not to the page."
 
-On each of the three press **Add suggestion to batch**, then **Commit suggestions** (the button the batch puts at
-the top of the page), then **Commit changes**.
+Then the **Files changed** tab, the only place GitHub batches suggestions: on each of the three press **Add
+suggestion to batch**, then **Commit suggestions** at the top, then **Commit changes**. One commit, one gate run.
+(Pressing **Commit suggestion** on each in the Conversation tab works too: three commits, and each new one cancels
+the gate run before it, so only the last finishes.)
 - "MANTA changed nothing. A person with write access accepted three fixes, in one commit."
 
 **6 · Green** (about a minute and a half). A new commit, "Apply suggestions from code review", appears and the gate
