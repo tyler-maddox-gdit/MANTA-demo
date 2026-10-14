@@ -1,6 +1,6 @@
 # The demo runbook
 
-MANTA across the software lifecycle, told in seven scenes on the Benefits Portal demo site: about 25 minutes,
+MANTA across the software lifecycle, told in six scenes on the Benefits Portal demo site: about 25 minutes,
 from a developer's terminal through a pull request and a nightly build to QA and release. Every scene runs
 without an AI key. Where the audience sees AI output that was produced earlier, say **"pre-run"** out loud;
 never describe pre-run output as live.
@@ -45,7 +45,7 @@ Do these before the audience arrives, in this order.
 - "Today we follow one feature, an upload dialog for a benefits portal, from the developer's laptop to the
   release paperwork."
 
-**If it goes wrong.** No slide: open the Workbench on the nightly snapshot (scene 6's lines) and show any
+**If it goes wrong.** No slide: open the Workbench on the nightly snapshot (scene 5's lines) and show any
 criterion's checklist there.
 
 ---
@@ -82,83 +82,67 @@ npx manta gate --base http://localhost:5173
 
 ---
 
-## Scene 3 · The developer applies an AI fix (3 min)
+## Scene 3 · The pull request (8 min)
 
-**Setup.** `npm run demo -- scene 3` prints the patch's file name (it carries the snapshot's run token).
-
-**Type.**
-```
-git apply demo-data/pr/reports/fix-<token>.patch
-npx manta gate --base http://localhost:5173
-```
-
-**See.** `git apply` prints nothing; `git diff --stat` would show `src/pages/Status.jsx` and `src/styles.css`
-changed. The gate runs again and ends with **New 0**, **Fixed 2**, **Tolerated** two fewer than the badge, and a
-passing verdict, plus the report's link.
-
-**Say.**
-- "MANTA's fix skill proposed these fixes as a **patch**: a file listing exact line changes to the source code,
-  which `git apply` applies in one step."
-- "The fix is a change to the source file and line that wrote the element, not an instruction about the page.
-  MANTA applied nothing. The developer did, in one line, and can read every change first."
-- "Fixed 2 is a bonus: the patch also fixes the old refresh button beside the page title, debt from the baseline. The
-  number went down."
-- "This patch was **pre-run** from a snapshot of this branch. With an AI key in CI, the same fix is written in
-  the pull request's own run."
-
-**If it goes wrong.** `git apply` refuses because the code has moved: open the patch file to show the changes,
-and the Fix row of the same issue in the Workbench on `demo-data/pr` (scene 6's lines with `demo-data/pr` in
-place of `demo-data/nightly`).
-
----
-
-## Scene 4 · The pull request (6 min)
-
-**Setup.** Undo scene 3's fix first; then the scene command pushes the branch, opens a live pull request,
-starts the nightly run for scene 5 and prints both pull requests' links.
+**Setup.** The scene command pushes the feature branch, opens a live pull request, starts the nightly run for
+scene 4 and prints the pull request's link. The dev server from scene 2 can keep running; nothing here needs it.
 
 **Type.**
 ```
-git checkout .
-npm run demo -- scene 4
+npm run demo -- scene 3
 ```
+Open the live PR's link. On its **Checks** tab, open **MANTA gate** and watch it run (about a minute and a half).
 
-**See.** In the browser, the **live PR**: the red **MANTA gate** check; MANTA's comment — `MANTA gate · failed:
-3 new violations at or above minor`, the New / Fixed / Tolerated lines, the three new ones in a table, and
-`AI fixes: none proposed — this run had no AI provider.`; the warnings in the check's summary; and a second red
-check, **Code scanning results / MANTA**, with the same three violations as alerts on the changed lines. (The
-first live PR after code scanning starts also gets GitHub's one-time "Code Scanning has recently been set up"
-comment.) Then switch to
-the **golden PR** tab: the same comment with `AI fixes: 3 proposed, 3 as suggestions below`, a review with three
-suggestions on the dialog's lines (the file field's label and the close button's name in `Status.jsx`, the hint
-colour in `styles.css`), each with a **Commit suggestion** button, an "Also fixable" section holding the
-refresh button's fix, and the `git apply` line.
+**See.** The gate job step by step: install, build, then the same scan the developer ran on the laptop, ending
+`Gate failed: 3 new violations at or above minor`. Back on the **Conversation** tab:
+- the red **MANTA gate** check, marked Required;
+- MANTA's comment — `MANTA gate · failed: 3 new violations at or above minor`, the New / Fixed / Tolerated
+  lines, the three new ones in a table, and `AI fixes: none proposed — this run had no AI provider.`;
+- a comment headed **Pre-run AI fixes**, saying no AI ran in this job and that the suggestions were written ahead
+  of time on a snapshot of this branch;
+- MANTA's review, `3 suggested fixes from MANTA.`: one suggestion on each of the three lines (the close button's
+  name and the file field's label in `Status.jsx`, the hint colour in `styles.css`);
+- a second red check, **Code scanning results / MANTA**: the same three as alerts on the changed lines. (The
+  first live PR after code scanning starts also gets GitHub's one-time "Code Scanning has recently been set up"
+  comment.)
+
+**Type (in the browser).** The **Files changed** tab: on each of the three suggestions press **Add suggestion to
+batch**, then **Commit suggestions** at the top, then **Commit changes**.
+
+**See.** A new commit on the PR, "Apply suggestions from code review", and the gate running again (about a minute
+and a half). Then the check turns green, MANTA's comment rewrites itself to `MANTA gate · passed: no new
+violations`, and the code scanning alerts close. Tolerated stays 27: the old debt was not part of this change.
 
 **Say.**
 - "A **pull request** is how a change asks to join the main code: the team reviews it, and automated checks
   run on it."
 - "A **pull request check** is one of those automated results, a green tick or a red cross beside the change.
   The gate is one required check: while it is red, this change cannot merge."
-- "The comment is live. MANTA wrote it from the checks that ran on this pull request a minute ago, and it
-  updates itself on every push."
-- "This second pull request is the **golden PR**: the same change, with MANTA's AI output posted once, ahead of
-  time. It is **pre-run**."
-- "Each **suggestion** is a proposed edit attached to exact lines of the change. Anyone with write access
-  accepts it with one click on Commit suggestion." Point at the button; never press it.
-- "The refresh button beside the page title is old debt, outside the lines this change touched, so MANTA
-  lists its fix under Also fixable instead of attaching it to lines the change never touched."
+- "MANTA ran in this pull request exactly as it ran on the developer's laptop, on GitHub's machines, and wrote
+  what it found into the pull request."
+- "These suggestions are **pre-run**: MANTA's fix skill wrote them ahead of time, on a snapshot of this same
+  branch, because this repository has no AI key today. The comment above says so. With a key, this job writes
+  them itself, in the run you just watched."
+- "Each **suggestion** is an edit to the exact source line that wrote the element, not an instruction about the
+  page. MANTA changed nothing: someone with write access accepts it, with one click."
+- "And the gate is green. Legacy debt tolerated, new debt blocked, and this time fixed before it landed."
 - "The same findings also arrive as code scanning alerts, in the Security tab beside every other scanner."
-- The golden PR's comment and review carry Tyler's name, not a bot's: they were posted from his machine.
 - Signed in as an admin, the page offers **Merge without waiting for requirements to be met (bypass rules)**.
-  Never tick it and never merge the live PR: the reset closes it.
+  Never tick it and never merge the live PR: the reset closes it and undoes the committed suggestions.
 
-**If it goes wrong.** CI is slow or the live PR will not open: show the golden PR alone. That is why it exists.
+**If it goes wrong.** CI is slow, or the suggestions do not appear: open the **golden PR** (`npm run demo --
+status` prints its link), the same change with the same suggestions posted ahead of time — **pre-run**. Show its
+review, but never press Commit suggestion there: the golden PR is kept as it is for every demo.
+
+**With an AI key.** When the repo secret `ANTHROPIC_API_KEY` is set ("Setup Tyler does once", item 6), there is
+no Pre-run comment: the gate job runs MANTA's fix skill itself (a minute or two longer) and posts its own
+suggestions. Say "the fix skill ran in this job and posted these itself". Their wording differs from run to run.
 
 ---
 
-## Scene 5 · Nightly through login (3 min)
+## Scene 4 · Nightly through login (3 min)
 
-**Setup.** `npm run demo -- scene 5` names the nightly run scene 4 started.
+**Setup.** `npm run demo -- scene 4` names the nightly run scene 3 started.
 
 **Type.**
 ```
@@ -183,7 +167,7 @@ schedule guarantees there is one.
 
 ---
 
-## Scene 6 · QA in the Workbench (5 min)
+## Scene 5 · QA in the Workbench (5 min)
 
 **Setup.** The Workbench opens the **nightly snapshot**: a real nightly run, downloaded and committed to this
 repo, with its AI notes **pre-run** afterwards. Rescan reloads pages from the site, so the preview build runs
@@ -216,9 +200,9 @@ It is read-only (no verdicts or rescans), but every finding and the Focus order 
 
 ---
 
-## Scene 7 · Release (2 min)
+## Scene 6 · Release (2 min)
 
-**Setup.** The Workbench from scene 6 is still open.
+**Setup.** The Workbench from scene 5 is still open.
 
 **Type.** Nothing: press **Export** on the Nightly run.
 
@@ -235,11 +219,10 @@ It is read-only (no verdicts or rescans), but every finding and the Focus order 
 
 ## The non-technical cut (about 15 minutes)
 
-For a room without developers: scenes **1, 2, 4, 6, 7**. Drop scene 3 (the terminal fix) and scene 5 (the
-nightly log). In scene 4, the golden PR's suggestions are the AI moment; in scene 6, the Focus order picture
-stands for the nightly. After scene 2, go straight to `npm run demo -- scene 4` (no `git checkout .` needed,
-since no patch was applied); after scene 4, go straight to `npm run demo -- scene 6`. The nightly still starts in
-scene 4; nobody watches it.
+For a room without developers: scenes **1, 2, 3, 5, 6**. Drop scene 4 (the nightly log). In scene 3, the
+suggestions and the gate turning green are the AI moment; in scene 5, the Focus order picture stands for the
+nightly. After scene 3, go straight to `npm run demo -- scene 5`. The nightly still starts in scene 3; nobody
+watches it.
 
 ---
 

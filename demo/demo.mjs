@@ -33,11 +33,10 @@ const workbenchLine = (name) => 'npm run demo -- workbench ' + name + '   (opens
 const CUES = {
   1: { title: 'Scene 1 · Conception (1 min)', type: [], next: 'Show the slide: a criterion row\'s checklist in the Workbench. Then: npm run demo -- scene 2' },
   2: { title: 'Scene 2 · The developer scans localhost (4 min)', type: ['npm run dev        (in a second terminal; leave it running)', GATE_LINE], next: 'Expect New 3 on /status?upload=BP-2026-10882 and "Gate failed", exit 1. Then: npm run demo -- scene 3' },
-  3: { title: 'Scene 3 · The developer applies an AI fix (3 min)', type: ['git apply <patch>', GATE_LINE], next: 'Say: "This patch was pre-run from a snapshot of this branch." Expect New 0. Then: git checkout .   and   npm run demo -- scene 4' },
-  4: { title: 'Scene 4 · The pull request (6 min)', type: [], next: 'Show the live PR (red check, the comment), then switch to the golden PR (pre-run). Then: npm run demo -- scene 5' },
-  5: { title: 'Scene 5 · Nightly through login (3 min)', type: ['gh run watch <run> -R ' + REPO], next: 'Expect the Sign in path replayed, ending on /account. Then: npm run demo -- scene 6' },
-  6: { title: 'Scene 6 · QA in the Workbench (5 min)', type: ['npm run build', 'npm run preview    (in this repo, a second terminal; Rescan reloads pages from localhost:4173)', workbenchLine('nightly')], next: 'Open the URL it prints, then the Nightly run\'s report. Then: npm run demo -- scene 7' },
-  7: { title: 'Scene 7 · Release (2 min)', type: [], next: 'In the same Workbench, press Export on the Nightly run: the ACR draft (docx) and the USPS defects. The end.' },
+  3: { title: 'Scene 3 · The pull request (8 min)', type: [], next: 'On the live PR: watch Checks → MANTA gate run, then show the comment, the Pre-run comment and the review (say "pre-run"). Files changed → Add suggestion to batch on all three → Commit suggestions. Expect the gate to run again and go green. Then: npm run demo -- scene 4' },
+  4: { title: 'Scene 4 · Nightly through login (3 min)', type: ['gh run watch <run> -R ' + REPO], next: 'Expect the Sign in path replayed, ending on /account. Then: npm run demo -- scene 5' },
+  5: { title: 'Scene 5 · QA in the Workbench (5 min)', type: ['npm run build', 'npm run preview    (in this repo, a second terminal; Rescan reloads pages from localhost:4173)', workbenchLine('nightly')], next: 'Open the URL it prints, then the Nightly run\'s report. Then: npm run demo -- scene 6' },
+  6: { title: 'Scene 6 · Release (2 min)', type: [], next: 'In the same Workbench, press Export on the Nightly run: the ACR draft (docx) and the USPS defects. The end.' },
 };
 
 function printCue(n, fill = {}) {
@@ -134,39 +133,33 @@ function reset(flags) {
 }
 
 function scene(n) {
-  if (!CUES[n]) die('scene takes a number from 1 to 7.');
+  if (!CUES[n]) die('scene takes a number from 1 to 6.');
   if (n === 2) {
     requireClean('Run npm run demo -- reset first.');
     must('git', ['checkout', '--quiet', FEATURE.branch]);
     console.log('[DONE] On ' + FEATURE.branch + '.');
   }
   if (n === 3) {
-    const reportsDir = join(ROOT, 'demo-data', 'pr', 'reports');
-    const patch = existsSync(reportsDir) ? readdirSync(reportsDir).find((f) => /^fix-.+\.patch$/.test(f)) : undefined;
-    if (!patch) console.log('[WARN] No fix-<token>.patch in demo-data/pr/reports: make the pr snapshot first (DEMO.md, Refreshing a snapshot).');
-    return printCue(3, { patch: patch ? 'demo-data/pr/reports/' + patch : undefined });
-  }
-  if (n === 4) {
-    requireClean('Type git checkout . first: the fix from scene 3 is still applied.');
+    requireClean('Commit or discard the local changes first (git checkout .).');
     must('git', ['push', 'origin', FEATURE.branch + ':' + FEATURE.branch]);
     let live = openPrs(FEATURE.branch)[0]?.url;
     if (!live) {
-      const r = run('gh', ['pr', 'create', '-R', REPO, '--base', MAIN.branch, '--head', FEATURE.branch, '--title', 'Upload documents', '--body', 'A Documents column and an upload dialog on /status. Opened live by the demo, scene 4.'], { capture: true });
+      const r = run('gh', ['pr', 'create', '-R', REPO, '--base', MAIN.branch, '--head', FEATURE.branch, '--title', 'Upload documents', '--body', 'A Documents column and an upload dialog on /status. Opened live by the demo, scene 3.'], { capture: true });
       if (!r.ok) die('gh pr create failed: ' + r.stderr);
       live = r.stdout.split('\n').pop();
     }
     const golden = openPrs(GOLDEN_BRANCH)[0]?.url;
-    // The nightly starts now so it has finished by scene 5.
+    // The nightly starts now so it has finished by scene 4.
     must('gh', ['workflow', 'run', NIGHTLY_WORKFLOW, '-R', REPO, '--ref', MAIN.branch]);
     console.log('\nLive PR:              ' + live);
-    console.log('Golden PR (pre-run):  ' + (golden ?? 'none open: see DEMO.md, Setup Tyler does once'));
-    console.log('Nightly started:      watched in scene 5.');
+    console.log('Golden PR (fallback): ' + (golden ?? 'none open: see DEMO.md, Setup Tyler does once'));
+    console.log('Nightly started:      watched in scene 4.');
   }
-  if (n === 5) {
+  if (n === 4) {
     const latest = latestRun(NIGHTLY_WORKFLOW);
     if (!latest) console.log('[WARN] No nightly run found. Start one: gh workflow run ' + NIGHTLY_WORKFLOW + ' -R ' + REPO);
     else console.log('Latest nightly: run ' + latest.databaseId + ', ' + latest.status + (latest.conclusion ? ' (' + latest.conclusion + ')' : '') + ', started ' + latest.createdAt + '.');
-    return printCue(5, { run: latest ? String(latest.databaseId) : undefined });
+    return printCue(4, { run: latest ? String(latest.databaseId) : undefined });
   }
   printCue(n);
 }
@@ -276,7 +269,7 @@ function help() {
 
   reset [--force]          Back to scene 1: story branches to their tags (force-pushed), live PRs closed,
                            snapshots restored, local runs removed. --force discards local changes.
-  scene <1-7>              Set up a scene and print what to type next.
+  scene <1-6>              Set up a scene and print what to type next.
   snapshot <name> [run]    Copy a run into demo-data/<name>/: a workflow run's artifact when [run] is given
          [--artifact a]    (manta-run by default, or manta-nightly), else this folder's reports/, run-records/, sites/.
   ci-run [run]             Download a workflow run's artifact into ci-run/ (the latest nightly by default)
