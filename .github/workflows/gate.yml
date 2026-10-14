@@ -24,14 +24,20 @@ jobs:
           node-version: 24
           cache: npm
 
-      - name: Let npm read MANTA
-        # npm writes the lockfile's MANTA as git+ssh, so the SSH forms are rewritten to the token too.
-        run: |
-          git config --global url."https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/".insteadOf "https://github.com/"
-          git config --global --add url."https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/".insteadOf "ssh://git@github.com/"
-          git config --global --add url."https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/".insteadOf "git@github.com:"
-
+      # npm installs MANTA from its private repository over git, and the lockfile pins it as git+ssh. For this
+      # step alone: every form of github.com goes over HTTPS with the read token, and the credential header the
+      # checkout left (this repo's GITHUB_TOKEN, which cannot read MANTA) is cleared, or git sends it instead.
       - run: npm ci
+        env:
+          GIT_CONFIG_COUNT: '4'
+          GIT_CONFIG_KEY_0: 'url.https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/.insteadOf'
+          GIT_CONFIG_VALUE_0: 'https://github.com/'
+          GIT_CONFIG_KEY_1: 'url.https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/.insteadOf'
+          GIT_CONFIG_VALUE_1: 'ssh://git@github.com/'
+          GIT_CONFIG_KEY_2: 'url.https://x-access-token:${{ secrets.MANTA_READ_TOKEN }}@github.com/.insteadOf'
+          GIT_CONFIG_VALUE_2: 'git@github.com:'
+          GIT_CONFIG_KEY_3: 'http.https://github.com/.extraheader'
+          GIT_CONFIG_VALUE_3: ''
 
       - name: Install Chromium
         run: npx playwright install chromium --with-deps --only-shell
