@@ -88,8 +88,9 @@ jobs:
           gh pr comment "$PR" -R "$GITHUB_REPOSITORY" --body "**Pre-run AI fixes.** No AI ran in this job: the repository has no \`ANTHROPIC_API_KEY\`. The suggestions in MANTA's review were written by MANTA's fix skill ahead of time, on a snapshot of this branch (run \`$token\`, kept in \`demo-data/pr\`), and posted here so they can be applied. With a key set, this job writes its own."
           echo "Posted the pre-run fixes of run $token."
 
+      # Never on the golden PR: its comment and review are the pre-run ones, posted once, and this would rewrite them.
       - name: Post to the pull request
-        if: always()
+        if: always() && github.head_ref != 'golden/upload-documents'
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: npx manta post --pr ${{ github.event.pull_request.number }}
