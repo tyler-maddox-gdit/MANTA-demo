@@ -209,10 +209,12 @@ function workbench(name = 'nightly', flags) {
   process.exitCode = r.status ?? 0;
 }
 
-/** Whether the Chromium MANTA scans with is installed, asked of MANTA's own Playwright. */
+/** Whether the Chromium MANTA scans with is installed: MANTA's own Playwright launches it headless, as a scan does, and closes it. */
 function chromiumInstalled() {
   try {
-    return existsSync(createRequire(join(MANTA_PKG, 'package.json'))('playwright').chromium.executablePath());
+    const playwright = createRequire(join(MANTA_PKG, 'package.json')).resolve('playwright');
+    const probe = 'require(' + JSON.stringify(playwright) + ').chromium.launch().then((b) => b.close()).then(() => process.exit(0), () => process.exit(1))';
+    return spawnSync(process.execPath, ['-e', probe], { stdio: 'ignore', timeout: 60_000 }).status === 0;
   } catch {
     return false;
   }
@@ -254,7 +256,8 @@ function status() {
   say(major >= 20, 'node ' + process.version + (major >= 20 ? '' : ' (20 or later needed)'));
   const installed = existsSync(join(MANTA_PKG, 'package.json'));
   say(installed, installed ? 'MANTA ' + JSON.parse(readFileSync(join(MANTA_PKG, 'package.json'), 'utf8')).version + ' installed' : 'MANTA not installed: run npm ci');
-  say(installed && chromiumInstalled(), 'Chromium for scanning' + (installed && chromiumInstalled() ? '' : ': run npx playwright install chromium'));
+  const chromium = installed && chromiumInstalled();
+  say(chromium, 'Chromium for scanning' + (chromium ? '' : ': run npx manta install-browser'));
   const login = out('gh', ['api', 'user', '--jq', '.login']);
   const admin = login && out('gh', ['api', 'repos/' + REPO, '--jq', '.permissions.admin']) === 'true';
   say(Boolean(admin), login ? 'gh signed in as ' + login + (admin ? ', a repo admin' : ', not a repo admin: reset cannot force-push main. gh auth switch -u tyler-maddox-gdit') : 'gh is not signed in: gh auth login');

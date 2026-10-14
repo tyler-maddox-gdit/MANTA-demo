@@ -71,12 +71,17 @@ Sign in as **tyler-maddox-gdit**. That account owns the repo: it can read MANTA'
    **Expect** it to end with `added … packages`. "Repository not found" or "Authentication failed" for
    `tyler-maddox-gdit/MANTA` means Part 2 step 2 did not take: run `gh auth setup-git` again.
 
-3. Install the browser MANTA scans with (about 150 MB):
+3. Install the browser MANTA scans with (about 100 MB). On the work network, set the first line in the
+   same window first, or the download fails with "unable to get local issuer certificate":
    ```
-   npx playwright install chromium
+   $env:NODE_OPTIONS = "--use-system-ca"
+   npx manta install-browser
    ```
-   Behind a corporate proxy, set it first in the same window: `$env:HTTPS_PROXY = "http://<proxy>:<port>"`.
-   "unable to get local issuer certificate" means the network re-signs HTTPS: see Troubleshooting.
+   **Expect** it to end with `Chromium is ready for MANTA.` It installs through MANTA's own Playwright,
+   so it always installs the browser build MANTA looks for. Never `npx playwright install` and never
+   copy browsers into `ms-playwright` by hand: another Playwright installs another build, and every
+   scan then fails with `Executable doesn't exist at …`.
+   Behind a corporate proxy, also set `$env:HTTPS_PROXY = "http://<proxy>:<port>"` in the same window.
 
 4. Check everything:
    ```
@@ -204,8 +209,9 @@ for anything that failed, the command and the exact error text (copy it from Ter
 | `npm` : "running scripts is disabled on this system" | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, or type `npm.cmd` in place of `npm`. |
 | `npm ci`: "Repository not found" / "Authentication failed" for `tyler-maddox-gdit/MANTA` | `gh auth status` must show tyler-maddox-gdit active; then `gh auth setup-git` and `npm ci` again. |
 | `npm ci`: `EPERM`, `ENAMETOOLONG`, "Filename too long" | Clone under `C:\demo`, run `git config --global core.longpaths true`, close editors that hold `node_modules` open, and try again. Antivirus scanning `node_modules` makes it slow, not fail. |
-| `npx playwright install chromium`: "unable to get local issuer certificate" | The network re-signs HTTPS with a company certificate Node does not trust. In the same window: `$env:NODE_OPTIONS = "--use-system-ca"`, then install again. Failing that, `npm config get cafile`: if it names a file, `$env:NODE_EXTRA_CA_CERTS = "<that file>"` (or the `.pem` IT gives you), then install again. Last resort, for that one download only: `$env:NODE_TLS_REJECT_UNAUTHORIZED = "0"`, install, close the window. |
-| `npx playwright install chromium` hangs or fails | The network blocks the download: set `$env:HTTPS_PROXY`, or ask IT to allow Playwright's download hosts. `npm run demo -- status` says when Chromium is missing. |
+| `npx manta install-browser`: "unable to get local issuer certificate" | The network re-signs HTTPS with a company certificate Node does not trust. In the same window: `$env:NODE_OPTIONS = "--use-system-ca"` (Node 22.15 or later), then install again. Failing that, `npm config get cafile`: if it names a file, `$env:NODE_EXTRA_CA_CERTS = "<that file>"` (or the `.pem` IT gives you), then install again. Last resort, for that one download only: `$env:NODE_TLS_REJECT_UNAUTHORIZED = "0"`, install, close the window. |
+| A scan or the Workbench: `Executable doesn't exist at …\ms-playwright\chromium_headless_shell-<build>\…` | The browser was installed by another Playwright version than MANTA's. Run `npx manta install-browser` in this folder (with `NODE_OPTIONS` as above). |
+| `npx manta install-browser` hangs or fails | The network blocks the download: set `$env:HTTPS_PROXY`, or ask IT to allow Playwright's download hosts. `npm run demo -- status` says when Chromium is missing. |
 | The gate: "could not load" `localhost:5173` | `npm run dev` is not running in tab 1. Or gate the built site instead: `npm run build`, `npm run preview`, `npx manta gate --base http://localhost:4173`. |
 | Scene 3: no **Pre-run AI fixes** comment or review on the live PR | The PR's branch is not the story's (`npm run demo -- reset`, then scene 2 and 3 again), or the gate job failed before posting: open its log under **Checks**. On stage, show the golden PR instead. |
 | The Workbench: port 3508 in use | `npm run demo -- workbench nightly --port 3600`, then open http://127.0.0.1:3600/. |
