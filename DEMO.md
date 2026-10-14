@@ -106,12 +106,12 @@ It pushes the feature branch, opens the live PR and prints its link and the gold
 **3 · Watch the gate run** (about a minute and a half). **Checks** tab → **MANTA gate**; expand the **Gate** step
 as it goes. It ends `Gate failed: 3 new violations at or above minor`.
 - "The same command the developer ran on the laptop, now on GitHub's machines: install, build the site, scan
-  every page, compare against the baseline."
+  the page this change touches, compare against the baseline."
 - "The same three problems the developer saw. Now the team sees them too."
 
 **4 · What MANTA posted.** Back to **Conversation** (refresh if it has not updated). Point at each, in order:
 - The red **MANTA gate** check, marked **Required**: "Blocked: it cannot merge."
-- MANTA's comment, `MANTA gate · failed: 3 new violations at or above minor`: "New 3, Tolerated 27. The old debt
+- MANTA's comment, `MANTA gate · failed: 3 new violations at or above minor`: "New 3, Tolerated 6. The old debt
   is tolerated, the new debt is not, and each one names the source file and line that wrote it."
 - The comment headed **Pre-run AI fixes**: "These fixes are **pre-run**: MANTA's AI wrote them ahead of time, on a
   snapshot of this same branch, because this repository has no AI key today. With a key, this job writes them
