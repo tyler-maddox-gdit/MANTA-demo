@@ -122,17 +122,18 @@ as it goes. It ends `Gate failed: 3 new violations at or above minor`.
 - Skip GitHub's long "Code Scanning has recently been set up" comment if it is there: it comes once, on the first
   pull request.
 
-**5 · Apply the fixes.** MANTA's review, `3 suggested fixes from MANTA.`, shows each suggestion on its lines in the
-Conversation tab: the close button's name and the file field's label in `Status.jsx`, the hint colour in
-`styles.css`. Read one aloud (the close button's `aria-label="Close"`).
+**5 · Apply the fixes, in one click.** MANTA's review, `3 suggested fixes from MANTA.`, shows each suggestion on its
+lines in the Conversation tab: the close button's name and the file field's label in `Status.jsx`, the hint colour
+in `styles.css`. Read one aloud (the close button's `aria-label="Close"`).
 - "Each suggestion is an edit to the exact source line that wrote the element. The contrast fix goes to the
   stylesheet, where the colour is set, not to the page."
 
-Then the **Files changed** tab, the only place GitHub batches suggestions: on each of the three press **Add
-suggestion to batch**, then **Commit suggestions** at the top, then **Commit changes**. One commit, one gate run.
-(Pressing **Commit suggestion** on each in the Conversation tab works too: three commits, and each new one cancels
-the gate run before it, so only the last finishes.)
-- "MANTA changed nothing. A person with write access accepted three fixes, in one commit."
+Below the review, a comment from github-actions: **☐ Apply all 3 of MANTA's suggested fixes in one commit.** Tick
+the box. Within about half a minute a commit appears, "Apply MANTA's suggested fixes (…)", made in your name, and
+the comment changes to **Applied all 3**. (The demo's **Apply fixes** workflow does it: it writes the three
+suggestions into one commit, so the gate runs once. Committing them one by one with **Commit suggestion** works
+too, but each commit starts the gate again.)
+- "MANTA changed nothing. A person with write access accepted three fixes, with one click, in one commit."
 
 **6 · Green** (about a minute and a half). A new commit, "Apply suggestions from code review", appears and the gate
 runs again. The check turns green, MANTA's comment rewrites itself to `MANTA gate · passed: no new violations`, and

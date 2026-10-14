@@ -155,8 +155,8 @@ npm run demo -- scene 3
 **Expect** two lines: the live PR's link and the golden PR's link (the fallback). Open the live PR. On its
 **Checks** tab, watch **MANTA gate** run (about a minute and a half) and end red. On the **Conversation** tab:
 MANTA's comment with its table of the three new violations, a comment headed **Pre-run AI fixes**, the code
-scanning alerts, and MANTA's review, `3 suggested fixes from MANTA.`. Then the **Files changed** tab: on each of the
-three suggestions press **Add suggestion to batch**, then **Commit suggestions** → **Commit changes**. **Expect** the gate to run again and turn
+scanning alerts, and MANTA's review, `3 suggested fixes from MANTA.`. Then tick the box in the comment **Apply all 3 of
+MANTA's suggested fixes in one commit**, and wait about half a minute for the commit. **Expect** the gate to run again and turn
 green, and MANTA's comment to say `passed: no new violations`. Never tick the admin's "Merge without waiting" box,
 and never press anything on the golden PR.
 
