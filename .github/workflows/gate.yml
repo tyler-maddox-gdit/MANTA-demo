@@ -101,6 +101,16 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: npx manta post --pr ${{ github.event.pull_request.number }}
 
+      # One more comment beside MANTA's review: a checkbox that applies every suggestion in one commit
+      # (apply-fixes.yml), so the gate runs once rather than once per suggestion committed.
+      - name: Offer to apply every suggestion in one commit
+        if: always() && github.head_ref != 'golden/upload-documents'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node .github/scripts/apply-fixes.mjs offer
+
       - name: Upload the run
         if: always()
         uses: actions/upload-artifact@v7

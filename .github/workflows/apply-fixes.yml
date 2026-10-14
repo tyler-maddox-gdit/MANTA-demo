@@ -1,0 +1,59 @@
+name: Apply fixes
+
+# One click applies every MANTA suggestion. The gate offers a checkbox comment beside MANTA's review; ticking it
+# edits that comment, which starts this run: every suggestion goes into one commit, so the gate runs once.
+# It runs from main (issue_comment) and runs no code from the pull request: it only rewrites the lines the
+# suggestions name. It pushes over the deploy key, since a push made with GITHUB_TOKEN would start no gate run.
+on:
+  issue_comment:
+    types: [edited]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: apply-fixes-${{ github.event.issue.number }}
+
+jobs:
+  apply:
+    name: Apply MANTA's fixes
+    if: >-
+      github.event.issue.pull_request &&
+      github.event.comment.user.login == 'github-actions[bot]' &&
+      contains(github.event.comment.body, '- [x] **Apply all') &&
+      contains(github.event.changes.body.from, '- [ ] **Apply all')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Find the pull request's branch
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/pulls/${{ github.event.issue.number }}" \
+            --jq '"ref=" + .head.ref, "same=" + (.head.repo.full_name == env.GITHUB_REPOSITORY | tostring)' >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v7
+        if: steps.pr.outputs.same == 'true'
+        with:
+          ref: ${{ steps.pr.outputs.ref }}
+          ssh-key: ${{ secrets.MANTA_DEMO_DEPLOY_KEY }}
+          path: pr
+
+      - name: Apply, commit and push
+        if: steps.pr.outputs.same == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.issue.number }}
+          COMMENT_ID: ${{ github.event.comment.id }}
+          SENDER: ${{ github.event.sender.login }}
+          SENDER_ID: ${{ github.event.sender.id }}
+        run: node .github/scripts/apply-fixes.mjs apply pr
