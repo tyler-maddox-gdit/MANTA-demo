@@ -22,7 +22,7 @@ Do these before the audience arrives, in this order.
 - [ ] `gh auth status` shows you signed in as a collaborator on `tyler-maddox-gdit/MANTA-demo`.
 - [ ] The repo secret `MANTA_SECRET_DEMO_PW` is set (Settings → Secrets and variables → Actions).
 - [ ] The repo secret `MANTA_READ_TOKEN` has not expired. It expires on: **2099-01-01** (see "Setup Tyler does once").
-- [ ] Chromium is installed: `npx manta install-browser` (on the work network, `$env:NODE_OPTIONS = "--use-system-ca"` first).
+- [ ] Chromium is installed: `npm run install-browser-gdit`.
 - [ ] `npm run dev` opens the site at http://localhost:5173. Stop it again (Ctrl+C).
 - [ ] The golden PR is open (its link is in `npm run demo -- status`).
 - [ ] The Actions tab shows last night's **Nightly** run green.

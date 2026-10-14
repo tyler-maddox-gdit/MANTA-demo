@@ -257,7 +257,7 @@ function status() {
   const installed = existsSync(join(MANTA_PKG, 'package.json'));
   say(installed, installed ? 'MANTA ' + JSON.parse(readFileSync(join(MANTA_PKG, 'package.json'), 'utf8')).version + ' installed' : 'MANTA not installed: run npm ci');
   const chromium = installed && chromiumInstalled();
-  say(chromium, 'Chromium for scanning' + (chromium ? '' : ': run npx manta install-browser'));
+  say(chromium, 'Chromium for scanning' + (chromium ? '' : ': run npm run install-browser-gdit'));
   const login = out('gh', ['api', 'user', '--jq', '.login']);
   const admin = login && out('gh', ['api', 'repos/' + REPO, '--jq', '.permissions.admin']) === 'true';
   say(Boolean(admin), login ? 'gh signed in as ' + login + (admin ? ', a repo admin' : ', not a repo admin: reset cannot force-push main. gh auth switch -u tyler-maddox-gdit') : 'gh is not signed in: gh auth login');
