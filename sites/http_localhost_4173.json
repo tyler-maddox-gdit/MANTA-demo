@@ -1,8 +1,9 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "origin": "http://localhost:4173",
   "pushedFrom": "",
   "at": "2026-10-10T00:00:00.000Z",
+  "signIn": "5d1e7a42",
   "paths": [
     {
       "id": "5d1e7a42",
@@ -10,70 +11,26 @@
       "name": "Sign in",
       "steps": [
         {
-          "id": "a1f04c3e",
-          "variable": "3f6a2d90",
-          "how": "In the Email field, type demo@example.gov.",
-          "script": {
-            "actions": [
-              {
-                "do": "fill",
-                "at": {
-                  "target": { "by": "label", "text": "Email", "exact": true },
-                  "within": null,
-                  "nth": null
-                },
-                "text": "demo@example.gov"
-              }
-            ],
-            "done": null,
-            "by": "user"
-          }
-        },
-        {
-          "id": "c27d9b15",
-          "variable": "7c41e5b8",
-          "how": "In the Password field, type {{secret:demo-pw}}.",
-          "script": {
-            "actions": [
-              {
-                "do": "fill",
-                "at": {
-                  "target": { "by": "label", "text": "Password", "exact": true },
-                  "within": null,
-                  "nth": null
-                },
-                "text": "{{secret:demo-pw}}"
-              }
-            ],
-            "done": null,
-            "by": "user"
-          }
-        },
-        {
           "id": "e8b3046f",
-          "variable": "9e0d38a7",
-          "how": "Press the Sign in button. The account page opens.",
-          "script": {
-            "actions": [
-              {
-                "do": "click",
-                "at": {
-                  "target": { "by": "role", "role": "button", "name": "Sign in", "exact": true },
-                  "within": null,
-                  "nth": null
-                }
-              }
-            ],
-            "done": { "url": { "contains": "/account" } },
-            "by": "user"
-          }
+          "actions": [
+            {
+              "do": "fill",
+              "at": { "target": { "by": "label", "text": "Email", "exact": true }, "within": null, "nth": null },
+              "text": "demo@example.gov"
+            },
+            {
+              "do": "fill",
+              "at": { "target": { "by": "label", "text": "Password", "exact": true }, "within": null, "nth": null },
+              "text": "{{secret:password}}"
+            },
+            {
+              "do": "click",
+              "at": { "target": { "by": "role", "role": "button", "name": "Sign in", "exact": true }, "within": null, "nth": null }
+            }
+          ],
+          "done": { "url": { "contains": "/account" } }
         }
       ]
     }
-  ],
-  "variables": [
-    { "id": "3f6a2d90", "name": "Email" },
-    { "id": "7c41e5b8", "name": "Password" },
-    { "id": "9e0d38a7", "name": "Sign in" }
   ]
 }

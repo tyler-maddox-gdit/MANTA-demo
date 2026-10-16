@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 export default function Account() {
-  if (sessionStorage.getItem('bp-signed-in') !== '1') return <Navigate to="/signin" replace />;
+  if (localStorage.getItem('bp-signed-in') !== '1') return <Navigate to="/signin" replace />;
   return (
     <div className="page">
       <div className="title-row">

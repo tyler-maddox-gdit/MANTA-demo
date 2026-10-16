@@ -115,11 +115,11 @@ else if (await confirm('Create the token in the browser now?')) {
   }
 } else skipped.push('MANTA_READ_TOKEN: run this again, or create the token by hand (SETUP.md, Part A)');
 
-stage('MANTA_SECRET_DEMO_PW: the password the nightly\'s Sign in path types');
-if (secrets.has('MANTA_SECRET_DEMO_PW')) done('MANTA_SECRET_DEMO_PW is set.');
+stage('MANTA_SECRET_PASSWORD: the password the nightly\'s Sign in path types');
+if (secrets.has('MANTA_SECRET_PASSWORD')) done('MANTA_SECRET_PASSWORD is set.');
 else {
-  setSecret('MANTA_SECRET_DEMO_PW', DEMO_PW);
-  done('MANTA_SECRET_DEMO_PW set to the demo password.');
+  setSecret('MANTA_SECRET_PASSWORD', DEMO_PW);
+  done('MANTA_SECRET_PASSWORD set to the demo password.');
 }
 
 stage('The deploy key the Baseline job pushes to main with');
