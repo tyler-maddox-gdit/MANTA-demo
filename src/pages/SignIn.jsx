@@ -8,7 +8,7 @@ export default function SignIn() {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     if (f.get('password') === 'benefits-demo') {
-      sessionStorage.setItem('bp-signed-in', '1');
+      localStorage.setItem('bp-signed-in', '1');
       navigate('/account');
     } else setError('That email and password did not match.');
   }

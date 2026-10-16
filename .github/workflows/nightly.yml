@@ -15,13 +15,13 @@ jobs:
     name: MANTA nightly
     runs-on: ubuntu-latest
     env:
-      MANTA_SECRET_DEMO_PW: ${{ secrets.MANTA_SECRET_DEMO_PW }}
+      MANTA_SECRET_PASSWORD: ${{ secrets.MANTA_SECRET_PASSWORD }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
       - name: Check the sign-in secret
-        if: env.MANTA_SECRET_DEMO_PW == ''
+        if: env.MANTA_SECRET_PASSWORD == ''
         run: |
-          echo "::warning::MANTA_SECRET_DEMO_PW is not set; the sign-in path will be held."
+          echo "::warning::MANTA_SECRET_PASSWORD is not set; the sign-in path will be held."
 
       - uses: actions/checkout@v7
 
