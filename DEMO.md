@@ -4,7 +4,8 @@ MANTA across the software lifecycle, shown on the Benefits Portal demo site in t
 own: **Dev** (the developer's gate and MANTA's AI skills), **DevOps** (the pull request gate) and **QA** (the
 Workbench). Each stage is set up by one command, whatever ran before it, so show any of them, in any order. The
 story below runs them Dev → DevOps → QA, the order the lifecycle runs, about 25 minutes, ending on the tester;
-the slide, [presentation/index.html](presentation/index.html), moves left to right through the same three.
+the slide, [presentation/index.html](presentation/index.html), moves left to right through the same three. What to
+say at each beat, and what every finding is, is in [SCRIPT.md](SCRIPT.md).
 
 Every stage runs without an AI key. Where the audience sees AI output that was produced earlier, say
 **"pre-run"** out loud; never describe pre-run output as live.
