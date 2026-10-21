@@ -217,6 +217,22 @@ async function stageQa(flags) {
 
 const firstSentence = (text) => (text.match(/^.*?[.!?](\s|$)/) ?? [text])[0].trim();
 const clip = (text, n = 110) => (text.length > n ? text.slice(0, n - 1) + '…' : text);
+/** The before and after lines of an edit, cut to the screen around the first change so a long line still shows what differs. */
+function windowed(before, after, max) {
+  const ls = before.split('\n').map((l) => l.trim());
+  const rs = after.split('\n').map((l) => l.trim());
+  if (ls.length !== rs.length) return [ls.map((l) => clip(l, max)), rs.map((l) => clip(l, max))];
+  const cut = (l, r) => {
+    let p = 0;
+    while (p < l.length && p < r.length && l[p] === r[p]) p++;
+    if (Math.max(l.length, r.length) <= max) return [l, r];
+    const start = Math.max(0, p - 30);
+    const view = (t) => (start > 0 ? '…' : '') + t.slice(start, start + max - (start > 0 ? 2 : 1)) + (t.length > start + max - 1 ? '…' : '');
+    return [view(l), view(r)];
+  };
+  const pairs = ls.map((l, i) => cut(l, rs[i]));
+  return [pairs.map((x) => x[0]), pairs.map((x) => x[1])];
+}
 function wrap(text, indent, width = 100) {
   const lines = [];
   let cur = '';
@@ -386,14 +402,16 @@ async function fix(flags) {
     console.log(bold(left) + dim(' '.repeat(Math.max(2, width - left.length - right.length)) + right));
     const c = p.scope === 'cluster' ? byId[p.scopeId] : undefined;
     const edits = (p.edits ?? []).filter((x) => x.replacement.trim() !== '').length;
-    console.log('    ' + dim(c ? 'From cluster "' + clusterKind(c)[0] + '": fixes the new finding and its ' + (c.affectedElements - (c.members ?? []).filter((m) => isNew.has(m.split('|::|')[2])).length) + ' existing partners ' + (edits === 1 ? 'in one edit.' : 'in ' + edits + ' edits, one per element.') : 'Standalone: no other finding shares its cause.'));
+    console.log(dim(wrap(c ? 'From cluster "' + clusterKind(c)[0] + '": fixes the new finding and its ' + (c.affectedElements - (c.members ?? []).filter((m) => isNew.has(m.split('|::|')[2])).length) + ' existing partners ' + (edits === 1 ? 'in one edit.' : 'in ' + edits + ' edits, one per element.') : 'Standalone: no other finding shares its cause.', '    ')));
     console.log(wrap(e.problem, '    ', width));
     if (e.fix) console.log(wrap('Fix: ' + e.fix, '    ', width));
     for (const edit of p.edits ?? []) {
       console.log('');
       console.log('    ' + cyan(edit.file + ':' + edit.startLine));
-      for (const l of edit.original.split('\n')) console.log('    ' + red('- ' + clip(l.trim(), width - 6)));
-      for (const l of edit.replacement.split('\n')) console.log('    ' + green('+ ' + clip(l.trim(), width - 6)));
+      const [was, now] = windowed(edit.original, edit.replacement, width - 6);
+      for (const l of was) console.log('    ' + red('- ' + l));
+      if (edit.replacement.trim() === '') console.log('    ' + dim('(line removed: the debt comment it carried is no longer true)'));
+      else for (const l of now) console.log('    ' + green('+ ' + l));
     }
     await pause(300);
   }
