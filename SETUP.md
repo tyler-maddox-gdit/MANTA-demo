@@ -1,6 +1,6 @@
 # Setting up the demo PC
 
-A step-by-step setup of a Windows PC to present the demo from, ending in a dry run of all six scenes. Plan
+A step-by-step setup of a Windows PC to present the demo from, ending in a dry run of all three stages. Plan
 on about an hour the first time, most of it downloads. Everything here is typed into **PowerShell in Windows
 Terminal** (Start → "Terminal"). Lines in code blocks are typed as shown; **Expect** says what you should see.
 
@@ -95,7 +95,7 @@ run the MANTA that `npm ci` installed.
 
 The repo's secrets, deploy key and ruleset were set on 2026-10-13, all but one: **`MANTA_READ_TOKEN`**, which
 lets the workflows install MANTA. GitHub lets no script create it, so it is yours. Until it exists every
-workflow run fails at `npm ci`: scene 3's live PR check stays red for the wrong reason and scene 4 has no
+workflow run fails at `npm ci`: the DevOps stage's live PR check stays red for the wrong reason and there is no
 nightly to show.
 
 1. ```
@@ -126,67 +126,68 @@ nightly to show.
    site differently from the Mac: the story tags then need refreshing (DEMO.md, "Refreshing what was done", the
    story tags) before the demo, or the gate's Tolerated count will not match the badge.
 
-## Part 5 · Dry run of every scene (about 30 minutes)
+## Part 5 · Dry run of every stage (about 30 minutes)
 
-This is the real thing: scene 3 opens a live pull request and starts a nightly on GitHub, and the reset at the
-end closes it. Open **two Terminal tabs**, both in `C:\demo\MANTA-demo` (Ctrl+Shift+T opens a tab; `cd
-C:\demo\MANTA-demo` in it). Call them **tab 1** and **tab 2**.
+This is the real thing: the DevOps stage opens a live pull request on GitHub, and the reset at the end closes
+it. The three stages stand on their own; run them in the order below, then once more in another order, to see
+that each sets itself up. Open **two Terminal tabs**, both in `C:\demo\MANTA-demo` (Ctrl+Shift+T opens a tab;
+`cd C:\demo\MANTA-demo` in it). Call them **tab 1** and **tab 2**. In tab 2, also check that Git will not
+rewrite line endings, or the Dev stage's patch will not apply:
+```
+git config core.autocrlf
+```
+**Expect** nothing or `false`. If it prints `true`: `git config core.autocrlf false`, then
+`git checkout -- .` after the next stage command.
 
 **Start clean** (tab 2):
 ```
 npm run demo -- reset
 ```
-**Expect** `[DONE] Reset: main at story/main, …` and Scene 1's cue. It force-pushes `main` and the feature
+**Expect** `[DONE] Reset: main at story/main, …` and the stage list. It force-pushes `main` and the feature
 branch to their tags; that is how every rehearsal starts.
 
-**Scene 1** — nothing to type: the slide.
-
-**Scene 2** — the developer's gate:
+**Stage QA** (tab 2):
 ```
-npm run demo -- scene 2                          (tab 2: checks out the feature branch)
+npm run demo -- stage qa
+```
+**Expect** the build, then the preview on http://localhost:4173 and the Workbench's URL. Open
+http://127.0.0.1:3508/ in the browser. In the launcher paste `http://localhost:4173/` and press Start; **expect**
+the scan to run and a report to open. Then the **Nightly** run's report: try each thing DEMO.md's QA stage
+lists: add an issue on the account page; a verdict on an issue; **Rescan** the Pending badge's contrast issue
+on `/status`; attest a criterion; open a criterion's checklist; the Pages dialog's **Focus order** column on
+the upload page; **Export** on the Nightly run. **Expect** the ACR draft (`.docx`) and the USPS defects export
+to download and open in Word. Ctrl+C in tab 2 stops both servers.
+
+**Stage DevOps** (tab 2):
+```
+npm run demo -- stage devops
+```
+**Expect** two lines: the live PR's link and the golden PR's link (the fallback). Open the live PR. On its
+**Checks** tab, watch **MANTA gate** run (about a minute and a half) and end red. On the **Conversation** tab:
+MANTA's comment with its table of the three new violations, a comment headed **Pre-run AI fixes**, the code
+scanning alerts, and MANTA's review, `3 suggested fixes from MANTA.`. Then, in the green Tip right under MANTA's
+review, tick **Apply all 3 suggested fixes**, and wait about half a minute for the commit. **Expect** the gate to
+run again and turn green, and MANTA's comment to say `passed: no new violations`. Never tick the admin's "Merge
+without waiting" box, and never press anything on the golden PR.
+
+**Stage Dev**:
+```
+npm run demo -- stage dev                        (tab 2: the feature branch, clean)
 npm run dev                                      (tab 1: leave it running)
 npx manta gate --base http://localhost:5173      (tab 2)
 ```
 **Expect** the scan's steps, then `New 3 ✗ P1 2 · P2 1`, `Tolerated 27`, the three violations on
 `/status?upload=BP-2026-10882` (`#upload-close`, `#upload-file`, `#upload-hint`) and
 `Gate failed: 3 new violations at or above minor.  exit 1`. Try Ctrl+clicking the `Report` link; whether it
-opens is one of the things to note.
+opens is one of the things to note. Then:
+```
+npm run demo -- fix                              (tab 2)
+npx manta gate --base http://localhost:5173      (tab 2)
+```
+**Expect** the pre-run header, the proposals with their before and after lines, `git apply` and a diff summary
+naming `Status.jsx` and `styles.css`; then the second gate: `New 0`, `Fixed 2`, `Gate passed`, `exit 0`.
 
-**Scene 3** — the pull request (tab 2):
-```
-npm run demo -- scene 3
-```
-**Expect** two lines: the live PR's link and the golden PR's link (the fallback). Open the live PR. On its
-**Checks** tab, watch **MANTA gate** run (about a minute and a half) and end red. On the **Conversation** tab:
-MANTA's comment with its table of the three new violations, a comment headed **Pre-run AI fixes**, the code
-scanning alerts, and MANTA's review, `3 suggested fixes from MANTA.`. Then, in the green Tip right under MANTA's review,
-tick **Apply all 3 suggested fixes**, and wait about half a minute for the commit. **Expect** the gate to run again and turn
-green, and MANTA's comment to say `passed: no new violations`. Never tick the admin's "Merge without waiting" box,
-and never press anything on the golden PR.
-
-**Scene 4** — the nightly (tab 2):
-```
-npm run demo -- scene 4
-```
-It prints a `gh run view <number> … --web` line: type that line. **Expect** the browser to open the latest green
-Nightly run, its Scan log showing the Sign in path ending on `/account`.
-
-**Scene 5** — QA in the Workbench:
-```
-Ctrl+C                                           (tab 1: stop the dev server)
-npm run build                                    (tab 1)
-npm run preview                                  (tab 1: leave it running)
-npm run demo -- workbench nightly                (tab 2)
-```
-Open http://127.0.0.1:3508/ in the browser, then the **Nightly** run's report. Try each thing DEMO.md's scene 5
-lists: add an issue on the account page; a verdict on an issue; **Rescan** the Pending badge's contrast issue on
-`/status` (it needs the preview in tab 1); attest a criterion; open a criterion's checklist; the Pages dialog's
-**Focus order** column on the upload page.
-
-**Scene 6** — release: back on the Workbench's run list, press **Export** on the Nightly run. **Expect** the ACR
-draft (`.docx`) and the USPS defects export to download and open in Word.
-
-**Finish** — Ctrl+C in both tabs, then (tab 2):
+**Finish** — Ctrl+C in tab 1, then (tab 2):
 ```
 npm run demo -- reset
 npm run demo -- status
@@ -213,10 +214,11 @@ for anything that failed, the command and the exact error text (copy it from Ter
 | A scan or the Workbench: `Executable doesn't exist at …\ms-playwright\chromium_headless_shell-<build>\…` | The browser was installed by another Playwright version than MANTA's. Run `npm run install-browser-gdit` in this folder. |
 | `npm run install-browser-gdit` hangs or fails | The network blocks the download: set `$env:HTTPS_PROXY`, or ask IT to allow Playwright's download hosts. `npm run demo -- status` says when Chromium is missing. |
 | The gate: "could not load" `localhost:5173` | `npm run dev` is not running in tab 1. Or gate the built site instead: `npm run build`, `npm run preview`, `npx manta gate --base http://localhost:4173`. |
-| Scene 3: no **Pre-run AI fixes** comment or review on the live PR | The PR's branch is not the story's (`npm run demo -- reset`, then scene 2 and 3 again), or the gate job failed before posting: open its log under **Checks**. On stage, show the golden PR instead. |
+| Stage DevOps: no **Pre-run AI fixes** comment or review on the live PR | The PR's branch is not the story's (`npm run demo -- stage devops` again), or the gate job failed before posting: open its log under **Checks**. On stage, show the golden PR instead. |
+| Stage Dev: `fix` says the patch does not apply | It was applied already, or Git rewrote line endings: `npm run demo -- stage dev` again; check `git config core.autocrlf` (Part 5). |
 | The Workbench: port 3508 in use | `npm run demo -- workbench nightly --port 3600`, then open http://127.0.0.1:3600/. |
 | `reset`: "The working tree has changes" | `npm run demo -- reset --force` discards them. |
 | `reset`: the push to `main` is rejected | gh is signed in as an account that is not a repo admin: `gh auth switch -u tyler-maddox-gdit`. |
 | Every workflow run fails at `npm ci` | `MANTA_READ_TOKEN` is missing or expired: Part 4. |
 | Pushes and pull requests start no workflow run at all (a manual `gh workflow run` does) | Turn Actions off and on: repo **Settings → Actions → General → Disable actions → Save**, then **Allow all actions and reusable workflows → Save**. This fixed it on 2026-10-13. |
-| Anything else | Note the exact text for #812. During a demo, each scene's **If it goes wrong** in DEMO.md is the fallback. |
+| Anything else | Note the exact text for #812. During a demo, each stage's **If it goes wrong** in DEMO.md is the fallback. |

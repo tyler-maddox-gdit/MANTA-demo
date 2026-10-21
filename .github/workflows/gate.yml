@@ -74,7 +74,7 @@ jobs:
           node -e "const t=Date.now();(async()=>{for(;;){try{if((await fetch('http://localhost:4173')).ok)return}catch{}if(Date.now()-t>60000){console.error('The preview server did not answer on http://localhost:4173 within 60 s.');process.exit(1)}await new Promise(r=>setTimeout(r,1000))}})()"
 
       # The demo keeps each CI gate short: it scans the one page the upload dialog changes. The developer's gate
-      # on the laptop (scene 2) scans every page in the config. Pages the baseline holds and this run does not
+      # on the laptop (the Dev stage) scans every page in the config. Pages the baseline holds and this run does not
       # scan are left alone, so the verdict is the same New 3.
       - name: Gate the upload page alone
         run: node -e "const fs=require('fs'),f='.manta/config.json',c=JSON.parse(fs.readFileSync(f,'utf8'));c.pages=['/status?upload=BP-2026-10882'];fs.writeFileSync(f,JSON.stringify(c,null,2))"

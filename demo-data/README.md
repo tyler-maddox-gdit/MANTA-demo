@@ -13,10 +13,11 @@ fresh scan. What a snapshot shows as AI output is **pre-run**.
 - **`pr/`** — a gated run of `feature/upload-documents` with `cluster` and `fix --scope new` added on the Mac:
   `gate-<token>.json`, the fix proposals with source edits for the upload dialog's three new defects and the
   refresh button's old debt, and `reports/fix-<token>.patch`. The Gate workflow posts these fixes onto the live PR as
-  pre-run suggestions when the repo has no AI key (scene 3), and the golden PR was posted from this run.
+  pre-run suggestions when the repo has no AI key (the DevOps stage), `npm run demo -- fix` prints and applies them
+  (the Dev stage), and the golden PR was posted from this run.
 - **`nightly/`** — one nightly run of `golden/upload-documents`, made on the Mac as CI makes it (`--extended`, the Sign in path replayed to
   `/account`, the upload page included), with `cluster,fix,explain,summary,adjudicate,acr` added on the Mac
-  afterwards. Scenes 6 and 7 open it.
+  afterwards. The QA stage opens it.
 
 Both are filled by `npm run demo -- snapshot <name> [<run id>]` (DEMO.md, "Refreshing a snapshot" and
 "Setup Tyler does once"); until then this folder holds only this file.

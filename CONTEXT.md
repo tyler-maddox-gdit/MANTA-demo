@@ -12,15 +12,19 @@ _Avoid_ "the app" or "the product": MANTA is the product; this is what it scans.
 
 ## Story
 
-The ordered [scenes](#scene) of one demo, from a developer's terminal through a pull request and the nightly
-to QA and release; also the two branches that hold it, `main` and `feature/upload-documents`.
+The one feature every [stage](#stage) shows, the upload dialog and its three defects, and the two branches that
+hold it, `main` and `feature/upload-documents`.
 
 _Avoid_ "script" for the story: a script is the `demo` command, or a path's Smart Script.
 
-## Scene
+## Stage
 
-One thing shown, about one to six minutes long, with its setup, what is typed, what is seen, what is said and
-a fallback. `npm run demo -- scene <n>` sets one up. DEMO.md has one page per scene.
+One self-contained part of the demo, about six to eight minutes long: QA (the Workbench), DevOps (the pull
+request gate) or Dev (the developer's gate and the AI skills), each with its setup, what is typed, what is
+seen, what is said and a fallback. `npm run demo -- stage <name>` sets one up, whatever ran before; stages are
+shown in any order. DEMO.md has one page per stage. The slide (`presentation/index.html`) lights one at a time.
+
+_Avoid_ "scene": the stages replaced the ordered scenes of the first version.
 
 ## Story tags
 
@@ -32,7 +36,7 @@ a fallback. `npm run demo -- scene <n>` sets one up. DEMO.md has one page per sc
 The pull request from `golden/upload-documents` that holds MANTA's [pre-run](#pre-run) AI output — the
 comment, the review's suggestions — posted once and never reset, closed or pushed to.
 
-_Avoid_ "the demo PR": the live PR is the one scene 4 opens and a reset closes.
+_Avoid_ "the demo PR": the live PR is the one the DevOps stage opens and a reset closes.
 
 ## Snapshot run
 
@@ -53,5 +57,5 @@ gets suggestions of its own. Removing it returns to the [pre-run](#pre-run) stor
 
 ## Reset
 
-`npm run demo -- reset`: one command back to scene 1 — story branches to their [tags](#story-tags), live PRs
+`npm run demo -- reset`: one command back to the start — story branches to their [tags](#story-tags), live PRs
 closed, snapshots restored, local runs removed.

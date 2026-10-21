@@ -161,12 +161,12 @@ else {
   done('Ruleset "' + RULESET_NAME + '" created: "' + GATE_CHECK + '" required, force pushes blocked but for admins and deploy keys.');
 }
 
-stage('Optional: ANTHROPIC_API_KEY turns the AI scenes live');
+stage('Optional: ANTHROPIC_API_KEY turns the AI passes live');
 if (secrets.has('ANTHROPIC_API_KEY')) done('ANTHROPIC_API_KEY is set: the gate and the nightly run their AI passes. Remove it to go back to pre-run.');
 else if (await confirm('Set an Anthropic API key now?')) {
   openUrl('https://console.anthropic.com/settings/keys');
   if (promptSecret('ANTHROPIC_API_KEY')) done('ANTHROPIC_API_KEY set.');
-} else say('Not set: the AI scenes stay pre-run. Add it any time: gh secret set ANTHROPIC_API_KEY -R ' + REPO);
+} else say('Not set: the AI passes stay pre-run. Add it any time: gh secret set ANTHROPIC_API_KEY -R ' + REPO);
 
 const golden = JSON.parse(must('gh', ['pr', 'list', '-R', REPO, '--head', 'golden/upload-documents', '--state', 'open', '--json', 'url']));
 console.log('\nGolden PR: ' + (golden[0]?.url ?? 'none open — DEMO.md, Refreshing what was done, says how to remake it'));
