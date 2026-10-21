@@ -122,22 +122,26 @@ Expect the step stream (five pages), then **New 3**, **Fixed 0**, **Tolerated 27
 
 **Beat 2 · The AI skills.** Type `npm run demo -- fix`.
 
-Expect the **pre-run** header (the run token and the model), the `cluster` line (3 clusters over 30
-violations, 7 standalone), then three proposals: the cause, what the fix skill **noticed** in the project,
-and the before-and-after source lines; then the `fix` line and the question `Apply the patch? [y/N]`. Stop
-there.
+Expect, top to bottom: the **Pre-run** paragraph (provider and model); **Step 1 · cluster** with one line,
+"30 findings come down to 3 shared causes and 7 one-offs"; **Step 2 · fix** with three fixes, each titled by
+what a user hits, with a **One cause** line on Fix 1, two **Noticed first** lines each, and the source line
+**before** and **after**; `Patch written for src/pages/Status.jsx and src/styles.css.`; then the question
+`Apply the patch? [y/N]`. Stop there.
 
 - "Pre-run. MANTA's AI skills ran on this run earlier; here is what they wrote."
-- **cluster**: "It groups findings by cause, not by page. The footer links are one cause, fifteen findings.
-  Our dialog's close button and the old refresh button are one pattern: icon-only buttons."
-- **noticed**: point at two. "Before it wrote a line it read the project: the `.field` wrapper every form row
-  uses, icons already marked `aria-hidden`, the comments the team leaves on known debt. The fix is in this
-  project's conventions, not a generic one."
-- **fix**: walk the three. "An `aria-label` on both icon buttons, the new one and the old one. A visible label
-  on the file field, in that wrapper. And the hint colour fixed in the stylesheet, where it is set, so every
-  hint on the site gets it."
-- "It asks. The developer reads the diff and says yes." Type `y`: `git apply`, then the diff summary,
-  `Status.jsx` and `styles.css`. "Applied, not committed."
+- **Step 1**: "It groups findings by cause, not by page. Thirty findings, three causes. The footer links are
+  one cause, fifteen findings."
+- **Fix 1 · a button with no name**: "One cause: the icon-button pattern. The dialog's close button and the
+  refresh button that was already there are the same pattern, so one fix covers both. An `aria-label` on each."
+- **Noticed first**, point at a line on Fix 1 and on Fix 3: "Before it wrote anything it read the project:
+  icons here are already marked `aria-hidden`, and the `.field` wrapper is what every form row uses. The fix
+  is in this project's conventions, not a generic one."
+- **Fix 2 · text too faint to read**: "The colour is fixed in the stylesheet, where it is set, from 2.6 to 1
+  up to 7 to 1, so every hint on the site gets it."
+- **Fix 3 · a form field with no label**: "A visible label, Choose files, in that wrapper, and the size limits
+  tied to the field so they are read with it."
+- "It asks. The developer reads the diff and says yes." Type `y`: `Applied (git apply), nothing committed:`,
+  then the diff summary, `Status.jsx` and `styles.css`.
 
 **Beat 3 · Green.** Type the gate again.
 

@@ -110,17 +110,21 @@ npx manta gate --base http://localhost:5173
 ```
 npm run demo -- fix
 ```
-**See.** A **pre-run** header naming the run and the model; MANTA's `cluster` line (the findings grouped by one
-upstream cause each); then each proposal: the cause in a sentence, the rules and elements it covers, what the
-fix skill **noticed** about the project before writing (the `.field` wrapper, the `aria-hidden` icons, the
-`DEBT` comments, the class naming), and the edit as the source file and line with the line before and after;
-then the `fix` line naming the patch, and the question `Apply the patch? [y/N]`. Read the diff aloud first;
-then type `y`: `git apply` and the diff summary, `Status.jsx` and `styles.css`.
+**See.** A **Pre-run** paragraph naming the provider and model. **Step 1 · cluster**: "30 findings come down to
+3 shared causes and 7 one-offs." **Step 2 · fix**: three fixes, each titled by what a user hits (**Fix 1 · a
+button with no name**, **Fix 2 · text too faint to read**, **Fix 3 · a form field with no label**) with its
+elements and impact; Fix 1 has a **One cause** line (the icon-button pattern covers the old refresh button
+too); each has two **Noticed first** lines (what the skill read in the project before writing: the class
+naming, the `aria-hidden` icons, the hard-coded greys, the `.field` wrapper) and then the source file and
+line with **before** and **after**. Then `Patch written for src/pages/Status.jsx and src/styles.css.` and the
+question `Apply the patch? [y/N]`. Read the three fixes aloud first; then type `y`: `Applied (git apply),
+nothing committed:` and the diff summary, `Status.jsx` and `styles.css`.
 - "MANTA's AI skills, **pre-run** on this run: no AI runs on this laptop today. With a key or the Claude command
   line here, the same command runs them live, in a minute or two."
-- "**cluster** groups the findings by cause: the two icon-only buttons are one pattern, one fix. **fix** read the
-  project first: there is the form-row wrapper it reuses, the icon convention, the debt comments. Then it
-  writes the edit to the exact line that wrote the element; the contrast fix goes to the stylesheet."
+- "Step 1 groups the findings by cause: the dialog's close button and the old refresh button are one pattern,
+  one fix. Step 2 read the project first, the **Noticed first** lines: the form-row wrapper it reuses, the icon
+  convention, where the greys live. Then it writes the edit to the exact line that wrote the element; the
+  contrast fix goes to the stylesheet."
 - "It asks. Nothing is applied until the developer has read the diff and said yes; nothing is committed."
 
 **3 · Green.** Type:

@@ -160,9 +160,9 @@ opens is one of the things to note. Then:
 npm run demo -- fix                              (tab 2)
 npx manta gate --base http://localhost:5173      (tab 2)
 ```
-**Expect** the pre-run header, the proposals with what the fix skill noticed and their before and after lines,
-then `Apply the patch? [y/N]`: type `y`. **Expect** `git apply` and a diff summary naming `Status.jsx` and
-`styles.css`; then the second gate: `New 0`, `Fixed 2`, `Gate passed`, `exit 0`. Ctrl+C in
+**Expect** a Pre-run paragraph, Step 1 (cluster) and Step 2 (fix) with three fixes, each with Noticed first
+lines and before and after source lines, then `Apply the patch? [y/N]`: type `y`. **Expect** `Applied (git
+apply), nothing committed:` and a diff summary naming `Status.jsx` and `styles.css`; then the second gate: `New 0`, `Fixed 2`, `Gate passed`, `exit 0`. Ctrl+C in
 tab 1 stops the dev server.
 
 **Stage DevOps** (tab 2):
