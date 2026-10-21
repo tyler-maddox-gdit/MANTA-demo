@@ -147,7 +147,7 @@ It puts the feature branch, `feature/upload-documents`, in the working tree, cle
 npm run dev        (in a second terminal; leave it running)
 npx manta gate --base http://localhost:5173
 ```
-**See.** MANTA's banner (a shaded manta ray beside a MANTA · ACCESSIBILITY GATE wordmark; it needs 80 columns), then its step stream as it
+**See.** MANTA's banner (a shaded manta ray beside a MANTA · ACCESSIBILITY GATE wordmark; it needs 77 columns), then its step stream as it
 scans each page (about 15 seconds), then the terminal summary: **New 3** (P1 2 · P2 1),
 **Fixed 0**, **Tolerated** with the same number as the README's badge, the three new violations listed on
 `/status?upload=BP-2026-10882`, each with a framed picture of the element from the scan's own screenshot, outlined in
