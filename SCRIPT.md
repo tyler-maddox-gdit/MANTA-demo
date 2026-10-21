@@ -123,16 +123,21 @@ Expect the step stream (five pages), then **New 3**, **Fixed 0**, **Tolerated 27
 **Beat 2 · The AI skills.** Type `npm run demo -- fix`.
 
 Expect the **pre-run** header (the run token and the model), the `cluster` line (3 clusters over 30
-violations, 7 standalone), then three proposals with before-and-after source lines, then `fix`, `git apply`,
-and a diff summary: `Status.jsx` and `styles.css`.
+violations, 7 standalone), then three proposals: the cause, what the fix skill **noticed** in the project,
+and the before-and-after source lines; then the `fix` line and the question `Apply the patch? [y/N]`. Stop
+there.
 
 - "Pre-run. MANTA's AI skills ran on this run earlier; here is what they wrote."
 - **cluster**: "It groups findings by cause, not by page. The footer links are one cause, fifteen findings.
   Our dialog's close button and the old refresh button are one pattern: icon-only buttons."
-- **fix**: walk the three proposals. "An `aria-label` on both icon buttons, the new one and the old one. A
-  visible label on the file field. And the hint colour fixed in the stylesheet, where it is set, not on the
-  page, so every hint on the site gets it. In the project's own conventions."
-- "The patch is applied, nothing is committed. The developer reads the diff."
+- **noticed**: point at two. "Before it wrote a line it read the project: the `.field` wrapper every form row
+  uses, icons already marked `aria-hidden`, the comments the team leaves on known debt. The fix is in this
+  project's conventions, not a generic one."
+- **fix**: walk the three. "An `aria-label` on both icon buttons, the new one and the old one. A visible label
+  on the file field, in that wrapper. And the hint colour fixed in the stylesheet, where it is set, so every
+  hint on the site gets it."
+- "It asks. The developer reads the diff and says yes." Type `y`: `git apply`, then the diff summary,
+  `Status.jsx` and `styles.css`. "Applied, not committed."
 
 **Beat 3 · Green.** Type the gate again.
 

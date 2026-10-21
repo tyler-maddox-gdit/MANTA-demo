@@ -111,14 +111,17 @@ npx manta gate --base http://localhost:5173
 npm run demo -- fix
 ```
 **See.** A **pre-run** header naming the run and the model; MANTA's `cluster` line (the findings grouped by one
-upstream cause each); then each proposal: the cause in a sentence, the rules and elements it covers, and the
-edit as the source file and line with the line before and after; then the `fix` line naming the patch, `git
-apply`, and the diff summary: `Status.jsx` and `styles.css`.
+upstream cause each); then each proposal: the cause in a sentence, the rules and elements it covers, what the
+fix skill **noticed** about the project before writing (the `.field` wrapper, the `aria-hidden` icons, the
+`DEBT` comments, the class naming), and the edit as the source file and line with the line before and after;
+then the `fix` line naming the patch, and the question `Apply the patch? [y/N]`. Read the diff aloud first;
+then type `y`: `git apply` and the diff summary, `Status.jsx` and `styles.css`.
 - "MANTA's AI skills, **pre-run** on this run: no AI runs on this laptop today. With a key or the Claude command
   line here, the same command runs them live, in a minute or two."
-- "**cluster** groups the findings by cause: the two icon-only buttons are one pattern, one fix. **fix** writes
-  the edit to the exact line that wrote the element, in the project's own conventions; the contrast fix goes
-  to the stylesheet. The patch is applied; nothing is committed. The developer reads the diff."
+- "**cluster** groups the findings by cause: the two icon-only buttons are one pattern, one fix. **fix** read the
+  project first: there is the form-row wrapper it reuses, the icon convention, the debt comments. Then it
+  writes the edit to the exact line that wrote the element; the contrast fix goes to the stylesheet."
+- "It asks. Nothing is applied until the developer has read the diff and said yes; nothing is committed."
 
 **3 · Green.** Type:
 ```

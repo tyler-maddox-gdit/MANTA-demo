@@ -9,6 +9,7 @@ import { createRequire } from 'node:module';
 import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
+import { createInterface } from 'node:readline/promises';
 import { fileURLToPath } from 'node:url';
 
 // ── Constants ───────────────────────────────────────────────────────────────
@@ -47,7 +48,7 @@ const CUES = {
   },
   dev: {
     title: 'Stage · Development: the developer\'s gate',
-    type: ['npm run dev                 (in a second terminal; leave it running)', GATE_LINE + '      → New 3, Gate failed, exit 1', 'npm run demo -- fix         → the AI skills\' proposals (pre-run) and the patch applied', GATE_LINE + '      → passed, exit 0'],
+    type: ['npm run dev                 (in a second terminal; leave it running)', GATE_LINE + '      → New 3, Gate failed, exit 1', 'npm run demo -- fix         → the AI skills\' proposals (pre-run); answer y to apply the patch', GATE_LINE + '      → passed, exit 0'],
     next: 'With the claude CLI on this machine, npm run demo -- fix --live runs the skills here instead.',
   },
 };
@@ -216,13 +217,18 @@ async function stageQa(flags) {
 
 const firstSentence = (text) => (text.match(/^.*?[.!?](\s|$)/) ?? [text])[0].trim();
 const clip = (text, n = 110) => (text.length > n ? text.slice(0, n - 1) + '…' : text);
+async function ask(question) {
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+  try { return (await rl.question(question)).trim(); } finally { rl.close(); }
+}
 
 /**
  * The AI skills over the developer's run, in the terminal. Without --live nothing runs: the cluster and fix
- * skills' output from the pr snapshot (written ahead of time, said so on screen) is printed in MANTA's own lines
- * and its patch applied, so the gate can run again. With --live the skills run here through the claude CLI.
+ * skills' output from the pr snapshot (written ahead of time, said so on screen) is printed in MANTA's own lines:
+ * the clusters, what the fix skill noticed about the project before writing, each edit; then it asks before
+ * applying the patch, so the gate can run again. With --live the skills run here through the claude CLI.
  */
-function fix(flags) {
+async function fix(flags) {
   if (out('git', ['rev-parse', '--abbrev-ref', 'HEAD']) !== FEATURE.branch) die('fix runs on ' + FEATURE.branch + ': npm run demo -- stage dev first.');
   if (flags.live) return fixLive();
   const dir = join(ROOT, 'demo-data', 'pr', 'reports');
@@ -246,6 +252,7 @@ function fix(flags) {
     console.log('');
     console.log('  ' + (cluster ? cluster.id + ' (' + cluster.worstImpact + ', ' + cluster.affectedElements + ' elements)' : p.id) + ' · ' + part(1).join(', ') + ' · ' + part(2).join(', '));
     console.log('  ' + (cluster?.hypothesis ?? firstSentence(p.domSpec?.domInstruction ?? '')));
+    for (const c of p.conventionsDetected ?? []) console.log('    noticed: ' + clip(c));
     for (const e of p.edits ?? []) {
       console.log('    ' + e.file + ':' + e.startLine);
       for (const l of e.original.split('\n')) console.log('    - ' + clip(l.trim()));
@@ -255,6 +262,10 @@ function fix(flags) {
   console.log('');
   line('SKILL', 'fix → written ' + artifact('fix-proposals') + '.json; .patch → written ' + patch);
   if (!run('git', ['apply', '--check', patch], { capture: true }).ok) die('The patch does not apply: already applied? npm run demo -- stage dev starts over.');
+  if (!/^y(es)?$/i.test(await ask('\nApply the patch? [y/N] '))) {
+    console.log('Nothing applied. To apply it later: git apply ' + patch + '\n');
+    return;
+  }
   must('git', ['apply', patch]);
   line('APPLY', 'git apply ' + patch);
   must('git', ['diff', '--stat']);
@@ -416,7 +427,7 @@ const [command, a, b] = words;
 switch (command) {
   case 'reset': reset(flags); break;
   case 'stage': await stage(a, flags); break;
-  case 'fix': fix(flags); break;
+  case 'fix': await fix(flags); break;
   case 'snapshot': snapshot(a, b, flags); break;
   case 'ci-run': ciRun(a, flags); break;
   case 'workbench': workbench(a, flags); break;
