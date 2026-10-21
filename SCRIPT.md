@@ -184,6 +184,8 @@ and the fix in plain words and the diff in red and green; then `3 fixes · 2 fil
 `Apply these 3 fixes? [y/N]`. Stop there. The output does not say pre-run; you do.
 
 - "Pre-run. MANTA's fix skill ran on this run earlier; this is its answer."
+- **What a user sees** (the picture): "Here is the dialog, and the three things a user hits: one, the hint
+  nobody can read; two, a close button that says nothing; three, a file field with no name. Keep those numbers."
 - **Reading the project**: "Before it wrote anything it read the project: React, Vite, where the stylesheet
   is, how this team names buttons, marks icons, lays out form rows, flags its known debt. The fix is in this
   project's conventions, not a generic one."
@@ -201,7 +203,9 @@ and the fix in plain words and the diff in red and green; then `3 fixes · 2 fil
 - **3 · File field with no label**: "A visible label, Choose files to upload, in the wrapper the other form
   rows use, and the size limits tied to the field so they are read with it."
 - "It asks. The developer reads the diff and says yes." Type `y`: `Applied to src/styles.css and
-  src/pages/Status.jsx. Nothing committed.`, then the diff summary.
+  src/pages/Status.jsx. Nothing committed.`, the diff summary, then the dialog again, boxes in green. "Same
+  dialog: a label you can see, a hint you can read, and a close button that now has a name you can't see but a
+  screen reader says."
 
 **Beat 3 · Green.** Type the gate again.
 

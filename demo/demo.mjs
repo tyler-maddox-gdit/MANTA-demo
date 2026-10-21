@@ -4,7 +4,7 @@
 // Usage: npm run demo -- <command>   (or: node demo/demo.mjs <command>). `help` lists the commands.
 // The cue strings below are the ones DEMO.md prints; change them in both places.
 import { spawn, spawnSync } from 'node:child_process';
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
@@ -389,6 +389,11 @@ async function fix(flags) {
   const conventions = [...new Set(list.flatMap((p) => p.conventionsDetected ?? []))].slice(0, 4);
   conventions.forEach((c, i) => label(i === 0 ? 'Conventions found' : '', clip(c, width - 22)));
   await pause(400);
+  if (showsImages(flags)) {
+    label('What a user sees', 'the upload dialog; each box is a new finding, numbered as the fixes below');
+    printShot('before');
+    await pause(400);
+  }
 
   const clusters = JSON.parse(readFileSync(join(dir, 'cluster-' + token + '.json'), 'utf8'));
   const lev = clusters.leverageSummary ?? {};
@@ -448,8 +453,125 @@ async function fix(flags) {
   }
   must('git', ['apply', patch]);
   console.log('Applied to ' + (files.length > 1 ? files.slice(0, -1).join(', ') + ' and ' + files[files.length - 1] : files[0]) + '. Nothing committed.');
-  must('git', ['diff', '--stat']);
+  must('git', ['--no-pager', 'diff', '--stat']);
+  if (showsImages(flags)) {
+    console.log('\n' + dim('The dialog with the fixes (the dev server has reloaded: ' + DEV_ORIGIN + UPLOAD_PATH + ')'));
+    printShot('after');
+  }
   console.log('\nRun the gate again: ' + GATE_LINE + '\n');
+}
+
+// ── The dialog, drawn in the terminal ───────────────────────────────────────
+// `fix` prints two pictures of the upload dialog as Sixel images, the format Windows Terminal (1.22 or later) draws
+// inline: the dialog as the developer's run found it, each new finding boxed and numbered as `fix` numbers its
+// fixes, and the dialog with the fixes applied. `shots` renders them once from the served site into the pr
+// snapshot, so `fix` only copies bytes to the terminal. iTerm2 draws Sixel too, for a rehearsal on a Mac.
+const UPLOAD_PATH = '/status?upload=BP-2026-10882';
+const SHOTS = join(ROOT, 'demo-data', 'pr', 'shots');
+const SHOT_SCALE = 1.25; // pixels per CSS pixel; Windows Terminal maps 10 image pixels to a column, so the dialog is about 66 columns wide
+const SHOT_COLOR = { before: '#cc0000', after: '#009900' };
+
+/** Whether `fix` draws the pictures: a terminal that draws Sixel, and no --no-images. */
+const showsImages = (flags) => TTY && !flags.noImages && Boolean(process.env.WT_SESSION || process.env.TERM_PROGRAM === 'iTerm.app');
+
+function printShot(name) {
+  const file = join(SHOTS, name + '.six');
+  if (!existsSync(file)) return;
+  process.stdout.write(readFileSync(file));
+  console.log('');
+}
+
+/** RGBA pixels as a Sixel image: the 255 colours the image uses most are its palette, every other pixel its nearest. */
+function sixel(w, h, rgba) {
+  const rgb = (i) => (rgba[i * 4] << 16) | (rgba[i * 4 + 1] << 8) | rgba[i * 4 + 2];
+  const counts = new Map();
+  for (let i = 0; i < w * h; i++) counts.set(rgb(i), (counts.get(rgb(i)) ?? 0) + 1);
+  const palette = [...counts.entries()].sort((x, y) => y[1] - x[1]).slice(0, 255).map(([k]) => [k >> 16, (k >> 8) & 255, k & 255]);
+  const nearest = new Map(palette.map(([r, g, b], n) => [(r << 16) | (g << 8) | b, n]));
+  const index = new Uint8Array(w * h);
+  for (let i = 0; i < w * h; i++) {
+    let best = nearest.get(rgb(i));
+    if (best === undefined) {
+      const [r, g, b] = [rgba[i * 4], rgba[i * 4 + 1], rgba[i * 4 + 2]];
+      let d = Infinity;
+      palette.forEach(([pr, pg, pb], n) => { const e = (r - pr) ** 2 + (g - pg) ** 2 + (b - pb) ** 2; if (e < d) { d = e; best = n; } });
+      nearest.set(rgb(i), best);
+    }
+    index[i] = best;
+  }
+  const pct = (v) => Math.round((v * 100) / 255);
+  const used = [...new Set(index)];
+  let out = '\x1bPq"1;1;' + w + ';' + h + used.map((n) => '#' + n + ';2;' + palette[n].map(pct).join(';')).join('');
+  for (let y0 = 0; y0 < h; y0 += 6) {
+    const band = new Set();
+    for (let y = y0; y < Math.min(y0 + 6, h); y++) for (let x = 0; x < w; x++) band.add(index[y * w + x]);
+    const rows = [];
+    for (const n of band) {
+      let row = '';
+      let run = 0;
+      let last = '';
+      const flush = () => { if (run) row += run > 3 ? '!' + run + last : last.repeat(run); };
+      for (let x = 0; x < w; x++) {
+        let bits = 0;
+        for (let k = 0; k < 6 && y0 + k < h; k++) if (index[(y0 + k) * w + x] === n) bits |= 1 << k;
+        const ch = String.fromCharCode(63 + bits);
+        if (ch === last) run++;
+        else { flush(); last = ch; run = 1; }
+      }
+      flush();
+      rows.push('#' + n + row);
+    }
+    out += rows.join('$') + '-';
+  }
+  return out + '\x1b\\';
+}
+
+/** Renders the dialog served at --base (the preview by default) into demo-data/pr/shots/<before|after>.six. */
+async function shots(name, flags) {
+  if (!SHOT_COLOR[name]) die('shots takes before (the feature branch as tagged) or after (with the fix patch applied).');
+  const dir = join(ROOT, 'demo-data', 'pr', 'reports');
+  const token = tokensIn(dir).pop();
+  if (!token) die('demo-data/pr holds no run: see DEMO.md, Refreshing a snapshot.');
+  const proposals = JSON.parse(readFileSync(join(dir, 'fix-proposals-' + token + '.json'), 'utf8')).proposals ?? [];
+  const isNew = new Set((JSON.parse(readFileSync(join(dir, 'gate-' + token + '.json'), 'utf8')).new ?? []).map((n) => n.target));
+  // Numbered as `fix` numbers its fixes: each proposal's new findings.
+  const boxes = proposals.flatMap((p, i) => [...new Set((p.members ?? []).map((m) => m.split('|::|')[2]))].filter((t) => isNew.has(t)).map((t) => [i + 1, t]));
+  const { chromium } = createRequire(join(MANTA_PKG, 'package.json'))('playwright');
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: SHOT_SCALE });
+    await page.goto((flags.base ?? PREVIEW_ORIGIN) + UPLOAD_PATH);
+    await page.waitForSelector('#upload-dialog');
+    await page.evaluate(({ boxes, color }) => {
+      for (const [n, selector] of boxes) {
+        const r = document.querySelector(selector).getBoundingClientRect();
+        const box = document.createElement('div');
+        Object.assign(box.style, { position: 'fixed', left: r.left - 5 + 'px', top: r.top - 5 + 'px', width: r.width + 10 + 'px', height: r.height + 10 + 'px', border: '3px solid ' + color, borderRadius: '4px', boxSizing: 'border-box', zIndex: 10 });
+        const tag = document.createElement('span');
+        tag.textContent = n;
+        Object.assign(tag.style, { position: 'absolute', left: '-14px', top: '-14px', width: '22px', height: '22px', borderRadius: '11px', background: color, color: '#fff', font: 'bold 14px system-ui, sans-serif', display: 'grid', placeItems: 'center' });
+        box.append(tag);
+        document.body.append(box);
+      }
+    }, { boxes, color: SHOT_COLOR[name] });
+    const r = await page.locator('#upload-dialog').boundingBox();
+    const png = await page.screenshot({ clip: { x: r.x - 24, y: r.y - 24, width: r.width + 48, height: r.height + 48 } });
+    const { w, h, data } = await page.evaluate(async (b64) => {
+      const img = new Image();
+      img.src = 'data:image/png;base64,' + b64;
+      await img.decode();
+      const c = document.createElement('canvas');
+      [c.width, c.height] = [img.width, img.height];
+      const g = c.getContext('2d');
+      g.drawImage(img, 0, 0);
+      return { w: c.width, h: c.height, data: Array.from(g.getImageData(0, 0, c.width, c.height).data) };
+    }, png.toString('base64'));
+    mkdirSync(SHOTS, { recursive: true });
+    writeFileSync(join(SHOTS, name + '.six'), sixel(w, h, data));
+    console.log('[DONE] demo-data/pr/shots/' + name + '.six: ' + w + '×' + h + ' pixels, ' + boxes.length + ' boxes (' + boxes.map(([n, t]) => n + ' ' + t).join(', ') + ').');
+  } finally {
+    await browser.close();
+  }
 }
 
 function fixLive() {
@@ -461,7 +583,7 @@ function fixLive() {
   const patch = 'reports/fix-' + tokensIn(reports).pop() + '.patch';
   if (!existsSync(join(ROOT, patch))) die('The fix skill wrote no patch (' + patch + '): see its lines above.');
   must('git', ['apply', patch]);
-  must('git', ['diff', '--stat']);
+  must('git', ['--no-pager', 'diff', '--stat']);
   console.log('\nRun the gate again: ' + GATE_LINE + '\n');
 }
 
@@ -578,7 +700,10 @@ function help() {
                            Ctrl+C; dev leaves the feature branch checked out, clean; devops opens the live PR;
                            release runs the feature branch with the fixes and the Workbench on the release snapshot.
   fix [--live]             The AI skills over the developer's run: pre-run from demo-data/pr, printed and
-                           its patch applied. --live runs cluster and fix here through the claude CLI.
+      [--no-images]        its patch applied. --live runs cluster and fix here through the claude CLI. In Windows
+                           Terminal (or iTerm2) it draws the dialog before and after; --no-images leaves them out.
+  shots <before|after>     Render those two pictures from the site served at --base (default the preview on
+         [--base url]      4173) into demo-data/pr/shots/: before on the branch as tagged, after with the patch.
   snapshot <name> [run]    Copy a run into demo-data/<name>/: a workflow run's artifact when [run] is given
          [--artifact a]    (manta-run by default, or manta-nightly), else this folder's reports/, run-records/, sites/.
   ci-run [run]             Download a workflow run's artifact into ci-run/ (the latest nightly by default)
@@ -599,6 +724,8 @@ const words = [];
 for (let i = 0; i < argv.length; i++) {
   if (argv[i] === '--force') flags.force = true;
   else if (argv[i] === '--live') flags.live = true;
+  else if (argv[i] === '--no-images') flags.noImages = true;
+  else if (argv[i] === '--base') flags.base = argv[++i];
   else if (argv[i] === '--artifact') flags.artifact = argv[++i];
   else if (argv[i] === '--port') flags.port = Number(argv[++i]);
   else if (argv[i].startsWith('--')) die('Unknown flag ' + argv[i] + '. Try: npm run demo -- help');
@@ -609,6 +736,7 @@ switch (command) {
   case 'reset': reset(flags); break;
   case 'stage': await stage(a, flags); break;
   case 'fix': await fix(flags); break;
+  case 'shots': await shots(a, flags); break;
   case 'snapshot': snapshot(a, b, flags); break;
   case 'ci-run': ciRun(a, flags); break;
   case 'workbench': workbench(a, flags); break;

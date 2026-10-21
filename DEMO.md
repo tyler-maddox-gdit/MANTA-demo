@@ -170,7 +170,8 @@ npm run demo -- fix
 claude-code`. Three lines as it reads: **Reading the run** (3 new violations on the upload page, 27 tolerated
 by the baseline), **Reading the project** (React 18, react-router 6, Vite 5, plain CSS in `src/styles.css`,
 source stamps on) and **Conventions found** (the button class naming, the `aria-hidden` icons, the stable ids,
-the `DEBT` comments). Then the two skills, one after the other. **Step 1 · cluster** (group findings that
+the `DEBT` comments). In Windows Terminal, a picture: **What a user sees**, the upload dialog with each new
+finding boxed in red and numbered as the fixes below. Then the two skills, one after the other. **Step 1 · cluster** (group findings that
 share one cause): "30 findings in this run come down to 3 shared causes and 6 one-offs", then the three
 causes. **Text too faint to read** (6 elements) and **Icon buttons with no name** (3 elements) have a green
 dot, each marked "Contains a new finding (#upload-hint) and 5 existing ones" and "(#upload-close) and 2 existing
@@ -184,7 +185,8 @@ the close button and on the old refresh button), **3 · File field with no label
 upload" label, `aria-describedby` to the hint; "Standalone: no other finding shares its cause."). Under each:
 the problem in plain words, the fix in plain words, and the diff, red and green, with the file and line. Then
 `3 fixes · 2 files` and the question `Apply these 3 fixes? [y/N]`. Read the fixes aloud first; then type `y`:
-`Applied to src/styles.css and src/pages/Status.jsx. Nothing committed.` and the diff summary. The output
+`Applied to src/styles.css and src/pages/Status.jsx. Nothing committed.`, the diff summary, and the dialog
+again with the fixes, the same boxes in green: the label visible, the hint darker. The output
 never says so itself, so you do: this answer is **pre-run**.
 - "This is MANTA's fix skill, **pre-run** on this run: no AI runs on this laptop today. With a key or the Claude
   command line here, the same command runs it live, in a minute or two."
@@ -209,7 +211,8 @@ pages, labelled in the same pass), **Tolerated 20**, and `Gate passed`, `exit 0`
 
 **If it goes wrong.** The dev server will not start: in the second terminal run `npm run build` then
 `npm run preview`, and gate the preview build instead: `npx manta gate --base http://localhost:4173 --no-screenshots`. `fix`
-says the patch does not apply: `npm run demo -- stage dev` starts the stage over. The second gate still fails:
+says the patch does not apply: `npm run demo -- stage dev` starts the stage over. The pictures come out as
+garbage or not at all (Windows Terminal older than 1.22): `npm run demo -- fix --no-images`. The second gate still fails:
 read what it names; `git diff` shows what was applied.
 
 **Live.** On a machine with the `claude` command line, `npm run demo -- fix --live` runs the cluster and fix
@@ -377,7 +380,10 @@ The command prints the run tokens it copied. See `demo-data/README.md` for how e
 and `fix-*.patch` must come from a run of `feature/upload-documents` at its tag, or the patch will not apply. The
 shared-colour fix is on line 1 of `src/styles.css`, a line the feature commit changes (it adds the `--scrim`
 token): GitHub only takes a suggestion on a line the pull request changed, so a fix on an untouched line would be
-listed under **Also fixable** instead of applied by the one click. Check that after a refresh.
+listed under **Also fixable** instead of applied by the one click. Check that after a refresh. A refresh of
+`pr` also removes the two pictures `fix` draws; render them again: with the feature branch's preview on
+4173, `npm run demo -- shots before`; then `git apply` the patch, build and preview again, `npm run demo -- shots
+after`, and `git checkout -- src`.
 
 ---
 

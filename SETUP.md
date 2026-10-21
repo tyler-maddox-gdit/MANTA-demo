@@ -27,6 +27,10 @@ The presenter's runbook is [DEMO.md](DEMO.md). This page gets the PC ready to fo
    Then **close Terminal and open it again**, so it finds the new tools. If `winget` is blocked or asks for an
    administrator, use the installers from nodejs.org (LTS), git-scm.com and cli.github.com, or ask IT.
 
+   The Dev stage draws pictures of the dialog in the terminal, which needs **Windows Terminal 1.22 or later**
+   (Settings → About shows the version). Older: `winget upgrade --id Microsoft.WindowsTerminal -e`, or present
+   with `npm run demo -- fix --no-images`.
+
 3. Let PowerShell run npm, then allow long file paths in Git:
    ```
    Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
@@ -173,9 +177,9 @@ npx manta gate --base http://localhost:5173 --no-screenshots   (tab 2)
 ```
 **Expect** the fix skill's answer: a header, Reading the run, Reading the project, Conventions found, Step 1
 (cluster: three causes, two with a green dot) and Step 2 (fix), three fixes with a plain-language problem and
-fix and a red and green diff each, `3 fixes · 2 files`, then `Apply these 3 fixes? [y/N]`: type `y`.
+fix and a red and green diff each (and, before Step 1, a picture of the dialog with three red numbered boxes), `3 fixes · 2 files`, then `Apply these 3 fixes? [y/N]`: type `y`.
 **Expect** `Applied to src/styles.css and src/pages/Status.jsx. Nothing committed.` and a diff
-summary; then the second gate: `New 0`, `Fixed 7`, `Tolerated 20`, `Gate passed`, `exit 0`. Ctrl+C in
+summary and the dialog again with green boxes; then the second gate: `New 0`, `Fixed 7`, `Tolerated 20`, `Gate passed`, `exit 0`. Ctrl+C in
 tab 1 stops the dev server.
 
 **Stage DevOps** (tab 2):

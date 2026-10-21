@@ -13,7 +13,8 @@ fresh scan. What a snapshot shows as AI output is **pre-run**.
 - **`pr/`** — a gated run of `feature/upload-documents` with `cluster` and `fix --scope new` added live through the
   claude CLI (2026-10-21): `gate-<token>.json`, the fix proposals with source edits for the upload dialog's three
   new defects and the old debt that shares their causes (the footer's five "Last updated" lines, which share the
-  hint's `--muted-bad` colour, and the refresh button), and `reports/fix-<token>.patch`. The Gate workflow posts these fixes onto the live PR as
+  hint's `--muted-bad` colour, and the refresh button), and `reports/fix-<token>.patch`. `shots/` holds the two pictures of the dialog `fix` draws in Windows
+  Terminal (Sixel), rendered by `npm run demo -- shots before|after`. The Gate workflow posts these fixes onto the live PR as
   pre-run suggestions when the repo has no AI key (the DevOps stage), `npm run demo -- fix` prints and applies them
   (the Dev stage), and the golden PR was posted from this run.
 - **`nightly/`** — one nightly run of `main` (the backlog, before the upload change: 27 on five pages), made on

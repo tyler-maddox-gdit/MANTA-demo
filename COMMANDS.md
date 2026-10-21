@@ -52,7 +52,8 @@ Terminal 2, started before the first gate and left running:
 npm run dev
 ```
 
-- `fix` shows the AI answer and asks `Apply these 3 fixes? [y/N]`: type `y`.
+- `fix` shows the AI answer, with a picture of the dialog before (and after, once applied), and asks `Apply these 3 fixes? [y/N]`: type `y`.
+- Pictures garbled or missing (Windows Terminal older than 1.22): `npm run demo -- fix --no-images`.
 - Gates (about 8 s each): first `New 3`, exit 1; second `New 0`, `Fixed 7`, `Tolerated 20`, exit 0.
 - Stop `npm run dev` (Ctrl+C) before Stage Release.
 
