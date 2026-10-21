@@ -51,7 +51,7 @@ const CUES = {
     next: 'With the claude CLI on this machine, npm run demo -- fix --live runs the skills here instead.',
   },
 };
-const STAGE_LIST = 'Stages: npm run demo -- stage qa | devops | dev   (any order; each sets itself up)';
+const STAGE_LIST = 'Stages: npm run demo -- stage dev | devops | qa   (any order; each sets itself up)';
 
 function printCue(name) {
   const cue = CUES[name];
@@ -382,9 +382,9 @@ function help() {
 
   reset [--force]          Back to the start: story branches to their tags (force-pushed), live PRs closed,
                            snapshots restored, local runs removed. --force discards local changes.
-  stage <qa|devops|dev>    Set a stage up, whatever ran before, and print what to type next. qa runs the
-         [--port n]        preview build and the Workbench on the nightly snapshot until Ctrl+C; devops opens
-                           the live PR; dev leaves the feature branch checked out, clean.
+  stage <dev|devops|qa>    Set a stage up, whatever ran before, and print what to type next. dev leaves the
+         [--port n]        feature branch checked out, clean; devops opens the live PR; qa runs the preview
+                           build and the Workbench on the nightly snapshot until Ctrl+C.
   fix [--live]             The AI skills over the developer's run: pre-run from demo-data/pr, printed and
                            its patch applied. --live runs cluster and fix here through the claude CLI.
   snapshot <name> [run]    Copy a run into demo-data/<name>/: a workflow run's artifact when [run] is given

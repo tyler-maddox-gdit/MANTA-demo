@@ -19,10 +19,10 @@ _Avoid_ "script" for the story: a script is the `demo` command, or a path's Smar
 
 ## Stage
 
-One self-contained part of the demo, about six to eight minutes long: QA (the Workbench), DevOps (the pull
-request gate) or Dev (the developer's gate and the AI skills), each with its setup, what is typed, what is
+One self-contained part of the demo, about six to eight minutes long: Dev (the developer's gate and the AI
+skills), DevOps (the pull request gate) or QA (the Workbench), each with its setup, what is typed, what is
 seen, what is said and a fallback. `npm run demo -- stage <name>` sets one up, whatever ran before; stages are
-shown in any order. DEMO.md has one page per stage. The slide (`presentation/index.html`) lights one at a time.
+shown in any order, and the story in DEMO.md runs them Dev → DevOps → QA. DEMO.md has one page per stage. The slide (`presentation/index.html`) lights one at a time.
 
 _Avoid_ "scene": the stages replaced the ordered scenes of the first version.
 

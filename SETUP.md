@@ -146,30 +146,6 @@ npm run demo -- reset
 **Expect** `[DONE] Reset: main at story/main, …` and the stage list. It force-pushes `main` and the feature
 branch to their tags; that is how every rehearsal starts.
 
-**Stage QA** (tab 2):
-```
-npm run demo -- stage qa
-```
-**Expect** the build, then the preview on http://localhost:4173 and the Workbench's URL. Open
-http://127.0.0.1:3508/ in the browser. In the launcher paste `http://localhost:4173/` and press Start; **expect**
-the scan to run and a report to open. Then the **Nightly** run's report: try each thing DEMO.md's QA stage
-lists: add an issue on the account page; a verdict on an issue; **Rescan** the Pending badge's contrast issue
-on `/status`; attest a criterion; open a criterion's checklist; the Pages dialog's **Focus order** column on
-the upload page; **Export** on the Nightly run. **Expect** the ACR draft (`.docx`) and the USPS defects export
-to download and open in Word. Ctrl+C in tab 2 stops both servers.
-
-**Stage DevOps** (tab 2):
-```
-npm run demo -- stage devops
-```
-**Expect** two lines: the live PR's link and the golden PR's link (the fallback). Open the live PR. On its
-**Checks** tab, watch **MANTA gate** run (about a minute and a half) and end red. On the **Conversation** tab:
-MANTA's comment with its table of the three new violations, a comment headed **Pre-run AI fixes**, the code
-scanning alerts, and MANTA's review, `3 suggested fixes from MANTA.`. Then, in the green Tip right under MANTA's
-review, tick **Apply all 3 suggested fixes**, and wait about half a minute for the commit. **Expect** the gate to
-run again and turn green, and MANTA's comment to say `passed: no new violations`. Never tick the admin's "Merge
-without waiting" box, and never press anything on the golden PR.
-
 **Stage Dev**:
 ```
 npm run demo -- stage dev                        (tab 2: the feature branch, clean)
@@ -185,9 +161,34 @@ npm run demo -- fix                              (tab 2)
 npx manta gate --base http://localhost:5173      (tab 2)
 ```
 **Expect** the pre-run header, the proposals with their before and after lines, `git apply` and a diff summary
-naming `Status.jsx` and `styles.css`; then the second gate: `New 0`, `Fixed 2`, `Gate passed`, `exit 0`.
+naming `Status.jsx` and `styles.css`; then the second gate: `New 0`, `Fixed 2`, `Gate passed`, `exit 0`. Ctrl+C in
+tab 1 stops the dev server.
 
-**Finish** — Ctrl+C in tab 1, then (tab 2):
+**Stage DevOps** (tab 2):
+```
+npm run demo -- stage devops
+```
+**Expect** two lines: the live PR's link and the golden PR's link (the fallback). Open the live PR. On its
+**Checks** tab, watch **MANTA gate** run (about a minute and a half) and end red. On the **Conversation** tab:
+MANTA's comment with its table of the three new violations, a comment headed **Pre-run AI fixes**, the code
+scanning alerts, and MANTA's review, `3 suggested fixes from MANTA.`. Then, in the green Tip right under MANTA's
+review, tick **Apply all 3 suggested fixes**, and wait about half a minute for the commit. **Expect** the gate to
+run again and turn green, and MANTA's comment to say `passed: no new violations`. Never tick the admin's "Merge
+without waiting" box, and never press anything on the golden PR.
+
+**Stage QA** (tab 2):
+```
+npm run demo -- stage qa
+```
+**Expect** the build, then the preview on http://localhost:4173 and the Workbench's URL. Open
+http://127.0.0.1:3508/ in the browser. In the launcher paste `http://localhost:4173/` and press Start; **expect**
+the scan to run and a report to open. Then the **Nightly** run's report: try each thing DEMO.md's QA stage
+lists: add an issue on the account page; a verdict on an issue; **Rescan** the Pending badge's contrast issue
+on `/status`; attest a criterion; open a criterion's checklist; the Pages dialog's **Focus order** column on
+the upload page; **Export** on the Nightly run. **Expect** the ACR draft (`.docx`) and the USPS defects export
+to download and open in Word. Ctrl+C in tab 2 stops both servers.
+
+**Finish** (tab 2):
 ```
 npm run demo -- reset
 npm run demo -- status
