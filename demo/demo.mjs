@@ -217,6 +217,17 @@ async function stageQa(flags) {
 
 const firstSentence = (text) => (text.match(/^.*?[.!?](\s|$)/) ?? [text])[0].trim();
 const clip = (text, n = 110) => (text.length > n ? text.slice(0, n - 1) + '…' : text);
+const PLAIN_RULE = { 'button-name': 'a button with no name', label: 'a form field with no label', 'color-contrast': 'text too faint to read', 'link-name': 'a link with no name', 'image-alt': 'an image with no alt text', 'select-name': 'a dropdown with no name' };
+const plainRule = (id) => PLAIN_RULE[id] ?? id;
+function wrap(text, indent, width = 100) {
+  const lines = [];
+  let cur = '';
+  for (const w of text.split(/\s+/)) {
+    if (cur && (cur + ' ' + w).length > width - indent.length) { lines.push(cur); cur = w; } else cur = cur ? cur + ' ' + w : w;
+  }
+  if (cur) lines.push(cur);
+  return lines.map((l) => indent + l).join('\n');
+}
 async function ask(question) {
   const rl = createInterface({ input: process.stdin, output: process.stdout });
   try { return (await rl.question(question)).trim(); } finally { rl.close(); }
@@ -239,35 +250,41 @@ async function fix(flags) {
   const clusters = JSON.parse(readFileSync(join(dir, 'cluster-' + token + '.json'), 'utf8'));
   const patch = artifact('fix') + '.patch';
   const prov = proposals.provenance ?? {};
-  const line = (label, text) => console.log('[' + label + ']  ' + text);
-  console.log('');
-  line('PRE-RUN', 'No AI runs now. These are MANTA\'s cluster and fix skills over run ' + token + ', written ahead of time');
-  line('PRE-RUN', 'with ' + (prov.provider ?? 'an AI provider') + ' (' + (prov.model ?? 'model not recorded') + '). With the claude CLI here, npm run demo -- fix --live runs them live.');
+  const gate = JSON.parse(readFileSync(join(dir, 'gate-' + token + '.json'), 'utf8'));
+  const impactOf = Object.fromEntries((gate.new ?? []).map((n) => [n.ruleId, n.impact]));
   const lev = clusters.leverageSummary ?? {};
-  line('SKILL', 'cluster → written ' + artifact('cluster') + '.json' + (lev.clusters !== undefined ? ': ' + lev.clusters + ' cluster' + (lev.clusters === 1 ? '' : 's') + ' over ' + lev.totalViolations + ' violations, ' + lev.standalone + ' standalone' : ''));
   const byId = Object.fromEntries((clusters.clusters ?? []).map((c) => [c.id, c]));
-  for (const p of proposals.proposals ?? []) {
-    const cluster = p.scope === 'cluster' ? byId[p.scopeId] : undefined;
-    const part = (i) => [...new Set((p.members ?? []).map((m) => m.split('|::|')[i]))];
-    console.log('');
-    console.log('  ' + (cluster ? cluster.id + ' (' + cluster.worstImpact + ', ' + cluster.affectedElements + ' elements)' : p.id) + ' · ' + part(1).join(', ') + ' · ' + part(2).join(', '));
-    console.log('  ' + (cluster?.hypothesis ?? firstSentence(p.domSpec?.domInstruction ?? '')));
-    for (const c of p.conventionsDetected ?? []) console.log('    noticed: ' + clip(c));
-    for (const e of p.edits ?? []) {
-      console.log('    ' + e.file + ':' + e.startLine);
-      for (const l of e.original.split('\n')) console.log('    - ' + clip(l.trim()));
-      for (const l of e.replacement.split('\n')) console.log('    + ' + clip(l.trim()));
-    }
-  }
   console.log('');
-  line('SKILL', 'fix → written ' + artifact('fix-proposals') + '.json; .patch → written ' + patch);
+  console.log(wrap('Pre-run: no AI runs on this laptop. MANTA\'s AI skills ran over this gate result earlier, with ' + (prov.provider ?? 'an AI provider') + ' (' + (prov.model ?? 'model not recorded') + '). This is what they wrote. With the claude CLI here, npm run demo -- fix --live runs them now instead.', ''));
+  console.log('');
+  console.log('Step 1 · cluster: group the findings by cause.');
+  if (lev.clusters !== undefined) console.log('  ' + lev.totalViolations + ' findings come down to ' + lev.clusters + ' shared causes and ' + lev.standalone + ' one-offs.');
+  console.log('');
+  console.log('Step 2 · fix: for each new finding, read the project, then write the change in its conventions.');
+  (proposals.proposals ?? []).forEach((p, i) => {
+    const cluster = p.scope === 'cluster' ? byId[p.scopeId] : undefined;
+    const part = (k) => [...new Set((p.members ?? []).map((m) => m.split('|::|')[k]))];
+    const rules = part(1);
+    console.log('');
+    console.log('  Fix ' + (i + 1) + ' · ' + rules.map(plainRule).join('; ') + ': ' + part(2).join(', ') + '  (' + rules.map((r) => impactOf[r] ?? cluster?.worstImpact ?? 'new').join(', ') + ')');
+    console.log(wrap('Why: ' + (cluster?.hypothesis ?? firstSentence(p.domSpec?.domInstruction ?? '')), '    '));
+    for (const c of (p.conventionsDetected ?? []).slice(0, 2)) console.log(wrap('Noticed first: ' + c, '    '));
+    for (const e of p.edits ?? []) {
+      console.log('    ' + e.file + ', line ' + e.startLine + ':');
+      for (const l of e.original.split('\n')) console.log('      before  ' + clip(l.trim(), 90));
+      for (const l of e.replacement.split('\n')) console.log('      after   ' + clip(l.trim(), 90));
+    }
+  });
+  const files = [...new Set((proposals.proposals ?? []).flatMap((p) => (p.edits ?? []).map((e) => e.file)))];
+  console.log('');
+  console.log('The patch, ' + files.join(' and ') + ': ' + patch);
   if (!run('git', ['apply', '--check', patch], { capture: true }).ok) die('The patch does not apply: already applied? npm run demo -- stage dev starts over.');
   if (!/^y(es)?$/i.test(await ask('\nApply the patch? [y/N] '))) {
     console.log('Nothing applied. To apply it later: git apply ' + patch + '\n');
     return;
   }
   must('git', ['apply', patch]);
-  line('APPLY', 'git apply ' + patch);
+  console.log('Applied (git apply), nothing committed:');
   must('git', ['diff', '--stat']);
   console.log('\nRun the gate again: ' + GATE_LINE + '\n');
 }
