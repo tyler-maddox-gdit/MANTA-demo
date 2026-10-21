@@ -285,6 +285,16 @@ function explain(rule, targets, p) {
   }
 }
 
+const CLUSTER_KIND = { 'button-name': ['Icon buttons with no name', 'buttons'], 'link-name': ['Icon links with no name', 'links'], 'color-contrast': ['Text too faint to read', 'pieces of text'], label: ['Form fields with no label', 'fields'], 'image-alt': ['Images with no alt text', 'images'] };
+const clusterKind = (c) => CLUSTER_KIND[c.ruleIds?.[0]] ?? [(c.ruleIds ?? []).join(', '), 'elements'];
+/** One sentence, plain, for why a cluster is one problem: its elements share the same markup or style rule. */
+function clusterWhy(c) {
+  const [, things] = clusterKind(c);
+  const where = c.fixTarget?.value ?? '';
+  const code = c.ruleIds?.[0] === 'link-name' ? where.replace(/ — .*/, '') : where;
+  return 'All ' + c.affectedElements + ' ' + things + ' come from the same place (' + clip(code, 60) + '), so one change fixes them all.';
+}
+
 /** What the project is, read from its own files: the frameworks and versions, the stylesheet, whether source stamping is on. */
 function stackLine() {
   const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
@@ -337,6 +347,30 @@ async function fix(flags) {
   conventions.forEach((c, i) => label(i === 0 ? 'Conventions found' : '', clip(c, width - 22)));
   await pause(400);
 
+  const clusters = JSON.parse(readFileSync(join(dir, 'cluster-' + token + '.json'), 'utf8'));
+  const lev = clusters.leverageSummary ?? {};
+  const byId = Object.fromEntries((clusters.clusters ?? []).map((c) => [c.id, c]));
+  const targetsOf = (c) => (c.members ?? []).map((m) => m.split('|::|')[2]);
+  const heading = (step, title, note) => console.log('\n' + bold(step + ' · ' + title) + dim('   ' + note));
+  heading('Step 1', 'cluster', 'group findings that share one cause');
+  console.log('    ' + lev.totalViolations + ' findings in this run come down to ' + lev.clusters + ' shared causes and ' + lev.standalone + ' one-offs.');
+  await pause(500);
+  for (const c of clusters.clusters ?? []) {
+    const fresh = targetsOf(c).filter((t) => isNew.has(t));
+    const old = targetsOf(c).length - fresh.length;
+    const [name] = clusterKind(c);
+    console.log('');
+    console.log('    ' + (fresh.length ? green('●') : dim('○')) + ' ' + bold(name) + dim(' · ' + c.affectedElements + ' elements · ' + c.ruleIds.join(', ') + ' · ' + c.worstImpact));
+    if (fresh.length) {
+      console.log(wrap(clusterWhy(c), '      ', width));
+      console.log('      ' + green('Contains a new finding') + ' (' + [...new Set(fresh)].join(', ') + ') and ' + old + ' existing ' + (old === 1 ? 'one' : 'ones') + '. Fixing the cause fixes all of them.');
+    } else {
+      console.log('      ' + dim('Existing debt in the baseline, no new finding. Left alone.'));
+    }
+  }
+  await pause(500);
+
+  heading('Step 2', 'fix', 'write the change for each new finding');
   for (const [i, p] of list.entries()) {
     const part = (k) => [...new Set((p.members ?? []).map((m) => m.split('|::|')[k]))];
     const rules = part(1);
@@ -346,6 +380,8 @@ async function fix(flags) {
     const left = (i + 1) + ' · ' + e.title;
     console.log('');
     console.log(bold(left) + dim(' '.repeat(Math.max(2, width - left.length - right.length)) + right));
+    const c = p.scope === 'cluster' ? byId[p.scopeId] : undefined;
+    console.log('    ' + dim(c ? 'From cluster "' + clusterKind(c)[0] + '": fixes the new finding and its ' + (c.affectedElements - targets.filter((t) => isNew.has(t)).length) + ' existing partners together.' : 'Standalone: no other finding shares its cause.'));
     console.log(wrap(e.problem, '    ', width));
     if (e.fix) console.log(wrap('Fix: ' + e.fix, '    ', width));
     for (const edit of p.edits ?? []) {
