@@ -307,7 +307,7 @@ function explain(rule, targets, p) {
       };
     }
     case 'color-contrast': {
-      const ratios = [...(p.domSpec?.domInstruction ?? '').matchAll(/(\d+(?:\.\d+)?):1/g)].map((m) => m[1] + ':1');
+      const ratios = [...(p.domSpec?.domInstruction ?? '').matchAll(/(\d+(?:\.\d+)?):1/g)].map((m) => m[1]).sort((x, y) => x - y).map((r) => r + ':1');
       const original = (p.edits ?? []).map((e) => e.original).join('\n');
       const hexes = (text) => [...text.matchAll(/#[0-9a-f]{3,8}\b/gi)].map((m) => m[0].toLowerCase());
       const hex = hexes(replacement).find((h) => !hexes(original).includes(h));
@@ -315,7 +315,7 @@ function explain(rule, targets, p) {
       return {
         title: cap(noun(first)) + ' too faint to read',
         problem: 'The ' + noun(first) + ' is ' + (ratios[0] ?? 'under 4.5:1') + ' against its background; the minimum for text this size is 4.5:1. Hard to read with low vision, and on a dim screen hard for anyone.' + (rest.length ? ' The ' + rest.map(noun).join(' and ') + ' uses the same colour and fails the same way.' : ''),
-        fix: 'Darken the ' + (variable ? 'shared colour ' + variable : 'colour') + (hex ? ' to ' + hex : '') + (ratios[1] ? ' (' + ratios[1].replace(/^/, '') + ')' : '') + ' in the stylesheet, where it is set, so everything that uses it gets the fix.',
+        fix: 'Darken the ' + (variable ? 'shared colour ' + variable : 'colour') + (hex ? ' to ' + hex : '') + (ratios.length > 1 ? ' (' + ratios.at(-1) + ')' : '') + ' in the stylesheet, where it is set, so everything that uses it gets the fix.',
       };
     }
     default:
