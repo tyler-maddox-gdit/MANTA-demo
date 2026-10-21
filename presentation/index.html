@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>MANTA across the software lifecycle</title>
+<meta name="description" content="Where MANTA, the Section 508 accessibility toolkit, works at each stage of the software development lifecycle: the slide for the MANTA demo.">
+<style>
+  :root {
+    --paper: #f5f7f6;
+    --ink: #13293d;
+    --ink-soft: #4a5d6b;
+    --line: #c7d1d6;
+    --rest: #e3e9ec;
+    --lit: #0f6e6a;
+    --lit-tint: #d6efec;
+    --lit-deep: #0a4c49;
+    --red: #a8231b;
+    --green: #2b7a45;
+    --focus: #f5b700;
+    --gutter: clamp(16px, 4vw, 64px);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Avenir Next", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size: clamp(16px, 1.3vw, 22px);
+    line-height: 1.45;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: clamp(16px, 3vh, 40px) var(--gutter);
+  }
+  :focus-visible { outline: 4px solid var(--focus); outline-offset: 3px; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+
+  /* Title row */
+  header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; }
+  h1 { font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; margin: 0; }
+  .lede { margin: .35rem 0 0; color: var(--ink-soft); max-width: 44em; }
+  .controls { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+  .next {
+    background: var(--ink); color: #fff; border: 2px solid var(--ink); border-radius: 999px;
+    padding: .6em 1.4em; font-weight: 600; font-size: 1.05em;
+  }
+  .next:hover { background: var(--lit-deep); border-color: var(--lit-deep); }
+  .all { background: transparent; border: 2px solid var(--line); border-radius: 999px; padding: .55em 1.1em; }
+  .all:hover { border-color: var(--ink); }
+  .keys { color: var(--ink-soft); font-size: .85em; }
+  .keys kbd { font-family: inherit; border: 1px solid var(--line); border-radius: 4px; padding: 0 .35em; background: #fff; }
+
+  /* The pipeline */
+  .pipeline { margin-top: clamp(1rem, 3vh, 2rem); }
+  .brackets, .track, .journey {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: clamp(8px, 1.2vw, 20px);
+  }
+  .bracket {
+    grid-column: span var(--span);
+    text-align: center;
+    color: var(--ink-soft);
+    font-weight: 600;
+    padding-bottom: .4rem;
+    border-bottom: 3px solid var(--line);
+    margin-bottom: .9rem;
+    transition: color .25s, border-color .25s;
+  }
+  .bracket.on { color: var(--lit-deep); border-color: var(--lit); }
+  .bracket small { display: block; font-weight: 400; font-size: .8em; }
+
+  .track { position: relative; list-style: none; margin: 0; padding: 0; }
+  .track::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 3px; background: var(--line); z-index: 0;
+  }
+  .node {
+    position: relative; z-index: 1; width: 100%;
+    background: var(--rest); border: 3px solid var(--line); border-radius: 14px;
+    padding: clamp(.6rem, 1.5vh, 1rem) 1rem;
+    text-align: left; display: flex; flex-direction: column; gap: .2rem;
+    transition: background .25s, border-color .25s, color .25s, transform .25s;
+  }
+  .node strong { font-size: 1.25em; font-weight: 600; }
+  .node span { color: var(--ink-soft); font-size: .9em; }
+  .node[aria-pressed="true"] { background: #fff; border-color: var(--lit); color: var(--ink); box-shadow: 0 0 0 4px var(--lit-tint); }
+  .node[aria-pressed="true"] span { color: var(--lit-deep); }
+  body.focused .node[aria-pressed="false"] { background: var(--paper); border-color: var(--rest); color: #5b6c78; }
+  body.focused .node[aria-pressed="false"] span { color: #5b6c78; }
+  .node:hover { transform: translateY(-2px); }
+
+  .journey { margin-top: .9rem; }
+  .journey p { margin: 0; font-size: .9em; color: var(--ink-soft); padding: 0 .3rem; transition: color .25s; }
+  .journey p b { font-weight: 600; color: var(--ink); }
+  body.focused .journey p.off, body.focused .journey p.off b { color: #5b6c78; }
+
+  /* The bullets */
+  .panel { margin-top: clamp(1rem, 3vh, 2rem); flex: 1; }
+  .stage { display: none; }
+  .stage.on { display: block; }
+  .stage h2 { font-size: clamp(1.3rem, 2.4vw, 2rem); font-weight: 600; margin: 0 0 .25rem; }
+  .stage .where { margin: 0 0 .7rem; color: var(--ink-soft); }
+  .stage ul { margin: 0; padding: 0; list-style: none; max-width: 60em; }
+  .stage li { position: relative; padding-left: 1.6em; margin: 0 0 .55em; font-size: clamp(1.1em, 1.5vw, 1.45em); line-height: 1.35; }
+  .stage li::before { content: ""; position: absolute; left: 0; top: .5em; width: .8em; height: .8em; border-radius: 50%; background: var(--lit); }
+  .stage li em { font-style: normal; color: var(--ink-soft); }
+
+  .overview { display: none; grid-template-columns: repeat(5, 1fr); column-gap: clamp(8px, 1.2vw, 20px); }
+  .overview.on { display: grid; }
+  .overview h2 { font-size: 1em; font-weight: 600; margin: 0 0 .4rem; }
+  .overview ul { margin: 0; padding: 0; list-style: none; }
+  .overview li { position: relative; padding-left: 1.1em; margin: 0 0 .5em; font-size: .9em; color: var(--ink-soft); line-height: 1.3; }
+  .overview li::before { content: ""; position: absolute; left: 0; top: .45em; width: .5em; height: .5em; border-radius: 50%; background: var(--line); }
+
+  footer { margin-top: 1rem; color: var(--ink-soft); font-size: .85em; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (max-width: 860px) {
+    .brackets { display: none; }
+    .track, .journey, .overview.on { grid-template-columns: 1fr; row-gap: .6rem; }
+    .track::before { display: none; }
+    .journey { display: none; }
+  }
+  @media (max-height: 900px) {
+    body { font-size: clamp(15px, 1.1vw, 18px); padding-top: 12px; }
+    .pipeline { margin-top: .9rem; }
+    .journey { margin-top: .6rem; }
+    .panel { margin-top: .9rem; }
+    .stage li { font-size: clamp(1em, 1.35vw, 1.25em); margin-bottom: .45em; }
+    footer { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+    .node:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>MANTA across the software lifecycle</h1>
+    <p class="lede">One feature, the Benefits Portal's upload dialog, followed from its first checklist to the conformance report. Each stage below is one part of today's demo.</p>
+  </div>
+  <div class="controls">
+    <button class="next" id="next" type="button">Next stage</button>
+    <button class="all" id="all" type="button">Show all</button>
+    <span class="keys" aria-hidden="true"><kbd>→</kbd> next <kbd>←</kbd> back <kbd>0</kbd> all</span>
+  </div>
+</header>
+
+<section class="pipeline" aria-labelledby="pipeline-title">
+  <h2 id="pipeline-title" class="sr-only">The stages</h2>
+
+  <div class="brackets" aria-hidden="true">
+    <div class="bracket" data-group="dev" style="--span:2">Development <small>demo stage</small></div>
+    <div class="bracket" data-group="devops" style="--span:1">DevOps <small>demo stage</small></div>
+    <div class="bracket" data-group="qa" style="--span:2">QA and release <small>demo stage</small></div>
+  </div>
+
+  <ul class="track">
+    <li><button class="node" type="button" data-group="dev" aria-pressed="false"><strong>Plan</strong><span>the checklist first</span></button></li>
+    <li><button class="node" type="button" data-group="dev" aria-pressed="false"><strong>Develop</strong><span>on the laptop</span></button></li>
+    <li><button class="node" type="button" data-group="devops" aria-pressed="false"><strong>Integrate</strong><span>every pull request</span></button></li>
+    <li><button class="node" type="button" data-group="qa" aria-pressed="false"><strong>Test</strong><span>in the Workbench</span></button></li>
+    <li><button class="node" type="button" data-group="qa" aria-pressed="false"><strong>Release</strong><span>the paperwork</span></button></li>
+  </ul>
+
+  <div class="journey" aria-label="The upload dialog's journey">
+    <p data-group="dev"><b>Specified.</b> Its acceptance criteria are a WCAG checklist.</p>
+    <p data-group="dev"><b>Built.</b> 3 new issues, found on the developer's laptop.</p>
+    <p data-group="devops"><b>Blocked.</b> Then fixed in one click, and the gate goes green.</p>
+    <p data-group="qa"><b>Judged.</b> Focus order, verdicts, a rescan: the human's call.</p>
+    <p data-group="qa"><b>Reported.</b> In the ACR, drafted from the same run.</p>
+  </div>
+</section>
+
+<section class="panel" aria-live="polite" aria-atomic="false">
+  <div class="overview on" id="overview">
+    <div>
+      <h2>Plan</h2>
+      <ul><li>The WCAG checklist is the acceptance criteria, before any code is written.</li></ul>
+    </div>
+    <div>
+      <h2>Develop</h2>
+      <ul>
+        <li>A scan on the developer's own laptop, before anyone else sees the change.</li>
+        <li>Legacy debt tolerated, new debt blocked.</li>
+        <li>Every finding names the source file and line.</li>
+        <li>AI skills explain the cause and write the fix.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Integrate</h2>
+      <ul>
+        <li>The same gate on every pull request, as a required check.</li>
+        <li>Fixes posted as suggestions; one click applies them.</li>
+        <li>Findings in GitHub code scanning, beside every other scanner.</li>
+        <li>Every night, a scan through the sign-in.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Test</h2>
+      <ul>
+        <li>A scan launched from the browser; no command line.</li>
+        <li>QA adds what rules cannot see, gives verdicts, re-measures a fix.</li>
+        <li>Focus order and keyboard rules as evidence for human judgment.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Release</h2>
+      <ul>
+        <li>The conformance report drafted from the run itself.</li>
+        <li>A defects export for the ticketing system.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage" id="stage-qa" data-group="qa">
+    <h2>QA and release: the Workbench</h2>
+    <p class="where">Test and Release. The scan is evidence; the tester is the judgment.</p>
+    <ul>
+      <li>Launch a scan from the browser, watch it run, read the report. No command line.</li>
+      <li>Add what no rule can see, give a verdict on what a rule could only flag, re-measure a fix on the spot. <em>Everything is recorded on the run itself.</em></li>
+      <li>Focus order and the keyboard rules give the tester evidence for the judgment calls, such as a dialog that lets focus walk out of it <em>(WCAG 2.4.3)</em>.</li>
+      <li>The conformance report <em>(the ACR)</em> and the defects export come from the same run. Nothing is retyped.</li>
+    </ul>
+  </div>
+
+  <div class="stage" id="stage-devops" data-group="devops">
+    <h2>DevOps: the pull request gate</h2>
+    <p class="where">Integrate. Legacy debt tolerated, new debt blocked, and this time fixed before it lands.</p>
+    <ul>
+      <li>The same gate the developer ran, now on every pull request as a required check: while it is red, the change cannot merge.</li>
+      <li>MANTA posts what it found and the fixes as review suggestions. One click applies them in one commit, and the gate goes green.</li>
+      <li>The findings also go to GitHub code scanning <em>(as SARIF)</em>, so accessibility sits beside every other scanner, tracked the same way.</li>
+      <li>Every night, a scan signs in and reaches the pages no pull request touches.</li>
+    </ul>
+  </div>
+
+  <div class="stage" id="stage-dev" data-group="dev">
+    <h2>Development: the developer's gate</h2>
+    <p class="where">Plan and Develop. Accessibility is part of the definition of done, and the developer learns first.</p>
+    <ul>
+      <li>Before any code, the WCAG checklist is the acceptance criteria for the feature.</li>
+      <li>The developer scans the site on their own laptop. Known debt is tolerated; new debt fails the change, the way a failing unit test does. <em>The count only goes down.</em></li>
+      <li>Every finding names the source file and line that wrote it.</li>
+      <li>A developer who does not know what <em>button-name</em> means asks MANTA's AI skills: they group the findings by cause and write the fix, and one command applies it.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <span>MANTA, the Section 508 accessibility toolkit. The Benefits Portal is a demonstration site for no real agency.</span>
+  <span id="status" aria-hidden="true">All stages</span>
+</footer>
+
+<script>
+(function () {
+  var ORDER = ['all', 'qa', 'devops', 'dev'];
+  var NAMES = { all: 'All stages', qa: 'QA and release', devops: 'DevOps', dev: 'Development' };
+  var body = document.body;
+  var nodes = document.querySelectorAll('.node');
+  var brackets = document.querySelectorAll('.bracket');
+  var journey = document.querySelectorAll('.journey p');
+  var stages = document.querySelectorAll('.stage');
+  var overview = document.getElementById('overview');
+  var status = document.getElementById('status');
+  var current = 'all';
+
+  function show(group, fromHash) {
+    if (ORDER.indexOf(group) < 0) group = 'all';
+    current = group;
+    var focused = group !== 'all';
+    body.classList.toggle('focused', focused);
+    nodes.forEach(function (n) { n.setAttribute('aria-pressed', String(n.dataset.group === group)); });
+    brackets.forEach(function (b) { b.classList.toggle('on', b.dataset.group === group); });
+    journey.forEach(function (p) { p.classList.toggle('off', focused && p.dataset.group !== group); });
+    stages.forEach(function (s) { s.classList.toggle('on', s.dataset.group === group); });
+    overview.classList.toggle('on', !focused);
+    status.textContent = NAMES[group];
+    if (!fromHash) history.replaceState(null, '', focused ? '#' + group : location.pathname);
+  }
+  function step(by) {
+    var i = ORDER.indexOf(current);
+    show(ORDER[(i + by + ORDER.length) % ORDER.length]);
+  }
+
+  document.getElementById('next').addEventListener('click', function () { step(1); });
+  document.getElementById('all').addEventListener('click', function () { show('all'); });
+  nodes.forEach(function (n) {
+    n.addEventListener('click', function () { show(n.dataset.group === current ? 'all' : n.dataset.group); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'INPUT' || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { step(1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { step(-1); e.preventDefault(); }
+    else if (e.key === '0') show('all');
+    else if (e.key === '1') show('qa');
+    else if (e.key === '2') show('devops');
+    else if (e.key === '3') show('dev');
+  });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1) || 'all', true); });
+  show(location.hash.slice(1) || 'all', true);
+})();
+</script>
+</body>
+</html>
