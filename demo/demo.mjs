@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-// The demo script: resets the story, sets up each scene and prints what to type next.
+// The demo script: resets the story, sets up each stage of the demo and prints what to type next.
 // Pure Node, so it runs the same on Windows and macOS: it spawns git and gh, never a shell.
 // Usage: npm run demo -- <command>   (or: node demo/demo.mjs <command>). `help` lists the commands.
 // The cue strings below are the ones DEMO.md prints; change them in both places.
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
@@ -29,22 +29,34 @@ const WORKBENCH_PORT = 3508;
 
 // ── The cues (DEMO.md says the same) ───────────────────────────────────────
 const GATE_LINE = 'npx manta gate --base ' + DEV_ORIGIN;
+const SLIDE = 'presentation/index.html';
+const PREVIEW_ORIGIN = 'http://localhost:4173';
 const workbenchLine = (name) => 'npm run demo -- workbench ' + name + '   (opens the Workbench on it; Ctrl+C stops it)';
 const CUES = {
-  1: { title: 'Scene 1 · Conception (1 min)', type: [], next: 'Show the slide: a criterion row\'s checklist in the Workbench. Then: npm run demo -- scene 2' },
-  2: { title: 'Scene 2 · The developer scans localhost (4 min)', type: ['npm run dev        (in a second terminal; leave it running)', GATE_LINE], next: 'Expect New 3 on /status?upload=BP-2026-10882 and "Gate failed", exit 1. Then: npm run demo -- scene 3' },
-  3: { title: 'Scene 3 · The pull request (8 min)', type: [], next: 'Open the live PR: Checks → MANTA gate, watch it fail on 3 new. Conversation: the comment, the Pre-run comment (say "pre-run"), the alerts, the review. In the green Tip under MANTA\'s review, tick "Apply all 3 suggested fixes". Expect the gate to run again and go green. Then: npm run demo -- scene 4' },
-  4: { title: 'Scene 4 · Nightly through login (2 min)', type: ['gh run view <run> -R ' + REPO + ' --web'], next: 'Last night\'s run, finished: show the Sign in path ending on /account and the manta-nightly artifact. Then: npm run demo -- scene 5' },
-  5: { title: 'Scene 5 · QA in the Workbench (5 min)', type: ['npm run build', 'npm run preview    (in this repo, a second terminal; Rescan reloads pages from localhost:4173)', workbenchLine('nightly')], next: 'Open the URL it prints, then the Nightly run\'s report. Then: npm run demo -- scene 6' },
-  6: { title: 'Scene 6 · Release (2 min)', type: [], next: 'In the same Workbench, press Export on the Nightly run: the ACR draft (docx) and the USPS defects. The end.' },
+  qa: {
+    title: 'Stage · QA and release: the Workbench',
+    type: [],
+    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. Launcher: paste ' + PREVIEW_ORIGIN + '/ (and /apply, /status, /signin,\n  /status?upload=BP-2026-10882), press Start. Then the Nightly run: its AI notes (say "pre-run"), Focus order on\n  the upload page, a verdict, Rescan, attest, Export (ACR draft, defects). Ctrl+C stops both servers.',
+  },
+  devops: {
+    title: 'Stage · DevOps: the pull request gate',
+    type: [],
+    next: 'Open the live PR. Checks → MANTA gate, watch it fail on 3 new (about 90 s). Conversation: the comment, the\n  Pre-run comment (say "pre-run"), the code scanning alerts, the review. In the green Tip under MANTA\'s review, tick\n  "Apply all 3 suggested fixes": one commit, the gate runs again and goes green. Never Merge. Fallback: the golden PR.',
+  },
+  dev: {
+    title: 'Stage · Development: the developer\'s gate',
+    type: ['npm run dev                 (in a second terminal; leave it running)', GATE_LINE + '      → New 3, Gate failed, exit 1', 'npm run demo -- fix         → the AI skills\' proposals (pre-run) and the patch applied', GATE_LINE + '      → passed, exit 0'],
+    next: 'With the claude CLI on this machine, npm run demo -- fix --live runs the skills here instead.',
+  },
 };
+const STAGE_LIST = 'Stages: npm run demo -- stage qa | devops | dev   (any order; each sets itself up)';
 
-function printCue(n, fill = {}) {
-  const cue = CUES[n];
-  console.log('\n' + cue.title);
+function printCue(name) {
+  const cue = CUES[name];
+  console.log('\n' + cue.title + '   (slide: ' + SLIDE + '#' + name + ')');
   if (cue.type.length) {
     console.log('  Type:');
-    for (const line of cue.type) console.log('    ' + line.replace(/<(\w+)>/g, (m, k) => fill[k] ?? m));
+    for (const line of cue.type) console.log('    ' + line);
   }
   console.log('  ' + cue.next + '\n');
 }
@@ -81,11 +93,6 @@ const ghJson = (args) => {
 };
 const openPrs = (head) => ghJson(['pr', 'list', '--head', head, '--state', 'open', '--json', 'number,url']) ?? [];
 
-function requireClean(hint) {
-  const dirty = dirtyFiles();
-  if (dirty.length) die('The working tree has changes (' + dirty.length + ' files). ' + hint);
-}
-
 /** The run tokens a reports directory holds: one per agent-analysis file. */
 function tokensIn(reportsDir) {
   if (!existsSync(reportsDir)) return [];
@@ -119,8 +126,9 @@ function reset(flags) {
   // Detach first, so neither story branch is the checked-out one while it is moved.
   must('git', ['checkout', '--quiet', '--detach', MAIN.tag]);
   for (const { branch, tag } of [MAIN, FEATURE]) must('git', ['branch', '--force', branch, tag]);
-  must('git', ['push', '--force', 'origin', MAIN.branch + ':' + MAIN.branch, FEATURE.branch + ':' + FEATURE.branch]);
+  // Closed before the push: a force-push to an open pull request's branch starts a gate run that posts on it later.
   for (const pr of openPrs(FEATURE.branch)) must('gh', ['pr', 'close', String(pr.number), '-R', REPO, '--comment', 'Closed by the demo reset.']);
+  must('git', ['push', '--force', 'origin', MAIN.branch + ':' + MAIN.branch, FEATURE.branch + ':' + FEATURE.branch]);
   must('git', ['checkout', '--quiet', MAIN.branch]);
   // Undo what the Workbench wrote into the snapshots: attestations, added issues, verdicts, rescans.
   must('git', ['checkout', '--', 'demo-data']);
@@ -129,37 +137,128 @@ function reset(flags) {
   const sites = join(ROOT, 'sites');
   if (existsSync(sites)) for (const f of readdirSync(sites)) if (f !== SITE_STORE) rmSync(join(sites, f), { recursive: true, force: true });
   console.log('[DONE] Reset: main at ' + MAIN.tag + ', ' + FEATURE.branch + ' at ' + FEATURE.tag + ', no live PR, snapshots restored.');
-  printCue(1);
+  console.log(STAGE_LIST);
 }
 
-function scene(n) {
-  if (!CUES[n]) die('scene takes a number from 1 to 6.');
-  if (n === 2) {
-    requireClean('Run npm run demo -- reset first.');
-    must('git', ['checkout', '--quiet', FEATURE.branch]);
-    console.log('[DONE] On ' + FEATURE.branch + '.');
-  }
-  if (n === 3) {
-    requireClean('Commit or discard the local changes first (git checkout .).');
-    must('git', ['push', 'origin', FEATURE.branch + ':' + FEATURE.branch]);
-    let live = openPrs(FEATURE.branch)[0]?.url;
-    if (!live) {
-      const r = run('gh', ['pr', 'create', '-R', REPO, '--base', MAIN.branch, '--head', FEATURE.branch, '--title', 'Upload documents', '--body', 'A Documents column and an upload dialog on /status. Opened live by the demo, scene 3.'], { capture: true });
-      if (!r.ok) die('gh pr create failed: ' + r.stderr);
-      live = r.stdout.split('\n').pop();
-    }
+/**
+ * Every stage's starting state, whatever ran before: tracked files as committed (the dev stage's applied patch
+ * and the Workbench's writes into the snapshots discarded), no local runs, the feature branch at its tag and
+ * checked out. `main` is never touched; origin is never pushed to here.
+ */
+function prepare() {
+  must('git', ['fetch', 'origin', '--prune', '--tags', '--force', '--quiet']);
+  if (!revParse('refs/tags/' + FEATURE.tag + '^{commit}')) die('Tag ' + FEATURE.tag + ' is missing. Set the story tags first (DEMO.md, Setup Tyler does once).');
+  const dirty = dirtyFiles();
+  if (dirty.length) console.log('Discarding ' + dirty.length + ' local change(s): ' + dirty.map((l) => l.slice(3)).join(', '));
+  must('git', ['checkout', '--quiet', '--', '.']);
+  must('git', ['clean', '-fdx', '--quiet', 'demo-data']);
+  for (const dir of RUN_DIRS.filter((d) => d !== 'sites').concat('ci-run')) rmSync(join(ROOT, dir), { recursive: true, force: true });
+  const sites = join(ROOT, 'sites');
+  if (existsSync(sites)) for (const f of readdirSync(sites)) if (f !== SITE_STORE) rmSync(join(sites, f), { recursive: true, force: true });
+  // Detach first: git refuses to move the checked-out branch.
+  must('git', ['checkout', '--quiet', '--detach']);
+  must('git', ['branch', '--force', FEATURE.branch, FEATURE.tag]);
+  must('git', ['checkout', '--quiet', FEATURE.branch]);
+  console.log('[DONE] On ' + FEATURE.branch + ' at ' + FEATURE.tag + ', clean.');
+}
+
+function stage(name, flags) {
+  if (!CUES[name]) die('stage takes qa, devops or dev.');
+  prepare();
+  if (name === 'devops') {
+    // Closed before the push: a force-push to an open pull request's branch starts a gate run that posts on it later.
+    for (const pr of openPrs(FEATURE.branch)) must('gh', ['pr', 'close', String(pr.number), '-R', REPO, '--comment', 'Closed by the demo: the next rehearsal opens a new pull request.']);
+    must('git', ['push', '--force', '--quiet', 'origin', FEATURE.branch + ':' + FEATURE.branch]);
+    const r = run('gh', ['pr', 'create', '-R', REPO, '--base', MAIN.branch, '--head', FEATURE.branch, '--title', 'Upload documents', '--body', 'A Documents column and an upload dialog on /status. Opened live by the demo (stage devops).'], { capture: true });
+    if (!r.ok) die('gh pr create failed: ' + r.stderr);
     const golden = openPrs(GOLDEN_BRANCH)[0]?.url;
-    console.log('\nLive PR:              ' + live);
+    console.log('\nLive PR:              ' + r.stdout.split('\n').pop());
     console.log('Golden PR (fallback): ' + (golden ?? 'none open: see DEMO.md, Setup Tyler does once'));
+    return printCue('devops');
   }
-  if (n === 4) {
-    // Last night's scheduled run, finished: scene 4 shows it, nothing is started live.
-    const latest = ghJson(['run', 'list', '--workflow', NIGHTLY_WORKFLOW, '--status', 'success', '--limit', '1', '--json', 'databaseId,createdAt,event'])?.[0];
-    if (!latest) console.log('[WARN] No green nightly run found. Start one the day before: gh workflow run ' + NIGHTLY_WORKFLOW + ' -R ' + REPO + ' --ref main');
-    else console.log('Latest green nightly: run ' + latest.databaseId + ' (' + latest.event + '), started ' + latest.createdAt + '.');
-    return printCue(4, { run: latest ? String(latest.databaseId) : undefined });
+  if (name === 'qa') return stageQa(flags);
+  printCue('dev');
+}
+
+/** The QA stage: the preview build on 4173 and the Workbench on the nightly snapshot, both in this process until Ctrl+C. */
+function stageQa(flags) {
+  const vite = join(ROOT, 'node_modules', 'vite', 'bin', 'vite.js');
+  if (!existsSync(vite)) die('vite is not installed here: run npm ci first.');
+  const dataDir = join(ROOT, 'demo-data', 'nightly');
+  if (!existsSync(join(dataDir, 'reports'))) die('No reports/ in ' + dataDir + ': see DEMO.md, Refreshing a snapshot.');
+  if (!existsSync(join(MANTA_PKG, 'ui', 'cli.ts'))) die('MANTA is not installed here: run npm ci first.');
+  const tsx = createRequire(join(MANTA_PKG, 'package.json')).resolve('tsx/cli');
+  must(process.execPath, [vite, 'build']);
+  printCue('qa');
+  // Only node is spawned (npm and vite are .cmd shims on Windows, which spawn cannot run without a shell).
+  const children = [
+    spawn(process.execPath, [vite, 'preview', '--port', '4173'], { cwd: ROOT, stdio: 'inherit' }),
+    spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(flags.port ?? WORKBENCH_PORT), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit' }),
+  ];
+  const stop = () => { for (const c of children) if (c.exitCode === null && !c.killed) c.kill(); };
+  process.on('SIGINT', () => { stop(); process.exit(130); });
+  process.on('exit', stop);
+  for (const c of children) c.on('exit', (code) => { stop(); if (code) process.exitCode = code; });
+}
+
+const firstSentence = (text) => (text.match(/^.*?[.!?](\s|$)/) ?? [text])[0].trim();
+const clip = (text, n = 110) => (text.length > n ? text.slice(0, n - 1) + '…' : text);
+
+/**
+ * The AI skills over the developer's run, in the terminal. Without --live nothing runs: the cluster and fix
+ * skills' output from the pr snapshot (written ahead of time, said so on screen) is printed in MANTA's own lines
+ * and its patch applied, so the gate can run again. With --live the skills run here through the claude CLI.
+ */
+function fix(flags) {
+  if (out('git', ['rev-parse', '--abbrev-ref', 'HEAD']) !== FEATURE.branch) die('fix runs on ' + FEATURE.branch + ': npm run demo -- stage dev first.');
+  if (flags.live) return fixLive();
+  const dir = join(ROOT, 'demo-data', 'pr', 'reports');
+  const token = tokensIn(dir).pop();
+  if (!token) die('demo-data/pr holds no run: see DEMO.md, Refreshing a snapshot.');
+  const artifact = (stem) => 'demo-data/pr/reports/' + stem + '-' + token;
+  const proposals = JSON.parse(readFileSync(join(dir, 'fix-proposals-' + token + '.json'), 'utf8'));
+  const clusters = JSON.parse(readFileSync(join(dir, 'cluster-' + token + '.json'), 'utf8'));
+  const patch = artifact('fix') + '.patch';
+  const prov = proposals.provenance ?? {};
+  const line = (label, text) => console.log('[' + label + ']  ' + text);
+  console.log('');
+  line('PRE-RUN', 'No AI runs now. These are MANTA\'s cluster and fix skills over run ' + token + ', written ahead of time');
+  line('PRE-RUN', 'with ' + (prov.provider ?? 'an AI provider') + ' (' + (prov.model ?? 'model not recorded') + '). With the claude CLI here, npm run demo -- fix --live runs them live.');
+  const lev = clusters.leverageSummary ?? {};
+  line('SKILL', 'cluster → written ' + artifact('cluster') + '.json' + (lev.clusters !== undefined ? ': ' + lev.clusters + ' cluster' + (lev.clusters === 1 ? '' : 's') + ' over ' + lev.totalViolations + ' violations, ' + lev.standalone + ' standalone' : ''));
+  const byId = Object.fromEntries((clusters.clusters ?? []).map((c) => [c.id, c]));
+  for (const p of proposals.proposals ?? []) {
+    const cluster = p.scope === 'cluster' ? byId[p.scopeId] : undefined;
+    const part = (i) => [...new Set((p.members ?? []).map((m) => m.split('|::|')[i]))];
+    console.log('');
+    console.log('  ' + (cluster ? cluster.id + ' (' + cluster.worstImpact + ', ' + cluster.affectedElements + ' elements)' : p.id) + ' · ' + part(1).join(', ') + ' · ' + part(2).join(', '));
+    console.log('  ' + (cluster?.hypothesis ?? firstSentence(p.domSpec?.domInstruction ?? '')));
+    for (const e of p.edits ?? []) {
+      console.log('    ' + e.file + ':' + e.startLine);
+      for (const l of e.original.split('\n')) console.log('    - ' + clip(l.trim()));
+      for (const l of e.replacement.split('\n')) console.log('    + ' + clip(l.trim()));
+    }
   }
-  printCue(n);
+  console.log('');
+  line('SKILL', 'fix → written ' + artifact('fix-proposals') + '.json; .patch → written ' + patch);
+  if (!run('git', ['apply', '--check', patch], { capture: true }).ok) die('The patch does not apply: already applied? npm run demo -- stage dev starts over.');
+  must('git', ['apply', patch]);
+  line('APPLY', 'git apply ' + patch);
+  must('git', ['diff', '--stat']);
+  console.log('\nRun the gate again: ' + GATE_LINE + '\n');
+}
+
+function fixLive() {
+  const reports = join(ROOT, 'reports');
+  if (tokensIn(reports).length === 0) die('No run in reports/: run the gate first (' + GATE_LINE + ').');
+  if (!run('claude', ['--version'], { capture: true }).ok) die('--live needs the claude CLI (MANTA\'s claude-code provider).');
+  const tsx = createRequire(join(MANTA_PKG, 'package.json')).resolve('tsx/cli');
+  must(process.execPath, [tsx, join(MANTA_PKG, 'ai', 'cli.ts'), '--skills', 'cluster,fix', '--scope', 'new', '--provider', 'claude-code']);
+  const patch = 'reports/fix-' + tokensIn(reports).pop() + '.patch';
+  if (!existsSync(join(ROOT, patch))) die('The fix skill wrote no patch (' + patch + '): see its lines above.');
+  must('git', ['apply', patch]);
+  must('git', ['diff', '--stat']);
+  console.log('\nRun the gate again: ' + GATE_LINE + '\n');
 }
 
 function snapshot(name, runId, flags) {
@@ -233,9 +332,9 @@ function status() {
     const local = revParse('refs/heads/' + branch);
     const remote = revParse('refs/remotes/origin/' + branch);
     if (!t) say(false, tag + ' is missing (set once, after the first baseline run)');
-    // A fresh clone has no local feature branch yet: scene 2's checkout makes it from origin's.
+    // A fresh clone has no local feature branch yet: the first stage's checkout makes it from origin's.
     else if (!local && remote === t) say(true, branch + ' on origin at ' + tag + ' (made locally by its first checkout)');
-    else say(local === t && remote === t, branch + (local === t ? ' at ' : ' NOT at ') + tag + (remote === t ? ', origin too' : ', origin differs: run reset'));
+    else say(local === t && remote === t, branch + (local === t ? ' at ' : ' NOT at ') + tag + (remote === t ? ', origin too' : ', origin differs: run stage devops or reset'));
   }
   say(Boolean(revParse('refs/remotes/origin/' + GOLDEN_BRANCH)), GOLDEN_BRANCH + ' on origin');
   console.log('Pull requests');
@@ -268,9 +367,13 @@ function status() {
 function help() {
   console.log(`MANTA demo — npm run demo -- <command>
 
-  reset [--force]          Back to scene 1: story branches to their tags (force-pushed), live PRs closed,
+  reset [--force]          Back to the start: story branches to their tags (force-pushed), live PRs closed,
                            snapshots restored, local runs removed. --force discards local changes.
-  scene <1-6>              Set up a scene and print what to type next.
+  stage <qa|devops|dev>    Set a stage up, whatever ran before, and print what to type next. qa runs the
+         [--port n]        preview build and the Workbench on the nightly snapshot until Ctrl+C; devops opens
+                           the live PR; dev leaves the feature branch checked out, clean.
+  fix [--live]             The AI skills over the developer's run: pre-run from demo-data/pr, printed and
+                           its patch applied. --live runs cluster and fix here through the claude CLI.
   snapshot <name> [run]    Copy a run into demo-data/<name>/: a workflow run's artifact when [run] is given
          [--artifact a]    (manta-run by default, or manta-nightly), else this folder's reports/, run-records/, sites/.
   ci-run [run]             Download a workflow run's artifact into ci-run/ (the latest nightly by default)
@@ -290,6 +393,7 @@ const flags = {};
 const words = [];
 for (let i = 0; i < argv.length; i++) {
   if (argv[i] === '--force') flags.force = true;
+  else if (argv[i] === '--live') flags.live = true;
   else if (argv[i] === '--artifact') flags.artifact = argv[++i];
   else if (argv[i] === '--port') flags.port = Number(argv[++i]);
   else if (argv[i].startsWith('--')) die('Unknown flag ' + argv[i] + '. Try: npm run demo -- help');
@@ -298,7 +402,8 @@ for (let i = 0; i < argv.length; i++) {
 const [command, a, b] = words;
 switch (command) {
   case 'reset': reset(flags); break;
-  case 'scene': scene(Number(a)); break;
+  case 'stage': stage(a, flags); break;
+  case 'fix': fix(flags); break;
   case 'snapshot': snapshot(a, b, flags); break;
   case 'ci-run': ciRun(a, flags); break;
   case 'workbench': workbench(a, flags); break;
