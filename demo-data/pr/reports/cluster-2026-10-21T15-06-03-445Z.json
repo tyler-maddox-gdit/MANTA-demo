@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceReportTimestamp": "2026-10-21T14-55-35-862Z",
+  "sourceReportTimestamp": "2026-10-21T15-06-03-445Z",
   "leverageSummary": {
     "totalViolations": 30,
     "clusters": 3,
@@ -17,10 +17,10 @@
       "worstImpact": "serious",
       "leverageScore": 45,
       "fixTarget": {
-        "kind": "template",
-        "value": "src/Shell.jsx — footer.site-footer div.social links (lines 30-32)"
+        "kind": "component",
+        "value": "src/Shell.jsx footer social links (footer.site-footer > div.social)"
       },
-      "hypothesis": "Shared footer social links wrap only aria-hidden SVG icons with no text or aria-label.",
+      "hypothesis": "Shared footer social links wrap only aria-hidden SVGs, giving every instance no text alternative.",
       "members": [
         "http://localhost:4173/apply|::|link-name|::|#social-fb",
         "http://localhost:4173/apply|::|link-name|::|#social-x",
@@ -52,7 +52,7 @@
         "kind": "selector",
         "value": ".muted"
       },
-      "hypothesis": "The .muted utility paints text #9a9a9a on white, yielding 2.81:1 everywhere it is applied.",
+      "hypothesis": "The .muted text color #9a9a9a reaches only 2.81:1 on white, below the 4.5:1 threshold.",
       "members": [
         "http://localhost:4173/apply|::|color-contrast|::|#last-updated",
         "http://localhost:4173/signin|::|color-contrast|::|#last-updated",
@@ -75,7 +75,7 @@
         "kind": "selector",
         "value": "button.icon-btn"
       },
-      "hypothesis": "The icon-btn button pattern in src/pages/Status.jsx renders icon-only buttons without any aria-label.",
+      "hypothesis": "The icon-btn pattern in Status.jsx renders icon-only buttons without any authored accessible name.",
       "members": [
         "http://localhost:4173/status?upload=BP-2026-10882|::|button-name|::|#refresh",
         "http://localhost:4173/status?upload=BP-2026-10882|::|button-name|::|#upload-close",

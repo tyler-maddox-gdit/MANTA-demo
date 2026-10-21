@@ -18,7 +18,7 @@
         "orientationAngle": 0,
         "orientationType": "landscape-primary"
       },
-      "timestamp": "2026-10-21T14:55:23.169Z",
+      "timestamp": "2026-10-21T15:05:50.642Z",
       "url": "http://localhost:4173/",
       "toolOptions": {
         "rules": {
@@ -3441,9 +3441,9 @@
       "couldNotLook": [],
       "dropped": []
     },
-    "timestamp": "2026-10-21T14:55:23.302Z",
+    "timestamp": "2026-10-21T15:05:50.768Z",
     "timing": {
-      "elapsedSinceNavigationMs": 7
+      "elapsedSinceNavigationMs": 5
     }
   },
   {
@@ -3465,7 +3465,7 @@
         "orientationAngle": 0,
         "orientationType": "landscape-primary"
       },
-      "timestamp": "2026-10-21T14:55:25.826Z",
+      "timestamp": "2026-10-21T15:05:53.299Z",
       "url": "http://localhost:4173/apply",
       "toolOptions": {
         "rules": {
@@ -8188,9 +8188,9 @@
         }
       ]
     },
-    "timestamp": "2026-10-21T14:55:25.966Z",
+    "timestamp": "2026-10-21T15:05:53.438Z",
     "timing": {
-      "elapsedSinceNavigationMs": 4
+      "elapsedSinceNavigationMs": 3
     }
   },
   {
@@ -8212,7 +8212,7 @@
         "orientationAngle": 0,
         "orientationType": "landscape-primary"
       },
-      "timestamp": "2026-10-21T14:55:28.557Z",
+      "timestamp": "2026-10-21T15:05:56.035Z",
       "url": "http://localhost:4173/status",
       "toolOptions": {
         "rules": {
@@ -11837,9 +11837,9 @@
       "couldNotLook": [],
       "dropped": []
     },
-    "timestamp": "2026-10-21T14:55:28.664Z",
+    "timestamp": "2026-10-21T15:05:56.143Z",
     "timing": {
-      "elapsedSinceNavigationMs": 2
+      "elapsedSinceNavigationMs": 3
     }
   },
   {
@@ -11861,7 +11861,7 @@
         "orientationAngle": 0,
         "orientationType": "landscape-primary"
       },
-      "timestamp": "2026-10-21T14:55:31.140Z",
+      "timestamp": "2026-10-21T15:05:58.647Z",
       "url": "http://localhost:4173/signin",
       "toolOptions": {
         "rules": {
@@ -14755,9 +14755,9 @@
       "couldNotLook": [],
       "dropped": []
     },
-    "timestamp": "2026-10-21T14:55:31.250Z",
+    "timestamp": "2026-10-21T15:05:58.763Z",
     "timing": {
-      "elapsedSinceNavigationMs": 3
+      "elapsedSinceNavigationMs": 1
     }
   },
   {
@@ -14779,7 +14779,7 @@
         "orientationAngle": 0,
         "orientationType": "landscape-primary"
       },
-      "timestamp": "2026-10-21T14:55:33.516Z",
+      "timestamp": "2026-10-21T15:06:01.078Z",
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
       "toolOptions": {
         "rules": {
@@ -19148,9 +19148,9 @@
         }
       ]
     },
-    "timestamp": "2026-10-21T14:55:33.630Z",
+    "timestamp": "2026-10-21T15:06:01.194Z",
     "timing": {
-      "elapsedSinceNavigationMs": 1
+      "elapsedSinceNavigationMs": 4
     }
   }
 ]

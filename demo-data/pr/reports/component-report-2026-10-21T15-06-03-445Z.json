@@ -22,7 +22,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:23.338Z",
+          "timestamp": "2026-10-21T15:05:50.803Z",
           "url": "http://localhost:4173/",
           "toolOptions": {
             "rules": {
@@ -1801,7 +1801,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:23.461Z",
+          "timestamp": "2026-10-21T15:05:50.923Z",
           "url": "http://localhost:4173/",
           "toolOptions": {
             "rules": {
@@ -3395,7 +3395,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:23.586Z",
+          "timestamp": "2026-10-21T15:05:51.046Z",
           "url": "http://localhost:4173/",
           "toolOptions": {
             "rules": {
@@ -5689,7 +5689,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:23.709Z",
+          "timestamp": "2026-10-21T15:05:51.170Z",
           "url": "http://localhost:4173/",
           "toolOptions": {
             "rules": {
@@ -7461,7 +7461,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:23.827Z",
+          "timestamp": "2026-10-21T15:05:51.289Z",
           "url": "http://localhost:4173/",
           "toolOptions": {
             "rules": {
@@ -9007,9 +9007,9 @@
         }
       }
     ],
-    "timestamp": "2026-10-21T14:55:23.922Z",
+    "timestamp": "2026-10-21T15:05:51.382Z",
     "timing": {
-      "elapsedSinceNavigationMs": 255
+      "elapsedSinceNavigationMs": 229
     }
   },
   {
@@ -9035,7 +9035,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:26.000Z",
+          "timestamp": "2026-10-21T15:05:53.471Z",
           "url": "http://localhost:4173/apply",
           "toolOptions": {
             "rules": {
@@ -10814,7 +10814,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:26.120Z",
+          "timestamp": "2026-10-21T15:05:53.593Z",
           "url": "http://localhost:4173/apply",
           "toolOptions": {
             "rules": {
@@ -12408,7 +12408,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:26.244Z",
+          "timestamp": "2026-10-21T15:05:53.722Z",
           "url": "http://localhost:4173/apply",
           "toolOptions": {
             "rules": {
@@ -16038,7 +16038,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:26.393Z",
+          "timestamp": "2026-10-21T15:05:53.868Z",
           "url": "http://localhost:4173/apply",
           "toolOptions": {
             "rules": {
@@ -17810,7 +17810,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:26.517Z",
+          "timestamp": "2026-10-21T15:05:53.990Z",
           "url": "http://localhost:4173/apply",
           "toolOptions": {
             "rules": {
@@ -20991,9 +20991,9 @@
         }
       }
     ],
-    "timestamp": "2026-10-21T14:55:26.635Z",
+    "timestamp": "2026-10-21T15:05:54.107Z",
     "timing": {
-      "elapsedSinceNavigationMs": 245
+      "elapsedSinceNavigationMs": 233
     }
   },
   {
@@ -21019,7 +21019,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:28.698Z",
+          "timestamp": "2026-10-21T15:05:56.176Z",
           "url": "http://localhost:4173/status",
           "toolOptions": {
             "rules": {
@@ -22798,7 +22798,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:28.817Z",
+          "timestamp": "2026-10-21T15:05:56.295Z",
           "url": "http://localhost:4173/status",
           "toolOptions": {
             "rules": {
@@ -24392,7 +24392,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:28.940Z",
+          "timestamp": "2026-10-21T15:05:56.419Z",
           "url": "http://localhost:4173/status",
           "toolOptions": {
             "rules": {
@@ -26942,7 +26942,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:29.063Z",
+          "timestamp": "2026-10-21T15:05:56.544Z",
           "url": "http://localhost:4173/status",
           "toolOptions": {
             "rules": {
@@ -28714,7 +28714,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:29.187Z",
+          "timestamp": "2026-10-21T15:05:56.670Z",
           "url": "http://localhost:4173/status",
           "toolOptions": {
             "rules": {
@@ -31045,9 +31045,9 @@
         }
       }
     ],
-    "timestamp": "2026-10-21T14:55:29.284Z",
+    "timestamp": "2026-10-21T15:05:56.770Z",
     "timing": {
-      "elapsedSinceNavigationMs": 200
+      "elapsedSinceNavigationMs": 215
     }
   },
   {
@@ -31073,7 +31073,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:31.284Z",
+          "timestamp": "2026-10-21T15:05:58.796Z",
           "url": "http://localhost:4173/signin",
           "toolOptions": {
             "rules": {
@@ -32852,7 +32852,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:31.405Z",
+          "timestamp": "2026-10-21T15:05:58.915Z",
           "url": "http://localhost:4173/signin",
           "toolOptions": {
             "rules": {
@@ -34446,7 +34446,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:31.520Z",
+          "timestamp": "2026-10-21T15:05:59.032Z",
           "url": "http://localhost:4173/signin",
           "toolOptions": {
             "rules": {
@@ -36241,7 +36241,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:31.642Z",
+          "timestamp": "2026-10-21T15:05:59.157Z",
           "url": "http://localhost:4173/signin",
           "toolOptions": {
             "rules": {
@@ -38013,7 +38013,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:31.758Z",
+          "timestamp": "2026-10-21T15:05:59.273Z",
           "url": "http://localhost:4173/signin",
           "toolOptions": {
             "rules": {
@@ -39765,9 +39765,9 @@
         }
       }
     ],
-    "timestamp": "2026-10-21T14:55:31.857Z",
+    "timestamp": "2026-10-21T15:05:59.375Z",
     "timing": {
-      "elapsedSinceNavigationMs": 212
+      "elapsedSinceNavigationMs": 195
     }
   },
   {
@@ -39793,7 +39793,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:33.665Z",
+          "timestamp": "2026-10-21T15:06:01.228Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -41572,7 +41572,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:33.788Z",
+          "timestamp": "2026-10-21T15:06:01.347Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -43166,7 +43166,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:33.913Z",
+          "timestamp": "2026-10-21T15:06:01.475Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -46459,7 +46459,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:34.042Z",
+          "timestamp": "2026-10-21T15:06:01.604Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -48231,7 +48231,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:34.162Z",
+          "timestamp": "2026-10-21T15:06:01.724Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -50331,7 +50331,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:34.284Z",
+          "timestamp": "2026-10-21T15:06:01.845Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -52431,7 +52431,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-21T14:55:34.411Z",
+          "timestamp": "2026-10-21T15:06:01.969Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -54762,9 +54762,9 @@
         }
       }
     ],
-    "timestamp": "2026-10-21T14:55:34.510Z",
+    "timestamp": "2026-10-21T15:06:02.073Z",
     "timing": {
-      "elapsedSinceNavigationMs": 202
+      "elapsedSinceNavigationMs": 226
     }
   }
 ]

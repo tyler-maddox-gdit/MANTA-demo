@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "id": "a23bbfd0-c0b2-4eb4-98bd-e4e096550742",
-  "startedAt": "2026-10-21T14:55:22.072Z",
+  "id": "d5662c2e-78af-4cf0-94a5-8367edae6069",
+  "startedAt": "2026-10-21T15:05:49.894Z",
   "urls": [
     "http://localhost:4173/",
     "http://localhost:4173/apply",
@@ -19,8 +19,8 @@
     ]
   },
   "status": "finished",
-  "token": "2026-10-21T14-55-35-862Z",
-  "finishedAt": "2026-10-21T14:55:35.991Z",
+  "token": "2026-10-21T15-06-03-445Z",
+  "finishedAt": "2026-10-21T15:06:03.558Z",
   "pages": [
     {
       "url": "http://localhost:4173/"
