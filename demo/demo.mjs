@@ -423,7 +423,7 @@ async function fix(flags) {
     return;
   }
   must('git', ['apply', patch]);
-  console.log('Applied to ' + files.join(' and ') + '. Nothing committed.');
+  console.log('Applied to ' + (files.length > 1 ? files.slice(0, -1).join(', ') + ' and ' + files[files.length - 1] : files[0]) + '. Nothing committed.');
   must('git', ['diff', '--stat']);
   console.log('\nRun the gate again: ' + GATE_LINE + '\n');
 }
