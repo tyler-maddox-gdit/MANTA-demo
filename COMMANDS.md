@@ -42,7 +42,7 @@ npm run dev
 ```
 
 - `fix` shows the AI answer and asks `Apply these 3 fixes? [y/N]`: type `y`.
-- Gates: first `New 3`, exit 1; second `New 0`, `Fixed 2`, exit 0.
+- Gates: first `New 3`, exit 1; second `New 0`, `Fixed 7`, `Tolerated 20`, exit 0.
 - Stop `npm run dev` (Ctrl+C) before Stage QA.
 
 ## 4. Stage DevOps

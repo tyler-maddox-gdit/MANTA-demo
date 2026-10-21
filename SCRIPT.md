@@ -21,9 +21,9 @@ the legacy debt: MANTA tolerates it and blocks anything new.
 
 | # | What a user hits | Rule, impact | Where | The fix MANTA writes |
 |---|---|---|---|---|
-| 1 | The dialog's close button is an icon only. A screen reader says "button" and nothing else. | `button-name`, critical, P1 (WCAG 4.1.2) | `src/pages/Status.jsx:18`, `#upload-close` | `aria-label="Close"` on the button; the SVG stays `aria-hidden` |
-| 2 | The file field has no label. "Edit, file upload" with no name: upload what? | `label`, critical, P1 (WCAG 1.3.1, 4.1.2) | `src/pages/Status.jsx:21`, `#upload-file` | A visible `<label for="upload-file">Choose files</label>` in the project's `.field` wrapper, plus `aria-describedby="upload-hint"` so the limits are read with the field |
-| 3 | The hint "Max 10 MB per file. Up to 5 files." is light grey on white, 2.61:1. | `color-contrast`, serious, P2 (WCAG 1.4.3) | `src/pages/Status.jsx:22`, `#upload-hint`; the colour is set in `src/styles.css:61` | `.hint { color: #a0a0a0 }` → `#595959` (7.0:1), in the stylesheet, so every `.hint` on the site gets it |
+| 1 | The dialog's close button is an icon only. A screen reader says "button" and nothing else. | `button-name`, critical, P1 (WCAG 4.1.2) | `src/pages/Status.jsx:18`, `#upload-close` | `aria-label="Close upload dialog"` on the button, and the same on the old refresh button (two edits); the SVGs stay `aria-hidden` |
+| 2 | The file field has no label. "Edit, file upload" with no name: upload what? | `label`, critical, P1 (WCAG 1.3.1, 4.1.2) | `src/pages/Status.jsx:21`, `#upload-file` | A visible `<label for="upload-file">Choose files to upload</label>` in the project's `.field` wrapper, plus `aria-describedby="upload-hint"` so the limits are read with the field |
+| 3 | The hint "Max 10 MB per file. Up to 5 files." is light grey on white, 2.81:1. It reuses the site's shared `.muted` style, the same grey as the footer's "Last updated" line. | `color-contrast`, serious, P2 (WCAG 1.4.3) | `src/pages/Status.jsx:22`, `#upload-hint`; the colour is the shared `--muted-bad` token on `src/styles.css:1` | One edit: `--muted-bad` `#9a9a9a` → `#595959` (7.0:1). It clears the new hint and the five tolerated "Last updated" lines |
 
 Impact and priority are axe's and MANTA's words for the same thing: critical = P1, serious = P2.
 
@@ -32,15 +32,17 @@ Impact and priority are axe's and MANTA's words for the same thing: critical = P
 | Pattern | Count | Where it shows |
 |---|---|---|
 | Footer social links are icons with no name (`link-name`, serious) | 15 | 3 links × 5 pages, `src/Shell.jsx:30-32` |
-| Footer "Last updated" line, grey 2.81:1 (`color-contrast`, serious) | 5 | 1 × 5 pages, `src/Shell.jsx:36` |
+| Footer "Last updated" line, grey 2.81:1, the same `.muted` style the new hint reuses (`color-contrast`, serious) | 5 | 1 × 5 pages, `src/Shell.jsx:36` |
 | Refresh button on Check a case is an icon with no name (`button-name`, critical) | 2 | `/status` and `/status?upload=…`, `src/pages/Status.jsx:41` |
 | "Pending" badge, amber on white (`color-contrast`, serious) | 2 | `/status` and `/status?upload=…`, `.badge-pending` |
 | Hero image with no alt (`image-alt`, critical) | 1 | Home, `src/pages/Home.jsx:27` |
 | SSN field: visible text not associated with the field (`label`, critical) | 1 | Apply, `#ssn` |
 | Household size select with no name (`select-name`, critical) | 1 | Apply, `#household-size` |
 
-The refresh button is the twist in Act 1: it is the same icon-button pattern as the dialog's close button, so
-MANTA's fix for the new defect fixes the old one too. **Fixed 2** on the second gate is that.
+Two of these are the twist in Act 1. The "Last updated" line shares one colour with the new hint, so the one
+colour edit that fixes the new defect also clears five tolerated findings. The refresh button is the same
+icon-button pattern as the close button, so MANTA fixes it in the same pass (its own edit, its own label).
+**Fixed 7** on the second gate is those two together: 5 + 2.
 
 ### The fourth defect, which no rule finds
 
@@ -57,11 +59,11 @@ questions, each with a pre-run AI adjudication the tester can take or overrule:
 
 - **`skip-link-works`**, every page: "Skip to main content" targets `#main-content`, and no element has
   that id (the landmark is `id="main"`), so Enter on the skip link moves focus nowhere. AI adjudication on the
-  header link: **likely violation**. The case-table and news links the rule also listed: **likely pass**
-  (they are content links, not a bypass mechanism). WCAG 2.4.1.
-- **`non-text-contrast-border`**, the Apply and Sign-in fields: the focus outline is amber on white, 1.66:1.
-  AI adjudication: **cannot tell**, because only the outline was measured and a second focus cue may exist.
-  The tester decides. WCAG 1.4.11.
+  header link on each of the five pages: **likely violation**. The eleven case-table and news links the rule
+  also listed: **likely pass** (they are content links, not a bypass mechanism). WCAG 2.4.1.
+- **`non-text-contrast-border`**, the six Apply fields and the two Sign-in fields: the focus outline is amber
+  on white, 1.66:1, and it is the only focus cue measured. AI adjudication: **likely violation**. The tester
+  confirms it by tabbing into a field and looking, or overrules it. WCAG 1.4.11.
 
 ### The account page, reached only through the sign-in
 
@@ -76,7 +78,7 @@ purpose only from context).
 | Gate | Pages scanned | New | Fixed | Tolerated | Result |
 |---|---|---|---|---|---|
 | Act 1, laptop, first gate | 5 | **3** (P1 2, P2 1) | 0 | 27 | `Gate failed: 3 new violations at or above minor.  exit 1` |
-| Act 1, laptop, after the fix | 5 | 0 | **2** | 25 | `Gate passed`, `exit 0` |
+| Act 1, laptop, after the fix | 5 | 0 | **7** (5 "Last updated" lines, 2 refresh buttons) | 20 | `Gate passed`, `exit 0` |
 | Act 2, pull request, first run | 1 (the upload page only; the workflow narrows the config to the page the change touches) | **3** | 0 | 6 | red, `MANTA gate · failed: 3 new violations at or above minor` |
 | Act 2, after the one-click apply | 1 | 0 | 1 | 5 | green, `MANTA gate · passed: no new violations` |
 | Act 3, Workbench launcher scan | the pages you paste | not a gate: 30 violations over the 5 pages (7 critical, 23 serious) | | | a report |
@@ -123,10 +125,10 @@ Expect the step stream (five pages), then **New 3**, **Fixed 0**, **Tolerated 27
 **Beat 2 · The AI skills.** Type `npm run demo -- fix`.
 
 Expect the fix skill's answer, top to bottom: the header with the run and the model; **Reading the run**,
-**Reading the project**, **Conventions found**; **Step 1 · cluster** (30 findings, 3 shared causes, 7 one-offs;
-only the icon-buttons cause has a green dot, the other two say "Left alone"); **Step 2 · fix** with three fixes,
-each titled by what a user hits and tagged "From cluster…" or "Standalone…", with the problem and the fix in
-plain words and the diff in red and green; then `3 fixes · 2 files` and the question
+**Reading the project**, **Conventions found**; **Step 1 · cluster** (30 findings, 3 shared causes, 6 one-offs;
+the text-too-faint and icon-buttons causes have a green dot, the footer links say "Left alone"); **Step 2 · fix**
+with three fixes, each titled by what a user hits and tagged "From cluster…" or "Standalone…", with the problem
+and the fix in plain words and the diff in red and green; then `3 fixes · 3 files` and the question
 `Apply these 3 fixes? [y/N]`. Stop there. The output does not say pre-run; you do.
 
 - "Pre-run. MANTA's fix skill ran on this run earlier; this is its answer."
@@ -134,24 +136,27 @@ plain words and the diff in red and green; then `3 fixes · 2 files` and the que
   is, how this team names buttons, marks icons, lays out form rows, flags its known debt. The fix is in this
   project's conventions, not a generic one."
 - **Step 1 · cluster**: "First skill: it groups findings by cause, not by page. Thirty findings, three causes.
-  Two are the footer's old debt, so they are left alone. The green one holds our new close button and two
-  old refresh buttons, all built from the same icon-button pattern."
-- **Step 2 · fix**: "Second skill: it writes the change for each new finding. Cluster handed it the icon
-  buttons together; the hint and the file field have no shared cause, so it took them alone."
-- **1 · Close button with no name**: "What a user hits, in plain words, then the change. The refresh button
-  that was already there is the same pattern, so one fix covers both: an `aria-label` on each."
-- **2 · Hint text too faint to read**: "2.6 to 1. Fixed in the stylesheet, where the colour is set, to 7 to 1,
-  so every hint on the site gets it."
-- **3 · File field with no label**: "A visible label, Choose files, in the wrapper the other form rows use,
-  and the size limits tied to the field so they are read with it."
-- "It asks. The developer reads the diff and says yes." Type `y`: `Applied to src/pages/Status.jsx and
-  src/styles.css. Nothing committed.`, then the diff summary.
+  The footer links are old debt, so they are left alone. The two green ones each hold one finding of ours and
+  some old debt that shares its cause: our hint with the five 'Last updated' lines, our close button with the
+  old refresh buttons."
+- **Step 2 · fix**: "Second skill: it writes the change for each new finding. Cluster handed it the shared
+  causes; the file field has no partner, so it took it alone."
+- **1 · Hint text too faint to read**: "This is the one to land. The new hint reuses the site's muted grey, the
+  same one as the footer's last-updated line on every page. So one edit, the shared colour in the stylesheet,
+  2.8 to 1 up to 7 to 1, fixes our new problem and five that were already there. One edit, six findings."
+- **2 · Close button with no name**: "What a user hits, in plain words, then the change. The refresh button
+  that was already there is the same pattern, so the same pass fixes both, with a label each: two edits."
+- **3 · File field with no label**: "A visible label, Choose files to upload, in the wrapper the other form
+  rows use, and the size limits tied to the field so they are read with it."
+- "It asks. The developer reads the diff and says yes." Type `y`: `Applied to src/styles.css, src/Shell.jsx and
+  src/pages/Status.jsx. Nothing committed.`, then the diff summary.
 
 **Beat 3 · Green.** Type the gate again.
 
-Expect **New 0**, **Fixed 2**, **Tolerated 25**, `Gate passed`, `exit 0`.
+Expect **New 0**, **Fixed 7**, **Tolerated 20**, `Gate passed`, `exit 0`.
 
-- "Fixed 2: the old refresh button went with the same fix. The count only goes down."
+- "Fixed 7. Our three new problems are gone, and so are seven old ones: the five last-updated lines that shared
+  the grey, and the refresh button on two pages. The count only goes down."
 - Land it: "Fixed before anyone else saw it, by a developer who never read WCAG."
 
 If it goes wrong: DEMO.md, the Development stage. The dev server will not start: gate the preview build instead. `fix` refuses:
@@ -187,8 +192,10 @@ golden PR's. Open the live PR.
   itself, in the run you just watched."
 - The **github-advanced-security** alerts on the changed lines, and the second check, Code scanning results.
   "Accessibility findings in GitHub's Security tab, in SARIF, beside every other scanner."
-- MANTA's review, `3 suggested fixes from MANTA.`, each on its line. Read the close button's `aria-label="Close"`.
-  "The same fixes the developer got, now where the reviewer lives: on the diff."
+- MANTA's review, `3 suggested fixes from MANTA.`, each on its line: the shared colour on line 1 of the
+  stylesheet, the close button's `aria-label="Close upload dialog"`, the file field's label. "The same fixes the
+  developer got, now where the reviewer lives: on the diff." Only edits on lines the pull request changed can be
+  suggestions; the rest (the old refresh button) are listed in MANTA's comment under Also fixable.
 
 **Beat 4 · One click.** The green Tip under the review: tick **Apply all 3 suggested fixes**. About 30 s
 later a commit appears in your name.
@@ -237,8 +244,9 @@ shows the three.
   alt. Then **add an issue**: the two **Read** links in Messages, both named the same. "No rule finds that. The
   tester did, and it is on the run with everything else."
 - A **verdict** on a needs-review item: the skip link on the upload page, adjudicated **likely violation**
-  (the target id does not exist). Confirm it. Then one of the focus-outline items on Apply, adjudicated
-  **cannot tell**: "the machine said it could not tell; the tester decides."
+  (the target id does not exist). Confirm it. Then one of the focus-outline items on Apply, also adjudicated
+  **likely violation**: tab into the field, look at the outline, and decide. "The machine gave a leaning; the
+  tester decides."
 - **Rescan** the Pending badge's contrast finding on `/status`. It reloads the page from the preview and
   measures again: still failing. "A fix is re-measured on the spot, not re-filed."
 - **Attest** a criterion, and open a criterion's **checklist**: "The Trusted Tester tests, as the checklist for

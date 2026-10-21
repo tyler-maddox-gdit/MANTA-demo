@@ -10,12 +10,13 @@ npm run demo -- workbench <name>       (nightly or pr; runs the MANTA that npm c
 Every AI artifact in a snapshot is gated on its run's token: it belongs to that run and cannot sit beside a
 fresh scan. What a snapshot shows as AI output is **pre-run**.
 
-- **`pr/`** — a gated run of `feature/upload-documents` with `cluster` and `fix --scope new` added on the Mac:
-  `gate-<token>.json`, the fix proposals with source edits for the upload dialog's three new defects and the
-  refresh button's old debt, and `reports/fix-<token>.patch`. The Gate workflow posts these fixes onto the live PR as
+- **`pr/`** — a gated run of `feature/upload-documents` with `cluster` and `fix --scope new` added live through the
+  claude CLI (2026-10-21): `gate-<token>.json`, the fix proposals with source edits for the upload dialog's three
+  new defects and the old debt that shares their causes (the footer's five "Last updated" lines, which share the
+  hint's `--muted-bad` colour, and the refresh button), and `reports/fix-<token>.patch`. The Gate workflow posts these fixes onto the live PR as
   pre-run suggestions when the repo has no AI key (the DevOps stage), `npm run demo -- fix` prints and applies them
   (the Dev stage), and the golden PR was posted from this run.
-- **`nightly/`** — one nightly run of `golden/upload-documents`, made on the Mac as CI makes it (`--extended`, the Sign in path replayed to
+- **`nightly/`** — one nightly run of the upload dialog's source (the golden branch's), made on the Mac as CI makes it (`--extended`, the Sign in path replayed to
   `/account`, the upload page included), with `cluster,fix,explain,summary,adjudicate,acr` added on the Mac
   afterwards. The QA stage opens it.
 

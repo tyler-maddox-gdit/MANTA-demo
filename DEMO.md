@@ -115,35 +115,39 @@ claude-code`. Three lines as it reads: **Reading the run** (3 new violations on 
 by the baseline), **Reading the project** (React 18, react-router 6, Vite 5, plain CSS in `src/styles.css`,
 source stamps on) and **Conventions found** (the button class naming, the `aria-hidden` icons, the stable ids,
 the `DEBT` comments). Then the two skills, one after the other. **Step 1 · cluster** (group findings that
-share one cause): "30 findings in this run come down to 3 shared causes and 7 one-offs", then the three
-causes: **Icon buttons with no name** with a green dot, marked "Contains a new finding (#upload-close) and 2
-existing ones", and **Icon links with no name** and **Text too faint to read** with hollow dots, "Existing
-debt in the baseline… Left alone." **Step 2 · fix** (write the change for each new finding): three fixes, each
-titled by what a user hits, with the rule, impact and element on the right and a grey line saying where it
-came from. **1 · Close button with no name** ("From cluster Icon buttons with no name": the refresh button
-has the same problem; one fix, two `aria-label`s), **2 · Hint text too faint to read** (2.61:1, darkened to #595959, 7.0:1, in the stylesheet),
-**3 · File field with no label** (a visible "Choose files" label, `aria-describedby` to the hint); fixes 2 and 3
-say "Standalone: no other finding shares its cause." Under each:
+share one cause): "30 findings in this run come down to 3 shared causes and 6 one-offs", then the three
+causes. **Text too faint to read** (6 elements) and **Icon buttons with no name** (3 elements) have a green
+dot, each marked "Contains a new finding (#upload-hint) and 5 existing ones" and "(#upload-close) and 2 existing
+ones". **Icon links with no name** has a hollow dot: "Existing debt in the baseline… Left alone." **Step 2 ·
+fix** (write the change for each new finding): three fixes, each titled by what a user hits, with the rule,
+impact and elements on the right and a grey line saying where it came from. **1 · Hint text too faint to read**
+("From cluster Text too faint to read: fixes the new finding and its 5 existing partners in one edit": the
+shared colour `--muted-bad`, 2.81:1 darkened to #595959, 7.0:1, one edit on line 1 of the stylesheet),
+**2 · Close button with no name** ("…its 2 existing partners in 2 edits, one per element": an `aria-label` on
+the close button and on the old refresh button), **3 · File field with no label** (a visible "Choose files to
+upload" label, `aria-describedby` to the hint; "Standalone: no other finding shares its cause."). Under each:
 the problem in plain words, the fix in plain words, and the diff, red and green, with the file and line. Then
-`3 fixes · 2 files` and the question `Apply these 3 fixes? [y/N]`. Read the fixes aloud first; then type `y`:
-`Applied to src/pages/Status.jsx and src/styles.css. Nothing committed.` and the diff summary. The output
+`3 fixes · 3 files` and the question `Apply these 3 fixes? [y/N]`. Read the fixes aloud first; then type `y`:
+`Applied to src/styles.css, src/Shell.jsx and src/pages/Status.jsx. Nothing committed.` and the diff summary. The output
 never says so itself, so you do: this answer is **pre-run**.
 - "This is MANTA's fix skill, **pre-run** on this run: no AI runs on this laptop today. With a key or the Claude
   command line here, the same command runs it live, in a minute or two."
 - "It read the run, then the project: the stack, the stylesheet, how this team writes buttons and form rows
   and marks its known debt. Then two skills. **Cluster** groups findings by cause: thirty findings, three
-  causes. Only one of those causes holds something new, the icon buttons, so the other two are left alone.
-  **Fix** then writes the change for each new finding, in plain words and as the diff, on the exact line that
-  wrote the element. The close button and the old refresh button share a cause, so cluster handed them to fix
-  together and one change covers both. The hint and the file field share nothing, so fix took them alone."
+  causes. Two of those causes hold something new, so the footer links are left alone. **Fix** then writes the
+  change for each new finding, in plain words and as the diff, on the exact line that wrote the element."
+- "Land the first fix: the new hint reuses the site's muted grey, the same grey as the footer's last-updated
+  line on every page. Cluster saw that, so fix changed the one shared colour: one edit, six findings, the new
+  one and five that were already there. The close button and the old refresh button share a pattern, so the
+  same pass labels both. The file field shares nothing, so fix took it alone."
 - "It asks. Nothing is applied until the developer has read the diff and said yes; nothing is committed."
 
 **3 · Green.** Type:
 ```
 npx manta gate --base http://localhost:5173
 ```
-**See.** `New 0`, **Fixed 2** (the refresh button's old debt went with the same pattern), Tolerated down by two,
-and `Gate passed`, `exit 0`.
+**See.** `New 0`, **Fixed 7** (the five "Last updated" lines that shared the grey, and the refresh button on two
+pages, labelled in the same pass), **Tolerated 20**, and `Gate passed`, `exit 0`.
 - "Fixed before anyone else saw it, by a developer who never read WCAG. The count only goes down; the pull
   request will come in green."
 
@@ -200,10 +204,12 @@ as it goes. It ends `Gate failed: 3 new violations at or above minor`.
   pull request.
 
 **4 · Apply the fixes, in one click.** MANTA's review, `3 suggested fixes from MANTA.`, shows each suggestion on its
-lines in the Conversation tab: the close button's name and the file field's label in `Status.jsx`, the hint colour
-in `styles.css`. Read one aloud (the close button's `aria-label="Close"`).
+lines in the Conversation tab: the shared colour on line 1 of `styles.css`, the close button's name and the file
+field's label in `Status.jsx`. Read one aloud (the close button's `aria-label="Close upload dialog"`). The old
+refresh button's label is not a suggestion, because GitHub can only suggest on lines the pull request changed;
+MANTA lists it in its comment under **Also fixable**.
 - "Each suggestion is an edit to the exact source line that wrote the element. The contrast fix goes to the
-  stylesheet, where the colour is set, not to the page."
+  stylesheet, where the shared colour is set, so it clears this hint and the old last-updated lines too."
 
 Right under the review, a comment with a green **Tip**: "One click applies all 3 of MANTA's suggested fixes", and
 under it the box **☐ Apply all 3 suggested fixes**. Tick it. Within about half a minute a commit appears, "Apply
@@ -320,7 +326,10 @@ section).
 
 The command prints the run tokens it copied. See `demo-data/README.md` for how each snapshot is made. The
 `pr` snapshot is also what `npm run demo -- fix` prints and applies: its `cluster-*.json`, `fix-proposals-*.json`
-and `fix-*.patch` must come from a run of `feature/upload-documents` at its tag, or the patch will not apply.
+and `fix-*.patch` must come from a run of `feature/upload-documents` at its tag, or the patch will not apply. The
+shared-colour fix is on line 1 of `src/styles.css`, a line the feature commit changes (it adds the `--scrim`
+token): GitHub only takes a suggestion on a line the pull request changed, so a fix on an untouched line would be
+listed under **Also fixable** instead of applied by the one click. Check that after a refresh.
 
 ---
 
