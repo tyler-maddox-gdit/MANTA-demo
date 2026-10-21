@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceReportTimestamp": "2026-10-21T15-00-12-698Z",
+  "sourceReportTimestamp": "2026-10-21T16-54-07-965Z",
   "edition": {
     "id": "wcag",
     "title": "VPAT® 2.5Rev WCAG Edition",
@@ -45,7 +45,7 @@
     {
       "id": "1.1.1",
       "level": "Partially Supports",
-      "remark": "Two images, one on each of two pages, carry no text alternative: a large hero graphic on the home page and the account page's avatar. Neither offers any wording a screen reader can announce in place of the picture, so a person who cannot see them receives nothing at all where the image sits. These are the images the scan was able to check automatically; other non-text content on these and other pages still needs review by a person.",
+      "remark": "Two images, one on each of two pages, carry no text alternative: the hero graphic on the home page and the avatar on the account page. Neither has an alt attribute nor any other text an assistive technology can announce, so a screen reader user receives nothing in place of the picture. Both are confirmed defects on the pages tested; this evidence speaks only to the images encountered there.",
       "evidence": {
         "outcome": "violations",
         "scan": {
@@ -321,7 +321,7 @@
     },
     {
       "id": "2.4.1",
-      "remark": "Across five pages, 16 in-page links were flagged because the place they point to does not exist: the header's \"skip\" link targets \"#main-content\", but no element on the page carries that id or name, and several links in a news list point to a missing \"#news\" target. Pressing Enter on them therefore moves focus nowhere. That broken targeting is all that was measured; a person has to decide whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block. skip-link-works could not look on 1 of 37 scans (the path is replayed once for each rule, and this rule needed its end loaded again); what it would have found is not shown.",
+      "remark": "Sixteen in-page links across five pages were flagged for a person to judge rather than recorded as failures. What was measured is that activating each one moves nothing: the header link points at \"#main-content\" and several in-content links point at \"#news\", and on those pages no element carries the id or name being targeted. What a person has to decide is whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block. Several of the sixteen read as ordinary in-content links rather than skip mechanisms. skip-link-works could not look on 1 of 35 scans (the path is replayed once for each rule, and this rule needed its end loaded again); what it would have found is not shown.",
       "evidence": {
         "outcome": "needs-review",
         "scan": {
@@ -387,11 +387,11 @@
           "unjudged": 0
         },
         "rationales": [
-          "The header's class=\"skip\" link points at #main-content, but no element carries that id or name; the page's landmark is main#main. The skip link itself moves focus nowhere.",
-          "The header skip link targets #main-content while the page's landmark is main#main; no element has that id or name, so pressing Enter leaves focus in the header.",
-          "The case link in table.cases drives the upload state reflected in this URL; it is in-page content in a td, not a mechanism to bypass repeated blocks, so the concern does not apply.",
-          "A case-id link in the second row's first cell of table.cases — content markup inside the page, not a bypass mechanism ahead of the repeated blocks.",
-          "Third-row case link in table.cases within div.page. Its placement in tabular content, not before the repeated blocks, puts it outside the bypass-blocks question."
+          "The header skip link points at #main-content while this page's landmark is main#main; no element has the id or name \"main-content\", so activating the link moves nothing.",
+          "The header's skip link targets #main-content, yet the landmark here is main#main and no element has the id or name \"main-content\", so the link's destination does not exist.",
+          "This case-id link is what produced the ?upload=BP-2026-10882 state, so it acts as a record control in a td of table.cases rather than a mechanism to bypass repeated blocks.",
+          "A case reference in a table row cell of table.cases, the same pattern as the row link that opened the upload view. Not a bypass mechanism for repeated blocks.",
+          "Per-row case-id anchor inside tbody of table.cases; it sits within the content and offers no skip over blocks, so the rule's concern does not apply to it."
         ],
         "passedRuleIds": [
           "bypass"
@@ -428,7 +428,7 @@
     {
       "id": "2.4.4",
       "level": "Partially Supports",
-      "remark": "Eighteen links across six pages have no text a screen reader can announce. Each is an icon-only link — for example the social media links in the page footer — built from a small graphic that is explicitly hidden from assistive technology, with no label, title or visible wording to replace it. A keyboard or screen reader user reaches these links in the tab order but is given nothing that says where each one leads.",
+      "remark": "Eighteen links across six pages have no text a screen reader can announce. Each is an icon-only link whose sole content is a small inline graphic marked as hidden from assistive technology, so the link is reachable by keyboard yet reaches the user unnamed; a repeated set of social-media icon links accounts for the examples on each page tested. For anyone who cannot see the icon, the destination of these links is not available in any form.",
       "evidence": {
         "outcome": "violations",
         "scan": {
@@ -584,7 +584,7 @@
     {
       "id": "4.1.2",
       "level": "Partially Supports",
-      "remark": "Twenty-four elements across six pages are presented to assistive technology without a usable name. Most are icon-only links, such as the footer's social media links, whose only content is a graphic hidden from screen readers. The benefits application form also has an entry field for a Social Security number with no label of any kind attached to it, so a screen reader user is asked to type into a box that announces no purpose. Other controls on these pages were checked and named correctly.",
+      "remark": "Twenty-two elements across six pages expose no name that assistive technology can read. They include icon-only links whose single graphic is hidden from assistive technology, leaving the control nameless in the keyboard tab order, and an entry field for a Social Security number on the application form with no label, title or other text attached to it. Screen reader and voice-control users cannot tell what these controls are or address them by name.",
       "evidence": {
         "outcome": "violations",
         "scan": {
@@ -599,7 +599,7 @@
           "select-name"
         ],
         "extendedRuleIds": [],
-        "violationNodes": 24,
+        "violationNodes": 22,
         "needsReviewNodes": 0,
         "pages": 6,
         "samples": [
@@ -637,12 +637,9 @@
         "passedRuleIds": [
           "aria-allowed-attr",
           "aria-conditional-attr",
-          "aria-deprecated-role",
           "aria-hidden-body",
           "aria-hidden-focus",
           "aria-prohibited-attr",
-          "aria-required-attr",
-          "aria-roles",
           "aria-valid-attr",
           "aria-valid-attr-value",
           "duplicate-id-aria",
@@ -652,7 +649,10 @@
           "area-alt",
           "aria-braille-equivalent",
           "aria-command-name",
+          "aria-deprecated-role",
           "aria-input-field-name",
+          "aria-required-attr",
+          "aria-roles",
           "aria-tab-name",
           "aria-toggle-field-name",
           "aria-tooltip-name",
@@ -737,7 +737,7 @@
     {
       "id": "1.4.3",
       "level": "Partially Supports",
-      "remark": "Ten pieces of text across six pages are too faint against their background to meet the 4.5:1 minimum for ordinary-size text. The grey \"Last updated\" line that appears in the footer of most pages measures 2.81:1 on white, and the orange \"Pending\" status badge on the status page measures only 2.27:1. Readers with low vision, or anyone viewing the screen in bright light, may not be able to make this text out. axe could not decide 1 element under this criterion (covered by another element); they are not shown.",
+      "remark": "Nine pieces of text across six pages are too faint against their background. The \"Last updated\" line that recurs from page to page is mid-grey on white at 2.81 to 1, and a \"Pending\" status badge on the status page is amber on white at 2.27 to 1, against a 4.5 to 1 threshold for text of that size. Readers with low vision, or anyone viewing in bright light, may be unable to make this text out, including the badge, which carries status meaning.",
       "evidence": {
         "outcome": "violations",
         "scan": {
@@ -749,7 +749,7 @@
           "color-contrast"
         ],
         "extendedRuleIds": [],
-        "violationNodes": 10,
+        "violationNodes": 9,
         "needsReviewNodes": 0,
         "pages": 6,
         "samples": [
@@ -820,7 +820,7 @@
     },
     {
       "id": "1.4.11",
-      "remark": "On two pages, eight form controls — the name, date of birth and Social Security number fields and the household size dropdown on the application form among them — show keyboard focus with a pale yellow outline that measures 1.66:1 against the white page, well under the 3:1 minimum. That outline contrast is what was measured; a person has to decide whether another visual cue identifies the focus.",
+      "remark": "Eight form controls across two pages were flagged for a person to judge. What was measured is the focus outline drawn around each: a pale amber on a white surface at 1.66 to 1, below the 3 to 1 threshold for a visual boundary of this kind. The controls are the first name, last name, date of birth and Social Security number fields and the household size menu on the application form. What a person has to decide is whether another visual cue identifies the focus.",
       "evidence": {
         "outcome": "needs-review",
         "scan": {
@@ -880,17 +880,17 @@
           }
         ],
         "verdicts": {
-          "likelyViolation": 8,
+          "likelyViolation": 0,
           "likelyPass": 0,
-          "cannotTell": 0,
+          "cannotTell": 8,
           "unjudged": 0
         },
         "rationales": [
-          "The dob input's focus ring measures 1.66:1 (rgb(255,190,46) on white), the only identification reported, with no border or fill contrast recorded to carry the cue.",
-          "The only focus identification measured on this text input is outline rgb(255,190,46) on white at 1.66:1, far under 3:1, and no border or fill cue was reported alongside it.",
-          "The select's focus outline rgb(255,190,46) on rgb(255,255,255) measures 1.66:1, the only identification reported for the control, with nothing else recorded above 3:1.",
-          "The income input's focus outline rgb(255,190,46) on white is 1.66:1 — the single cue measured, and the form-wide pattern repeats the same insufficient ring.",
-          "Focus is shown by outline rgb(255,190,46) on rgb(255,255,255) at 1.66:1 — the sole cue measured for this input, and well below 3:1 against the white surface."
+          "Measured evidence covers the outline alone (1.66:1 on white). Deciding whether another visual cue marks focus on this field needs the rendered focus state, which is not here.",
+          "Only the outline was measured, 1.66:1 on white. Whether a second focus cue — border change, fill, shadow, thickness — identifies focus is a rendered appearance this node does not carry.",
+          "For this select only the focus outline was measured (1.66:1). A select's own border or an added shadow could also mark focus; that rendered appearance is not in the payload.",
+          "The node supplies one measurement, outline rgb(255,190,46) on white at 1.66:1. Whether another rendered cue identifies focus on this field is undetermined here.",
+          "The check reports only the focus outline at 1.66:1 against white. Any additional cue on div.field or the input itself would be a rendered style absent from the payload."
         ],
         "passedRuleIds": [],
         "inapplicableRuleIds": []

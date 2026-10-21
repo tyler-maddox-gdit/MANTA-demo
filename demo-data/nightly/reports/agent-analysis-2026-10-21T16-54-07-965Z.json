@@ -2,7 +2,7 @@
   "fullPage": [
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-21T14:58:51.150Z",
+      "timestamp": "2026-10-21T16:52:54.282Z",
       "summary": {
         "totalViolations": 3,
         "totalPasses": 18,
@@ -1386,7 +1386,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-21T14:59:08.317Z",
+      "timestamp": "2026-10-21T16:53:11.231Z",
       "summary": {
         "totalViolations": 4,
         "totalPasses": 22,
@@ -3377,10 +3377,10 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-21T14:59:23.166Z",
+      "timestamp": "2026-10-21T16:53:26.075Z",
       "summary": {
         "totalViolations": 3,
-        "totalPasses": 18,
+        "totalPasses": 17,
         "totalIncomplete": 1,
         "totalInapplicable": 51,
         "critical": 1,
@@ -3458,8 +3458,8 @@
                 ],
                 "source": {
                   "file": "src/pages/Status.jsx",
-                  "startLine": 41,
-                  "endLine": 41,
+                  "startLine": 16,
+                  "endLine": 16,
                   "via": "self"
                 },
                 "matchedRules": [
@@ -3598,8 +3598,8 @@
                 ],
                 "source": {
                   "file": "src/pages/Status.jsx",
-                  "startLine": 52,
-                  "endLine": 52,
+                  "startLine": 27,
+                  "endLine": 27,
                   "via": "self"
                 },
                 "matchedRules": [
@@ -3631,8 +3631,8 @@
                   }
                 ],
                 "box": {
-                  "x": 663.171875,
-                  "y": 247.765625,
+                  "x": 803.234375,
+                  "y": 244.96875,
                   "w": 74.875,
                   "h": 22.78125
                 }
@@ -3693,7 +3693,7 @@
                 ],
                 "box": {
                   "x": 24,
-                  "y": 612.28125,
+                  "y": 589.90625,
                   "w": 1232,
                   "h": 21.609375
                 }
@@ -3822,7 +3822,7 @@
                 ],
                 "box": {
                   "x": 24,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -3907,7 +3907,7 @@
                 ],
                 "box": {
                   "x": 64,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -3992,7 +3992,7 @@
                 ],
                 "box": {
                   "x": 104,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -4077,8 +4077,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 41,
-                "endLine": 41,
+                "startLine": 16,
+                "endLine": 16,
                 "via": "self"
               },
               "matchedRules": [
@@ -4215,8 +4215,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 52,
-                "endLine": 52,
+                "startLine": 27,
+                "endLine": 27,
                 "via": "self"
               },
               "matchedRules": [
@@ -4248,8 +4248,8 @@
                 }
               ],
               "box": {
-                "x": 663.171875,
-                "y": 247.765625,
+                "x": 803.234375,
+                "y": 244.96875,
                 "w": 74.875,
                 "h": 22.78125
               }
@@ -4310,7 +4310,7 @@
               ],
               "box": {
                 "x": 24,
-                "y": 612.28125,
+                "y": 589.90625,
                 "w": 1232,
                 "h": 21.609375
               }
@@ -4439,7 +4439,7 @@
               ],
               "box": {
                 "x": 24,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -4524,7 +4524,7 @@
               ],
               "box": {
                 "x": 64,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -4609,7 +4609,7 @@
               ],
               "box": {
                 "x": 104,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -4732,8 +4732,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
+                "startLine": 23,
+                "endLine": 23,
                 "via": "self"
               },
               "matchedRules": [
@@ -4794,8 +4794,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
+                "startLine": 23,
+                "endLine": 23,
                 "via": "self"
               },
               "matchedRules": [
@@ -4856,8 +4856,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
+                "startLine": 23,
+                "endLine": 23,
                 "via": "self"
               },
               "matchedRules": [
@@ -4918,8 +4918,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
+                "startLine": 23,
+                "endLine": 23,
                 "via": "self"
               },
               "matchedRules": [
@@ -4950,7 +4950,6 @@
         "aria-prohibited-attr",
         "aria-valid-attr-value",
         "aria-valid-attr",
-        "button-name",
         "bypass",
         "color-contrast",
         "document-title",
@@ -5020,7 +5019,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-21T14:59:41.581Z",
+      "timestamp": "2026-10-21T16:53:42.031Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 20,
@@ -6148,13 +6147,13 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-21T14:59:52.340Z",
+      "timestamp": "2026-10-21T16:53:52.785Z",
       "summary": {
-        "totalViolations": 4,
-        "totalPasses": 23,
+        "totalViolations": 3,
+        "totalPasses": 17,
         "totalIncomplete": 1,
-        "totalInapplicable": 42,
-        "critical": 2,
+        "totalInapplicable": 51,
+        "critical": 1,
         "serious": 2,
         "moderate": 0,
         "minor": 0
@@ -6168,7 +6167,7 @@
             "help": "Buttons must have discernible text",
             "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
             "description": "Ensure buttons have discernible text",
-            "affectedElements": 2,
+            "affectedElements": 1,
             "wcagCriteria": [
               {
                 "sc": "4.1.2",
@@ -6229,8 +6228,8 @@
                 ],
                 "source": {
                   "file": "src/pages/Status.jsx",
-                  "startLine": 41,
-                  "endLine": 41,
+                  "startLine": 16,
+                  "endLine": 16,
                   "via": "self"
                 },
                 "matchedRules": [
@@ -6290,270 +6289,12 @@
                   "w": 36,
                   "h": 36
                 }
-              },
-              {
-                "html": "<button type=\"button\" class=\"icon-btn\" id=\"upload-close\"><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg></button>",
-                "target": [
-                  "#upload-close"
-                ],
-                "impact": "critical",
-                "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                "violationId": 10,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "title-row"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 18,
-                  "endLine": 18,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": ".icon-btn"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "button-has-visible-text",
-                    "data": null,
-                    "message": "Element does not have inner text that is visible to screen readers",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-label",
-                    "data": null,
-                    "message": "aria-label attribute does not exist or is empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-labelledby",
-                    "data": null,
-                    "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-title",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no title attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "implicit-label",
-                    "data": null,
-                    "message": "Element does not have an implicit (wrapped) <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "explicit-label",
-                    "data": null,
-                    "message": "Element does not have an explicit <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "presentational-role",
-                    "data": null,
-                    "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                    "relatedTargets": []
-                  }
-                ],
-                "box": {
-                  "x": 651.375,
-                  "y": 245.90625,
-                  "w": 36,
-                  "h": 36
-                }
               }
             ],
             "summary": "Buttons must have discernible text.",
             "why": "Screen readers announce buttons by their text content. Without it, users cannot determine the button's purpose (WCAG 4.1.2).",
             "fix": {
               "html": "Add visible text, or aria-label=\"...\", or a <span class=\"sr-only\">...</span> inside the button."
-            }
-          },
-          {
-            "ruleId": "label",
-            "impact": "critical",
-            "impactDescription": "Completely blocks access for some users — must fix immediately.",
-            "help": "Form elements must have labels",
-            "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
-            "description": "Ensure every form element has a label",
-            "affectedElements": 1,
-            "wcagCriteria": [
-              {
-                "sc": "4.1.2",
-                "title": "Name, Role, Value",
-                "level": "A"
-              }
-            ],
-            "wcagTags": [
-              "cat.forms",
-              "WCAG 2.0 Level A",
-              "WCAG 4.1.2",
-              "Section 508",
-              "section508.22.n",
-              "TTv5",
-              "TT5.c",
-              "EN-301-549",
-              "EN-9.4.1.2",
-              "W3C ACT Rules",
-              "RGAAv4",
-              "RGAA-11.1.1"
-            ],
-            "nodes": [
-              {
-                "html": "<input type=\"file\" id=\"upload-file\">",
-                "target": [
-                  "#upload-file"
-                ],
-                "impact": "critical",
-                "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                "violationId": 12,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "root"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 21,
-                  "endLine": 21,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": "input, select"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "implicit-label",
-                    "data": null,
-                    "message": "Element does not have an implicit (wrapped) <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "explicit-label",
-                    "data": null,
-                    "message": "Element does not have an explicit <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-label",
-                    "data": null,
-                    "message": "aria-label attribute does not exist or is empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-labelledby",
-                    "data": null,
-                    "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-title",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no title attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-placeholder",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no placeholder attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "presentational-role",
-                    "data": null,
-                    "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                    "relatedTargets": []
-                  }
-                ],
-                "box": {
-                  "x": 424,
-                  "y": 347.859375,
-                  "w": 354.1875,
-                  "h": 43
-                }
-              }
-            ],
-            "summary": "Form inputs must have associated labels.",
-            "why": "Without a label, assistive technology cannot convey the purpose of form controls (WCAG 1.3.1, 4.1.2).",
-            "fix": {
-              "html": "Use <label for=\"id\">...</label> paired with the input's id, or wrap the input inside a <label>."
             }
           }
         ],
@@ -6565,7 +6306,7 @@
             "help": "Elements must meet minimum color contrast ratio thresholds",
             "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
             "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
-            "affectedElements": 3,
+            "affectedElements": 2,
             "wcagCriteria": [
               {
                 "sc": "1.4.3",
@@ -6627,8 +6368,8 @@
                 ],
                 "source": {
                   "file": "src/pages/Status.jsx",
-                  "startLine": 52,
-                  "endLine": 52,
+                  "startLine": 27,
+                  "endLine": 27,
                   "via": "self"
                 },
                 "matchedRules": [
@@ -6660,96 +6401,10 @@
                   }
                 ],
                 "box": {
-                  "x": 663.171875,
-                  "y": 247.765625,
+                  "x": 803.234375,
+                  "y": 244.96875,
                   "w": 74.875,
                   "h": 22.78125
-                }
-              },
-              {
-                "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
-                "target": [
-                  "#upload-hint"
-                ],
-                "impact": "serious",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                "violationId": 11,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "root"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 22,
-                  "endLine": 22,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": ".muted"
-                  },
-                  {
-                    "selectorText": ".hint"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "color-contrast",
-                    "data": {
-                      "fgColor": "#9a9a9a",
-                      "bgColor": "#ffffff",
-                      "contrastRatio": 2.81,
-                      "fontSize": "10.8pt (14.4px)",
-                      "fontWeight": "normal",
-                      "messageKey": null,
-                      "expectedContrastRatio": "4.5:1"
-                    },
-                    "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                    "relatedTargets": [
-                      [
-                        "#upload-dialog"
-                      ]
-                    ]
-                  }
-                ],
-                "box": {
-                  "x": 424,
-                  "y": 405.25,
-                  "w": 432,
-                  "h": 21.609375
                 }
               },
               {
@@ -6808,7 +6463,7 @@
                 ],
                 "box": {
                   "x": 24,
-                  "y": 612.28125,
+                  "y": 589.90625,
                   "w": 1232,
                   "h": 21.609375
                 }
@@ -6937,7 +6592,7 @@
                 ],
                 "box": {
                   "x": 24,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -7022,7 +6677,7 @@
                 ],
                 "box": {
                   "x": 64,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -7107,7 +6762,7 @@
                 ],
                 "box": {
                   "x": 104,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -7131,7 +6786,7 @@
           "help": "Buttons must have discernible text",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
           "description": "Ensure buttons have discernible text",
-          "affectedElements": 2,
+          "affectedElements": 1,
           "wcagCriteria": [
             {
               "sc": "4.1.2",
@@ -7192,8 +6847,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 41,
-                "endLine": 41,
+                "startLine": 16,
+                "endLine": 16,
                 "via": "self"
               },
               "matchedRules": [
@@ -7253,116 +6908,6 @@
                 "w": 36,
                 "h": 36
               }
-            },
-            {
-              "html": "<button type=\"button\" class=\"icon-btn\" id=\"upload-close\"><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg></button>",
-              "target": [
-                "#upload-close"
-              ],
-              "impact": "critical",
-              "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-              "violationId": 10,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "title-row"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 18,
-                "endLine": 18,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": ".icon-btn"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "button-has-visible-text",
-                  "data": null,
-                  "message": "Element does not have inner text that is visible to screen readers",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-label",
-                  "data": null,
-                  "message": "aria-label attribute does not exist or is empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-labelledby",
-                  "data": null,
-                  "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-title",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no title attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "implicit-label",
-                  "data": null,
-                  "message": "Element does not have an implicit (wrapped) <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "explicit-label",
-                  "data": null,
-                  "message": "Element does not have an explicit <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "presentational-role",
-                  "data": null,
-                  "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                  "relatedTargets": []
-                }
-              ],
-              "box": {
-                "x": 651.375,
-                "y": 245.90625,
-                "w": 36,
-                "h": 36
-              }
             }
           ],
           "summary": "Buttons must have discernible text.",
@@ -7378,7 +6923,7 @@
           "help": "Elements must meet minimum color contrast ratio thresholds",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
-          "affectedElements": 3,
+          "affectedElements": 2,
           "wcagCriteria": [
             {
               "sc": "1.4.3",
@@ -7440,8 +6985,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 52,
-                "endLine": 52,
+                "startLine": 27,
+                "endLine": 27,
                 "via": "self"
               },
               "matchedRules": [
@@ -7473,96 +7018,10 @@
                 }
               ],
               "box": {
-                "x": 663.171875,
-                "y": 247.765625,
+                "x": 803.234375,
+                "y": 244.96875,
                 "w": 74.875,
                 "h": 22.78125
-              }
-            },
-            {
-              "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
-              "target": [
-                "#upload-hint"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-              "violationId": 11,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 22,
-                "endLine": 22,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": ".muted"
-                },
-                {
-                  "selectorText": ".hint"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "color-contrast",
-                  "data": {
-                    "fgColor": "#9a9a9a",
-                    "bgColor": "#ffffff",
-                    "contrastRatio": 2.81,
-                    "fontSize": "10.8pt (14.4px)",
-                    "fontWeight": "normal",
-                    "messageKey": null,
-                    "expectedContrastRatio": "4.5:1"
-                  },
-                  "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                  "relatedTargets": [
-                    [
-                      "#upload-dialog"
-                    ]
-                  ]
-                }
-              ],
-              "box": {
-                "x": 424,
-                "y": 405.25,
-                "w": 432,
-                "h": 21.609375
               }
             },
             {
@@ -7621,7 +7080,7 @@
               ],
               "box": {
                 "x": 24,
-                "y": 612.28125,
+                "y": 589.90625,
                 "w": 1232,
                 "h": 21.609375
               }
@@ -7631,154 +7090,6 @@
           "why": "Low contrast text is difficult or impossible to read for users with low vision (WCAG 1.4.3).",
           "fix": {
             "html": "Darken the foreground color or lighten the background. Use https://webaim.org/resources/contrastchecker/ to verify."
-          }
-        },
-        {
-          "ruleId": "label",
-          "impact": "critical",
-          "impactDescription": "Completely blocks access for some users — must fix immediately.",
-          "help": "Form elements must have labels",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
-          "description": "Ensure every form element has a label",
-          "affectedElements": 1,
-          "wcagCriteria": [
-            {
-              "sc": "4.1.2",
-              "title": "Name, Role, Value",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "cat.forms",
-            "WCAG 2.0 Level A",
-            "WCAG 4.1.2",
-            "Section 508",
-            "section508.22.n",
-            "TTv5",
-            "TT5.c",
-            "EN-301-549",
-            "EN-9.4.1.2",
-            "W3C ACT Rules",
-            "RGAAv4",
-            "RGAA-11.1.1"
-          ],
-          "nodes": [
-            {
-              "html": "<input type=\"file\" id=\"upload-file\">",
-              "target": [
-                "#upload-file"
-              ],
-              "impact": "critical",
-              "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-              "violationId": 12,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 21,
-                "endLine": 21,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "input, select"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "implicit-label",
-                  "data": null,
-                  "message": "Element does not have an implicit (wrapped) <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "explicit-label",
-                  "data": null,
-                  "message": "Element does not have an explicit <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-label",
-                  "data": null,
-                  "message": "aria-label attribute does not exist or is empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-labelledby",
-                  "data": null,
-                  "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-title",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no title attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-placeholder",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no placeholder attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "presentational-role",
-                  "data": null,
-                  "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                  "relatedTargets": []
-                }
-              ],
-              "box": {
-                "x": 424,
-                "y": 347.859375,
-                "w": 354.1875,
-                "h": 43
-              }
-            }
-          ],
-          "summary": "Form inputs must have associated labels.",
-          "why": "Without a label, assistive technology cannot convey the purpose of form controls (WCAG 1.3.1, 4.1.2).",
-          "fix": {
-            "html": "Use <label for=\"id\">...</label> paired with the input's id, or wrap the input inside a <label>."
           }
         },
         {
@@ -7898,7 +7209,7 @@
               ],
               "box": {
                 "x": 24,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -7983,7 +7294,7 @@
               ],
               "box": {
                 "x": 64,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -8068,7 +7379,7 @@
               ],
               "box": {
                 "x": 104,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -8191,8 +7502,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
+                "startLine": 23,
+                "endLine": 23,
                 "via": "self"
               },
               "matchedRules": [
@@ -8253,8 +7564,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
+                "startLine": 23,
+                "endLine": 23,
                 "via": "self"
               },
               "matchedRules": [
@@ -8315,8 +7626,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
+                "startLine": 23,
+                "endLine": 23,
                 "via": "self"
               },
               "matchedRules": [
@@ -8377,8 +7688,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
+                "startLine": 23,
+                "endLine": 23,
                 "via": "self"
               },
               "matchedRules": [
@@ -8404,20 +7715,14 @@
       "passedRuleIds": [
         "aria-allowed-attr",
         "aria-conditional-attr",
-        "aria-deprecated-role",
         "aria-hidden-body",
         "aria-hidden-focus",
         "aria-prohibited-attr",
-        "aria-required-attr",
-        "aria-roles",
         "aria-valid-attr-value",
         "aria-valid-attr",
-        "button-name",
         "bypass",
         "color-contrast",
         "document-title",
-        "duplicate-id-aria",
-        "form-field-multiple-labels",
         "html-has-lang",
         "html-lang-valid",
         "link-name",
@@ -8430,11 +7735,14 @@
         "area-alt",
         "aria-braille-equivalent",
         "aria-command-name",
+        "aria-deprecated-role",
         "aria-input-field-name",
         "aria-meter-name",
         "aria-progressbar-name",
+        "aria-required-attr",
         "aria-required-children",
         "aria-required-parent",
+        "aria-roles",
         "aria-tab-name",
         "aria-toggle-field-name",
         "aria-tooltip-name",
@@ -8442,6 +7750,8 @@
         "avoid-inline-spacing",
         "definition-list",
         "dlitem",
+        "duplicate-id-aria",
+        "form-field-multiple-labels",
         "frame-focusable-content",
         "frame-title-unique",
         "frame-title",
@@ -8449,6 +7759,7 @@
         "image-alt",
         "input-button-name",
         "input-image-alt",
+        "label",
         "link-in-text-block",
         "list",
         "listitem",
@@ -8467,29 +7778,20 @@
         "media-video",
         "media-audio",
         "media-script-audio",
+        "form-input-purpose",
+        "form-control",
+        "form",
         "auth-field",
         "motion-listener"
       ],
       "couldNotLook": [],
-      "dropped": [
-        {
-          "rule": "color-contrast",
-          "stopReason": "elmPartiallyObscuring",
-          "label": "covered by another element",
-          "nodes": 1,
-          "targets": [
-            [
-              "#upload-dialog > p:nth-child(2)"
-            ]
-          ]
-        }
-      ]
+      "dropped": []
     }
   ],
   "components": [
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-21T14:58:51.312Z",
+      "timestamp": "2026-10-21T16:52:54.444Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 8,
@@ -8588,7 +7890,7 @@
     },
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-21T14:58:51.434Z",
+      "timestamp": "2026-10-21T16:52:54.565Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -8687,7 +7989,7 @@
     },
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-21T14:58:51.556Z",
+      "timestamp": "2026-10-21T16:52:54.689Z",
       "summary": {
         "totalViolations": 1,
         "totalPasses": 11,
@@ -9025,7 +8327,7 @@
     },
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-21T14:58:51.681Z",
+      "timestamp": "2026-10-21T16:52:54.813Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 2,
@@ -9915,7 +9217,7 @@
     },
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-21T14:58:51.798Z",
+      "timestamp": "2026-10-21T16:52:54.934Z",
       "summary": {
         "totalViolations": 1,
         "totalPasses": 3,
@@ -10253,7 +9555,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-21T14:59:08.486Z",
+      "timestamp": "2026-10-21T16:53:11.401Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 8,
@@ -10352,7 +9654,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-21T14:59:08.603Z",
+      "timestamp": "2026-10-21T16:53:11.520Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -10451,7 +9753,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-21T14:59:08.726Z",
+      "timestamp": "2026-10-21T16:53:11.644Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 14,
@@ -11583,7 +10885,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-21T14:59:08.873Z",
+      "timestamp": "2026-10-21T16:53:11.791Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 2,
@@ -12473,7 +11775,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-21T14:59:08.998Z",
+      "timestamp": "2026-10-21T16:53:11.915Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 7,
@@ -13605,7 +12907,7 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-21T14:59:23.311Z",
+      "timestamp": "2026-10-21T16:53:26.215Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 8,
@@ -13704,7 +13006,7 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-21T14:59:23.432Z",
+      "timestamp": "2026-10-21T16:53:26.332Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -13803,10 +13105,10 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-21T14:59:23.560Z",
+      "timestamp": "2026-10-21T16:53:26.453Z",
       "summary": {
         "totalViolations": 2,
-        "totalPasses": 7,
+        "totalPasses": 6,
         "totalIncomplete": 0,
         "totalInapplicable": 61,
         "critical": 1,
@@ -13884,8 +13186,8 @@
                 ],
                 "source": {
                   "file": "src/pages/Status.jsx",
-                  "startLine": 41,
-                  "endLine": 41,
+                  "startLine": 16,
+                  "endLine": 16,
                   "via": "self"
                 },
                 "matchedRules": [
@@ -14024,8 +13326,8 @@
                 ],
                 "source": {
                   "file": "src/pages/Status.jsx",
-                  "startLine": 52,
-                  "endLine": 52,
+                  "startLine": 27,
+                  "endLine": 27,
                   "via": "self"
                 },
                 "matchedRules": [
@@ -14057,8 +13359,8 @@
                   }
                 ],
                 "box": {
-                  "x": 663.171875,
-                  "y": 247.765625,
+                  "x": 803.234375,
+                  "y": 244.96875,
                   "w": 74.875,
                   "h": 22.78125
                 }
@@ -14143,8 +13445,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 41,
-                "endLine": 41,
+                "startLine": 16,
+                "endLine": 16,
                 "via": "self"
               },
               "matchedRules": [
@@ -14281,8 +13583,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 52,
-                "endLine": 52,
+                "startLine": 27,
+                "endLine": 27,
                 "via": "self"
               },
               "matchedRules": [
@@ -14314,8 +13616,8 @@
                 }
               ],
               "box": {
-                "x": 663.171875,
-                "y": 247.765625,
+                "x": 803.234375,
+                "y": 244.96875,
                 "w": 74.875,
                 "h": 22.78125
               }
@@ -14331,7 +13633,6 @@
       "needsReview": [],
       "passedRuleIds": [
         "aria-hidden-focus",
-        "button-name",
         "color-contrast",
         "link-name",
         "nested-interactive",
@@ -14409,7 +13710,7 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-21T14:59:23.682Z",
+      "timestamp": "2026-10-21T16:53:26.579Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 2,
@@ -14507,7 +13808,7 @@
                 ],
                 "box": {
                   "x": 24,
-                  "y": 612.28125,
+                  "y": 589.90625,
                   "w": 1232,
                   "h": 21.609375
                 }
@@ -14636,7 +13937,7 @@
                 ],
                 "box": {
                   "x": 24,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -14721,7 +14022,7 @@
                 ],
                 "box": {
                   "x": 64,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -14806,7 +14107,7 @@
                 ],
                 "box": {
                   "x": 104,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -14907,7 +14208,7 @@
               ],
               "box": {
                 "x": 24,
-                "y": 612.28125,
+                "y": 589.90625,
                 "w": 1232,
                 "h": 21.609375
               }
@@ -15036,7 +14337,7 @@
               ],
               "box": {
                 "x": 24,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -15121,7 +14422,7 @@
               ],
               "box": {
                 "x": 64,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -15206,7 +14507,7 @@
               ],
               "box": {
                 "x": 104,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -15299,12 +14600,12 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-21T14:59:23.804Z",
+      "timestamp": "2026-10-21T16:53:26.700Z",
       "summary": {
         "totalViolations": 1,
-        "totalPasses": 6,
+        "totalPasses": 4,
         "totalIncomplete": 0,
-        "totalInapplicable": 62,
+        "totalInapplicable": 64,
         "critical": 0,
         "serious": 1,
         "moderate": 0,
@@ -15382,8 +14683,8 @@
                 ],
                 "source": {
                   "file": "src/pages/Status.jsx",
-                  "startLine": 52,
-                  "endLine": 52,
+                  "startLine": 27,
+                  "endLine": 27,
                   "via": "self"
                 },
                 "matchedRules": [
@@ -15415,8 +14716,8 @@
                   }
                 ],
                 "box": {
-                  "x": 663.171875,
-                  "y": 247.765625,
+                  "x": 803.234375,
+                  "y": 244.96875,
                   "w": 74.875,
                   "h": 22.78125
                 }
@@ -15502,8 +14803,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 52,
-                "endLine": 52,
+                "startLine": 27,
+                "endLine": 27,
                 "via": "self"
               },
               "matchedRules": [
@@ -15535,8 +14836,8 @@
                 }
               ],
               "box": {
-                "x": 663.171875,
-                "y": 247.765625,
+                "x": 803.234375,
+                "y": 244.96875,
                 "w": 74.875,
                 "h": 22.78125
               }
@@ -15551,10 +14852,8 @@
       ],
       "needsReview": [],
       "passedRuleIds": [
-        "button-name",
         "color-contrast",
         "link-name",
-        "nested-interactive",
         "td-headers-attr",
         "th-has-data-cells"
       ],
@@ -15582,6 +14881,7 @@
         "aria-valid-attr",
         "autocomplete-valid",
         "avoid-inline-spacing",
+        "button-name",
         "definition-list",
         "dlitem",
         "document-title",
@@ -15603,6 +14903,7 @@
         "marquee",
         "meta-refresh",
         "meta-viewport",
+        "nested-interactive",
         "object-alt",
         "role-img-alt",
         "scrollable-region-focusable",
@@ -15630,7 +14931,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-21T14:59:41.723Z",
+      "timestamp": "2026-10-21T16:53:42.173Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 8,
@@ -15729,7 +15030,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-21T14:59:41.839Z",
+      "timestamp": "2026-10-21T16:53:42.289Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -15828,7 +15129,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-21T14:59:41.954Z",
+      "timestamp": "2026-10-21T16:53:42.405Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -16096,7 +15397,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-21T14:59:42.075Z",
+      "timestamp": "2026-10-21T16:53:42.526Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 2,
@@ -16986,7 +16287,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-21T14:59:42.190Z",
+      "timestamp": "2026-10-21T16:53:42.641Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -17254,7 +16555,7 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-21T14:59:52.488Z",
+      "timestamp": "2026-10-21T16:53:52.924Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 8,
@@ -17353,7 +16654,7 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-21T14:59:52.606Z",
+      "timestamp": "2026-10-21T16:53:53.046Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -17452,13 +16753,13 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-21T14:59:52.731Z",
+      "timestamp": "2026-10-21T16:53:53.167Z",
       "summary": {
-        "totalViolations": 3,
-        "totalPasses": 17,
+        "totalViolations": 2,
+        "totalPasses": 6,
         "totalIncomplete": 0,
-        "totalInapplicable": 47,
-        "critical": 2,
+        "totalInapplicable": 61,
+        "critical": 1,
         "serious": 1,
         "moderate": 0,
         "minor": 0
@@ -17472,7 +16773,7 @@
             "help": "Buttons must have discernible text",
             "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
             "description": "Ensure buttons have discernible text",
-            "affectedElements": 2,
+            "affectedElements": 1,
             "wcagCriteria": [
               {
                 "sc": "4.1.2",
@@ -17533,8 +16834,8 @@
                 ],
                 "source": {
                   "file": "src/pages/Status.jsx",
-                  "startLine": 41,
-                  "endLine": 41,
+                  "startLine": 16,
+                  "endLine": 16,
                   "via": "self"
                 },
                 "matchedRules": [
@@ -17594,270 +16895,12 @@
                   "w": 36,
                   "h": 36
                 }
-              },
-              {
-                "html": "<button type=\"button\" class=\"icon-btn\" id=\"upload-close\"><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg></button>",
-                "target": [
-                  "#upload-close"
-                ],
-                "impact": "critical",
-                "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                "violationId": 10,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "title-row"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 18,
-                  "endLine": 18,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": ".icon-btn"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "button-has-visible-text",
-                    "data": null,
-                    "message": "Element does not have inner text that is visible to screen readers",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-label",
-                    "data": null,
-                    "message": "aria-label attribute does not exist or is empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-labelledby",
-                    "data": null,
-                    "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-title",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no title attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "implicit-label",
-                    "data": null,
-                    "message": "Element does not have an implicit (wrapped) <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "explicit-label",
-                    "data": null,
-                    "message": "Element does not have an explicit <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "presentational-role",
-                    "data": null,
-                    "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                    "relatedTargets": []
-                  }
-                ],
-                "box": {
-                  "x": 651.375,
-                  "y": 245.90625,
-                  "w": 36,
-                  "h": 36
-                }
               }
             ],
             "summary": "Buttons must have discernible text.",
             "why": "Screen readers announce buttons by their text content. Without it, users cannot determine the button's purpose (WCAG 4.1.2).",
             "fix": {
               "html": "Add visible text, or aria-label=\"...\", or a <span class=\"sr-only\">...</span> inside the button."
-            }
-          },
-          {
-            "ruleId": "label",
-            "impact": "critical",
-            "impactDescription": "Completely blocks access for some users — must fix immediately.",
-            "help": "Form elements must have labels",
-            "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
-            "description": "Ensure every form element has a label",
-            "affectedElements": 1,
-            "wcagCriteria": [
-              {
-                "sc": "4.1.2",
-                "title": "Name, Role, Value",
-                "level": "A"
-              }
-            ],
-            "wcagTags": [
-              "cat.forms",
-              "WCAG 2.0 Level A",
-              "WCAG 4.1.2",
-              "Section 508",
-              "section508.22.n",
-              "TTv5",
-              "TT5.c",
-              "EN-301-549",
-              "EN-9.4.1.2",
-              "W3C ACT Rules",
-              "RGAAv4",
-              "RGAA-11.1.1"
-            ],
-            "nodes": [
-              {
-                "html": "<input type=\"file\" id=\"upload-file\">",
-                "target": [
-                  "#upload-file"
-                ],
-                "impact": "critical",
-                "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                "violationId": 12,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "root"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 21,
-                  "endLine": 21,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": "input, select"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "implicit-label",
-                    "data": null,
-                    "message": "Element does not have an implicit (wrapped) <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "explicit-label",
-                    "data": null,
-                    "message": "Element does not have an explicit <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-label",
-                    "data": null,
-                    "message": "aria-label attribute does not exist or is empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-labelledby",
-                    "data": null,
-                    "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-title",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no title attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-placeholder",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no placeholder attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "presentational-role",
-                    "data": null,
-                    "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                    "relatedTargets": []
-                  }
-                ],
-                "box": {
-                  "x": 424,
-                  "y": 347.859375,
-                  "w": 354.1875,
-                  "h": 43
-                }
-              }
-            ],
-            "summary": "Form inputs must have associated labels.",
-            "why": "Without a label, assistive technology cannot convey the purpose of form controls (WCAG 1.3.1, 4.1.2).",
-            "fix": {
-              "html": "Use <label for=\"id\">...</label> paired with the input's id, or wrap the input inside a <label>."
             }
           }
         ],
@@ -17869,7 +16912,7 @@
             "help": "Elements must meet minimum color contrast ratio thresholds",
             "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
             "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
-            "affectedElements": 2,
+            "affectedElements": 1,
             "wcagCriteria": [
               {
                 "sc": "1.4.3",
@@ -17931,8 +16974,8 @@
                 ],
                 "source": {
                   "file": "src/pages/Status.jsx",
-                  "startLine": 52,
-                  "endLine": 52,
+                  "startLine": 27,
+                  "endLine": 27,
                   "via": "self"
                 },
                 "matchedRules": [
@@ -17964,96 +17007,10 @@
                   }
                 ],
                 "box": {
-                  "x": 663.171875,
-                  "y": 247.765625,
+                  "x": 803.234375,
+                  "y": 244.96875,
                   "w": 74.875,
                   "h": 22.78125
-                }
-              },
-              {
-                "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
-                "target": [
-                  "#upload-hint"
-                ],
-                "impact": "serious",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                "violationId": 11,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "root"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 22,
-                  "endLine": 22,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": ".muted"
-                  },
-                  {
-                    "selectorText": ".hint"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "color-contrast",
-                    "data": {
-                      "fgColor": "#9a9a9a",
-                      "bgColor": "#ffffff",
-                      "contrastRatio": 2.81,
-                      "fontSize": "10.8pt (14.4px)",
-                      "fontWeight": "normal",
-                      "messageKey": null,
-                      "expectedContrastRatio": "4.5:1"
-                    },
-                    "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                    "relatedTargets": [
-                      [
-                        "#upload-dialog"
-                      ]
-                    ]
-                  }
-                ],
-                "box": {
-                  "x": 424,
-                  "y": 405.25,
-                  "w": 432,
-                  "h": 21.609375
                 }
               }
             ],
@@ -18075,7 +17032,7 @@
           "help": "Buttons must have discernible text",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
           "description": "Ensure buttons have discernible text",
-          "affectedElements": 2,
+          "affectedElements": 1,
           "wcagCriteria": [
             {
               "sc": "4.1.2",
@@ -18136,8 +17093,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 41,
-                "endLine": 41,
+                "startLine": 16,
+                "endLine": 16,
                 "via": "self"
               },
               "matchedRules": [
@@ -18197,116 +17154,6 @@
                 "w": 36,
                 "h": 36
               }
-            },
-            {
-              "html": "<button type=\"button\" class=\"icon-btn\" id=\"upload-close\"><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg></button>",
-              "target": [
-                "#upload-close"
-              ],
-              "impact": "critical",
-              "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-              "violationId": 10,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "title-row"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 18,
-                "endLine": 18,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": ".icon-btn"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "button-has-visible-text",
-                  "data": null,
-                  "message": "Element does not have inner text that is visible to screen readers",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-label",
-                  "data": null,
-                  "message": "aria-label attribute does not exist or is empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-labelledby",
-                  "data": null,
-                  "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-title",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no title attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "implicit-label",
-                  "data": null,
-                  "message": "Element does not have an implicit (wrapped) <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "explicit-label",
-                  "data": null,
-                  "message": "Element does not have an explicit <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "presentational-role",
-                  "data": null,
-                  "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                  "relatedTargets": []
-                }
-              ],
-              "box": {
-                "x": 651.375,
-                "y": 245.90625,
-                "w": 36,
-                "h": 36
-              }
             }
           ],
           "summary": "Buttons must have discernible text.",
@@ -18322,7 +17169,7 @@
           "help": "Elements must meet minimum color contrast ratio thresholds",
           "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
-          "affectedElements": 2,
+          "affectedElements": 1,
           "wcagCriteria": [
             {
               "sc": "1.4.3",
@@ -18384,8 +17231,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 52,
-                "endLine": 52,
+                "startLine": 27,
+                "endLine": 27,
                 "via": "self"
               },
               "matchedRules": [
@@ -18417,96 +17264,10 @@
                 }
               ],
               "box": {
-                "x": 663.171875,
-                "y": 247.765625,
+                "x": 803.234375,
+                "y": 244.96875,
                 "w": 74.875,
                 "h": 22.78125
-              }
-            },
-            {
-              "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
-              "target": [
-                "#upload-hint"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-              "violationId": 11,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 22,
-                "endLine": 22,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": ".muted"
-                },
-                {
-                  "selectorText": ".hint"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "color-contrast",
-                  "data": {
-                    "fgColor": "#9a9a9a",
-                    "bgColor": "#ffffff",
-                    "contrastRatio": 2.81,
-                    "fontSize": "10.8pt (14.4px)",
-                    "fontWeight": "normal",
-                    "messageKey": null,
-                    "expectedContrastRatio": "4.5:1"
-                  },
-                  "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                  "relatedTargets": [
-                    [
-                      "#upload-dialog"
-                    ]
-                  ]
-                }
-              ],
-              "box": {
-                "x": 424,
-                "y": 405.25,
-                "w": 432,
-                "h": 21.609375
               }
             }
           ],
@@ -18515,171 +17276,12 @@
           "fix": {
             "html": "Darken the foreground color or lighten the background. Use https://webaim.org/resources/contrastchecker/ to verify."
           }
-        },
-        {
-          "ruleId": "label",
-          "impact": "critical",
-          "impactDescription": "Completely blocks access for some users — must fix immediately.",
-          "help": "Form elements must have labels",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
-          "description": "Ensure every form element has a label",
-          "affectedElements": 1,
-          "wcagCriteria": [
-            {
-              "sc": "4.1.2",
-              "title": "Name, Role, Value",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "cat.forms",
-            "WCAG 2.0 Level A",
-            "WCAG 4.1.2",
-            "Section 508",
-            "section508.22.n",
-            "TTv5",
-            "TT5.c",
-            "EN-301-549",
-            "EN-9.4.1.2",
-            "W3C ACT Rules",
-            "RGAAv4",
-            "RGAA-11.1.1"
-          ],
-          "nodes": [
-            {
-              "html": "<input type=\"file\" id=\"upload-file\">",
-              "target": [
-                "#upload-file"
-              ],
-              "impact": "critical",
-              "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-              "violationId": 12,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 21,
-                "endLine": 21,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "input, select"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "implicit-label",
-                  "data": null,
-                  "message": "Element does not have an implicit (wrapped) <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "explicit-label",
-                  "data": null,
-                  "message": "Element does not have an explicit <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-label",
-                  "data": null,
-                  "message": "aria-label attribute does not exist or is empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-labelledby",
-                  "data": null,
-                  "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-title",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no title attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-placeholder",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no placeholder attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "presentational-role",
-                  "data": null,
-                  "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                  "relatedTargets": []
-                }
-              ],
-              "box": {
-                "x": 424,
-                "y": 347.859375,
-                "w": 354.1875,
-                "h": 43
-              }
-            }
-          ],
-          "summary": "Form inputs must have associated labels.",
-          "why": "Without a label, assistive technology cannot convey the purpose of form controls (WCAG 1.3.1, 4.1.2).",
-          "fix": {
-            "html": "Use <label for=\"id\">...</label> paired with the input's id, or wrap the input inside a <label>."
-          }
         }
       ],
       "needsReview": [],
       "passedRuleIds": [
-        "aria-allowed-attr",
-        "aria-conditional-attr",
-        "aria-deprecated-role",
         "aria-hidden-focus",
-        "aria-prohibited-attr",
-        "aria-required-attr",
-        "aria-roles",
-        "aria-valid-attr-value",
-        "aria-valid-attr",
-        "button-name",
         "color-contrast",
-        "duplicate-id-aria",
-        "form-field-multiple-labels",
         "link-name",
         "nested-interactive",
         "td-headers-attr",
@@ -18687,22 +17289,32 @@
       ],
       "inapplicableRuleIds": [
         "area-alt",
+        "aria-allowed-attr",
         "aria-braille-equivalent",
         "aria-command-name",
+        "aria-conditional-attr",
+        "aria-deprecated-role",
         "aria-hidden-body",
         "aria-input-field-name",
         "aria-meter-name",
         "aria-progressbar-name",
+        "aria-prohibited-attr",
+        "aria-required-attr",
         "aria-required-children",
         "aria-required-parent",
+        "aria-roles",
         "aria-tab-name",
         "aria-toggle-field-name",
         "aria-tooltip-name",
+        "aria-valid-attr-value",
+        "aria-valid-attr",
         "autocomplete-valid",
         "avoid-inline-spacing",
         "definition-list",
         "dlitem",
         "document-title",
+        "duplicate-id-aria",
+        "form-field-multiple-labels",
         "frame-focusable-content",
         "frame-title-unique",
         "frame-title",
@@ -18712,6 +17324,7 @@
         "image-alt",
         "input-button-name",
         "input-image-alt",
+        "label",
         "link-in-text-block",
         "list",
         "listitem",
@@ -18731,30 +17344,21 @@
         "media-video",
         "media-audio",
         "media-script-audio",
+        "form-input-purpose",
+        "form-control",
+        "form",
         "auth-field",
         "motion-listener"
       ],
       "couldNotLook": [],
-      "dropped": [
-        {
-          "rule": "color-contrast",
-          "stopReason": "elmPartiallyObscuring",
-          "label": "covered by another element",
-          "nodes": 1,
-          "targets": [
-            [
-              "#upload-dialog > p:nth-child(2)"
-            ]
-          ]
-        }
-      ],
+      "dropped": [],
       "componentName": "Main Content",
       "selector": "main",
       "context": "landmark"
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-21T14:59:52.860Z",
+      "timestamp": "2026-10-21T16:53:53.289Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 2,
@@ -18852,7 +17456,7 @@
                 ],
                 "box": {
                   "x": 24,
-                  "y": 612.28125,
+                  "y": 589.90625,
                   "w": 1232,
                   "h": 21.609375
                 }
@@ -18981,7 +17585,7 @@
                 ],
                 "box": {
                   "x": 24,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -19066,7 +17670,7 @@
                 ],
                 "box": {
                   "x": 64,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -19151,7 +17755,7 @@
                 ],
                 "box": {
                   "x": 104,
-                  "y": 529.890625,
+                  "y": 507.515625,
                   "w": 32,
                   "h": 32
                 }
@@ -19252,7 +17856,7 @@
               ],
               "box": {
                 "x": 24,
-                "y": 612.28125,
+                "y": 589.90625,
                 "w": 1232,
                 "h": 21.609375
               }
@@ -19381,7 +17985,7 @@
               ],
               "box": {
                 "x": 24,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -19466,7 +18070,7 @@
               ],
               "box": {
                 "x": 64,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -19551,7 +18155,7 @@
               ],
               "box": {
                 "x": 104,
-                "y": 529.890625,
+                "y": 507.515625,
                 "w": 32,
                 "h": 32
               }
@@ -19644,1896 +18248,12 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-21T14:59:52.978Z",
-      "summary": {
-        "totalViolations": 3,
-        "totalPasses": 14,
-        "totalIncomplete": 0,
-        "totalInapplicable": 50,
-        "critical": 2,
-        "serious": 1,
-        "moderate": 0,
-        "minor": 0
-      },
-      "violationsByImpact": {
-        "critical": [
-          {
-            "ruleId": "button-name",
-            "impact": "critical",
-            "impactDescription": "Completely blocks access for some users — must fix immediately.",
-            "help": "Buttons must have discernible text",
-            "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
-            "description": "Ensure buttons have discernible text",
-            "affectedElements": 1,
-            "wcagCriteria": [
-              {
-                "sc": "4.1.2",
-                "title": "Name, Role, Value",
-                "level": "A"
-              }
-            ],
-            "wcagTags": [
-              "cat.name-role-value",
-              "WCAG 2.0 Level A",
-              "WCAG 4.1.2",
-              "Section 508",
-              "section508.22.a",
-              "TTv5",
-              "TT6.a",
-              "EN-301-549",
-              "EN-9.4.1.2",
-              "W3C ACT Rules",
-              "RGAAv4",
-              "RGAA-11.9.1"
-            ],
-            "nodes": [
-              {
-                "html": "<button type=\"button\" class=\"icon-btn\" id=\"upload-close\"><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg></button>",
-                "target": [
-                  "#upload-close"
-                ],
-                "impact": "critical",
-                "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                "violationId": 10,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "title-row"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 18,
-                  "endLine": 18,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": ".icon-btn"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "button-has-visible-text",
-                    "data": null,
-                    "message": "Element does not have inner text that is visible to screen readers",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-label",
-                    "data": null,
-                    "message": "aria-label attribute does not exist or is empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-labelledby",
-                    "data": null,
-                    "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-title",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no title attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "implicit-label",
-                    "data": null,
-                    "message": "Element does not have an implicit (wrapped) <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "explicit-label",
-                    "data": null,
-                    "message": "Element does not have an explicit <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "presentational-role",
-                    "data": null,
-                    "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                    "relatedTargets": []
-                  }
-                ],
-                "box": {
-                  "x": 651.375,
-                  "y": 245.90625,
-                  "w": 36,
-                  "h": 36
-                }
-              }
-            ],
-            "summary": "Buttons must have discernible text.",
-            "why": "Screen readers announce buttons by their text content. Without it, users cannot determine the button's purpose (WCAG 4.1.2).",
-            "fix": {
-              "html": "Add visible text, or aria-label=\"...\", or a <span class=\"sr-only\">...</span> inside the button."
-            }
-          },
-          {
-            "ruleId": "label",
-            "impact": "critical",
-            "impactDescription": "Completely blocks access for some users — must fix immediately.",
-            "help": "Form elements must have labels",
-            "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
-            "description": "Ensure every form element has a label",
-            "affectedElements": 1,
-            "wcagCriteria": [
-              {
-                "sc": "4.1.2",
-                "title": "Name, Role, Value",
-                "level": "A"
-              }
-            ],
-            "wcagTags": [
-              "cat.forms",
-              "WCAG 2.0 Level A",
-              "WCAG 4.1.2",
-              "Section 508",
-              "section508.22.n",
-              "TTv5",
-              "TT5.c",
-              "EN-301-549",
-              "EN-9.4.1.2",
-              "W3C ACT Rules",
-              "RGAAv4",
-              "RGAA-11.1.1"
-            ],
-            "nodes": [
-              {
-                "html": "<input type=\"file\" id=\"upload-file\">",
-                "target": [
-                  "#upload-file"
-                ],
-                "impact": "critical",
-                "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                "violationId": 12,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "root"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 21,
-                  "endLine": 21,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": "input, select"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "implicit-label",
-                    "data": null,
-                    "message": "Element does not have an implicit (wrapped) <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "explicit-label",
-                    "data": null,
-                    "message": "Element does not have an explicit <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-label",
-                    "data": null,
-                    "message": "aria-label attribute does not exist or is empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-labelledby",
-                    "data": null,
-                    "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-title",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no title attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-placeholder",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no placeholder attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "presentational-role",
-                    "data": null,
-                    "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                    "relatedTargets": []
-                  }
-                ],
-                "box": {
-                  "x": 424,
-                  "y": 347.859375,
-                  "w": 354.1875,
-                  "h": 43
-                }
-              }
-            ],
-            "summary": "Form inputs must have associated labels.",
-            "why": "Without a label, assistive technology cannot convey the purpose of form controls (WCAG 1.3.1, 4.1.2).",
-            "fix": {
-              "html": "Use <label for=\"id\">...</label> paired with the input's id, or wrap the input inside a <label>."
-            }
-          }
-        ],
-        "serious": [
-          {
-            "ruleId": "color-contrast",
-            "impact": "serious",
-            "impactDescription": "Creates significant barriers for users with disabilities — should fix.",
-            "help": "Elements must meet minimum color contrast ratio thresholds",
-            "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
-            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
-            "affectedElements": 1,
-            "wcagCriteria": [
-              {
-                "sc": "1.4.3",
-                "title": "Contrast (Minimum)",
-                "level": "AA"
-              }
-            ],
-            "wcagTags": [
-              "cat.color",
-              "WCAG 2.0 Level AA",
-              "WCAG 1.4.3",
-              "TTv5",
-              "TT13.c",
-              "EN-301-549",
-              "EN-9.1.4.3",
-              "W3C ACT Rules",
-              "RGAAv4",
-              "RGAA-3.2.1"
-            ],
-            "nodes": [
-              {
-                "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
-                "target": [
-                  "#upload-hint"
-                ],
-                "impact": "serious",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                "violationId": 11,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "root"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 22,
-                  "endLine": 22,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": ".muted"
-                  },
-                  {
-                    "selectorText": ".hint"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "color-contrast",
-                    "data": {
-                      "fgColor": "#9a9a9a",
-                      "bgColor": "#ffffff",
-                      "contrastRatio": 2.81,
-                      "fontSize": "10.8pt (14.4px)",
-                      "fontWeight": "normal",
-                      "messageKey": null,
-                      "expectedContrastRatio": "4.5:1"
-                    },
-                    "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                    "relatedTargets": [
-                      [
-                        "#upload-dialog"
-                      ]
-                    ]
-                  }
-                ],
-                "box": {
-                  "x": 424,
-                  "y": 405.25,
-                  "w": 432,
-                  "h": 21.609375
-                }
-              }
-            ],
-            "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
-            "why": "Low contrast text is difficult or impossible to read for users with low vision (WCAG 1.4.3).",
-            "fix": {
-              "html": "Darken the foreground color or lighten the background. Use https://webaim.org/resources/contrastchecker/ to verify."
-            }
-          }
-        ],
-        "moderate": [],
-        "minor": []
-      },
-      "remediations": [
-        {
-          "ruleId": "button-name",
-          "impact": "critical",
-          "impactDescription": "Completely blocks access for some users — must fix immediately.",
-          "help": "Buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
-          "description": "Ensure buttons have discernible text",
-          "affectedElements": 1,
-          "wcagCriteria": [
-            {
-              "sc": "4.1.2",
-              "title": "Name, Role, Value",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "cat.name-role-value",
-            "WCAG 2.0 Level A",
-            "WCAG 4.1.2",
-            "Section 508",
-            "section508.22.a",
-            "TTv5",
-            "TT6.a",
-            "EN-301-549",
-            "EN-9.4.1.2",
-            "W3C ACT Rules",
-            "RGAAv4",
-            "RGAA-11.9.1"
-          ],
-          "nodes": [
-            {
-              "html": "<button type=\"button\" class=\"icon-btn\" id=\"upload-close\"><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg></button>",
-              "target": [
-                "#upload-close"
-              ],
-              "impact": "critical",
-              "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-              "violationId": 10,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "title-row"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 18,
-                "endLine": 18,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": ".icon-btn"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "button-has-visible-text",
-                  "data": null,
-                  "message": "Element does not have inner text that is visible to screen readers",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-label",
-                  "data": null,
-                  "message": "aria-label attribute does not exist or is empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-labelledby",
-                  "data": null,
-                  "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-title",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no title attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "implicit-label",
-                  "data": null,
-                  "message": "Element does not have an implicit (wrapped) <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "explicit-label",
-                  "data": null,
-                  "message": "Element does not have an explicit <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "presentational-role",
-                  "data": null,
-                  "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                  "relatedTargets": []
-                }
-              ],
-              "box": {
-                "x": 651.375,
-                "y": 245.90625,
-                "w": 36,
-                "h": 36
-              }
-            }
-          ],
-          "summary": "Buttons must have discernible text.",
-          "why": "Screen readers announce buttons by their text content. Without it, users cannot determine the button's purpose (WCAG 4.1.2).",
-          "fix": {
-            "html": "Add visible text, or aria-label=\"...\", or a <span class=\"sr-only\">...</span> inside the button."
-          }
-        },
-        {
-          "ruleId": "color-contrast",
-          "impact": "serious",
-          "impactDescription": "Creates significant barriers for users with disabilities — should fix.",
-          "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
-          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
-          "affectedElements": 1,
-          "wcagCriteria": [
-            {
-              "sc": "1.4.3",
-              "title": "Contrast (Minimum)",
-              "level": "AA"
-            }
-          ],
-          "wcagTags": [
-            "cat.color",
-            "WCAG 2.0 Level AA",
-            "WCAG 1.4.3",
-            "TTv5",
-            "TT13.c",
-            "EN-301-549",
-            "EN-9.1.4.3",
-            "W3C ACT Rules",
-            "RGAAv4",
-            "RGAA-3.2.1"
-          ],
-          "nodes": [
-            {
-              "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
-              "target": [
-                "#upload-hint"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-              "violationId": 11,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 22,
-                "endLine": 22,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": ".muted"
-                },
-                {
-                  "selectorText": ".hint"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "color-contrast",
-                  "data": {
-                    "fgColor": "#9a9a9a",
-                    "bgColor": "#ffffff",
-                    "contrastRatio": 2.81,
-                    "fontSize": "10.8pt (14.4px)",
-                    "fontWeight": "normal",
-                    "messageKey": null,
-                    "expectedContrastRatio": "4.5:1"
-                  },
-                  "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                  "relatedTargets": [
-                    [
-                      "#upload-dialog"
-                    ]
-                  ]
-                }
-              ],
-              "box": {
-                "x": 424,
-                "y": 405.25,
-                "w": 432,
-                "h": 21.609375
-              }
-            }
-          ],
-          "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
-          "why": "Low contrast text is difficult or impossible to read for users with low vision (WCAG 1.4.3).",
-          "fix": {
-            "html": "Darken the foreground color or lighten the background. Use https://webaim.org/resources/contrastchecker/ to verify."
-          }
-        },
-        {
-          "ruleId": "label",
-          "impact": "critical",
-          "impactDescription": "Completely blocks access for some users — must fix immediately.",
-          "help": "Form elements must have labels",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
-          "description": "Ensure every form element has a label",
-          "affectedElements": 1,
-          "wcagCriteria": [
-            {
-              "sc": "4.1.2",
-              "title": "Name, Role, Value",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "cat.forms",
-            "WCAG 2.0 Level A",
-            "WCAG 4.1.2",
-            "Section 508",
-            "section508.22.n",
-            "TTv5",
-            "TT5.c",
-            "EN-301-549",
-            "EN-9.4.1.2",
-            "W3C ACT Rules",
-            "RGAAv4",
-            "RGAA-11.1.1"
-          ],
-          "nodes": [
-            {
-              "html": "<input type=\"file\" id=\"upload-file\">",
-              "target": [
-                "#upload-file"
-              ],
-              "impact": "critical",
-              "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-              "violationId": 12,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 21,
-                "endLine": 21,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "input, select"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "implicit-label",
-                  "data": null,
-                  "message": "Element does not have an implicit (wrapped) <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "explicit-label",
-                  "data": null,
-                  "message": "Element does not have an explicit <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-label",
-                  "data": null,
-                  "message": "aria-label attribute does not exist or is empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-labelledby",
-                  "data": null,
-                  "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-title",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no title attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-placeholder",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no placeholder attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "presentational-role",
-                  "data": null,
-                  "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                  "relatedTargets": []
-                }
-              ],
-              "box": {
-                "x": 424,
-                "y": 347.859375,
-                "w": 354.1875,
-                "h": 43
-              }
-            }
-          ],
-          "summary": "Form inputs must have associated labels.",
-          "why": "Without a label, assistive technology cannot convey the purpose of form controls (WCAG 1.3.1, 4.1.2).",
-          "fix": {
-            "html": "Use <label for=\"id\">...</label> paired with the input's id, or wrap the input inside a <label>."
-          }
-        }
-      ],
-      "needsReview": [],
-      "passedRuleIds": [
-        "aria-allowed-attr",
-        "aria-conditional-attr",
-        "aria-deprecated-role",
-        "aria-hidden-focus",
-        "aria-prohibited-attr",
-        "aria-required-attr",
-        "aria-roles",
-        "aria-valid-attr-value",
-        "aria-valid-attr",
-        "button-name",
-        "color-contrast",
-        "duplicate-id-aria",
-        "form-field-multiple-labels",
-        "nested-interactive"
-      ],
-      "inapplicableRuleIds": [
-        "area-alt",
-        "aria-braille-equivalent",
-        "aria-command-name",
-        "aria-hidden-body",
-        "aria-input-field-name",
-        "aria-meter-name",
-        "aria-progressbar-name",
-        "aria-required-children",
-        "aria-required-parent",
-        "aria-tab-name",
-        "aria-toggle-field-name",
-        "aria-tooltip-name",
-        "autocomplete-valid",
-        "avoid-inline-spacing",
-        "definition-list",
-        "dlitem",
-        "document-title",
-        "frame-focusable-content",
-        "frame-title-unique",
-        "frame-title",
-        "html-has-lang",
-        "html-lang-valid",
-        "html-xml-lang-mismatch",
-        "image-alt",
-        "input-button-name",
-        "input-image-alt",
-        "link-in-text-block",
-        "link-name",
-        "list",
-        "listitem",
-        "marquee",
-        "meta-refresh",
-        "meta-viewport",
-        "object-alt",
-        "role-img-alt",
-        "scrollable-region-focusable",
-        "select-name",
-        "server-side-image-map",
-        "summary-name",
-        "svg-img-alt",
-        "td-headers-attr",
-        "th-has-data-cells",
-        "valid-lang",
-        "video-caption",
-        "no-autoplay-audio",
-        "media-video",
-        "media-audio",
-        "media-script-audio",
-        "auth-field",
-        "motion-listener"
-      ],
-      "couldNotLook": [],
-      "dropped": [
-        {
-          "rule": "color-contrast",
-          "stopReason": "elmPartiallyObscuring",
-          "label": "covered by another element",
-          "nodes": 1,
-          "targets": [
-            [
-              "#upload-dialog > p:nth-child(2)"
-            ]
-          ]
-        }
-      ],
-      "componentName": "Dialog",
-      "selector": "[role=\"dialog\"]",
-      "context": "aria-widget"
-    },
-    {
-      "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-21T14:59:53.099Z",
-      "summary": {
-        "totalViolations": 3,
-        "totalPasses": 14,
-        "totalIncomplete": 0,
-        "totalInapplicable": 50,
-        "critical": 2,
-        "serious": 1,
-        "moderate": 0,
-        "minor": 0
-      },
-      "violationsByImpact": {
-        "critical": [
-          {
-            "ruleId": "button-name",
-            "impact": "critical",
-            "impactDescription": "Completely blocks access for some users — must fix immediately.",
-            "help": "Buttons must have discernible text",
-            "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
-            "description": "Ensure buttons have discernible text",
-            "affectedElements": 1,
-            "wcagCriteria": [
-              {
-                "sc": "4.1.2",
-                "title": "Name, Role, Value",
-                "level": "A"
-              }
-            ],
-            "wcagTags": [
-              "cat.name-role-value",
-              "WCAG 2.0 Level A",
-              "WCAG 4.1.2",
-              "Section 508",
-              "section508.22.a",
-              "TTv5",
-              "TT6.a",
-              "EN-301-549",
-              "EN-9.4.1.2",
-              "W3C ACT Rules",
-              "RGAAv4",
-              "RGAA-11.9.1"
-            ],
-            "nodes": [
-              {
-                "html": "<button type=\"button\" class=\"icon-btn\" id=\"upload-close\"><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg></button>",
-                "target": [
-                  "#upload-close"
-                ],
-                "impact": "critical",
-                "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                "violationId": 10,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "title-row"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 18,
-                  "endLine": 18,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": ".icon-btn"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "button-has-visible-text",
-                    "data": null,
-                    "message": "Element does not have inner text that is visible to screen readers",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-label",
-                    "data": null,
-                    "message": "aria-label attribute does not exist or is empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-labelledby",
-                    "data": null,
-                    "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-title",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no title attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "implicit-label",
-                    "data": null,
-                    "message": "Element does not have an implicit (wrapped) <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "explicit-label",
-                    "data": null,
-                    "message": "Element does not have an explicit <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "presentational-role",
-                    "data": null,
-                    "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                    "relatedTargets": []
-                  }
-                ],
-                "box": {
-                  "x": 651.375,
-                  "y": 245.90625,
-                  "w": 36,
-                  "h": 36
-                }
-              }
-            ],
-            "summary": "Buttons must have discernible text.",
-            "why": "Screen readers announce buttons by their text content. Without it, users cannot determine the button's purpose (WCAG 4.1.2).",
-            "fix": {
-              "html": "Add visible text, or aria-label=\"...\", or a <span class=\"sr-only\">...</span> inside the button."
-            }
-          },
-          {
-            "ruleId": "label",
-            "impact": "critical",
-            "impactDescription": "Completely blocks access for some users — must fix immediately.",
-            "help": "Form elements must have labels",
-            "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
-            "description": "Ensure every form element has a label",
-            "affectedElements": 1,
-            "wcagCriteria": [
-              {
-                "sc": "4.1.2",
-                "title": "Name, Role, Value",
-                "level": "A"
-              }
-            ],
-            "wcagTags": [
-              "cat.forms",
-              "WCAG 2.0 Level A",
-              "WCAG 4.1.2",
-              "Section 508",
-              "section508.22.n",
-              "TTv5",
-              "TT5.c",
-              "EN-301-549",
-              "EN-9.4.1.2",
-              "W3C ACT Rules",
-              "RGAAv4",
-              "RGAA-11.1.1"
-            ],
-            "nodes": [
-              {
-                "html": "<input type=\"file\" id=\"upload-file\">",
-                "target": [
-                  "#upload-file"
-                ],
-                "impact": "critical",
-                "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                "violationId": 12,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "root"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 21,
-                  "endLine": 21,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": "input, select"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "implicit-label",
-                    "data": null,
-                    "message": "Element does not have an implicit (wrapped) <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "explicit-label",
-                    "data": null,
-                    "message": "Element does not have an explicit <label>",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-label",
-                    "data": null,
-                    "message": "aria-label attribute does not exist or is empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "aria-labelledby",
-                    "data": null,
-                    "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-title",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no title attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "non-empty-placeholder",
-                    "data": {
-                      "messageKey": "noAttr"
-                    },
-                    "message": "Element has no placeholder attribute",
-                    "relatedTargets": []
-                  },
-                  {
-                    "id": "presentational-role",
-                    "data": null,
-                    "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                    "relatedTargets": []
-                  }
-                ],
-                "box": {
-                  "x": 424,
-                  "y": 347.859375,
-                  "w": 354.1875,
-                  "h": 43
-                }
-              }
-            ],
-            "summary": "Form inputs must have associated labels.",
-            "why": "Without a label, assistive technology cannot convey the purpose of form controls (WCAG 1.3.1, 4.1.2).",
-            "fix": {
-              "html": "Use <label for=\"id\">...</label> paired with the input's id, or wrap the input inside a <label>."
-            }
-          }
-        ],
-        "serious": [
-          {
-            "ruleId": "color-contrast",
-            "impact": "serious",
-            "impactDescription": "Creates significant barriers for users with disabilities — should fix.",
-            "help": "Elements must meet minimum color contrast ratio thresholds",
-            "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
-            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
-            "affectedElements": 1,
-            "wcagCriteria": [
-              {
-                "sc": "1.4.3",
-                "title": "Contrast (Minimum)",
-                "level": "AA"
-              }
-            ],
-            "wcagTags": [
-              "cat.color",
-              "WCAG 2.0 Level AA",
-              "WCAG 1.4.3",
-              "TTv5",
-              "TT13.c",
-              "EN-301-549",
-              "EN-9.1.4.3",
-              "W3C ACT Rules",
-              "RGAAv4",
-              "RGAA-3.2.1"
-            ],
-            "nodes": [
-              {
-                "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
-                "target": [
-                  "#upload-hint"
-                ],
-                "impact": "serious",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                "violationId": 11,
-                "ancestors": [
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "modal"
-                    ],
-                    "dataAttrs": [],
-                    "id": "upload-dialog",
-                    "role": "dialog"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "backdrop"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [
-                      "page"
-                    ],
-                    "dataAttrs": []
-                  },
-                  {
-                    "tag": "main",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "main"
-                  },
-                  {
-                    "tag": "div",
-                    "classes": [],
-                    "dataAttrs": [],
-                    "id": "root"
-                  }
-                ],
-                "source": {
-                  "file": "src/pages/Status.jsx",
-                  "startLine": 22,
-                  "endLine": 22,
-                  "via": "self"
-                },
-                "matchedRules": [
-                  {
-                    "selectorText": ".muted"
-                  },
-                  {
-                    "selectorText": ".hint"
-                  }
-                ],
-                "checks": [
-                  {
-                    "id": "color-contrast",
-                    "data": {
-                      "fgColor": "#9a9a9a",
-                      "bgColor": "#ffffff",
-                      "contrastRatio": 2.81,
-                      "fontSize": "10.8pt (14.4px)",
-                      "fontWeight": "normal",
-                      "messageKey": null,
-                      "expectedContrastRatio": "4.5:1"
-                    },
-                    "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                    "relatedTargets": [
-                      [
-                        "#upload-dialog"
-                      ]
-                    ]
-                  }
-                ],
-                "box": {
-                  "x": 424,
-                  "y": 405.25,
-                  "w": 432,
-                  "h": 21.609375
-                }
-              }
-            ],
-            "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
-            "why": "Low contrast text is difficult or impossible to read for users with low vision (WCAG 1.4.3).",
-            "fix": {
-              "html": "Darken the foreground color or lighten the background. Use https://webaim.org/resources/contrastchecker/ to verify."
-            }
-          }
-        ],
-        "moderate": [],
-        "minor": []
-      },
-      "remediations": [
-        {
-          "ruleId": "button-name",
-          "impact": "critical",
-          "impactDescription": "Completely blocks access for some users — must fix immediately.",
-          "help": "Buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
-          "description": "Ensure buttons have discernible text",
-          "affectedElements": 1,
-          "wcagCriteria": [
-            {
-              "sc": "4.1.2",
-              "title": "Name, Role, Value",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "cat.name-role-value",
-            "WCAG 2.0 Level A",
-            "WCAG 4.1.2",
-            "Section 508",
-            "section508.22.a",
-            "TTv5",
-            "TT6.a",
-            "EN-301-549",
-            "EN-9.4.1.2",
-            "W3C ACT Rules",
-            "RGAAv4",
-            "RGAA-11.9.1"
-          ],
-          "nodes": [
-            {
-              "html": "<button type=\"button\" class=\"icon-btn\" id=\"upload-close\"><svg aria-hidden=\"true\" width=\"14\" height=\"14\" viewBox=\"0 0 14 14\"><path d=\"M2 2l10 10M12 2L2 12\" stroke=\"currentColor\" stroke-width=\"2\"></path></svg></button>",
-              "target": [
-                "#upload-close"
-              ],
-              "impact": "critical",
-              "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-              "violationId": 10,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "title-row"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 18,
-                "endLine": 18,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": ".icon-btn"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "button-has-visible-text",
-                  "data": null,
-                  "message": "Element does not have inner text that is visible to screen readers",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-label",
-                  "data": null,
-                  "message": "aria-label attribute does not exist or is empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-labelledby",
-                  "data": null,
-                  "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-title",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no title attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "implicit-label",
-                  "data": null,
-                  "message": "Element does not have an implicit (wrapped) <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "explicit-label",
-                  "data": null,
-                  "message": "Element does not have an explicit <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "presentational-role",
-                  "data": null,
-                  "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                  "relatedTargets": []
-                }
-              ],
-              "box": {
-                "x": 651.375,
-                "y": 245.90625,
-                "w": 36,
-                "h": 36
-              }
-            }
-          ],
-          "summary": "Buttons must have discernible text.",
-          "why": "Screen readers announce buttons by their text content. Without it, users cannot determine the button's purpose (WCAG 4.1.2).",
-          "fix": {
-            "html": "Add visible text, or aria-label=\"...\", or a <span class=\"sr-only\">...</span> inside the button."
-          }
-        },
-        {
-          "ruleId": "color-contrast",
-          "impact": "serious",
-          "impactDescription": "Creates significant barriers for users with disabilities — should fix.",
-          "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
-          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
-          "affectedElements": 1,
-          "wcagCriteria": [
-            {
-              "sc": "1.4.3",
-              "title": "Contrast (Minimum)",
-              "level": "AA"
-            }
-          ],
-          "wcagTags": [
-            "cat.color",
-            "WCAG 2.0 Level AA",
-            "WCAG 1.4.3",
-            "TTv5",
-            "TT13.c",
-            "EN-301-549",
-            "EN-9.1.4.3",
-            "W3C ACT Rules",
-            "RGAAv4",
-            "RGAA-3.2.1"
-          ],
-          "nodes": [
-            {
-              "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
-              "target": [
-                "#upload-hint"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-              "violationId": 11,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 22,
-                "endLine": 22,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": ".muted"
-                },
-                {
-                  "selectorText": ".hint"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "color-contrast",
-                  "data": {
-                    "fgColor": "#9a9a9a",
-                    "bgColor": "#ffffff",
-                    "contrastRatio": 2.81,
-                    "fontSize": "10.8pt (14.4px)",
-                    "fontWeight": "normal",
-                    "messageKey": null,
-                    "expectedContrastRatio": "4.5:1"
-                  },
-                  "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
-                  "relatedTargets": [
-                    [
-                      "#upload-dialog"
-                    ]
-                  ]
-                }
-              ],
-              "box": {
-                "x": 424,
-                "y": 405.25,
-                "w": 432,
-                "h": 21.609375
-              }
-            }
-          ],
-          "summary": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text).",
-          "why": "Low contrast text is difficult or impossible to read for users with low vision (WCAG 1.4.3).",
-          "fix": {
-            "html": "Darken the foreground color or lighten the background. Use https://webaim.org/resources/contrastchecker/ to verify."
-          }
-        },
-        {
-          "ruleId": "label",
-          "impact": "critical",
-          "impactDescription": "Completely blocks access for some users — must fix immediately.",
-          "help": "Form elements must have labels",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
-          "description": "Ensure every form element has a label",
-          "affectedElements": 1,
-          "wcagCriteria": [
-            {
-              "sc": "4.1.2",
-              "title": "Name, Role, Value",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "cat.forms",
-            "WCAG 2.0 Level A",
-            "WCAG 4.1.2",
-            "Section 508",
-            "section508.22.n",
-            "TTv5",
-            "TT5.c",
-            "EN-301-549",
-            "EN-9.4.1.2",
-            "W3C ACT Rules",
-            "RGAAv4",
-            "RGAA-11.1.1"
-          ],
-          "nodes": [
-            {
-              "html": "<input type=\"file\" id=\"upload-file\">",
-              "target": [
-                "#upload-file"
-              ],
-              "impact": "critical",
-              "failureSummary": "Fix any of the following:\n  Element does not have an implicit (wrapped) <label>\n  Element does not have an explicit <label>\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element has no placeholder attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-              "violationId": 12,
-              "ancestors": [
-                {
-                  "tag": "div",
-                  "classes": [
-                    "modal"
-                  ],
-                  "dataAttrs": [],
-                  "id": "upload-dialog",
-                  "role": "dialog"
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "backdrop"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 21,
-                "endLine": 21,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "input, select"
-                }
-              ],
-              "checks": [
-                {
-                  "id": "implicit-label",
-                  "data": null,
-                  "message": "Element does not have an implicit (wrapped) <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "explicit-label",
-                  "data": null,
-                  "message": "Element does not have an explicit <label>",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-label",
-                  "data": null,
-                  "message": "aria-label attribute does not exist or is empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "aria-labelledby",
-                  "data": null,
-                  "message": "aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-title",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no title attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "non-empty-placeholder",
-                  "data": {
-                    "messageKey": "noAttr"
-                  },
-                  "message": "Element has no placeholder attribute",
-                  "relatedTargets": []
-                },
-                {
-                  "id": "presentational-role",
-                  "data": null,
-                  "message": "Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
-                  "relatedTargets": []
-                }
-              ],
-              "box": {
-                "x": 424,
-                "y": 347.859375,
-                "w": 354.1875,
-                "h": 43
-              }
-            }
-          ],
-          "summary": "Form inputs must have associated labels.",
-          "why": "Without a label, assistive technology cannot convey the purpose of form controls (WCAG 1.3.1, 4.1.2).",
-          "fix": {
-            "html": "Use <label for=\"id\">...</label> paired with the input's id, or wrap the input inside a <label>."
-          }
-        }
-      ],
-      "needsReview": [],
-      "passedRuleIds": [
-        "aria-allowed-attr",
-        "aria-conditional-attr",
-        "aria-deprecated-role",
-        "aria-hidden-focus",
-        "aria-prohibited-attr",
-        "aria-required-attr",
-        "aria-roles",
-        "aria-valid-attr-value",
-        "aria-valid-attr",
-        "button-name",
-        "color-contrast",
-        "duplicate-id-aria",
-        "form-field-multiple-labels",
-        "nested-interactive"
-      ],
-      "inapplicableRuleIds": [
-        "area-alt",
-        "aria-braille-equivalent",
-        "aria-command-name",
-        "aria-hidden-body",
-        "aria-input-field-name",
-        "aria-meter-name",
-        "aria-progressbar-name",
-        "aria-required-children",
-        "aria-required-parent",
-        "aria-tab-name",
-        "aria-toggle-field-name",
-        "aria-tooltip-name",
-        "autocomplete-valid",
-        "avoid-inline-spacing",
-        "definition-list",
-        "dlitem",
-        "document-title",
-        "frame-focusable-content",
-        "frame-title-unique",
-        "frame-title",
-        "html-has-lang",
-        "html-lang-valid",
-        "html-xml-lang-mismatch",
-        "image-alt",
-        "input-button-name",
-        "input-image-alt",
-        "link-in-text-block",
-        "link-name",
-        "list",
-        "listitem",
-        "marquee",
-        "meta-refresh",
-        "meta-viewport",
-        "object-alt",
-        "role-img-alt",
-        "scrollable-region-focusable",
-        "select-name",
-        "server-side-image-map",
-        "summary-name",
-        "svg-img-alt",
-        "td-headers-attr",
-        "th-has-data-cells",
-        "valid-lang",
-        "video-caption",
-        "no-autoplay-audio",
-        "media-video",
-        "media-audio",
-        "media-script-audio",
-        "auth-field",
-        "motion-listener"
-      ],
-      "couldNotLook": [],
-      "dropped": [
-        {
-          "rule": "color-contrast",
-          "stopReason": "elmPartiallyObscuring",
-          "label": "covered by another element",
-          "nodes": 1,
-          "targets": [
-            [
-              "#upload-dialog > p:nth-child(2)"
-            ]
-          ]
-        }
-      ],
-      "componentName": "Modal / Dialog",
-      "selector": "[class*=\"modal\"], [class*=\"dialog\"]",
-      "context": "interactive-pattern"
-    },
-    {
-      "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-21T14:59:53.227Z",
+      "timestamp": "2026-10-21T16:53:53.411Z",
       "summary": {
         "totalViolations": 1,
-        "totalPasses": 6,
+        "totalPasses": 4,
         "totalIncomplete": 0,
-        "totalInapplicable": 62,
+        "totalInapplicable": 64,
         "critical": 0,
         "serious": 1,
         "moderate": 0,
@@ -21611,8 +18331,8 @@
                 ],
                 "source": {
                   "file": "src/pages/Status.jsx",
-                  "startLine": 52,
-                  "endLine": 52,
+                  "startLine": 27,
+                  "endLine": 27,
                   "via": "self"
                 },
                 "matchedRules": [
@@ -21644,8 +18364,8 @@
                   }
                 ],
                 "box": {
-                  "x": 663.171875,
-                  "y": 247.765625,
+                  "x": 803.234375,
+                  "y": 244.96875,
                   "w": 74.875,
                   "h": 22.78125
                 }
@@ -21731,8 +18451,8 @@
               ],
               "source": {
                 "file": "src/pages/Status.jsx",
-                "startLine": 52,
-                "endLine": 52,
+                "startLine": 27,
+                "endLine": 27,
                 "via": "self"
               },
               "matchedRules": [
@@ -21764,8 +18484,8 @@
                 }
               ],
               "box": {
-                "x": 663.171875,
-                "y": 247.765625,
+                "x": 803.234375,
+                "y": 244.96875,
                 "w": 74.875,
                 "h": 22.78125
               }
@@ -21780,10 +18500,8 @@
       ],
       "needsReview": [],
       "passedRuleIds": [
-        "button-name",
         "color-contrast",
         "link-name",
-        "nested-interactive",
         "td-headers-attr",
         "th-has-data-cells"
       ],
@@ -21811,6 +18529,7 @@
         "aria-valid-attr",
         "autocomplete-valid",
         "avoid-inline-spacing",
+        "button-name",
         "definition-list",
         "dlitem",
         "document-title",
@@ -21832,6 +18551,7 @@
         "marquee",
         "meta-refresh",
         "meta-viewport",
+        "nested-interactive",
         "object-alt",
         "role-img-alt",
         "scrollable-region-focusable",

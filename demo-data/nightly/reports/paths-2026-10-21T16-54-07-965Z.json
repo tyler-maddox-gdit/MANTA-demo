@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sourceReportTimestamp": "2026-10-21T15-00-12-698Z",
+  "sourceReportTimestamp": "2026-10-21T16-54-07-965Z",
   "entries": [
     {
       "kind": "variable-added",
-      "at": "2026-10-21T15:00:12.798Z",
+      "at": "2026-10-21T16:54:08.056Z",
       "variable": {
         "id": "3f6a2d90",
         "name": "Email"
@@ -12,7 +12,7 @@
     },
     {
       "kind": "variable-added",
-      "at": "2026-10-21T15:00:12.798Z",
+      "at": "2026-10-21T16:54:08.056Z",
       "variable": {
         "id": "7c41e5b8",
         "name": "Password"
@@ -20,7 +20,7 @@
     },
     {
       "kind": "variable-added",
-      "at": "2026-10-21T15:00:12.798Z",
+      "at": "2026-10-21T16:54:08.056Z",
       "variable": {
         "id": "9e0d38a7",
         "name": "Sign in"
@@ -28,7 +28,7 @@
     },
     {
       "kind": "path-added",
-      "at": "2026-10-21T15:00:12.798Z",
+      "at": "2026-10-21T16:54:08.056Z",
       "path": {
         "id": "5d1e7a42",
         "page": "http://localhost:4173/signin",

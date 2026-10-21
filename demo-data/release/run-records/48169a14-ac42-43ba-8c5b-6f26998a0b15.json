@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "48169a14-ac42-43ba-8c5b-6f26998a0b15",
+  "startedAt": "2026-10-21T16:57:44.875Z",
+  "name": "Nightly",
+  "urls": [
+    "http://localhost:4173/",
+    "http://localhost:4173/apply",
+    "http://localhost:4173/status",
+    "http://localhost:4173/signin",
+    "http://localhost:4173/status?upload=BP-2026-10882"
+  ],
+  "options": {
+    "headless": true,
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa"
+    ],
+    "extended": true
+  },
+  "status": "finished",
+  "token": "2026-10-21T16-59-06-963Z",
+  "finishedAt": "2026-10-21T16:59:07.090Z",
+  "pages": [
+    {
+      "url": "http://localhost:4173/"
+    },
+    {
+      "url": "http://localhost:4173/apply"
+    },
+    {
+      "url": "http://localhost:4173/status"
+    },
+    {
+      "url": "http://localhost:4173/signin"
+    },
+    {
+      "url": "http://localhost:4173/status?upload=BP-2026-10882"
+    }
+  ]
+}

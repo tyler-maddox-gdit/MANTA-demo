@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sourceReportTimestamp": "2026-10-21T15-00-12-698Z",
+  "sourceReportTimestamp": "2026-10-21T16-59-06-963Z",
   "leverageSummary": {
-    "totalViolations": 30,
-    "clusters": 3,
-    "standalone": 6
+    "totalViolations": 20,
+    "clusters": 1,
+    "standalone": 5
   },
   "clusters": [
     {
@@ -18,9 +18,9 @@
       "leverageScore": 45,
       "fixTarget": {
         "kind": "template",
-        "value": "src/Shell.jsx footer.site-footer div.social links (lines 30-32)"
+        "value": "src/Shell.jsx footer.site-footer > div.social (lines 30-32)"
       },
-      "hypothesis": "Shared footer social links wrap aria-hidden SVGs only, so every instance renders with no accessible name.",
+      "hypothesis": "Shared footer shell renders icon-only social anchors whose aria-hidden SVG is their sole content, leaving no accessible name.",
       "members": [
         "http://localhost:4173/apply|::|link-name|::|#social-fb",
         "http://localhost:4173/apply|::|link-name|::|#social-x",
@@ -37,49 +37,6 @@
         "http://localhost:4173/|::|link-name|::|#social-fb",
         "http://localhost:4173/|::|link-name|::|#social-x",
         "http://localhost:4173/|::|link-name|::|#social-yt"
-      ]
-    },
-    {
-      "id": "cluster-2",
-      "rank": 2,
-      "ruleIds": [
-        "color-contrast"
-      ],
-      "affectedElements": 6,
-      "worstImpact": "serious",
-      "leverageScore": 18,
-      "fixTarget": {
-        "kind": "selector",
-        "value": ".muted"
-      },
-      "hypothesis": "The shared .muted text class sets foreground #9a9a9a, giving 2.81:1 against white surfaces.",
-      "members": [
-        "http://localhost:4173/apply|::|color-contrast|::|#last-updated",
-        "http://localhost:4173/signin|::|color-contrast|::|#last-updated",
-        "http://localhost:4173/status?upload=BP-2026-10882|::|color-contrast|::|#last-updated",
-        "http://localhost:4173/status?upload=BP-2026-10882|::|color-contrast|::|#upload-hint",
-        "http://localhost:4173/status|::|color-contrast|::|#last-updated",
-        "http://localhost:4173/|::|color-contrast|::|#last-updated"
-      ]
-    },
-    {
-      "id": "cluster-3",
-      "rank": 3,
-      "ruleIds": [
-        "button-name"
-      ],
-      "affectedElements": 3,
-      "worstImpact": "critical",
-      "leverageScore": 12,
-      "fixTarget": {
-        "kind": "selector",
-        "value": "button.icon-btn"
-      },
-      "hypothesis": "The icon-btn pattern in Status.jsx emits icon-only buttons with no text or aria-label.",
-      "members": [
-        "http://localhost:4173/status?upload=BP-2026-10882|::|button-name|::|#refresh",
-        "http://localhost:4173/status?upload=BP-2026-10882|::|button-name|::|#upload-close",
-        "http://localhost:4173/status|::|button-name|::|#refresh"
       ]
     }
   ],
@@ -107,14 +64,6 @@
       "page": "http://localhost:4173/status?upload=BP-2026-10882",
       "firstTarget": ".badge-pending",
       "summary": "Elements must meet minimum color contrast ratio thresholds"
-    },
-    {
-      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|label|::|#upload-file",
-      "ruleId": "label",
-      "impact": "critical",
-      "page": "http://localhost:4173/status?upload=BP-2026-10882",
-      "firstTarget": "#upload-file",
-      "summary": "Form elements must have labels"
     },
     {
       "key": "http://localhost:4173/status|::|color-contrast|::|.badge-pending",

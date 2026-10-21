@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "sourceReportTimestamp": "2026-10-21T15-00-12-698Z",
+  "sourceReportTimestamp": "2026-10-21T16-54-07-965Z",
   "proposals": [
     {
       "id": "proposal-1",
@@ -9,8 +9,8 @@
       "stack": "react",
       "kind": "source-diff",
       "fixTarget": {
-        "kind": "template",
-        "value": "src/Shell.jsx — Footer() footer.site-footer > div.social links (lines 30-32)"
+        "kind": "component",
+        "value": "Footer in src/Shell.jsx — div.social anchors (lines 30-32)"
       },
       "members": [
         "http://localhost:4173/apply|::|link-name|::|#social-fb",
@@ -30,13 +30,13 @@
         "http://localhost:4173/|::|link-name|::|#social-yt"
       ],
       "conventionsDetected": [
-        "Icon-only links wrap an inline <svg aria-hidden=\"true\"> sized 16×16 with fill=\"currentColor\"",
-        "Stable hyphenated ids per network (social-x, social-fb, social-yt) on the footer anchors",
-        "Lowercase hyphenated class names (site-footer, social, gov-strip) styled by descendant selectors such as .social a",
-        "{/* DEBT <rule-id>: ... */} comments flag known accessibility debt at the markup that causes it"
+        "Icon-only links wrap an inline <svg aria-hidden=\"true\"> with width/height/viewBox and fill=\"currentColor\"",
+        "Per-link ids follow a social-<network> pattern (#social-x, #social-fb, #social-yt) and are styled by the .social a rule in src/styles.css",
+        "Existing markup already uses aria-hidden=\"true\" for decorative glyphs (e.g. span.seal in Header) and aria-label on landmarks (nav aria-label=\"Primary\")",
+        "Known gaps are flagged inline with {/* DEBT <rule>: ... */} comments"
       ],
       "domSpec": {
-        "domInstruction": "In the shared Footer in src/Shell.jsx, give each of the three icon-only social anchors an accessible name: aria-label=\"Benefits Portal on X\" on #social-x, aria-label=\"Benefits Portal on Facebook\" on #social-fb and aria-label=\"Benefits Portal on YouTube\" on #social-yt. Leave the inner <svg aria-hidden=\"true\"> decorative as it is — the label on the anchor is the whole accessible name, and because Footer renders on every route this one change clears all 15 nodes across /, /apply, /status, /signin and /status?upload=BP-2026-10882.",
+        "domInstruction": "In the Footer component's div.social, give each icon-only anchor a non-empty aria-label naming its destination: aria-label=\"Benefits Portal on X\" on #social-x, aria-label=\"Benefits Portal on Facebook\" on #social-fb and aria-label=\"Benefits Portal on YouTube\" on #social-yt, keeping each inner <svg aria-hidden=\"true\"> as decoration. Because Footer is rendered by Shell on every route, this single change names the links on /, /apply, /status, /signin and /status?upload=BP-2026-10882.",
         "testAssertion": "React Testing Library: render(<Toggle />); expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false').",
         "verificationAssertion": "Re-run axe rules link-name against the 15 listed selectors; all must pass.",
         "verifySelectors": [
@@ -87,9 +87,9 @@
     "violations": 15
   },
   "total": {
-    "clusters": 3,
-    "ruleGroups": 4,
-    "violations": 30
+    "clusters": 2,
+    "ruleGroups": 5,
+    "violations": 27
   },
   "provenance": {
     "provider": "claude-code",
