@@ -153,7 +153,7 @@ npm run demo -- stage qa
 **Expect** `[DONE] On story/main (detached)`, the build, then the preview on http://localhost:4173 and the
 Workbench's URL. Open http://127.0.0.1:3508/ in the browser. The site has no Documents column (it is `main`). In
 the launcher paste `http://localhost:4173/` and press Start; **expect** the scan to run and a report to open with
-5 violations. Then the **Nightly** run's report: **expect** 27 on the five pages; try each thing DEMO.md's QA stage
+5 violations. Then the **Nightly** run's report: **expect** 33 open issues across 6 pages (27 on the five, 6 on `/account`); try each thing DEMO.md's QA stage
 lists: add an issue on the account page; a verdict on the skip link; **Rescan** the Pending badge's contrast issue
 on `/status`; open a criterion's checklist. Ctrl+C in tab 2 stops both servers.
 
@@ -195,7 +195,7 @@ without waiting" box, and never press anything on the golden PR.
 npm run demo -- stage release
 ```
 **Expect** `[DONE] The fixes applied to feature/upload-documents`, the build, then both servers. Open
-http://127.0.0.1:3508/. The **Nightly** run: **expect** 20 on the five pages. The Pages dialog's **Focus order**
+http://127.0.0.1:3508/. The **Nightly** run: **expect** 25 open issues across 6 pages. The Pages dialog's **Focus order**
 column on the upload page: 21 stops, the dialog at 15 to 18. A verdict on 2.4.3; attest a criterion; **Export** on
 the Nightly run. **Expect** the ACR draft (`.docx`) and the USPS defects export to download and open in Word.
 Ctrl+C in tab 2 stops both servers.

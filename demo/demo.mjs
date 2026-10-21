@@ -39,7 +39,7 @@ const CUES = {
   qa: {
     title: 'Stage · QA: the backlog in the Workbench',
     type: [],
-    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is main, before the upload change. Launcher: paste ' + PREVIEW_ORIGIN + '/,\n  press Start. Then the Nightly run: 27 on five pages and /account, its AI notes (say "pre-run"), the five "Last\n  updated" lines, a verdict, add an issue, Rescan, a checklist. Ctrl+C stops both servers.',
+    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is main, before the upload change. Launcher: paste ' + PREVIEW_ORIGIN + '/,\n  press Start. Then the Nightly run: 33 open issues (27 on the five pages, 6 on /account), its AI notes (say "pre-run"), the five "Last\n  updated" lines, a verdict, add an issue, Rescan, a checklist. Ctrl+C stops both servers.',
   },
   devops: {
     title: 'Stage · DevOps: the pull request gate',
@@ -52,16 +52,17 @@ const CUES = {
     next: 'With the claude CLI on this machine, npm run demo -- fix --live runs the skills here instead.',
   },
   release: {
+    slide: 'qa',
     title: 'Stage · Release: the next night',
     type: [],
-    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is the upload change with its fixes, as merged. The Nightly run:\n  20 on five pages, the "Last updated" lines and the refresh button gone. Pages → Focus order on\n  /status?upload=BP-2026-10882, a verdict on 2.4.3, attest, Export (ACR draft). Ctrl+C stops both servers.',
+    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is the upload change with its fixes, as merged. The Nightly run:\n  25 open issues (was 33), the "Last updated" lines and the refresh button gone. Pages → Focus order on\n  /status?upload=BP-2026-10882, a verdict on 2.4.3, attest, Export (ACR draft). Ctrl+C stops both servers.',
   },
 };
 const STAGE_LIST = 'Stages: npm run demo -- stage qa | dev | devops | release   (any order; each sets itself up)';
 
 function printCue(name) {
   const cue = CUES[name];
-  console.log('\n' + cue.title + '   (slide: ' + SLIDE + '#' + name + ')');
+  console.log('\n' + cue.title + '   (slide: ' + SLIDE + '#' + (cue.slide ?? name) + ')');
   if (cue.type.length) {
     console.log('  Type:');
     for (const line of cue.type) console.log('    ' + line);

@@ -30,7 +30,7 @@ npm run demo -- status
 npm run demo -- stage qa
 ```
 
-- Workbench: http://127.0.0.1:3508/. The site is `main`, before the upload change: the Nightly run shows 27.
+- Workbench: http://127.0.0.1:3508/. The site is `main`, before the upload change: the Nightly run shows 33 open issues (27 on the five pages the gate scans, 6 on `/account`).
 - Launcher: paste `http://localhost:4173/` only.
 - Ctrl+C stops the site and the Workbench before Stage Dev.
 - Port 3508 taken: `npm run demo -- stage qa --port 3600`
@@ -72,7 +72,7 @@ Start Stage Release during the gate's 90 s wait if you like: it only touches thi
 npm run demo -- stage release
 ```
 
-- The upload change with the fixes, as merged; the Workbench on the release snapshot: the Nightly run shows 20.
+- The upload change with the fixes, as merged; the Workbench on the release snapshot: the Nightly run shows 25 (was 33).
 - Workbench: http://127.0.0.1:3508/. Ctrl+C stops both.
 - Port 3508 taken: `npm run demo -- stage release --port 3600`
 

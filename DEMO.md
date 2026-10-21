@@ -61,8 +61,8 @@ developer's, and the pull request's. Then we go back to the tester the morning a
 will say **pre-run**: no AI runs on this laptop today." Light QA and release.
 
 **QA, the tester's seat (8 min).** The Workbench on `main`, before the change: a scan from the browser, the
-Nightly's 27, the AI notes, the "Last updated" grey on five pages and the refresh button ("remember these two"),
-an added issue, a verdict, a rescan, a checklist. Hands off with: 27 on the list, and nobody owns one.
+Nightly's backlog (33 open issues: 27 on the five pages, 6 on `/account`), the AI notes, the "Last updated" grey on five pages and the refresh button ("remember these two"),
+an added issue, a verdict, a rescan, a checklist. Hands off with: 33 on the list, and nobody owns one.
 
 **Development, the developer's seat (6 min).** Red gate (Tolerated 27: the tester's backlog), the AI skills,
 whose cluster step pulls the grey and the refresh button in with the new defects, green gate: **Fixed 7**,
@@ -73,7 +73,7 @@ say this developer pushed the dialog as it was. The same three on the pull reque
 reviewer lives, one click, green. Lands on: policy, not a person. Hands off with: say it merges; that night
 the nightly runs again.
 
-**Release, back in the tester's seat (3 min).** The next Nightly: 27 became 20, and nobody filed a ticket.
+**Release, back in the tester's seat (3 min).** The next Nightly: 33 became 25, and nobody filed a ticket.
 Then the fourth defect, the one no rule fires on: focus walks out of the dialog. The tester's verdict, and the
 ACR drafted from the run. Lands on: the scan is evidence, the tester is the judgment, the paperwork is drafted
 from both.
@@ -102,11 +102,13 @@ made as CI makes it, with its AI notes **pre-run** afterwards) together, until C
 **Type.** Nothing more. Open http://127.0.0.1:3508/.
 
 **See, in order.**
-1. **The launcher.** Paste `http://localhost:4173/`, pick the conformance level, press **Start**. One row, the
+1. **The launcher.** Paste `http://localhost:4173/`, name the run (the Name field is required), pick the
+   conformance level, press **Start**. One row, the
    current step, then the report: 5 violations on Home. "A scan launched from the browser: no command line, and
    the same scan core the command line and the pipeline run."
-2. **The Nightly run** (the run list, then its report): **27** on the five pages, and `/account` reached through
-   the Sign in path. The plain-language notes beside each issue, the summary and the adjudications, all
+2. **The Nightly run** (the run list, then its report): **33** open issues across 6 pages: 27 on the five the gate
+   also scans, 6 on `/account`, reached through the Sign in path. The **Start here** card lists the causes: the
+   footer links (15), then `p.muted#last-updated` (5). The plain-language notes beside each issue, the summary and the adjudications, all
    **pre-run** by MANTA's AI skills on this snapshot. Point at the "Last updated" contrast finding on all five
    pages (one grey, one cause) and the refresh button on Check a case: "remember these two".
 3. **What only a tester does.** Add an issue on the account page (the two **Read** links); give a verdict on the
@@ -114,12 +116,12 @@ made as CI makes it, with its AI notes **pre-run** afterwards) together, until C
    failing; it reloads the page from the preview); open a criterion's checklist.
 
 **Say.**
-- "This is the backlog: 27 known problems on the five pages, scanned every night, tolerated by the gate, nobody's
+- "This is the backlog: 27 known problems on the five public pages, 6 more behind the sign-in, scanned every night, tolerated by the gate, nobody's
   ticket."
 - "The scan is evidence; the human is the judgment. QA adds what no rule can see, decides what the scan could
   only flag, and re-measures a fix on the spot."
 - "Everything QA does is recorded on the run itself: who decided what, and when. The record is the run."
-- Hand off: "27 on the list, and nobody owns one. Watch what happens when a developer touches the page next to
+- Hand off: "33 on the list, and nobody owns one. Watch what happens when a developer touches the page next to
   them."
 
 Ctrl+C stops both servers before the next stage.
@@ -313,14 +315,16 @@ nightly run of that build: the site as it merges, AI notes **pre-run**), until C
 **Type.** Nothing more. Open http://127.0.0.1:3508/.
 
 **See, in order.**
-1. **The Nightly run**: **20** on the five pages. The "Last updated" lines and the refresh button are gone.
+1. **The Nightly run**: **25** open issues (was 33). The "Last updated" lines, the account page's too, and the
+   refresh button are gone.
 2. **Focus order.** The Pages dialog's **Focus order** column on `/status?upload=BP-2026-10882`: the numbered
    stops walk past the page behind the open dialog, into the dialog at 15 to 18, and straight out into the footer.
    Record a verdict on 2.4.3 with the checklist, and attest.
 3. **Export** on the Nightly run: the ACR draft (a Word document) and the USPS defects export.
 
 **Say.**
-- "Yesterday 27, this morning 20. Nobody filed a ticket: the developer fixed seven on the way past."
+- "Yesterday 33, this morning 25. Eight: the seven the developer's gate counted, and the same grey on the
+  account page the gate never scans. Nobody filed a ticket."
 - "Three defects the machine found and the machine fixed. Every gate is green. Here is the fourth. No rule
   fires on a dialog that lets focus walk out of it, so no gate stopped it and no AI fixed it. MANTA recorded the
   walk; QA judges it against WCAG 2.4.3, Focus Order, with the checklist."

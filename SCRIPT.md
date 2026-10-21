@@ -43,7 +43,8 @@ Two of these are the thread from Act 1 to Act 4. The tester sees them in the bac
 "Last updated" line turns out to share one colour with the new hint, so the one colour edit that fixes the new
 defect also clears five tolerated findings, and the refresh button is the same icon-button pattern as the close
 button, so MANTA fixes it in the same pass (its own edit, its own label). **Fixed 7** on the second gate is those
-two together: 5 + 2. In Act 4 they are gone from the tester's backlog: 27 → 20, and nobody filed a ticket.
+two together: 5 + 2. In Act 4 they are gone from the tester's backlog, with the same grey on the account page: 33 → 25, and nobody
+filed a ticket.
 
 ### The fourth defect, which no rule finds
 
@@ -79,13 +80,13 @@ purpose only from context).
 
 | Step | Pages scanned | New | Fixed | Tolerated | Result |
 |---|---|---|---|---|---|
-| Act 1, the Nightly run on `main` (Workbench) | 5 + `/account` by the sign-in path, extended rules on | not a gate: **27** on the 5 pages (5 critical, 22 serious), 3 on `/account` | | | the backlog |
+| Act 1, the Nightly run on `main` (Workbench) | 5 + `/account` by the sign-in path, extended rules on | not a gate: **33** open issues: 27 on the 5 pages (5 critical, 22 serious), 6 on `/account` | | | the backlog |
 | Act 1, the launcher scan | the page you paste (Home) | not a gate: 5 | | | a report |
 | Act 2, laptop, first gate | 5 | **3** (P1 2, P2 1) | 0 | 27 | `Gate failed: 3 new violations at or above minor.  exit 1` |
 | Act 2, laptop, after the fix | 5 | 0 | **7** (5 "Last updated" lines, 2 refresh buttons) | 20 | `Gate passed`, `exit 0` |
 | Act 3, pull request, first run | 1 (the upload page only; the workflow narrows the config to the page the change touches) | **3** | 0 | 6 | red, `MANTA gate · failed: 3 new violations at or above minor` |
 | Act 3, after the one-click apply | 1 | 0 | 1 | 5 | green, `MANTA gate · passed: no new violations` |
-| Act 4, the next Nightly run (Workbench) | 5 + `/account`, extended rules on | not a gate: **20** on the 5 pages, 3 on `/account` | | | the backlog after the merge |
+| Act 4, the next Nightly run (Workbench) | 5 + `/account`, extended rules on | not a gate: **25** open issues: 20 on the 5 pages, 5 on `/account` (its "Last updated" line is fixed too) | | | the backlog after the merge |
 
 The pull request tolerates 6 because it scans one page: that page's refresh button, Pending badge, "Last
 updated" line and three social links. The golden PR (the fallback) says Tolerated 27: it ran before the
@@ -117,8 +118,8 @@ Press **Next stage**: QA and release lights.
 Setup, before the audience: `npm run demo -- stage qa`. It builds `main` (the site before the upload change) at
 http://localhost:4173 and starts the Workbench on the nightly snapshot at http://127.0.0.1:3508/.
 
-**Beat 1 · A scan from the browser.** The launcher: paste `http://localhost:4173/`, pick the conformance level,
-Start. One row, the steps, then the report: 5 violations on Home.
+**Beat 1 · A scan from the browser.** The launcher: paste `http://localhost:4173/`, name the run (required), pick
+the conformance level, Start. One row, the steps, then the report: 5 violations on Home.
 
 - "This is where most of you work. No command line: a scan from the browser, and it is the same scan core the
   developer and the pipeline run, as you will see."
@@ -126,8 +127,9 @@ Start. One row, the steps, then the report: 5 violations on Home.
 **Beat 2 · The backlog.** Open the **Nightly** run from the run list.
 
 - "Every night the site is scanned on its own: five pages, and the account page behind the sign-in, with a
-  password kept as a secret. 27 problems on the five pages. This is the backlog: known, tolerated, nobody's
-  ticket."
+  password kept as a secret. 33 open issues: 27 on the five pages the gate also scans, 6 on the account page.
+  This is the backlog: known, tolerated, nobody's ticket." The **Start here** card lists the causes: the footer
+  links (15) first, then `p.muted#last-updated` (5): the thread.
 - The AI notes beside the findings, pre-run: the run summary ("Fix the footer social links first … giving them
   names in that one shared footer clears all 15 of those issues at once. Next, the footer timestamp … one style
   change there clears 5 more.") and the plain-language note on each cluster. "Pre-run. MANTA grouped the 27 by
@@ -146,7 +148,7 @@ Start. One row, the steps, then the report: 5 violations on Home.
   failing. "A fix is re-measured on the spot, not re-filed."
 - Open a criterion's **checklist**: "The Trusted Tester test for that criterion, inside the tool."
 
-**Handoff.** "27 on the list, and nobody owns one. Watch what happens when a developer touches the page next
+**Handoff.** "33 on the list, and nobody owns one. Watch what happens when a developer touches the page next
 to them."
 
 Ctrl+C stops the preview and the Workbench. Press **Next stage**: Development lights.
@@ -277,9 +279,10 @@ merges, at http://localhost:4173, and starts the Workbench on the release snapsh
 
 **Beat 1 · The backlog moved.** Open the **Nightly** run.
 
-- "Yesterday 27. This morning 20. The five last-updated lines and the refresh buttons are gone from the
-  tester's list. Nobody filed a ticket: the developer fixed them on the way past, because MANTA saw they shared
-  a cause with something new."
+- "Yesterday 33. This morning 25. The last-updated lines and the refresh buttons are gone from the
+  tester's list. Eight: the seven the developer's gate counted, and the same grey on the account page, which
+  the gate never scans and the nightly does. Nobody filed a ticket: the developer fixed them on the way past,
+  because MANTA saw they shared a cause with something new."
 
 **Beat 2 · The fourth defect.** The Pages dialog, the **Focus order** column, on
 `/status?upload=BP-2026-10882`.
