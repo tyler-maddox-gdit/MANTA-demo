@@ -6,6 +6,7 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { createRequire } from 'node:module';
+import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -30,7 +31,8 @@ const WORKBENCH_PORT = 3508;
 // ── The cues (DEMO.md says the same) ───────────────────────────────────────
 const GATE_LINE = 'npx manta gate --base ' + DEV_ORIGIN;
 const SLIDE = 'presentation/index.html';
-const PREVIEW_ORIGIN = 'http://localhost:4173';
+const PREVIEW_PORT = 4173;
+const PREVIEW_ORIGIN = 'http://localhost:' + PREVIEW_PORT;
 const workbenchLine = (name) => 'npm run demo -- workbench ' + name + '   (opens the Workbench on it; Ctrl+C stops it)';
 const CUES = {
   qa: {
@@ -162,7 +164,7 @@ function prepare() {
   console.log('[DONE] On ' + FEATURE.branch + ' at ' + FEATURE.tag + ', clean.');
 }
 
-function stage(name, flags) {
+async function stage(name, flags) {
   if (!CUES[name]) die('stage takes qa, devops or dev.');
   prepare();
   if (name === 'devops') {
@@ -176,12 +178,23 @@ function stage(name, flags) {
     console.log('Golden PR (fallback): ' + (golden ?? 'none open: see DEMO.md, Setup Tyler does once'));
     return printCue('devops');
   }
-  if (name === 'qa') return stageQa(flags);
+  if (name === 'qa') return await stageQa(flags);
   printCue('dev');
 }
 
+/** Whether nothing listens on 127.0.0.1:<port>. */
+const portFree = (port) => new Promise((resolve) => {
+  const probe = createServer();
+  probe.once('error', () => resolve(false));
+  probe.listen(port, '127.0.0.1', () => probe.close(() => resolve(true)));
+});
+
 /** The QA stage: the preview build on 4173 and the Workbench on the nightly snapshot, both in this process until Ctrl+C. */
-function stageQa(flags) {
+async function stageQa(flags) {
+  const port = flags.port ?? WORKBENCH_PORT;
+  for (const [p, what] of [[PREVIEW_PORT, 'the preview'], [port, 'the Workbench']]) {
+    if (!(await portFree(p))) die('Port ' + p + ' is in use, so ' + what + ' cannot start. Stop what holds it' + (p === port ? ', or: npm run demo -- stage qa --port ' + (port + 100) : '') + '.');
+  }
   const vite = join(ROOT, 'node_modules', 'vite', 'bin', 'vite.js');
   if (!existsSync(vite)) die('vite is not installed here: run npm ci first.');
   const dataDir = join(ROOT, 'demo-data', 'nightly');
@@ -192,13 +205,13 @@ function stageQa(flags) {
   printCue('qa');
   // Only node is spawned (npm and vite are .cmd shims on Windows, which spawn cannot run without a shell).
   const children = [
-    spawn(process.execPath, [vite, 'preview', '--port', '4173'], { cwd: ROOT, stdio: 'inherit' }),
-    spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(flags.port ?? WORKBENCH_PORT), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit' }),
+    spawn(process.execPath, [vite, 'preview', '--port', String(PREVIEW_PORT)], { cwd: ROOT, stdio: 'inherit' }),
+    spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(port), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit' }),
   ];
   const stop = () => { for (const c of children) if (c.exitCode === null && !c.killed) c.kill(); };
   process.on('SIGINT', () => { stop(); process.exit(130); });
   process.on('exit', stop);
-  for (const c of children) c.on('exit', (code) => { stop(); if (code) process.exitCode = code; });
+  for (const c of children) c.on('exit', (code) => { if (code) console.error('[ERROR] A server stopped (see above); the other was stopped too. Fix it and run the stage again.'); stop(); if (code) process.exitCode = code; });
 }
 
 const firstSentence = (text) => (text.match(/^.*?[.!?](\s|$)/) ?? [text])[0].trim();
@@ -402,7 +415,7 @@ for (let i = 0; i < argv.length; i++) {
 const [command, a, b] = words;
 switch (command) {
   case 'reset': reset(flags); break;
-  case 'stage': stage(a, flags); break;
+  case 'stage': await stage(a, flags); break;
   case 'fix': fix(flags); break;
   case 'snapshot': snapshot(a, b, flags); break;
   case 'ci-run': ciRun(a, flags); break;
