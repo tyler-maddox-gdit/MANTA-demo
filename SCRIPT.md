@@ -122,26 +122,23 @@ Expect the step stream (five pages), then **New 3**, **Fixed 0**, **Tolerated 27
 
 **Beat 2 · The AI skills.** Type `npm run demo -- fix`.
 
-Expect, top to bottom: the **Pre-run** paragraph (provider and model); **Step 1 · cluster** with one line,
-"30 findings come down to 3 shared causes and 7 one-offs"; **Step 2 · fix** with three fixes, each titled by
-what a user hits, with a **One cause** line on Fix 1, two **Noticed first** lines each, and the source line
-**before** and **after**; `Patch written for src/pages/Status.jsx and src/styles.css.`; then the question
-`Apply the patch? [y/N]`. Stop there.
+Expect the fix skill's answer, top to bottom: the header with the run and the model; **Reading the run**,
+**Reading the project**, **Conventions found**; then three fixes, each titled by what a user hits, with the
+problem and the fix in plain words and the diff in red and green; then `3 fixes · 2 files` and the question
+`Apply these 3 fixes? [y/N]`. Stop there. The output does not say pre-run; you do.
 
-- "Pre-run. MANTA's AI skills ran on this run earlier; here is what they wrote."
-- **Step 1**: "It groups findings by cause, not by page. Thirty findings, three causes. The footer links are
-  one cause, fifteen findings."
-- **Fix 1 · a button with no name**: "One cause: the icon-button pattern. The dialog's close button and the
-  refresh button that was already there are the same pattern, so one fix covers both. An `aria-label` on each."
-- **Noticed first**, point at a line on Fix 1 and on Fix 3: "Before it wrote anything it read the project:
-  icons here are already marked `aria-hidden`, and the `.field` wrapper is what every form row uses. The fix
-  is in this project's conventions, not a generic one."
-- **Fix 2 · text too faint to read**: "The colour is fixed in the stylesheet, where it is set, from 2.6 to 1
-  up to 7 to 1, so every hint on the site gets it."
-- **Fix 3 · a form field with no label**: "A visible label, Choose files, in that wrapper, and the size limits
-  tied to the field so they are read with it."
-- "It asks. The developer reads the diff and says yes." Type `y`: `Applied (git apply), nothing committed:`,
-  then the diff summary, `Status.jsx` and `styles.css`.
+- "Pre-run. MANTA's fix skill ran on this run earlier; this is its answer."
+- **Reading the project**: "Before it wrote anything it read the project: React, Vite, where the stylesheet
+  is, how this team names buttons, marks icons, lays out form rows, flags its known debt. The fix is in this
+  project's conventions, not a generic one."
+- **1 · Close button with no name**: "What a user hits, in plain words, then the change. And it noticed the
+  refresh button that was already there is the same pattern, so one fix covers both: an `aria-label` on each."
+- **2 · Hint text too faint to read**: "2.6 to 1. Fixed in the stylesheet, where the colour is set, to 7 to 1,
+  so every hint on the site gets it."
+- **3 · File field with no label**: "A visible label, Choose files, in the wrapper the other form rows use,
+  and the size limits tied to the field so they are read with it."
+- "It asks. The developer reads the diff and says yes." Type `y`: `Applied to src/pages/Status.jsx and
+  src/styles.css. Nothing committed.`, then the diff summary.
 
 **Beat 3 · Green.** Type the gate again.
 

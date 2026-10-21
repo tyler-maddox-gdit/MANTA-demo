@@ -318,6 +318,7 @@ async function fix(flags) {
   const patch = 'demo-data/pr/reports/fix-' + token + '.patch';
   const prov = proposals.provenance ?? {};
   const impactOf = Object.fromEntries((gate.new ?? []).map((n) => [n.ruleId, n.impact]));
+  const isNew = new Set((gate.new ?? []).map((n) => n.target));
   const pages = [...new Set((gate.new ?? []).map((n) => n.page))];
   const list = proposals.proposals ?? [];
   const files = [...new Set(list.flatMap((p) => (p.edits ?? []).map((e) => e.file)))];
@@ -339,7 +340,7 @@ async function fix(flags) {
   for (const [i, p] of list.entries()) {
     const part = (k) => [...new Set((p.members ?? []).map((m) => m.split('|::|')[k]))];
     const rules = part(1);
-    const targets = part(2);
+    const targets = part(2).sort((x, y) => Number(isNew.has(y)) - Number(isNew.has(x)));
     const e = explain(rules[0], targets, p);
     const right = rules.join(', ') + ' · ' + rules.map((r) => impactOf[r] ?? 'new').join(', ') + ' · ' + targets.join(', ');
     const left = (i + 1) + ' · ' + e.title;

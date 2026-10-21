@@ -110,21 +110,24 @@ npx manta gate --base http://localhost:5173
 ```
 npm run demo -- fix
 ```
-**See.** A **Pre-run** paragraph naming the provider and model. **Step 1 · cluster**: "30 findings come down to
-3 shared causes and 7 one-offs." **Step 2 · fix**: three fixes, each titled by what a user hits (**Fix 1 · a
-button with no name**, **Fix 2 · text too faint to read**, **Fix 3 · a form field with no label**) with its
-elements and impact; Fix 1 has a **One cause** line (the icon-button pattern covers the old refresh button
-too); each has two **Noticed first** lines (what the skill read in the project before writing: the class
-naming, the `aria-hidden` icons, the hard-coded greys, the `.field` wrapper) and then the source file and
-line with **before** and **after**. Then `Patch written for src/pages/Status.jsx and src/styles.css.` and the
-question `Apply the patch? [y/N]`. Read the three fixes aloud first; then type `y`: `Applied (git apply),
-nothing committed:` and the diff summary, `Status.jsx` and `styles.css`.
-- "MANTA's AI skills, **pre-run** on this run: no AI runs on this laptop today. With a key or the Claude command
-  line here, the same command runs them live, in a minute or two."
-- "Step 1 groups the findings by cause: the dialog's close button and the old refresh button are one pattern,
-  one fix. Step 2 read the project first, the **Noticed first** lines: the form-row wrapper it reuses, the icon
-  convention, where the greys live. Then it writes the edit to the exact line that wrote the element; the
-  contrast fix goes to the stylesheet."
+**See.** The fix skill's answer, as the developer reads it. A header, `MANTA fix · run … · claude-opus-5 via
+claude-code`. Three lines as it reads: **Reading the run** (3 new violations on the upload page, 27 tolerated
+by the baseline), **Reading the project** (React 18, react-router 6, Vite 5, plain CSS in `src/styles.css`,
+source stamps on) and **Conventions found** (the button class naming, the `aria-hidden` icons, the stable ids,
+the `DEBT` comments). Then three fixes, each titled by what a user hits, with the rule, impact and element on
+the right: **1 · Close button with no name** (the refresh button has the same problem; one fix, two
+`aria-label`s), **2 · Hint text too faint to read** (2.61:1, darkened to #595959, 7.0:1, in the stylesheet),
+**3 · File field with no label** (a visible "Choose files" label, `aria-describedby` to the hint). Under each:
+the problem in plain words, the fix in plain words, and the diff, red and green, with the file and line. Then
+`3 fixes · 2 files` and the question `Apply these 3 fixes? [y/N]`. Read the fixes aloud first; then type `y`:
+`Applied to src/pages/Status.jsx and src/styles.css. Nothing committed.` and the diff summary. The output
+never says so itself, so you do: this answer is **pre-run**.
+- "This is MANTA's fix skill, **pre-run** on this run: no AI runs on this laptop today. With a key or the Claude
+  command line here, the same command runs it live, in a minute or two."
+- "It read the run, then the project: the stack, the stylesheet, how this team writes buttons and form rows
+  and marks its known debt. Then, for each problem: what a user hits, what to change, and the change itself,
+  on the exact line that wrote the element. The close button and the old refresh button are one pattern, so
+  one fix covers both; the contrast fix goes to the stylesheet."
 - "It asks. Nothing is applied until the developer has read the diff and said yes; nothing is committed."
 
 **3 · Green.** Type:
