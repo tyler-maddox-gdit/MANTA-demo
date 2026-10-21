@@ -247,7 +247,7 @@ const cyan = (t) => paint('36', t);
 const pause = (ms) => (TTY ? new Promise((r) => setTimeout(r, ms)) : Promise.resolve());
 const cols = () => process.stdout.columns ?? 110;
 const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
-const NOUN = { '#upload-close': 'close button', '#refresh': 'refresh button', '#upload-file': 'file field', '#upload-hint': 'hint text' };
+const NOUN = { '#upload-close': 'close button', '#refresh': 'refresh button', '#upload-file': 'file field', '#upload-hint': 'hint text', '#last-updated': 'footer "Last updated" line' };
 const noun = (selector) => NOUN[selector] ?? selector;
 
 /** The developer's explanation of one proposal: a title, the problem as a user meets it, and the fix, from the rule and the edit itself. */
@@ -273,11 +273,14 @@ function explain(rule, targets, p) {
     }
     case 'color-contrast': {
       const ratios = [...(p.domSpec?.domInstruction ?? '').matchAll(/(\d+(?:\.\d+)?):1/g)].map((m) => m[1] + ':1');
-      const hex = replacement.match(/#[0-9a-f]{3,6}\b/i)?.[0];
+      const original = (p.edits ?? []).map((e) => e.original).join('\n');
+      const hexes = (text) => [...text.matchAll(/#[0-9a-f]{3,8}\b/gi)].map((m) => m[0].toLowerCase());
+      const hex = hexes(replacement).find((h) => !hexes(original).includes(h));
+      const variable = hex && [...replacement.matchAll(/(--[\w-]+):\s*(#[0-9a-f]{3,8})/gi)].find((m) => m[2].toLowerCase() === hex)?.[1];
       return {
         title: cap(noun(first)) + ' too faint to read',
-        problem: 'The ' + noun(first) + ' is ' + (ratios[0] ?? 'under 4.5:1') + ' against its background; the minimum for text this size is 4.5:1. Hard to read with low vision, and on a dim screen hard for anyone.',
-        fix: 'Darken the colour' + (hex ? ' to ' + hex : '') + (ratios[1] ? ' (' + ratios[1] + ')' : '') + ' in the shared rule in the stylesheet, where it is set, so everything that uses it gets the fix.',
+        problem: 'The ' + noun(first) + ' is ' + (ratios[0] ?? 'under 4.5:1') + ' against its background; the minimum for text this size is 4.5:1. Hard to read with low vision, and on a dim screen hard for anyone.' + (rest.length ? ' The ' + rest.map(noun).join(' and ') + ' uses the same colour and fails the same way.' : ''),
+        fix: 'Darken the ' + (variable ? 'shared colour ' + variable : 'colour') + (hex ? ' to ' + hex : '') + (ratios[1] ? ' (' + ratios[1].replace(/^/, '') + ')' : '') + ' in the stylesheet, where it is set, so everything that uses it gets the fix.',
       };
     }
     default:
@@ -292,7 +295,7 @@ function clusterWhy(c) {
   const [, things] = clusterKind(c);
   const where = c.fixTarget?.value ?? '';
   const code = c.ruleIds?.[0] === 'link-name' ? where.replace(/ — .*/, '') : where;
-  return 'All ' + c.affectedElements + ' ' + things + ' come from the same place (' + clip(code, 60) + '), so one change fixes them all.';
+  return 'All ' + c.affectedElements + ' ' + things + ' trace back to the same place (' + clip(code, 60) + ').';
 }
 
 /** What the project is, read from its own files: the frameworks and versions, the stylesheet, whether source stamping is on. */
@@ -364,7 +367,7 @@ async function fix(flags) {
     console.log('    ' + (fresh.length ? green('●') : dim('○')) + ' ' + bold(name) + dim(' · ' + c.affectedElements + ' elements · ' + c.ruleIds.join(', ') + ' · ' + c.worstImpact));
     if (fresh.length) {
       console.log(wrap(clusterWhy(c), '      ', width));
-      console.log('      ' + green('Contains a new finding') + ' (' + [...new Set(fresh)].join(', ') + ') and ' + old + ' existing ' + (old === 1 ? 'one' : 'ones') + '. Fixing the cause fixes all of them.');
+      console.log('      ' + green('Contains a new finding') + ' (' + [...new Set(fresh)].join(', ') + ') and ' + old + ' existing ' + (old === 1 ? 'one' : 'ones') + '. Fixing the cause clears all of them.');
     } else {
       console.log('      ' + dim('Existing debt in the baseline, no new finding. Left alone.'));
     }
@@ -382,7 +385,8 @@ async function fix(flags) {
     console.log('');
     console.log(bold(left) + dim(' '.repeat(Math.max(2, width - left.length - right.length)) + right));
     const c = p.scope === 'cluster' ? byId[p.scopeId] : undefined;
-    console.log('    ' + dim(c ? 'From cluster "' + clusterKind(c)[0] + '": fixes the new finding and its ' + (c.affectedElements - targets.filter((t) => isNew.has(t)).length) + ' existing partners together.' : 'Standalone: no other finding shares its cause.'));
+    const edits = (p.edits ?? []).filter((x) => x.replacement.trim() !== '').length;
+    console.log('    ' + dim(c ? 'From cluster "' + clusterKind(c)[0] + '": fixes the new finding and its ' + (c.affectedElements - (c.members ?? []).filter((m) => isNew.has(m.split('|::|')[2])).length) + ' existing partners ' + (edits === 1 ? 'in one edit.' : 'in ' + edits + ' edits, one per element.') : 'Standalone: no other finding shares its cause.'));
     console.log(wrap(e.problem, '    ', width));
     if (e.fix) console.log(wrap('Fix: ' + e.fix, '    ', width));
     for (const edit of p.edits ?? []) {
