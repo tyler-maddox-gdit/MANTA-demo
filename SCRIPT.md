@@ -176,17 +176,15 @@ new findings on `/status?upload=BP-2026-10882`, each with its source file and li
 
 **Beat 2 · The AI skills.** Type `npm run demo -- fix`.
 
-Expect the fix skill's answer, top to bottom: the header with the run and the model; **Reading the run**,
-**Reading the project**, **Conventions found**; **Step 1 · cluster** (30 findings, 3 shared causes, 6 one-offs;
+Expect the fix skill's answer, top to bottom: the header with the run and the model, then framed cards:
+**Reading** (the run, the project, conventions found); **Step 1 · cluster** (30 findings, 3 shared causes, 6 one-offs;
 the text-too-faint and icon-buttons causes have a green dot, the footer links say "Left alone"); **Step 2 · fix**
 with three fixes, each titled by what a user hits and tagged "From cluster…" or "Standalone…", with the problem
 and the fix in plain words and the diff in red and green; then `3 fixes · 2 files` and the question
 `Apply these 3 fixes? [y/N]`. Stop there. The output does not say pre-run; you do.
 
 - "Pre-run. MANTA's fix skill ran on this run earlier; this is its answer."
-- **What a user sees** (the picture): "Here is the dialog, and the three things a user hits: one, the hint
-  nobody can read; two, a close button that says nothing; three, a file field with no name. Keep those numbers."
-- **Reading the project**: "Before it wrote anything it read the project: React, Vite, where the stylesheet
+- **Reading**: "Before it wrote anything it read the project: React, Vite, where the stylesheet
   is, how this team names buttons, marks icons, lays out form rows, flags its known debt. The fix is in this
   project's conventions, not a generic one."
 - **Step 1 · cluster**: "First skill: it groups findings by cause, the same grouping the tester saw this
@@ -203,9 +201,7 @@ and the fix in plain words and the diff in red and green; then `3 fixes · 2 fil
 - **3 · File field with no label**: "A visible label, Choose files to upload, in the wrapper the other form
   rows use, and the size limits tied to the field so they are read with it."
 - "It asks. The developer reads the diff and says yes." Type `y`: `Applied to src/styles.css and
-  src/pages/Status.jsx. Nothing committed.`, the diff summary, then the dialog again, boxes in green. "Same
-  dialog: a label you can see, a hint you can read, and a close button that now has a name you can't see but a
-  screen reader says."
+  src/pages/Status.jsx. Nothing committed.`, then the diff summary.
 
 **Beat 3 · Green.** Type the gate again.
 
