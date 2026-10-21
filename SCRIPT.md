@@ -164,7 +164,7 @@ Setup, before the audience: `npm run demo -- stage dev`, then `npm run dev` in a
 
 **Beat 1 · The gate.** Type `npx manta gate --base http://localhost:5173`.
 
-Expect the step stream (five pages, about 15 seconds), then **New 3**, **Fixed 0**, **Tolerated 27**, the three
+Expect MANTA's banner, the manta ray, then the step stream (five pages, about 15 seconds), then **New 3**, **Fixed 0**, **Tolerated 27**, the three
 new findings on `/status?upload=BP-2026-10882`, each with a framed picture of the element, outlined in red, cut
 from the scan's own screenshot, and its source file and line, and `Gate failed … exit 1`.
 

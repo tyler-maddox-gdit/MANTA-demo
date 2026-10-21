@@ -167,7 +167,7 @@ npm run demo -- stage dev                        (tab 2: the feature branch, cle
 npm run dev                                      (tab 1: leave it running)
 npx manta gate --base http://localhost:5173      (tab 2)
 ```
-**Expect** the scan's steps, then `New 3 ✗ P1 2 · P2 1`, `Tolerated 27`, the three violations on
+**Expect** the manta ray banner, the scan's steps, then `New 3 ✗ P1 2 · P2 1`, `Tolerated 27`, the three violations on
 `/status?upload=BP-2026-10882` (`#upload-close`, `#upload-file`, `#upload-hint`), each with a framed picture of
 the element outlined in red, and
 `Gate failed: 3 new violations at or above minor.  exit 1`. Try Ctrl+clicking the `Report` link; whether it
