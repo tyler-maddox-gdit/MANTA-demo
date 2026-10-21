@@ -149,7 +149,7 @@ function prepare() {
   must('git', ['fetch', 'origin', '--prune', '--tags', '--force', '--quiet']);
   if (!revParse('refs/tags/' + FEATURE.tag + '^{commit}')) die('Tag ' + FEATURE.tag + ' is missing. Set the story tags first (DEMO.md, Setup Tyler does once).');
   const dirty = dirtyFiles();
-  if (dirty.length) console.log('Discarding ' + dirty.length + ' local change(s): ' + dirty.map((l) => l.slice(3)).join(', '));
+  if (dirty.length) console.log('Discarding ' + dirty.length + ' local change(s): ' + dirty.map((l) => l.replace(/^\s*\S+\s+/, '')).join(', '));
   must('git', ['checkout', '--quiet', '--', '.']);
   must('git', ['clean', '-fdx', '--quiet', 'demo-data']);
   for (const dir of RUN_DIRS.filter((d) => d !== 'sites').concat('ci-run')) rmSync(join(ROOT, dir), { recursive: true, force: true });
