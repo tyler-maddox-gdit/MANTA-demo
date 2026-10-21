@@ -178,7 +178,7 @@ from the scan's own screenshot, and its source file and line, and `Gate failed �
 
 **Beat 2 · The AI skills.** Type `npm run demo -- fix`.
 
-Expect the fix skill's answer, top to bottom: the header with the run and the model, then framed cards:
+Expect the fix skill's answer, top to bottom: the header with the run and the model, then a framed box,
 **Reading** (the run, the project, conventions found); **Step 1 · cluster** (30 findings, 3 shared causes, 6 one-offs;
 the text-too-faint and icon-buttons causes have a green dot, the footer links say "Left alone"); **Step 2 · fix**
 with three fixes, each titled by what a user hits and tagged "From cluster…" or "Standalone…", with the problem

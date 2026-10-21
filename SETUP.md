@@ -176,7 +176,7 @@ opens is one of the things to note. Then:
 npm run demo -- fix                              (tab 2)
 npx manta gate --base http://localhost:5173      (tab 2)
 ```
-**Expect** the fix skill's answer: a header, then framed cards: Reading (the run, the project, conventions found), Step 1
+**Expect** the fix skill's answer: a header, a framed Reading box (the run, the project, conventions found), Step 1
 (cluster: three causes, two with a green dot) and Step 2 (fix), three fixes with a plain-language problem and
 fix and a red and green diff each, `3 fixes · 2 files`, then `Apply these 3 fixes? [y/N]`: type `y`.
 **Expect** `Applied to src/styles.css and src/pages/Status.jsx. Nothing committed.` and a diff

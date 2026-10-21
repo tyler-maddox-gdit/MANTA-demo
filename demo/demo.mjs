@@ -395,49 +395,49 @@ async function fix(flags) {
   const lev = clusters.leverageSummary ?? {};
   const byId = Object.fromEntries((clusters.clusters ?? []).map((c) => [c.id, c]));
   const targetsOf = (c) => (c.members ?? []).map((m) => m.split('|::|')[2]);
+  const heading = (step, title, note) => console.log('\n' + bold(step + ' · ' + title) + dim('   ' + note));
+  heading('Step 1', 'cluster', 'group findings that share one cause');
+  console.log('    ' + lev.totalViolations + ' findings in this run come down to ' + lev.clusters + ' shared causes and ' + lev.standalone + ' one-offs.');
+  await pause(500);
   const touched = (c) => targetsOf(c).some((t) => isNew.has(t));
-  const step1 = [lev.totalViolations + ' findings in this run come down to ' + lev.clusters + ' shared causes and ' + lev.standalone + ' one-offs.'];
   for (const c of [...(clusters.clusters ?? [])].sort((a, b) => Number(touched(b)) - Number(touched(a)))) {
     const fresh = targetsOf(c).filter((t) => isNew.has(t));
     const old = targetsOf(c).length - fresh.length;
     const [name] = clusterKind(c);
-    step1.push('');
-    step1.push((fresh.length ? green('●') : dim('○')) + ' ' + bold(name) + dim(clip(' · ' + c.affectedElements + ' elements · ' + c.ruleIds.join(', ') + ' · ' + c.worstImpact, inner - name.length - 2)));
+    console.log('');
+    console.log('    ' + (fresh.length ? green('●') : dim('○')) + ' ' + bold(name) + dim(' · ' + c.affectedElements + ' elements · ' + c.ruleIds.join(', ') + ' · ' + c.worstImpact));
     if (fresh.length) {
-      step1.push(wrap(clusterWhy(c), '  ', inner));
-      step1.push(wrap(green('Contains a new finding') + ' (' + [...new Set(fresh)].join(', ') + ') and ' + old + ' existing ' + (old === 1 ? 'one' : 'ones') + '. Fixing the cause clears all of them.', '  ', inner));
+      console.log(wrap(clusterWhy(c), '      ', width));
+      console.log('      ' + green('Contains a new finding') + ' (' + [...new Set(fresh)].join(', ') + ') and ' + old + ' existing ' + (old === 1 ? 'one' : 'ones') + '. Fixing the cause clears all of them.');
     } else {
-      step1.push('  ' + dim('Existing debt in the baseline, no new finding. Left alone.'));
+      console.log('      ' + dim('Existing debt in the baseline, no new finding. Left alone.'));
     }
   }
-  card('Step 1 · cluster', step1, width, 'group findings that share one cause');
-  await pause(600);
+  await pause(500);
 
-  console.log('');
-  console.log(bold('Step 2 · fix') + dim('   write the change for each new finding'));
+  heading('Step 2', 'fix', 'write the change for each new finding');
   for (const [i, p] of list.entries()) {
     const part = (k) => [...new Set((p.members ?? []).map((m) => m.split('|::|')[k]))];
     const rules = part(1);
     const targets = part(2).sort((x, y) => Number(isNew.has(y)) - Number(isNew.has(x)));
     const e = explain(rules[0], targets, p);
+    const right = rules.join(', ') + ' · ' + rules.map((r) => impactOf[r] ?? 'new').join(', ') + ' · ' + targets.join(', ');
+    const left = (i + 1) + ' · ' + e.title;
+    console.log('');
+    console.log(bold(left) + dim(' '.repeat(Math.max(2, width - left.length - right.length)) + right));
     const c = p.scope === 'cluster' ? byId[p.scopeId] : undefined;
     const edits = (p.edits ?? []).filter((x) => x.replacement.trim() !== '').length;
-    const body = [
-      ...wrap(c ? 'From cluster "' + clusterKind(c)[0] + '": fixes the new finding and its ' + (c.affectedElements - (c.members ?? []).filter((m) => isNew.has(m.split('|::|')[2])).length) + ' existing partners ' + (edits === 1 ? 'in one edit.' : 'in ' + edits + ' edits, one per element.') : 'Standalone: no other finding shares its cause.', '', inner).split('\n').map(dim),
-      dim(clip(rules.join(', ') + ' · ' + rules.map((r) => impactOf[r] ?? 'new').join(', ') + ' · ' + targets.join(', '), inner)),
-      '',
-      wrap(e.problem, '', inner),
-    ];
-    if (e.fix) body.push('', wrap(bold('Fix:') + ' ' + e.fix, '', inner));
+    console.log(dim(wrap(c ? 'From cluster "' + clusterKind(c)[0] + '": fixes the new finding and its ' + (c.affectedElements - (c.members ?? []).filter((m) => isNew.has(m.split('|::|')[2])).length) + ' existing partners ' + (edits === 1 ? 'in one edit.' : 'in ' + edits + ' edits, one per element.') : 'Standalone: no other finding shares its cause.', '    ')));
+    console.log(wrap(e.problem, '    ', width));
+    if (e.fix) console.log(wrap('Fix: ' + e.fix, '    ', width));
     for (const edit of p.edits ?? []) {
-      body.push('', cyan(edit.file + ':' + edit.startLine));
-      const [was, now] = windowed(edit.original, edit.replacement, inner - 2);
-      for (const l of was) body.push(red('- ' + l));
-      if (edit.replacement.trim() === '') body.push(dim('(line removed: the debt comment it carried is no longer true)'));
-      else for (const l of now) body.push(green('+ ' + l));
+      console.log('');
+      console.log('    ' + cyan(edit.file + ':' + edit.startLine));
+      const [was, now] = windowed(edit.original, edit.replacement, width - 6);
+      for (const l of was) console.log('    ' + red('- ' + l));
+      if (edit.replacement.trim() === '') console.log('    ' + dim('(line removed: the debt comment it carried is no longer true)'));
+      else for (const l of now) console.log('    ' + green('+ ' + l));
     }
-    console.log('');
-    card((i + 1) + ' · ' + e.title, body, width);
     await pause(300);
   }
   console.log('');
@@ -456,11 +456,10 @@ async function fix(flags) {
 /** Visible width of a line: its ANSI colour codes count for nothing. */
 const visible = (t) => t.replace(/\x1b\[[0-9;]*m/g, '').length;
 
-/** One section of the output in a rounded frame: the title (and a dim note) on the top edge, each line padded to the right edge. */
-function card(title, lines, width, note = '') {
+/** A section of the output in a rounded frame: the title on the top edge, each line padded to the right edge. */
+function card(title, lines, width) {
   const inner = width - 4;
-  const fill = width - 5 - title.length - (note ? note.length + 3 : 0);
-  console.log(dim('╭─ ') + bold(title) + dim(' ' + '─'.repeat(Math.max(1, fill)) + (note ? ' ' + note + ' ─' : '') + '╮'));
+  console.log(dim('╭─ ') + bold(title) + dim(' ' + '─'.repeat(Math.max(1, width - 5 - title.length)) + '╮'));
   for (const l of lines.flatMap((x) => x.split('\n'))) console.log(dim('│') + ' ' + l + ' '.repeat(Math.max(0, inner - visible(l))) + ' ' + dim('│'));
   console.log(dim('╰' + '─'.repeat(width - 2) + '╯'));
 }

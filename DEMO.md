@@ -167,16 +167,16 @@ red, with its rule, impact and source file and line (Windows Terminal 1.22 or la
 npm run demo -- fix
 ```
 **See.** The fix skill's answer, as the developer reads it. A header, `MANTA fix · run … · claude-opus-5 via
-claude-code`. Each part is a framed card. **Reading**: **The run** (3 new violations on the upload page, 27
+claude-code`. A framed box, **Reading**: **The run** (3 new violations on the upload page, 27
 tolerated by the baseline), **The project** (React 18, react-router 6, Vite 5, plain CSS in `src/styles.css`,
 source stamps on) and **Conventions found** (the button class naming, the `aria-hidden` icons, the stable ids,
-the `DEBT` comments). Then the two skills, one after the other. The **Step 1 · cluster** card (group findings that
+the `DEBT` comments). Then the two skills, one after the other. **Step 1 · cluster** (group findings that
 share one cause): "30 findings in this run come down to 3 shared causes and 6 one-offs", then the three
 causes. **Text too faint to read** (6 elements) and **Icon buttons with no name** (3 elements) have a green
 dot, each marked "Contains a new finding (#upload-hint) and 5 existing ones" and "(#upload-close) and 2 existing
 ones". **Icon links with no name** has a hollow dot: "Existing debt in the baseline… Left alone." **Step 2 ·
-fix** (write the change for each new finding): three cards, each titled by what a user hits, with a grey line
-saying where it came from and one with the rule, impact and elements. **1 · Hint text too faint to read**
+fix** (write the change for each new finding): three fixes, each titled by what a user hits, with the rule,
+impact and elements on the right and a grey line saying where it came from. **1 · Hint text too faint to read**
 ("From cluster Text too faint to read: fixes the new finding and its 5 existing partners in one edit": the
 shared colour `--muted-bad`, 2.81:1 darkened to #595959, 7.0:1, one edit on line 1 of the stylesheet),
 **2 · Close button with no name** ("…its 2 existing partners in 2 edits, one per element": an `aria-label` on
