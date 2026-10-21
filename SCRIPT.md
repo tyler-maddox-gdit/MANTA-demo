@@ -92,7 +92,7 @@ The pull request tolerates 6 because it scans one page: that page's refresh butt
 updated" line and three social links. The golden PR (the fallback) says Tolerated 27: it ran before the
 workflow narrowed the scan to the changed page.
 
-The laptop gate takes about 8 seconds for the five pages (`--no-screenshots`; 15 with screenshots). The pull
+The laptop gate takes about 15 seconds for the five pages: it screenshots each one, for the pictures. The pull
 request's scan takes 7 seconds; the rest of its minute and a half is GitHub starting a machine, installing and
 building.
 
@@ -162,16 +162,18 @@ If it goes wrong: open `demo-data/nightly/reports/index.html` from disk (read-on
 
 Setup, before the audience: `npm run demo -- stage dev`, then `npm run dev` in a second terminal.
 
-**Beat 1 · The gate.** Type `npx manta gate --base http://localhost:5173 --no-screenshots`.
+**Beat 1 · The gate.** Type `npx manta gate --base http://localhost:5173`.
 
-Expect the step stream (five pages, about 8 seconds), then **New 3**, **Fixed 0**, **Tolerated 27**, the three
-new findings on `/status?upload=BP-2026-10882`, each with its source file and line, and `Gate failed … exit 1`.
+Expect the step stream (five pages, about 15 seconds), then **New 3**, **Fixed 0**, **Tolerated 27**, the three
+new findings on `/status?upload=BP-2026-10882`, each with a framed picture of the element, outlined in red, cut
+from the scan's own screenshot, and its source file and line, and `Gate failed … exit 1`.
 
 - "The developer's own machine, the site as it runs on their laptop, the same scan core. Tolerated 27: the
   backlog the tester just showed you, committed to the repository as the baseline. Legacy debt tolerated, new
   debt blocked. The number can go down; it cannot go up."
-- Read the three aloud as a user would meet them (the table above): a button that says "button", a file field
-  with no name, a hint you cannot read. "Each one names the file and the line that wrote it."
+- Read the three aloud as a user would meet them, pointing at each picture: a button that says "button", a file
+  field with no name, a hint you cannot read. "MANTA shows you the element it means, from its own screenshot,
+  and names the file and the line that wrote it."
 - "This developer is not an accessibility specialist. `button-name`? `label`? What do they do?"
 
 **Beat 2 · The AI skills.** Type `npm run demo -- fix`.

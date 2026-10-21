@@ -27,9 +27,9 @@ The presenter's runbook is [DEMO.md](DEMO.md). This page gets the PC ready to fo
    Then **close Terminal and open it again**, so it finds the new tools. If `winget` is blocked or asks for an
    administrator, use the installers from nodejs.org (LTS), git-scm.com and cli.github.com, or ask IT.
 
-   The Dev stage draws pictures of the dialog in the terminal, which needs **Windows Terminal 1.22 or later**
-   (Settings → About shows the version). Older: `winget upgrade --id Microsoft.WindowsTerminal -e`, or present
-   with `npm run demo -- fix --no-images`.
+   The Dev stage's gate draws pictures of the failing elements in the terminal, which needs **Windows Terminal
+   1.22 or later** (Settings → About shows the version). Older: `winget upgrade --id Microsoft.WindowsTerminal -e`,
+   or add `--no-images` to the gate.
 
 3. Let PowerShell run npm, then allow long file paths in Git:
    ```
@@ -165,15 +165,16 @@ on `/status`; open a criterion's checklist. Ctrl+C in tab 2 stops both servers.
 ```
 npm run demo -- stage dev                        (tab 2: the feature branch, clean)
 npm run dev                                      (tab 1: leave it running)
-npx manta gate --base http://localhost:5173 --no-screenshots   (tab 2)
+npx manta gate --base http://localhost:5173      (tab 2)
 ```
 **Expect** the scan's steps, then `New 3 ✗ P1 2 · P2 1`, `Tolerated 27`, the three violations on
-`/status?upload=BP-2026-10882` (`#upload-close`, `#upload-file`, `#upload-hint`) and
+`/status?upload=BP-2026-10882` (`#upload-close`, `#upload-file`, `#upload-hint`), each with a framed picture of
+the element outlined in red, and
 `Gate failed: 3 new violations at or above minor.  exit 1`. Try Ctrl+clicking the `Report` link; whether it
 opens is one of the things to note. Then:
 ```
 npm run demo -- fix                              (tab 2)
-npx manta gate --base http://localhost:5173 --no-screenshots   (tab 2)
+npx manta gate --base http://localhost:5173      (tab 2)
 ```
 **Expect** the fix skill's answer: a header, then framed cards: Reading (the run, the project, conventions found), Step 1
 (cluster: three causes, two with a green dot) and Step 2 (fix), three fixes with a plain-language problem and
@@ -230,7 +231,7 @@ for anything that failed, the command and the exact error text (copy it from Ter
 | `npm run install-browser-gdit`: "unable to get local issuer certificate" | The network re-signs HTTPS with a company certificate Node does not trust, and the script's `--use-system-ca` did not cover it. Check `node --version` is 22.15 or later. Failing that, `npm config get cafile`: if it names a file, `$env:NODE_EXTRA_CA_CERTS = "<that file>"` (or the `.pem` IT gives you), then install again. Last resort, for that one download only: `$env:NODE_TLS_REJECT_UNAUTHORIZED = "0"`, install, close the window. |
 | A scan or the Workbench: `Executable doesn't exist at …\ms-playwright\chromium_headless_shell-<build>\…` | The browser was installed by another Playwright version than MANTA's. Run `npm run install-browser-gdit` in this folder. |
 | `npm run install-browser-gdit` hangs or fails | The network blocks the download: set `$env:HTTPS_PROXY`, or ask IT to allow Playwright's download hosts. `npm run demo -- status` says when Chromium is missing. |
-| The gate: "could not load" `localhost:5173` | `npm run dev` is not running in tab 1. Or gate the built site instead: `npm run build`, `npm run preview`, `npx manta gate --base http://localhost:4173 --no-screenshots`. |
+| The gate: "could not load" `localhost:5173` | `npm run dev` is not running in tab 1. Or gate the built site instead: `npm run build`, `npm run preview`, `npx manta gate --base http://localhost:4173`. |
 | Stage DevOps: no **Pre-run AI fixes** comment or review on the live PR | The PR's branch is not the story's (`npm run demo -- stage devops` again), or the gate job failed before posting: open its log under **Checks**. On stage, show the golden PR instead. |
 | Stage Dev: `fix` says the patch does not apply | It was applied already, or Git rewrote line endings: `npm run demo -- stage dev` again; check `git config core.autocrlf` (Part 5). |
 | The Workbench: port 3508 in use | `npm run demo -- workbench nightly --port 3600`, then open http://127.0.0.1:3600/. |

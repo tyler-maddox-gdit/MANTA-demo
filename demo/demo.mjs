@@ -30,7 +30,7 @@ const MANTA_PKG = join(ROOT, 'node_modules', '@usps', '508-toolkit');
 const WORKBENCH_PORT = 3508;
 
 // ── The cues (DEMO.md says the same) ───────────────────────────────────────
-const GATE_LINE = 'npx manta gate --base ' + DEV_ORIGIN + ' --no-screenshots';
+const GATE_LINE = 'npx manta gate --base ' + DEV_ORIGIN;
 const SLIDE = 'presentation/index.html';
 const PREVIEW_PORT = 4173;
 const PREVIEW_ORIGIN = 'http://localhost:' + PREVIEW_PORT;

@@ -41,9 +41,9 @@ Terminal 1:
 
 ```
 npm run demo -- stage dev
-npx manta gate --base http://localhost:5173 --no-screenshots
+npx manta gate --base http://localhost:5173
 npm run demo -- fix
-npx manta gate --base http://localhost:5173 --no-screenshots
+npx manta gate --base http://localhost:5173
 ```
 
 Terminal 2, started before the first gate and left running:
@@ -52,8 +52,9 @@ Terminal 2, started before the first gate and left running:
 npm run dev
 ```
 
+- First gate: a framed picture under each new finding (Windows Terminal 1.22+). Garbled or missing: add `--no-images`.
 - `fix` shows the AI answer and asks `Apply these 3 fixes? [y/N]`: type `y`.
-- Gates (about 8 s each): first `New 3`, exit 1; second `New 0`, `Fixed 7`, `Tolerated 20`, exit 0.
+- Gates (about 15 s each): first `New 3`, exit 1; second `New 0`, `Fixed 7`, `Tolerated 20`, exit 0.
 - Stop `npm run dev` (Ctrl+C) before Stage Release.
 
 ## 5. Stage DevOps
@@ -95,7 +96,7 @@ Between stages or between rehearsals. Each stage command already clears local ru
 npm run demo -- stage qa --port 3600
 npm run build
 npm run preview
-npx manta gate --base http://localhost:4173 --no-screenshots
+npx manta gate --base http://localhost:4173
 npm run demo -- fix --live
 ```
 

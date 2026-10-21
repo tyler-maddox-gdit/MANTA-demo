@@ -145,12 +145,12 @@ It puts the feature branch, `feature/upload-documents`, in the working tree, cle
 **1 · The gate.** Type:
 ```
 npm run dev        (in a second terminal; leave it running)
-npx manta gate --base http://localhost:5173 --no-screenshots
+npx manta gate --base http://localhost:5173
 ```
-**See.** MANTA's step stream as it scans each page (about 8 seconds; `--no-screenshots` skips the screenshots
-the report would carry, which halves it), then the terminal summary: **New 3** (P1 2 · P2 1),
+**See.** MANTA's step stream as it scans each page (about 15 seconds), then the terminal summary: **New 3** (P1 2 · P2 1),
 **Fixed 0**, **Tolerated** with the same number as the README's badge, the three new violations listed on
-`/status?upload=BP-2026-10882`, and the last line `Gate failed: 3 new violations at or above minor.  exit 1`.
+`/status?upload=BP-2026-10882`, each with a framed picture of the element from the scan's own screenshot, outlined in
+red, with its rule, impact and source file and line (Windows Terminal 1.22 or later; `--no-images` leaves them out), and the last line `Gate failed: 3 new violations at or above minor.  exit 1`.
 - "Accessibility is part of the definition of done: before anyone wrote a line of this dialog, a WCAG checklist
   was its acceptance criteria, and this is the check the developer runs against it."
 - "The developer runs MANTA on their own machine, against the site as it runs on their laptop. This is the
@@ -200,7 +200,7 @@ never says so itself, so you do: this answer is **pre-run**.
 
 **3 · Green.** Type:
 ```
-npx manta gate --base http://localhost:5173 --no-screenshots
+npx manta gate --base http://localhost:5173
 ```
 **See.** `New 0`, **Fixed 7** (the five "Last updated" lines that shared the grey, and the refresh button on two
 pages, labelled in the same pass), **Tolerated 20**, and `Gate passed`, `exit 0`.
@@ -208,7 +208,7 @@ pages, labelled in the same pass), **Tolerated 20**, and `Gate passed`, `exit 0`
   request will come in green."
 
 **If it goes wrong.** The dev server will not start: in the second terminal run `npm run build` then
-`npm run preview`, and gate the preview build instead: `npx manta gate --base http://localhost:4173 --no-screenshots`. `fix`
+`npm run preview`, and gate the preview build instead: `npx manta gate --base http://localhost:4173`. `fix`
 says the patch does not apply: `npm run demo -- stage dev` starts the stage over. The second gate still fails:
 read what it names; `git diff` shows what was applied.
 
