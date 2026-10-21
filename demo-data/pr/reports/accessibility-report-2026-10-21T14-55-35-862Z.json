@@ -6,19 +6,19 @@
     "results": {
       "testEngine": {
         "name": "axe-core",
-        "version": "4.11.1"
+        "version": "4.13.0"
       },
       "testRunner": {
         "name": "axe"
       },
       "testEnvironment": {
-        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
         "windowWidth": 1280,
         "windowHeight": 720,
         "orientationAngle": 0,
         "orientationType": "landscape-primary"
       },
-      "timestamp": "2026-10-11T06:10:02.875Z",
+      "timestamp": "2026-10-21T14:55:23.169Z",
       "url": "http://localhost:4173/",
       "toolOptions": {
         "rules": {
@@ -59,7 +59,7 @@
           ],
           "description": "Ensure <area> elements of image maps have alternative text",
           "help": "Active <area> elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/area-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/area-alt?application=playwright",
           "nodes": []
         },
         {
@@ -74,7 +74,7 @@
           ],
           "description": "Ensure aria-braillelabel and aria-brailleroledescription have a non-braille equivalent",
           "help": "aria-braille attributes must have a non-braille equivalent",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-braille-equivalent?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-braille-equivalent?application=playwright",
           "nodes": []
         },
         {
@@ -94,7 +94,7 @@
           ],
           "description": "Ensure every ARIA button, link and menuitem has an accessible name",
           "help": "ARIA commands must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-command-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-command-name?application=playwright",
           "nodes": []
         },
         {
@@ -111,7 +111,7 @@
           ],
           "description": "Ensure elements do not use deprecated roles",
           "help": "Deprecated ARIA roles must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-deprecated-role?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-deprecated-role?application=playwright",
           "nodes": []
         },
         {
@@ -131,7 +131,7 @@
           ],
           "description": "Ensure every ARIA input field has an accessible name",
           "help": "ARIA input fields must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-input-field-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-input-field-name?application=playwright",
           "nodes": []
         },
         {
@@ -148,7 +148,7 @@
           ],
           "description": "Ensure every ARIA meter node has an accessible name",
           "help": "ARIA meter nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-meter-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-meter-name?application=playwright",
           "nodes": []
         },
         {
@@ -165,7 +165,7 @@
           ],
           "description": "Ensure every ARIA progressbar node has an accessible name",
           "help": "ARIA progressbar nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-progressbar-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-progressbar-name?application=playwright",
           "nodes": []
         },
         {
@@ -182,7 +182,7 @@
           ],
           "description": "Ensure elements with ARIA roles have all required ARIA attributes",
           "help": "Required ARIA attributes must be provided",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-attr?application=playwright",
           "nodes": []
         },
         {
@@ -199,7 +199,7 @@
           ],
           "description": "Ensure elements with an ARIA role that require child roles contain them",
           "help": "Certain ARIA roles must contain particular children",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-children?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-children?application=playwright",
           "nodes": []
         },
         {
@@ -216,7 +216,7 @@
           ],
           "description": "Ensure elements with an ARIA role that require parent roles are contained by them",
           "help": "Certain ARIA roles must be contained by particular parents",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-parent?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-parent?application=playwright",
           "nodes": []
         },
         {
@@ -233,7 +233,27 @@
           ],
           "description": "Ensure all elements with a role attribute use a valid value",
           "help": "ARIA roles used must conform to valid values",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-roles?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-roles?application=playwright",
+          "nodes": []
+        },
+        {
+          "id": "aria-tab-name",
+          "impact": null,
+          "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412",
+            "TTv5",
+            "TT5.c",
+            "EN-301-549",
+            "EN-9.4.1.2",
+            "ACT",
+            "RGAAv4",
+            "RGAA-7.1.1"
+          ],
+          "description": "Ensure every ARIA tab node has an accessible name",
+          "help": "ARIA tab nodes must have an accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-tab-name?application=playwright",
           "nodes": []
         },
         {
@@ -253,7 +273,7 @@
           ],
           "description": "Ensure every ARIA toggle field has an accessible name",
           "help": "ARIA toggle fields must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-toggle-field-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-toggle-field-name?application=playwright",
           "nodes": []
         },
         {
@@ -268,7 +288,7 @@
           ],
           "description": "Ensure every ARIA tooltip node has an accessible name",
           "help": "ARIA tooltip nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-tooltip-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-tooltip-name?application=playwright",
           "nodes": []
         },
         {
@@ -286,7 +306,7 @@
           ],
           "description": "Ensure the autocomplete attribute is correct and suitable for the form field",
           "help": "autocomplete attribute must be used correctly",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/autocomplete-valid?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/autocomplete-valid?application=playwright",
           "nodes": []
         },
         {
@@ -302,7 +322,7 @@
           ],
           "description": "Ensure that text spacing set through style attributes can be adjusted with custom stylesheets",
           "help": "Inline text spacing must be adjustable with custom stylesheets",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/avoid-inline-spacing?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/avoid-inline-spacing?application=playwright",
           "nodes": []
         },
         {
@@ -324,7 +344,7 @@
           ],
           "description": "Ensure buttons have discernible text",
           "help": "Buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
           "nodes": []
         },
         {
@@ -341,7 +361,7 @@
           ],
           "description": "Ensure <dl> elements are structured correctly",
           "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/definition-list?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/definition-list?application=playwright",
           "nodes": []
         },
         {
@@ -358,7 +378,7 @@
           ],
           "description": "Ensure <dt> and <dd> elements are contained by a <dl>",
           "help": "<dt> and <dd> elements must be contained by a <dl>",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/dlitem?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/dlitem?application=playwright",
           "nodes": []
         },
         {
@@ -377,7 +397,7 @@
           ],
           "description": "Ensure form field does not have multiple label elements",
           "help": "Form field must not have multiple label elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/form-field-multiple-labels?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/form-field-multiple-labels?application=playwright",
           "nodes": []
         },
         {
@@ -396,7 +416,7 @@
           ],
           "description": "Ensure <frame> and <iframe> elements with focusable content do not have tabindex=-1",
           "help": "Frames with focusable content must not have tabindex=-1",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-focusable-content?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-focusable-content?application=playwright",
           "nodes": []
         },
         {
@@ -415,7 +435,7 @@
           ],
           "description": "Ensure <iframe> and <frame> elements contain a unique title attribute",
           "help": "Frames must have a unique title attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title-unique?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-title-unique?application=playwright",
           "nodes": []
         },
         {
@@ -436,7 +456,7 @@
           ],
           "description": "Ensure <iframe> and <frame> elements have an accessible name",
           "help": "Frames must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-title?application=playwright",
           "nodes": []
         },
         {
@@ -454,7 +474,7 @@
           ],
           "description": "Ensure that HTML elements with both valid lang and xml:lang attributes agree on the base language of the page",
           "help": "HTML elements with lang and xml:lang must have the same base language",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-xml-lang-mismatch?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-xml-lang-mismatch?application=playwright",
           "nodes": []
         },
         {
@@ -476,7 +496,7 @@
           ],
           "description": "Ensure input buttons have discernible text",
           "help": "Input buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/input-button-name?application=playwright",
           "nodes": []
         },
         {
@@ -500,7 +520,7 @@
           ],
           "description": "Ensure <input type=\"image\"> elements have alternative text",
           "help": "Image buttons must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-image-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/input-image-alt?application=playwright",
           "nodes": []
         },
         {
@@ -522,7 +542,7 @@
           ],
           "description": "Ensure every form element has a label",
           "help": "Form elements must have labels",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
           "nodes": []
         },
         {
@@ -541,7 +561,7 @@
           ],
           "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
           "help": "Links must be distinguishable without relying on color",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-in-text-block?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-in-text-block?application=playwright",
           "nodes": []
         },
         {
@@ -560,7 +580,7 @@
           ],
           "description": "Ensure <marquee> elements are not used",
           "help": "<marquee> elements are deprecated and must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/marquee?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/marquee?application=playwright",
           "nodes": []
         },
         {
@@ -579,7 +599,7 @@
           ],
           "description": "Ensure <meta http-equiv=\"refresh\"> is not used for delayed refresh",
           "help": "Delayed refresh under 20 hours must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-refresh?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/meta-refresh?application=playwright",
           "nodes": []
         },
         {
@@ -598,7 +618,7 @@
           ],
           "description": "Ensure <object> elements have alternative text",
           "help": "<object> elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/object-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/object-alt?application=playwright",
           "nodes": []
         },
         {
@@ -618,9 +638,9 @@
             "RGAAv4",
             "RGAA-1.1.1"
           ],
-          "description": "Ensure [role=\"img\"] elements have alternative text",
-          "help": "[role=\"img\"] elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/role-img-alt?application=playwright",
+          "description": "Ensure [role=\"img\"] and [role=\"image\"] elements have alternative text",
+          "help": "[role=\"img\"] and [role=\"image\"] elements must have alternative text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/role-img-alt?application=playwright",
           "nodes": []
         },
         {
@@ -639,9 +659,9 @@
             "RGAAv4",
             "RGAA-7.3.2"
           ],
-          "description": "Ensure elements that have scrollable content are accessible by keyboard",
+          "description": "Ensure elements that have scrollable content are accessible by keyboard in Safari",
           "help": "Scrollable region must have keyboard access",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/scrollable-region-focusable?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright",
           "nodes": []
         },
         {
@@ -663,7 +683,7 @@
           ],
           "description": "Ensure select element has an accessible name",
           "help": "Select element must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/select-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/select-name?application=playwright",
           "nodes": []
         },
         {
@@ -684,7 +704,7 @@
           ],
           "description": "Ensure that server-side image maps are not used",
           "help": "Server-side image maps must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/server-side-image-map?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/server-side-image-map?application=playwright",
           "nodes": []
         },
         {
@@ -703,7 +723,7 @@
           ],
           "description": "Ensure summary elements have discernible text",
           "help": "Summary elements must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/summary-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/summary-name?application=playwright",
           "nodes": []
         },
         {
@@ -723,9 +743,9 @@
             "RGAAv4",
             "RGAA-1.1.5"
           ],
-          "description": "Ensure <svg> elements with an img, graphics-document or graphics-symbol role have accessible text",
-          "help": "<svg> elements with an img role must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/svg-img-alt?application=playwright",
+          "description": "Ensure <svg> elements with an img, image, graphics-document or graphics-symbol role have accessible text",
+          "help": "<svg> elements with an img or image role must have alternative text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/svg-img-alt?application=playwright",
           "nodes": []
         },
         {
@@ -746,7 +766,7 @@
           ],
           "description": "Ensure that each cell in a table that uses the headers attribute refers only to other <th> elements in that table",
           "help": "Table cell headers attributes must refer to other <th> elements in the same table",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/td-headers-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/td-headers-attr?application=playwright",
           "nodes": []
         },
         {
@@ -767,7 +787,7 @@
           ],
           "description": "Ensure that <th> elements and elements with role=columnheader/rowheader have data cells they describe",
           "help": "Table headers in a data table must refer to data cells",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/th-has-data-cells?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/th-has-data-cells?application=playwright",
           "nodes": []
         },
         {
@@ -787,7 +807,7 @@
           ],
           "description": "Ensure lang attributes have valid values",
           "help": "lang attribute must have a valid value",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/valid-lang?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/valid-lang?application=playwright",
           "nodes": []
         },
         {
@@ -808,7 +828,7 @@
           ],
           "description": "Ensure <video> elements have captions",
           "help": "<video> elements must have captions",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/video-caption?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/video-caption?application=playwright",
           "nodes": []
         },
         {
@@ -828,7 +848,7 @@
           ],
           "description": "Ensure <video> or <audio> elements do not autoplay audio for more than 3 seconds without a control mechanism to stop or mute the audio",
           "help": "<video> or <audio> elements must not play automatically",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/no-autoplay-audio?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/no-autoplay-audio?application=playwright",
           "nodes": []
         },
         {
@@ -956,7 +976,7 @@
           ],
           "description": "Ensure an element's role supports its ARIA attributes",
           "help": "Elements must only use supported ARIA attributes",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-allowed-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-allowed-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -967,6 +987,20 @@
                   "relatedNodes": [],
                   "impact": "critical",
                   "message": "ARIA attributes are used correctly for the defined role"
+                },
+                {
+                  "id": "aria-allowed-attr-elm",
+                  "data": null,
+                  "relatedNodes": [],
+                  "message": "ARIA attributes are allowed for this element",
+                  "impact": "critical"
+                },
+                {
+                  "id": "aria-no-deprecated-attr",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "critical",
+                  "message": "No deprecated ARIA attributes are used"
                 }
               ],
               "none": [
@@ -993,6 +1027,20 @@
                   "relatedNodes": [],
                   "impact": "critical",
                   "message": "ARIA attributes are used correctly for the defined role"
+                },
+                {
+                  "id": "aria-allowed-attr-elm",
+                  "data": null,
+                  "relatedNodes": [],
+                  "message": "ARIA attributes are allowed for this element",
+                  "impact": "critical"
+                },
+                {
+                  "id": "aria-no-deprecated-attr",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "critical",
+                  "message": "No deprecated ARIA attributes are used"
                 }
               ],
               "none": [
@@ -1026,7 +1074,7 @@
           ],
           "description": "Ensure ARIA attributes are used as described in the specification of the element's role",
           "help": "ARIA attributes must be used as specified for the element's role",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-conditional-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-conditional-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -1082,7 +1130,7 @@
           ],
           "description": "Ensure aria-hidden=\"true\" is not present on the document body.",
           "help": "aria-hidden=\"true\" must not be present on the document body",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-body?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-hidden-body?application=playwright",
           "nodes": [
             {
               "any": [
@@ -1120,7 +1168,7 @@
           ],
           "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
           "help": "ARIA hidden element must not be focusable or contain focusable elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-hidden-focus?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -1266,7 +1314,7 @@
           ],
           "description": "Ensure ARIA attributes are not prohibited for an element's role",
           "help": "Elements must only use permitted ARIA attributes",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-prohibited-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -1320,7 +1368,7 @@
           ],
           "description": "Ensure all ARIA attributes have valid values",
           "help": "ARIA attributes must conform to valid values",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr-value?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -1402,7 +1450,7 @@
           ],
           "description": "Ensure attributes that begin with aria- are valid ARIA attributes",
           "help": "ARIA attributes must conform to valid names",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr?application=playwright",
           "nodes": [
             {
               "any": [
@@ -1460,7 +1508,7 @@
           ],
           "description": "Ensure each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
           "help": "Page must have means to bypass repeated blocks",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/bypass?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/bypass?application=playwright",
           "nodes": [
             {
               "any": [
@@ -1539,7 +1587,7 @@
           ],
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
           "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "nodes": [
             {
               "any": [
@@ -2235,7 +2283,7 @@
           ],
           "description": "Ensure each HTML document contains a non-empty <title> element",
           "help": "Documents must have <title> element to aid in navigation",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/document-title?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/document-title?application=playwright",
           "nodes": [
             {
               "any": [
@@ -2271,7 +2319,7 @@
           ],
           "description": "Ensure every id attribute value used in ARIA and in labels is unique",
           "help": "IDs used in ARIA and labels must be unique",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/duplicate-id-aria?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/duplicate-id-aria?application=playwright",
           "nodes": [
             {
               "any": [
@@ -2310,7 +2358,7 @@
           ],
           "description": "Ensure every HTML document has a lang attribute",
           "help": "<html> element must have a lang attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-has-lang?application=playwright",
           "nodes": [
             {
               "any": [
@@ -2349,7 +2397,7 @@
           ],
           "description": "Ensure the lang attribute of the <html> element has a valid value",
           "help": "<html> element must have a valid value for the lang attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-lang-valid?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-lang-valid?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -2392,7 +2440,7 @@
           ],
           "description": "Ensure links have discernible text",
           "help": "Links must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -2748,7 +2796,7 @@
           ],
           "description": "Ensure that lists are structured correctly",
           "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/list?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/list?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -2784,7 +2832,7 @@
           ],
           "description": "Ensure <li> elements are used semantically",
           "help": "<li> elements must be contained in a <ul> or <ol>",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/listitem?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/listitem?application=playwright",
           "nodes": [
             {
               "any": [
@@ -2857,7 +2905,7 @@
           ],
           "description": "Ensure <meta name=\"viewport\"> does not disable text scaling and zooming",
           "help": "Zooming and scaling must not be disabled",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-viewport?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/meta-viewport?application=playwright",
           "nodes": [
             {
               "any": [
@@ -2895,7 +2943,7 @@
           ],
           "description": "Ensure interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies",
           "help": "Interactive controls must not be nested",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/nested-interactive?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/nested-interactive?application=playwright",
           "nodes": [
             {
               "any": [
@@ -2937,7 +2985,7 @@
           ],
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
           "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "nodes": [
             {
               "any": [
@@ -3021,7 +3069,7 @@
           ],
           "description": "Ensure <img> elements have alternative text or a role of none or presentation",
           "help": "Images must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/image-alt?application=playwright",
           "nodes": [
             {
               "any": [
@@ -3127,7 +3175,7 @@
           ],
           "description": "Ensure links have discernible text",
           "help": "Links must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -3393,9 +3441,9 @@
       "couldNotLook": [],
       "dropped": []
     },
-    "timestamp": "2026-10-11T06:10:02.999Z",
+    "timestamp": "2026-10-21T14:55:23.302Z",
     "timing": {
-      "elapsedSinceNavigationMs": 5
+      "elapsedSinceNavigationMs": 7
     }
   },
   {
@@ -3405,19 +3453,19 @@
     "results": {
       "testEngine": {
         "name": "axe-core",
-        "version": "4.11.1"
+        "version": "4.13.0"
       },
       "testRunner": {
         "name": "axe"
       },
       "testEnvironment": {
-        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
         "windowWidth": 1280,
         "windowHeight": 720,
         "orientationAngle": 0,
         "orientationType": "landscape-primary"
       },
-      "timestamp": "2026-10-11T06:10:04.285Z",
+      "timestamp": "2026-10-21T14:55:25.826Z",
       "url": "http://localhost:4173/apply",
       "toolOptions": {
         "rules": {
@@ -3458,7 +3506,7 @@
           ],
           "description": "Ensure <area> elements of image maps have alternative text",
           "help": "Active <area> elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/area-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/area-alt?application=playwright",
           "nodes": []
         },
         {
@@ -3473,7 +3521,7 @@
           ],
           "description": "Ensure aria-braillelabel and aria-brailleroledescription have a non-braille equivalent",
           "help": "aria-braille attributes must have a non-braille equivalent",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-braille-equivalent?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-braille-equivalent?application=playwright",
           "nodes": []
         },
         {
@@ -3493,7 +3541,7 @@
           ],
           "description": "Ensure every ARIA button, link and menuitem has an accessible name",
           "help": "ARIA commands must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-command-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-command-name?application=playwright",
           "nodes": []
         },
         {
@@ -3510,7 +3558,7 @@
           ],
           "description": "Ensure elements do not use deprecated roles",
           "help": "Deprecated ARIA roles must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-deprecated-role?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-deprecated-role?application=playwright",
           "nodes": []
         },
         {
@@ -3530,7 +3578,7 @@
           ],
           "description": "Ensure every ARIA input field has an accessible name",
           "help": "ARIA input fields must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-input-field-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-input-field-name?application=playwright",
           "nodes": []
         },
         {
@@ -3547,7 +3595,7 @@
           ],
           "description": "Ensure every ARIA meter node has an accessible name",
           "help": "ARIA meter nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-meter-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-meter-name?application=playwright",
           "nodes": []
         },
         {
@@ -3564,7 +3612,7 @@
           ],
           "description": "Ensure every ARIA progressbar node has an accessible name",
           "help": "ARIA progressbar nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-progressbar-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-progressbar-name?application=playwright",
           "nodes": []
         },
         {
@@ -3581,7 +3629,7 @@
           ],
           "description": "Ensure elements with ARIA roles have all required ARIA attributes",
           "help": "Required ARIA attributes must be provided",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-attr?application=playwright",
           "nodes": []
         },
         {
@@ -3598,7 +3646,7 @@
           ],
           "description": "Ensure elements with an ARIA role that require child roles contain them",
           "help": "Certain ARIA roles must contain particular children",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-children?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-children?application=playwright",
           "nodes": []
         },
         {
@@ -3615,7 +3663,7 @@
           ],
           "description": "Ensure elements with an ARIA role that require parent roles are contained by them",
           "help": "Certain ARIA roles must be contained by particular parents",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-parent?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-parent?application=playwright",
           "nodes": []
         },
         {
@@ -3632,7 +3680,27 @@
           ],
           "description": "Ensure all elements with a role attribute use a valid value",
           "help": "ARIA roles used must conform to valid values",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-roles?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-roles?application=playwright",
+          "nodes": []
+        },
+        {
+          "id": "aria-tab-name",
+          "impact": null,
+          "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412",
+            "TTv5",
+            "TT5.c",
+            "EN-301-549",
+            "EN-9.4.1.2",
+            "ACT",
+            "RGAAv4",
+            "RGAA-7.1.1"
+          ],
+          "description": "Ensure every ARIA tab node has an accessible name",
+          "help": "ARIA tab nodes must have an accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-tab-name?application=playwright",
           "nodes": []
         },
         {
@@ -3652,7 +3720,7 @@
           ],
           "description": "Ensure every ARIA toggle field has an accessible name",
           "help": "ARIA toggle fields must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-toggle-field-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-toggle-field-name?application=playwright",
           "nodes": []
         },
         {
@@ -3667,7 +3735,7 @@
           ],
           "description": "Ensure every ARIA tooltip node has an accessible name",
           "help": "ARIA tooltip nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-tooltip-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-tooltip-name?application=playwright",
           "nodes": []
         },
         {
@@ -3683,7 +3751,7 @@
           ],
           "description": "Ensure that text spacing set through style attributes can be adjusted with custom stylesheets",
           "help": "Inline text spacing must be adjustable with custom stylesheets",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/avoid-inline-spacing?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/avoid-inline-spacing?application=playwright",
           "nodes": []
         },
         {
@@ -3700,7 +3768,7 @@
           ],
           "description": "Ensure <dl> elements are structured correctly",
           "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/definition-list?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/definition-list?application=playwright",
           "nodes": []
         },
         {
@@ -3717,7 +3785,7 @@
           ],
           "description": "Ensure <dt> and <dd> elements are contained by a <dl>",
           "help": "<dt> and <dd> elements must be contained by a <dl>",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/dlitem?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/dlitem?application=playwright",
           "nodes": []
         },
         {
@@ -3736,7 +3804,7 @@
           ],
           "description": "Ensure <frame> and <iframe> elements with focusable content do not have tabindex=-1",
           "help": "Frames with focusable content must not have tabindex=-1",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-focusable-content?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-focusable-content?application=playwright",
           "nodes": []
         },
         {
@@ -3755,7 +3823,7 @@
           ],
           "description": "Ensure <iframe> and <frame> elements contain a unique title attribute",
           "help": "Frames must have a unique title attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title-unique?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-title-unique?application=playwright",
           "nodes": []
         },
         {
@@ -3776,7 +3844,7 @@
           ],
           "description": "Ensure <iframe> and <frame> elements have an accessible name",
           "help": "Frames must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-title?application=playwright",
           "nodes": []
         },
         {
@@ -3794,7 +3862,7 @@
           ],
           "description": "Ensure that HTML elements with both valid lang and xml:lang attributes agree on the base language of the page",
           "help": "HTML elements with lang and xml:lang must have the same base language",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-xml-lang-mismatch?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-xml-lang-mismatch?application=playwright",
           "nodes": []
         },
         {
@@ -3817,7 +3885,7 @@
           ],
           "description": "Ensure <img> elements have alternative text or a role of none or presentation",
           "help": "Images must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/image-alt?application=playwright",
           "nodes": []
         },
         {
@@ -3839,7 +3907,7 @@
           ],
           "description": "Ensure input buttons have discernible text",
           "help": "Input buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/input-button-name?application=playwright",
           "nodes": []
         },
         {
@@ -3863,7 +3931,7 @@
           ],
           "description": "Ensure <input type=\"image\"> elements have alternative text",
           "help": "Image buttons must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-image-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/input-image-alt?application=playwright",
           "nodes": []
         },
         {
@@ -3882,7 +3950,7 @@
           ],
           "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
           "help": "Links must be distinguishable without relying on color",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-in-text-block?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-in-text-block?application=playwright",
           "nodes": []
         },
         {
@@ -3901,7 +3969,7 @@
           ],
           "description": "Ensure <marquee> elements are not used",
           "help": "<marquee> elements are deprecated and must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/marquee?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/marquee?application=playwright",
           "nodes": []
         },
         {
@@ -3920,7 +3988,7 @@
           ],
           "description": "Ensure <meta http-equiv=\"refresh\"> is not used for delayed refresh",
           "help": "Delayed refresh under 20 hours must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-refresh?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/meta-refresh?application=playwright",
           "nodes": []
         },
         {
@@ -3939,7 +4007,7 @@
           ],
           "description": "Ensure <object> elements have alternative text",
           "help": "<object> elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/object-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/object-alt?application=playwright",
           "nodes": []
         },
         {
@@ -3959,9 +4027,9 @@
             "RGAAv4",
             "RGAA-1.1.1"
           ],
-          "description": "Ensure [role=\"img\"] elements have alternative text",
-          "help": "[role=\"img\"] elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/role-img-alt?application=playwright",
+          "description": "Ensure [role=\"img\"] and [role=\"image\"] elements have alternative text",
+          "help": "[role=\"img\"] and [role=\"image\"] elements must have alternative text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/role-img-alt?application=playwright",
           "nodes": []
         },
         {
@@ -3980,9 +4048,9 @@
             "RGAAv4",
             "RGAA-7.3.2"
           ],
-          "description": "Ensure elements that have scrollable content are accessible by keyboard",
+          "description": "Ensure elements that have scrollable content are accessible by keyboard in Safari",
           "help": "Scrollable region must have keyboard access",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/scrollable-region-focusable?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright",
           "nodes": []
         },
         {
@@ -4003,7 +4071,7 @@
           ],
           "description": "Ensure that server-side image maps are not used",
           "help": "Server-side image maps must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/server-side-image-map?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/server-side-image-map?application=playwright",
           "nodes": []
         },
         {
@@ -4022,7 +4090,7 @@
           ],
           "description": "Ensure summary elements have discernible text",
           "help": "Summary elements must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/summary-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/summary-name?application=playwright",
           "nodes": []
         },
         {
@@ -4042,9 +4110,9 @@
             "RGAAv4",
             "RGAA-1.1.5"
           ],
-          "description": "Ensure <svg> elements with an img, graphics-document or graphics-symbol role have accessible text",
-          "help": "<svg> elements with an img role must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/svg-img-alt?application=playwright",
+          "description": "Ensure <svg> elements with an img, image, graphics-document or graphics-symbol role have accessible text",
+          "help": "<svg> elements with an img or image role must have alternative text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/svg-img-alt?application=playwright",
           "nodes": []
         },
         {
@@ -4065,7 +4133,7 @@
           ],
           "description": "Ensure that each cell in a table that uses the headers attribute refers only to other <th> elements in that table",
           "help": "Table cell headers attributes must refer to other <th> elements in the same table",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/td-headers-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/td-headers-attr?application=playwright",
           "nodes": []
         },
         {
@@ -4086,7 +4154,7 @@
           ],
           "description": "Ensure that <th> elements and elements with role=columnheader/rowheader have data cells they describe",
           "help": "Table headers in a data table must refer to data cells",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/th-has-data-cells?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/th-has-data-cells?application=playwright",
           "nodes": []
         },
         {
@@ -4106,7 +4174,7 @@
           ],
           "description": "Ensure lang attributes have valid values",
           "help": "lang attribute must have a valid value",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/valid-lang?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/valid-lang?application=playwright",
           "nodes": []
         },
         {
@@ -4127,7 +4195,7 @@
           ],
           "description": "Ensure <video> elements have captions",
           "help": "<video> elements must have captions",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/video-caption?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/video-caption?application=playwright",
           "nodes": []
         },
         {
@@ -4147,7 +4215,7 @@
           ],
           "description": "Ensure <video> or <audio> elements do not autoplay audio for more than 3 seconds without a control mechanism to stop or mute the audio",
           "help": "<video> or <audio> elements must not play automatically",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/no-autoplay-audio?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/no-autoplay-audio?application=playwright",
           "nodes": []
         },
         {
@@ -4233,7 +4301,7 @@
           ],
           "description": "Ensure an element's role supports its ARIA attributes",
           "help": "Elements must only use supported ARIA attributes",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-allowed-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-allowed-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -4244,6 +4312,20 @@
                   "relatedNodes": [],
                   "impact": "critical",
                   "message": "ARIA attributes are used correctly for the defined role"
+                },
+                {
+                  "id": "aria-allowed-attr-elm",
+                  "data": null,
+                  "relatedNodes": [],
+                  "message": "ARIA attributes are allowed for this element",
+                  "impact": "critical"
+                },
+                {
+                  "id": "aria-no-deprecated-attr",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "critical",
+                  "message": "No deprecated ARIA attributes are used"
                 }
               ],
               "none": [
@@ -4270,6 +4352,20 @@
                   "relatedNodes": [],
                   "impact": "critical",
                   "message": "ARIA attributes are used correctly for the defined role"
+                },
+                {
+                  "id": "aria-allowed-attr-elm",
+                  "data": null,
+                  "relatedNodes": [],
+                  "message": "ARIA attributes are allowed for this element",
+                  "impact": "critical"
+                },
+                {
+                  "id": "aria-no-deprecated-attr",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "critical",
+                  "message": "No deprecated ARIA attributes are used"
                 }
               ],
               "none": [
@@ -4296,6 +4392,20 @@
                   "relatedNodes": [],
                   "impact": "critical",
                   "message": "ARIA attributes are used correctly for the defined role"
+                },
+                {
+                  "id": "aria-allowed-attr-elm",
+                  "data": null,
+                  "relatedNodes": [],
+                  "message": "ARIA attributes are allowed for this element",
+                  "impact": "critical"
+                },
+                {
+                  "id": "aria-no-deprecated-attr",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "critical",
+                  "message": "No deprecated ARIA attributes are used"
                 }
               ],
               "none": [
@@ -4329,7 +4439,7 @@
           ],
           "description": "Ensure ARIA attributes are used as described in the specification of the element's role",
           "help": "ARIA attributes must be used as specified for the element's role",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-conditional-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-conditional-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -4403,7 +4513,7 @@
           ],
           "description": "Ensure aria-hidden=\"true\" is not present on the document body.",
           "help": "aria-hidden=\"true\" must not be present on the document body",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-body?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-hidden-body?application=playwright",
           "nodes": [
             {
               "any": [
@@ -4441,7 +4551,7 @@
           ],
           "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
           "help": "ARIA hidden element must not be focusable or contain focusable elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-hidden-focus?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -4587,7 +4697,7 @@
           ],
           "description": "Ensure ARIA attributes are not prohibited for an element's role",
           "help": "Elements must only use permitted ARIA attributes",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-prohibited-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -4659,7 +4769,7 @@
           ],
           "description": "Ensure all ARIA attributes have valid values",
           "help": "ARIA attributes must conform to valid values",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr-value?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -4773,7 +4883,7 @@
           ],
           "description": "Ensure attributes that begin with aria- are valid ARIA attributes",
           "help": "ARIA attributes must conform to valid names",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr?application=playwright",
           "nodes": [
             {
               "any": [
@@ -4846,7 +4956,7 @@
           ],
           "description": "Ensure the autocomplete attribute is correct and suitable for the form field",
           "help": "autocomplete attribute must be used correctly",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/autocomplete-valid?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/autocomplete-valid?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -4923,7 +5033,7 @@
           ],
           "description": "Ensure buttons have discernible text",
           "help": "Buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -4963,7 +5073,7 @@
           ],
           "description": "Ensure each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
           "help": "Page must have means to bypass repeated blocks",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/bypass?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/bypass?application=playwright",
           "nodes": [
             {
               "any": [
@@ -5030,7 +5140,7 @@
           ],
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
           "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "nodes": [
             {
               "any": [
@@ -5876,7 +5986,7 @@
           ],
           "description": "Ensure each HTML document contains a non-empty <title> element",
           "help": "Documents must have <title> element to aid in navigation",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/document-title?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/document-title?application=playwright",
           "nodes": [
             {
               "any": [
@@ -5912,7 +6022,7 @@
           ],
           "description": "Ensure every id attribute value used in ARIA and in labels is unique",
           "help": "IDs used in ARIA and labels must be unique",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/duplicate-id-aria?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/duplicate-id-aria?application=playwright",
           "nodes": [
             {
               "any": [
@@ -6004,7 +6114,7 @@
           ],
           "description": "Ensure form field does not have multiple label elements",
           "help": "Form field must not have multiple label elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/form-field-multiple-labels?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/form-field-multiple-labels?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -6211,7 +6321,7 @@
           ],
           "description": "Ensure every HTML document has a lang attribute",
           "help": "<html> element must have a lang attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-has-lang?application=playwright",
           "nodes": [
             {
               "any": [
@@ -6250,7 +6360,7 @@
           ],
           "description": "Ensure the lang attribute of the <html> element has a valid value",
           "help": "<html> element must have a valid value for the lang attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-lang-valid?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-lang-valid?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -6291,7 +6401,7 @@
           ],
           "description": "Ensure every form element has a label",
           "help": "Form elements must have labels",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
           "nodes": [
             {
               "any": [
@@ -6567,7 +6677,7 @@
           ],
           "description": "Ensure links have discernible text",
           "help": "Links must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -6715,7 +6825,7 @@
           ],
           "description": "Ensure that lists are structured correctly",
           "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/list?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/list?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -6751,7 +6861,7 @@
           ],
           "description": "Ensure <li> elements are used semantically",
           "help": "<li> elements must be contained in a <ul> or <ol>",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/listitem?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/listitem?application=playwright",
           "nodes": [
             {
               "any": [
@@ -6824,7 +6934,7 @@
           ],
           "description": "Ensure <meta name=\"viewport\"> does not disable text scaling and zooming",
           "help": "Zooming and scaling must not be disabled",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-viewport?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/meta-viewport?application=playwright",
           "nodes": [
             {
               "any": [
@@ -6862,7 +6972,7 @@
           ],
           "description": "Ensure interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies",
           "help": "Interactive controls must not be nested",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/nested-interactive?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/nested-interactive?application=playwright",
           "nodes": [
             {
               "any": [
@@ -7460,7 +7570,7 @@
           ],
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
           "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "nodes": [
             {
               "any": [
@@ -7543,7 +7653,7 @@
           ],
           "description": "Ensure every form element has a label",
           "help": "Form elements must have labels",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
           "nodes": [
             {
               "any": [
@@ -7677,7 +7787,7 @@
           ],
           "description": "Ensure links have discernible text",
           "help": "Links must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -7958,7 +8068,7 @@
           ],
           "description": "Ensure select element has an accessible name",
           "help": "Select element must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/select-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/select-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -8078,9 +8188,9 @@
         }
       ]
     },
-    "timestamp": "2026-10-11T06:10:04.448Z",
+    "timestamp": "2026-10-21T14:55:25.966Z",
     "timing": {
-      "elapsedSinceNavigationMs": 1
+      "elapsedSinceNavigationMs": 4
     }
   },
   {
@@ -8090,19 +8200,19 @@
     "results": {
       "testEngine": {
         "name": "axe-core",
-        "version": "4.11.1"
+        "version": "4.13.0"
       },
       "testRunner": {
         "name": "axe"
       },
       "testEnvironment": {
-        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
         "windowWidth": 1280,
         "windowHeight": 720,
         "orientationAngle": 0,
         "orientationType": "landscape-primary"
       },
-      "timestamp": "2026-10-11T06:10:05.785Z",
+      "timestamp": "2026-10-21T14:55:28.557Z",
       "url": "http://localhost:4173/status",
       "toolOptions": {
         "rules": {
@@ -8143,7 +8253,7 @@
           ],
           "description": "Ensure <area> elements of image maps have alternative text",
           "help": "Active <area> elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/area-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/area-alt?application=playwright",
           "nodes": []
         },
         {
@@ -8158,7 +8268,7 @@
           ],
           "description": "Ensure aria-braillelabel and aria-brailleroledescription have a non-braille equivalent",
           "help": "aria-braille attributes must have a non-braille equivalent",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-braille-equivalent?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-braille-equivalent?application=playwright",
           "nodes": []
         },
         {
@@ -8178,7 +8288,7 @@
           ],
           "description": "Ensure every ARIA button, link and menuitem has an accessible name",
           "help": "ARIA commands must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-command-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-command-name?application=playwright",
           "nodes": []
         },
         {
@@ -8195,7 +8305,7 @@
           ],
           "description": "Ensure elements do not use deprecated roles",
           "help": "Deprecated ARIA roles must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-deprecated-role?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-deprecated-role?application=playwright",
           "nodes": []
         },
         {
@@ -8215,7 +8325,7 @@
           ],
           "description": "Ensure every ARIA input field has an accessible name",
           "help": "ARIA input fields must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-input-field-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-input-field-name?application=playwright",
           "nodes": []
         },
         {
@@ -8232,7 +8342,7 @@
           ],
           "description": "Ensure every ARIA meter node has an accessible name",
           "help": "ARIA meter nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-meter-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-meter-name?application=playwright",
           "nodes": []
         },
         {
@@ -8249,7 +8359,7 @@
           ],
           "description": "Ensure every ARIA progressbar node has an accessible name",
           "help": "ARIA progressbar nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-progressbar-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-progressbar-name?application=playwright",
           "nodes": []
         },
         {
@@ -8266,7 +8376,7 @@
           ],
           "description": "Ensure elements with ARIA roles have all required ARIA attributes",
           "help": "Required ARIA attributes must be provided",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-attr?application=playwright",
           "nodes": []
         },
         {
@@ -8283,7 +8393,7 @@
           ],
           "description": "Ensure elements with an ARIA role that require child roles contain them",
           "help": "Certain ARIA roles must contain particular children",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-children?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-children?application=playwright",
           "nodes": []
         },
         {
@@ -8300,7 +8410,7 @@
           ],
           "description": "Ensure elements with an ARIA role that require parent roles are contained by them",
           "help": "Certain ARIA roles must be contained by particular parents",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-parent?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-parent?application=playwright",
           "nodes": []
         },
         {
@@ -8317,7 +8427,27 @@
           ],
           "description": "Ensure all elements with a role attribute use a valid value",
           "help": "ARIA roles used must conform to valid values",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-roles?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-roles?application=playwright",
+          "nodes": []
+        },
+        {
+          "id": "aria-tab-name",
+          "impact": null,
+          "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412",
+            "TTv5",
+            "TT5.c",
+            "EN-301-549",
+            "EN-9.4.1.2",
+            "ACT",
+            "RGAAv4",
+            "RGAA-7.1.1"
+          ],
+          "description": "Ensure every ARIA tab node has an accessible name",
+          "help": "ARIA tab nodes must have an accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-tab-name?application=playwright",
           "nodes": []
         },
         {
@@ -8337,7 +8467,7 @@
           ],
           "description": "Ensure every ARIA toggle field has an accessible name",
           "help": "ARIA toggle fields must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-toggle-field-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-toggle-field-name?application=playwright",
           "nodes": []
         },
         {
@@ -8352,7 +8482,7 @@
           ],
           "description": "Ensure every ARIA tooltip node has an accessible name",
           "help": "ARIA tooltip nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-tooltip-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-tooltip-name?application=playwright",
           "nodes": []
         },
         {
@@ -8370,7 +8500,7 @@
           ],
           "description": "Ensure the autocomplete attribute is correct and suitable for the form field",
           "help": "autocomplete attribute must be used correctly",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/autocomplete-valid?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/autocomplete-valid?application=playwright",
           "nodes": []
         },
         {
@@ -8386,7 +8516,7 @@
           ],
           "description": "Ensure that text spacing set through style attributes can be adjusted with custom stylesheets",
           "help": "Inline text spacing must be adjustable with custom stylesheets",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/avoid-inline-spacing?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/avoid-inline-spacing?application=playwright",
           "nodes": []
         },
         {
@@ -8403,7 +8533,7 @@
           ],
           "description": "Ensure <dl> elements are structured correctly",
           "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/definition-list?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/definition-list?application=playwright",
           "nodes": []
         },
         {
@@ -8420,7 +8550,7 @@
           ],
           "description": "Ensure <dt> and <dd> elements are contained by a <dl>",
           "help": "<dt> and <dd> elements must be contained by a <dl>",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/dlitem?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/dlitem?application=playwright",
           "nodes": []
         },
         {
@@ -8437,7 +8567,7 @@
           ],
           "description": "Ensure every id attribute value used in ARIA and in labels is unique",
           "help": "IDs used in ARIA and labels must be unique",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/duplicate-id-aria?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/duplicate-id-aria?application=playwright",
           "nodes": []
         },
         {
@@ -8456,7 +8586,7 @@
           ],
           "description": "Ensure form field does not have multiple label elements",
           "help": "Form field must not have multiple label elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/form-field-multiple-labels?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/form-field-multiple-labels?application=playwright",
           "nodes": []
         },
         {
@@ -8475,7 +8605,7 @@
           ],
           "description": "Ensure <frame> and <iframe> elements with focusable content do not have tabindex=-1",
           "help": "Frames with focusable content must not have tabindex=-1",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-focusable-content?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-focusable-content?application=playwright",
           "nodes": []
         },
         {
@@ -8494,7 +8624,7 @@
           ],
           "description": "Ensure <iframe> and <frame> elements contain a unique title attribute",
           "help": "Frames must have a unique title attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title-unique?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-title-unique?application=playwright",
           "nodes": []
         },
         {
@@ -8515,7 +8645,7 @@
           ],
           "description": "Ensure <iframe> and <frame> elements have an accessible name",
           "help": "Frames must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-title?application=playwright",
           "nodes": []
         },
         {
@@ -8533,7 +8663,7 @@
           ],
           "description": "Ensure that HTML elements with both valid lang and xml:lang attributes agree on the base language of the page",
           "help": "HTML elements with lang and xml:lang must have the same base language",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-xml-lang-mismatch?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-xml-lang-mismatch?application=playwright",
           "nodes": []
         },
         {
@@ -8556,7 +8686,7 @@
           ],
           "description": "Ensure <img> elements have alternative text or a role of none or presentation",
           "help": "Images must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/image-alt?application=playwright",
           "nodes": []
         },
         {
@@ -8578,7 +8708,7 @@
           ],
           "description": "Ensure input buttons have discernible text",
           "help": "Input buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/input-button-name?application=playwright",
           "nodes": []
         },
         {
@@ -8602,7 +8732,7 @@
           ],
           "description": "Ensure <input type=\"image\"> elements have alternative text",
           "help": "Image buttons must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-image-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/input-image-alt?application=playwright",
           "nodes": []
         },
         {
@@ -8624,7 +8754,7 @@
           ],
           "description": "Ensure every form element has a label",
           "help": "Form elements must have labels",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
           "nodes": []
         },
         {
@@ -8643,7 +8773,7 @@
           ],
           "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
           "help": "Links must be distinguishable without relying on color",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-in-text-block?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-in-text-block?application=playwright",
           "nodes": []
         },
         {
@@ -8660,7 +8790,7 @@
           ],
           "description": "Ensure that lists are structured correctly",
           "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/list?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/list?application=playwright",
           "nodes": []
         },
         {
@@ -8677,7 +8807,7 @@
           ],
           "description": "Ensure <li> elements are used semantically",
           "help": "<li> elements must be contained in a <ul> or <ol>",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/listitem?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/listitem?application=playwright",
           "nodes": []
         },
         {
@@ -8696,7 +8826,7 @@
           ],
           "description": "Ensure <marquee> elements are not used",
           "help": "<marquee> elements are deprecated and must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/marquee?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/marquee?application=playwright",
           "nodes": []
         },
         {
@@ -8715,7 +8845,7 @@
           ],
           "description": "Ensure <meta http-equiv=\"refresh\"> is not used for delayed refresh",
           "help": "Delayed refresh under 20 hours must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-refresh?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/meta-refresh?application=playwright",
           "nodes": []
         },
         {
@@ -8734,7 +8864,7 @@
           ],
           "description": "Ensure <object> elements have alternative text",
           "help": "<object> elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/object-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/object-alt?application=playwright",
           "nodes": []
         },
         {
@@ -8754,9 +8884,9 @@
             "RGAAv4",
             "RGAA-1.1.1"
           ],
-          "description": "Ensure [role=\"img\"] elements have alternative text",
-          "help": "[role=\"img\"] elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/role-img-alt?application=playwright",
+          "description": "Ensure [role=\"img\"] and [role=\"image\"] elements have alternative text",
+          "help": "[role=\"img\"] and [role=\"image\"] elements must have alternative text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/role-img-alt?application=playwright",
           "nodes": []
         },
         {
@@ -8775,9 +8905,9 @@
             "RGAAv4",
             "RGAA-7.3.2"
           ],
-          "description": "Ensure elements that have scrollable content are accessible by keyboard",
+          "description": "Ensure elements that have scrollable content are accessible by keyboard in Safari",
           "help": "Scrollable region must have keyboard access",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/scrollable-region-focusable?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright",
           "nodes": []
         },
         {
@@ -8799,7 +8929,7 @@
           ],
           "description": "Ensure select element has an accessible name",
           "help": "Select element must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/select-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/select-name?application=playwright",
           "nodes": []
         },
         {
@@ -8820,7 +8950,7 @@
           ],
           "description": "Ensure that server-side image maps are not used",
           "help": "Server-side image maps must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/server-side-image-map?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/server-side-image-map?application=playwright",
           "nodes": []
         },
         {
@@ -8839,7 +8969,7 @@
           ],
           "description": "Ensure summary elements have discernible text",
           "help": "Summary elements must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/summary-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/summary-name?application=playwright",
           "nodes": []
         },
         {
@@ -8859,9 +8989,9 @@
             "RGAAv4",
             "RGAA-1.1.5"
           ],
-          "description": "Ensure <svg> elements with an img, graphics-document or graphics-symbol role have accessible text",
-          "help": "<svg> elements with an img role must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/svg-img-alt?application=playwright",
+          "description": "Ensure <svg> elements with an img, image, graphics-document or graphics-symbol role have accessible text",
+          "help": "<svg> elements with an img or image role must have alternative text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/svg-img-alt?application=playwright",
           "nodes": []
         },
         {
@@ -8881,7 +9011,7 @@
           ],
           "description": "Ensure lang attributes have valid values",
           "help": "lang attribute must have a valid value",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/valid-lang?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/valid-lang?application=playwright",
           "nodes": []
         },
         {
@@ -8902,7 +9032,7 @@
           ],
           "description": "Ensure <video> elements have captions",
           "help": "<video> elements must have captions",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/video-caption?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/video-caption?application=playwright",
           "nodes": []
         },
         {
@@ -8922,7 +9052,7 @@
           ],
           "description": "Ensure <video> or <audio> elements do not autoplay audio for more than 3 seconds without a control mechanism to stop or mute the audio",
           "help": "<video> or <audio> elements must not play automatically",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/no-autoplay-audio?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/no-autoplay-audio?application=playwright",
           "nodes": []
         },
         {
@@ -9050,7 +9180,7 @@
           ],
           "description": "Ensure an element's role supports its ARIA attributes",
           "help": "Elements must only use supported ARIA attributes",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-allowed-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-allowed-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -9061,6 +9191,20 @@
                   "relatedNodes": [],
                   "impact": "critical",
                   "message": "ARIA attributes are used correctly for the defined role"
+                },
+                {
+                  "id": "aria-allowed-attr-elm",
+                  "data": null,
+                  "relatedNodes": [],
+                  "message": "ARIA attributes are allowed for this element",
+                  "impact": "critical"
+                },
+                {
+                  "id": "aria-no-deprecated-attr",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "critical",
+                  "message": "No deprecated ARIA attributes are used"
                 }
               ],
               "none": [
@@ -9094,7 +9238,7 @@
           ],
           "description": "Ensure ARIA attributes are used as described in the specification of the element's role",
           "help": "ARIA attributes must be used as specified for the element's role",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-conditional-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-conditional-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -9132,7 +9276,7 @@
           ],
           "description": "Ensure aria-hidden=\"true\" is not present on the document body.",
           "help": "aria-hidden=\"true\" must not be present on the document body",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-body?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-hidden-body?application=playwright",
           "nodes": [
             {
               "any": [
@@ -9170,7 +9314,7 @@
           ],
           "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
           "help": "ARIA hidden element must not be focusable or contain focusable elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-hidden-focus?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -9348,7 +9492,7 @@
           ],
           "description": "Ensure ARIA attributes are not prohibited for an element's role",
           "help": "Elements must only use permitted ARIA attributes",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-prohibited-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -9384,7 +9528,7 @@
           ],
           "description": "Ensure all ARIA attributes have valid values",
           "help": "ARIA attributes must conform to valid values",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr-value?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -9434,7 +9578,7 @@
           ],
           "description": "Ensure attributes that begin with aria- are valid ARIA attributes",
           "help": "ARIA attributes must conform to valid names",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr?application=playwright",
           "nodes": [
             {
               "any": [
@@ -9475,7 +9619,7 @@
           ],
           "description": "Ensure buttons have discernible text",
           "help": "Buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -9569,7 +9713,7 @@
           ],
           "description": "Ensure each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
           "help": "Page must have means to bypass repeated blocks",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/bypass?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/bypass?application=playwright",
           "nodes": [
             {
               "any": [
@@ -9636,7 +9780,7 @@
           ],
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
           "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "nodes": [
             {
               "any": [
@@ -10532,7 +10676,7 @@
           ],
           "description": "Ensure each HTML document contains a non-empty <title> element",
           "help": "Documents must have <title> element to aid in navigation",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/document-title?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/document-title?application=playwright",
           "nodes": [
             {
               "any": [
@@ -10571,7 +10715,7 @@
           ],
           "description": "Ensure every HTML document has a lang attribute",
           "help": "<html> element must have a lang attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-has-lang?application=playwright",
           "nodes": [
             {
               "any": [
@@ -10610,7 +10754,7 @@
           ],
           "description": "Ensure the lang attribute of the <html> element has a valid value",
           "help": "<html> element must have a valid value for the lang attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-lang-valid?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-lang-valid?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -10653,7 +10797,7 @@
           ],
           "description": "Ensure links have discernible text",
           "help": "Links must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -10906,7 +11050,7 @@
           ],
           "description": "Ensure <meta name=\"viewport\"> does not disable text scaling and zooming",
           "help": "Zooming and scaling must not be disabled",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-viewport?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/meta-viewport?application=playwright",
           "nodes": [
             {
               "any": [
@@ -10944,7 +11088,7 @@
           ],
           "description": "Ensure interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies",
           "help": "Interactive controls must not be nested",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/nested-interactive?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/nested-interactive?application=playwright",
           "nodes": [
             {
               "any": [
@@ -11056,7 +11200,7 @@
           ],
           "description": "Ensure that each cell in a table that uses the headers attribute refers only to other <th> elements in that table",
           "help": "Table cell headers attributes must refer to other <th> elements in the same table",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/td-headers-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/td-headers-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -11096,7 +11240,7 @@
           ],
           "description": "Ensure that <th> elements and elements with role=columnheader/rowheader have data cells they describe",
           "help": "Table headers in a data table must refer to data cells",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/th-has-data-cells?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/th-has-data-cells?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -11140,7 +11284,7 @@
           ],
           "description": "Ensure buttons have discernible text",
           "help": "Buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -11263,7 +11407,7 @@
           ],
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
           "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "nodes": [
             {
               "any": [
@@ -11427,7 +11571,7 @@
           ],
           "description": "Ensure links have discernible text",
           "help": "Links must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -11693,9 +11837,9 @@
       "couldNotLook": [],
       "dropped": []
     },
-    "timestamp": "2026-10-11T06:10:05.905Z",
+    "timestamp": "2026-10-21T14:55:28.664Z",
     "timing": {
-      "elapsedSinceNavigationMs": 1
+      "elapsedSinceNavigationMs": 2
     }
   },
   {
@@ -11705,19 +11849,19 @@
     "results": {
       "testEngine": {
         "name": "axe-core",
-        "version": "4.11.1"
+        "version": "4.13.0"
       },
       "testRunner": {
         "name": "axe"
       },
       "testEnvironment": {
-        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
         "windowWidth": 1280,
         "windowHeight": 720,
         "orientationAngle": 0,
         "orientationType": "landscape-primary"
       },
-      "timestamp": "2026-10-11T06:10:07.212Z",
+      "timestamp": "2026-10-21T14:55:31.140Z",
       "url": "http://localhost:4173/signin",
       "toolOptions": {
         "rules": {
@@ -11758,7 +11902,7 @@
           ],
           "description": "Ensure <area> elements of image maps have alternative text",
           "help": "Active <area> elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/area-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/area-alt?application=playwright",
           "nodes": []
         },
         {
@@ -11773,7 +11917,7 @@
           ],
           "description": "Ensure aria-braillelabel and aria-brailleroledescription have a non-braille equivalent",
           "help": "aria-braille attributes must have a non-braille equivalent",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-braille-equivalent?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-braille-equivalent?application=playwright",
           "nodes": []
         },
         {
@@ -11793,7 +11937,7 @@
           ],
           "description": "Ensure every ARIA button, link and menuitem has an accessible name",
           "help": "ARIA commands must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-command-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-command-name?application=playwright",
           "nodes": []
         },
         {
@@ -11810,7 +11954,7 @@
           ],
           "description": "Ensure elements do not use deprecated roles",
           "help": "Deprecated ARIA roles must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-deprecated-role?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-deprecated-role?application=playwright",
           "nodes": []
         },
         {
@@ -11830,7 +11974,7 @@
           ],
           "description": "Ensure every ARIA input field has an accessible name",
           "help": "ARIA input fields must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-input-field-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-input-field-name?application=playwright",
           "nodes": []
         },
         {
@@ -11847,7 +11991,7 @@
           ],
           "description": "Ensure every ARIA meter node has an accessible name",
           "help": "ARIA meter nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-meter-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-meter-name?application=playwright",
           "nodes": []
         },
         {
@@ -11864,7 +12008,7 @@
           ],
           "description": "Ensure every ARIA progressbar node has an accessible name",
           "help": "ARIA progressbar nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-progressbar-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-progressbar-name?application=playwright",
           "nodes": []
         },
         {
@@ -11881,7 +12025,7 @@
           ],
           "description": "Ensure elements with ARIA roles have all required ARIA attributes",
           "help": "Required ARIA attributes must be provided",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-attr?application=playwright",
           "nodes": []
         },
         {
@@ -11898,7 +12042,7 @@
           ],
           "description": "Ensure elements with an ARIA role that require child roles contain them",
           "help": "Certain ARIA roles must contain particular children",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-children?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-children?application=playwright",
           "nodes": []
         },
         {
@@ -11915,7 +12059,7 @@
           ],
           "description": "Ensure elements with an ARIA role that require parent roles are contained by them",
           "help": "Certain ARIA roles must be contained by particular parents",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-parent?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-parent?application=playwright",
           "nodes": []
         },
         {
@@ -11932,7 +12076,27 @@
           ],
           "description": "Ensure all elements with a role attribute use a valid value",
           "help": "ARIA roles used must conform to valid values",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-roles?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-roles?application=playwright",
+          "nodes": []
+        },
+        {
+          "id": "aria-tab-name",
+          "impact": null,
+          "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412",
+            "TTv5",
+            "TT5.c",
+            "EN-301-549",
+            "EN-9.4.1.2",
+            "ACT",
+            "RGAAv4",
+            "RGAA-7.1.1"
+          ],
+          "description": "Ensure every ARIA tab node has an accessible name",
+          "help": "ARIA tab nodes must have an accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-tab-name?application=playwright",
           "nodes": []
         },
         {
@@ -11952,7 +12116,7 @@
           ],
           "description": "Ensure every ARIA toggle field has an accessible name",
           "help": "ARIA toggle fields must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-toggle-field-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-toggle-field-name?application=playwright",
           "nodes": []
         },
         {
@@ -11967,7 +12131,7 @@
           ],
           "description": "Ensure every ARIA tooltip node has an accessible name",
           "help": "ARIA tooltip nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-tooltip-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-tooltip-name?application=playwright",
           "nodes": []
         },
         {
@@ -11983,7 +12147,7 @@
           ],
           "description": "Ensure that text spacing set through style attributes can be adjusted with custom stylesheets",
           "help": "Inline text spacing must be adjustable with custom stylesheets",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/avoid-inline-spacing?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/avoid-inline-spacing?application=playwright",
           "nodes": []
         },
         {
@@ -12000,7 +12164,7 @@
           ],
           "description": "Ensure <dl> elements are structured correctly",
           "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/definition-list?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/definition-list?application=playwright",
           "nodes": []
         },
         {
@@ -12017,7 +12181,7 @@
           ],
           "description": "Ensure <dt> and <dd> elements are contained by a <dl>",
           "help": "<dt> and <dd> elements must be contained by a <dl>",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/dlitem?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/dlitem?application=playwright",
           "nodes": []
         },
         {
@@ -12036,7 +12200,7 @@
           ],
           "description": "Ensure <frame> and <iframe> elements with focusable content do not have tabindex=-1",
           "help": "Frames with focusable content must not have tabindex=-1",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-focusable-content?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-focusable-content?application=playwright",
           "nodes": []
         },
         {
@@ -12055,7 +12219,7 @@
           ],
           "description": "Ensure <iframe> and <frame> elements contain a unique title attribute",
           "help": "Frames must have a unique title attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title-unique?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-title-unique?application=playwright",
           "nodes": []
         },
         {
@@ -12076,7 +12240,7 @@
           ],
           "description": "Ensure <iframe> and <frame> elements have an accessible name",
           "help": "Frames must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-title?application=playwright",
           "nodes": []
         },
         {
@@ -12094,7 +12258,7 @@
           ],
           "description": "Ensure that HTML elements with both valid lang and xml:lang attributes agree on the base language of the page",
           "help": "HTML elements with lang and xml:lang must have the same base language",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-xml-lang-mismatch?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-xml-lang-mismatch?application=playwright",
           "nodes": []
         },
         {
@@ -12117,7 +12281,7 @@
           ],
           "description": "Ensure <img> elements have alternative text or a role of none or presentation",
           "help": "Images must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/image-alt?application=playwright",
           "nodes": []
         },
         {
@@ -12139,7 +12303,7 @@
           ],
           "description": "Ensure input buttons have discernible text",
           "help": "Input buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/input-button-name?application=playwright",
           "nodes": []
         },
         {
@@ -12163,7 +12327,7 @@
           ],
           "description": "Ensure <input type=\"image\"> elements have alternative text",
           "help": "Image buttons must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-image-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/input-image-alt?application=playwright",
           "nodes": []
         },
         {
@@ -12182,7 +12346,7 @@
           ],
           "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
           "help": "Links must be distinguishable without relying on color",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-in-text-block?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-in-text-block?application=playwright",
           "nodes": []
         },
         {
@@ -12199,7 +12363,7 @@
           ],
           "description": "Ensure that lists are structured correctly",
           "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/list?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/list?application=playwright",
           "nodes": []
         },
         {
@@ -12216,7 +12380,7 @@
           ],
           "description": "Ensure <li> elements are used semantically",
           "help": "<li> elements must be contained in a <ul> or <ol>",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/listitem?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/listitem?application=playwright",
           "nodes": []
         },
         {
@@ -12235,7 +12399,7 @@
           ],
           "description": "Ensure <marquee> elements are not used",
           "help": "<marquee> elements are deprecated and must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/marquee?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/marquee?application=playwright",
           "nodes": []
         },
         {
@@ -12254,7 +12418,7 @@
           ],
           "description": "Ensure <meta http-equiv=\"refresh\"> is not used for delayed refresh",
           "help": "Delayed refresh under 20 hours must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-refresh?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/meta-refresh?application=playwright",
           "nodes": []
         },
         {
@@ -12273,7 +12437,7 @@
           ],
           "description": "Ensure <object> elements have alternative text",
           "help": "<object> elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/object-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/object-alt?application=playwright",
           "nodes": []
         },
         {
@@ -12293,9 +12457,9 @@
             "RGAAv4",
             "RGAA-1.1.1"
           ],
-          "description": "Ensure [role=\"img\"] elements have alternative text",
-          "help": "[role=\"img\"] elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/role-img-alt?application=playwright",
+          "description": "Ensure [role=\"img\"] and [role=\"image\"] elements have alternative text",
+          "help": "[role=\"img\"] and [role=\"image\"] elements must have alternative text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/role-img-alt?application=playwright",
           "nodes": []
         },
         {
@@ -12314,9 +12478,9 @@
             "RGAAv4",
             "RGAA-7.3.2"
           ],
-          "description": "Ensure elements that have scrollable content are accessible by keyboard",
+          "description": "Ensure elements that have scrollable content are accessible by keyboard in Safari",
           "help": "Scrollable region must have keyboard access",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/scrollable-region-focusable?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright",
           "nodes": []
         },
         {
@@ -12338,7 +12502,7 @@
           ],
           "description": "Ensure select element has an accessible name",
           "help": "Select element must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/select-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/select-name?application=playwright",
           "nodes": []
         },
         {
@@ -12359,7 +12523,7 @@
           ],
           "description": "Ensure that server-side image maps are not used",
           "help": "Server-side image maps must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/server-side-image-map?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/server-side-image-map?application=playwright",
           "nodes": []
         },
         {
@@ -12378,7 +12542,7 @@
           ],
           "description": "Ensure summary elements have discernible text",
           "help": "Summary elements must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/summary-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/summary-name?application=playwright",
           "nodes": []
         },
         {
@@ -12398,9 +12562,9 @@
             "RGAAv4",
             "RGAA-1.1.5"
           ],
-          "description": "Ensure <svg> elements with an img, graphics-document or graphics-symbol role have accessible text",
-          "help": "<svg> elements with an img role must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/svg-img-alt?application=playwright",
+          "description": "Ensure <svg> elements with an img, image, graphics-document or graphics-symbol role have accessible text",
+          "help": "<svg> elements with an img or image role must have alternative text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/svg-img-alt?application=playwright",
           "nodes": []
         },
         {
@@ -12421,7 +12585,7 @@
           ],
           "description": "Ensure that each cell in a table that uses the headers attribute refers only to other <th> elements in that table",
           "help": "Table cell headers attributes must refer to other <th> elements in the same table",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/td-headers-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/td-headers-attr?application=playwright",
           "nodes": []
         },
         {
@@ -12442,7 +12606,7 @@
           ],
           "description": "Ensure that <th> elements and elements with role=columnheader/rowheader have data cells they describe",
           "help": "Table headers in a data table must refer to data cells",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/th-has-data-cells?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/th-has-data-cells?application=playwright",
           "nodes": []
         },
         {
@@ -12462,7 +12626,7 @@
           ],
           "description": "Ensure lang attributes have valid values",
           "help": "lang attribute must have a valid value",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/valid-lang?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/valid-lang?application=playwright",
           "nodes": []
         },
         {
@@ -12483,7 +12647,7 @@
           ],
           "description": "Ensure <video> elements have captions",
           "help": "<video> elements must have captions",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/video-caption?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/video-caption?application=playwright",
           "nodes": []
         },
         {
@@ -12503,7 +12667,7 @@
           ],
           "description": "Ensure <video> or <audio> elements do not autoplay audio for more than 3 seconds without a control mechanism to stop or mute the audio",
           "help": "<video> or <audio> elements must not play automatically",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/no-autoplay-audio?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/no-autoplay-audio?application=playwright",
           "nodes": []
         },
         {
@@ -12577,7 +12741,7 @@
           ],
           "description": "Ensure an element's role supports its ARIA attributes",
           "help": "Elements must only use supported ARIA attributes",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-allowed-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-allowed-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -12588,6 +12752,20 @@
                   "relatedNodes": [],
                   "impact": "critical",
                   "message": "ARIA attributes are used correctly for the defined role"
+                },
+                {
+                  "id": "aria-allowed-attr-elm",
+                  "data": null,
+                  "relatedNodes": [],
+                  "message": "ARIA attributes are allowed for this element",
+                  "impact": "critical"
+                },
+                {
+                  "id": "aria-no-deprecated-attr",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "critical",
+                  "message": "No deprecated ARIA attributes are used"
                 }
               ],
               "none": [
@@ -12621,7 +12799,7 @@
           ],
           "description": "Ensure ARIA attributes are used as described in the specification of the element's role",
           "help": "ARIA attributes must be used as specified for the element's role",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-conditional-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-conditional-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -12659,7 +12837,7 @@
           ],
           "description": "Ensure aria-hidden=\"true\" is not present on the document body.",
           "help": "aria-hidden=\"true\" must not be present on the document body",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-body?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-hidden-body?application=playwright",
           "nodes": [
             {
               "any": [
@@ -12697,7 +12875,7 @@
           ],
           "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
           "help": "ARIA hidden element must not be focusable or contain focusable elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-hidden-focus?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -12843,7 +13021,7 @@
           ],
           "description": "Ensure ARIA attributes are not prohibited for an element's role",
           "help": "Elements must only use permitted ARIA attributes",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-prohibited-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -12879,7 +13057,7 @@
           ],
           "description": "Ensure all ARIA attributes have valid values",
           "help": "ARIA attributes must conform to valid values",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr-value?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -12929,7 +13107,7 @@
           ],
           "description": "Ensure attributes that begin with aria- are valid ARIA attributes",
           "help": "ARIA attributes must conform to valid names",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr?application=playwright",
           "nodes": [
             {
               "any": [
@@ -12966,7 +13144,7 @@
           ],
           "description": "Ensure the autocomplete attribute is correct and suitable for the form field",
           "help": "autocomplete attribute must be used correctly",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/autocomplete-valid?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/autocomplete-valid?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -13025,7 +13203,7 @@
           ],
           "description": "Ensure buttons have discernible text",
           "help": "Buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -13065,7 +13243,7 @@
           ],
           "description": "Ensure each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
           "help": "Page must have means to bypass repeated blocks",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/bypass?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/bypass?application=playwright",
           "nodes": [
             {
               "any": [
@@ -13132,7 +13310,7 @@
           ],
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
           "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "nodes": [
             {
               "any": [
@@ -13503,7 +13681,7 @@
           ],
           "description": "Ensure each HTML document contains a non-empty <title> element",
           "help": "Documents must have <title> element to aid in navigation",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/document-title?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/document-title?application=playwright",
           "nodes": [
             {
               "any": [
@@ -13539,7 +13717,7 @@
           ],
           "description": "Ensure every id attribute value used in ARIA and in labels is unique",
           "help": "IDs used in ARIA and labels must be unique",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/duplicate-id-aria?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/duplicate-id-aria?application=playwright",
           "nodes": [
             {
               "any": [
@@ -13595,7 +13773,7 @@
           ],
           "description": "Ensure form field does not have multiple label elements",
           "help": "Form field must not have multiple label elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/form-field-multiple-labels?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/form-field-multiple-labels?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -13666,7 +13844,7 @@
           ],
           "description": "Ensure every HTML document has a lang attribute",
           "help": "<html> element must have a lang attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-has-lang?application=playwright",
           "nodes": [
             {
               "any": [
@@ -13705,7 +13883,7 @@
           ],
           "description": "Ensure the lang attribute of the <html> element has a valid value",
           "help": "<html> element must have a valid value for the lang attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-lang-valid?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-lang-valid?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -13746,7 +13924,7 @@
           ],
           "description": "Ensure every form element has a label",
           "help": "Form elements must have labels",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
           "nodes": [
             {
               "any": [
@@ -13841,7 +14019,7 @@
           ],
           "description": "Ensure links have discernible text",
           "help": "Links must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -13990,7 +14168,7 @@
           ],
           "description": "Ensure <meta name=\"viewport\"> does not disable text scaling and zooming",
           "help": "Zooming and scaling must not be disabled",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-viewport?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/meta-viewport?application=playwright",
           "nodes": [
             {
               "any": [
@@ -14028,7 +14206,7 @@
           ],
           "description": "Ensure interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies",
           "help": "Interactive controls must not be nested",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/nested-interactive?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/nested-interactive?application=playwright",
           "nodes": [
             {
               "any": [
@@ -14226,7 +14404,7 @@
           ],
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
           "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "nodes": [
             {
               "any": [
@@ -14311,7 +14489,7 @@
           ],
           "description": "Ensure links have discernible text",
           "help": "Links must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -14577,9 +14755,9 @@
       "couldNotLook": [],
       "dropped": []
     },
-    "timestamp": "2026-10-11T06:10:07.338Z",
+    "timestamp": "2026-10-21T14:55:31.250Z",
     "timing": {
-      "elapsedSinceNavigationMs": 2
+      "elapsedSinceNavigationMs": 3
     }
   },
   {
@@ -14589,19 +14767,19 @@
     "results": {
       "testEngine": {
         "name": "axe-core",
-        "version": "4.11.1"
+        "version": "4.13.0"
       },
       "testRunner": {
         "name": "axe"
       },
       "testEnvironment": {
-        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/145.0.7632.6 Safari/537.36",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.8078.4 Safari/537.36",
         "windowWidth": 1280,
         "windowHeight": 720,
         "orientationAngle": 0,
         "orientationType": "landscape-primary"
       },
-      "timestamp": "2026-10-11T06:10:08.618Z",
+      "timestamp": "2026-10-21T14:55:33.516Z",
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
       "toolOptions": {
         "rules": {
@@ -14642,7 +14820,7 @@
           ],
           "description": "Ensure <area> elements of image maps have alternative text",
           "help": "Active <area> elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/area-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/area-alt?application=playwright",
           "nodes": []
         },
         {
@@ -14657,7 +14835,7 @@
           ],
           "description": "Ensure aria-braillelabel and aria-brailleroledescription have a non-braille equivalent",
           "help": "aria-braille attributes must have a non-braille equivalent",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-braille-equivalent?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-braille-equivalent?application=playwright",
           "nodes": []
         },
         {
@@ -14677,7 +14855,7 @@
           ],
           "description": "Ensure every ARIA button, link and menuitem has an accessible name",
           "help": "ARIA commands must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-command-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-command-name?application=playwright",
           "nodes": []
         },
         {
@@ -14697,7 +14875,7 @@
           ],
           "description": "Ensure every ARIA input field has an accessible name",
           "help": "ARIA input fields must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-input-field-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-input-field-name?application=playwright",
           "nodes": []
         },
         {
@@ -14714,7 +14892,7 @@
           ],
           "description": "Ensure every ARIA meter node has an accessible name",
           "help": "ARIA meter nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-meter-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-meter-name?application=playwright",
           "nodes": []
         },
         {
@@ -14731,7 +14909,7 @@
           ],
           "description": "Ensure every ARIA progressbar node has an accessible name",
           "help": "ARIA progressbar nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-progressbar-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-progressbar-name?application=playwright",
           "nodes": []
         },
         {
@@ -14748,7 +14926,7 @@
           ],
           "description": "Ensure elements with an ARIA role that require child roles contain them",
           "help": "Certain ARIA roles must contain particular children",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-children?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-children?application=playwright",
           "nodes": []
         },
         {
@@ -14765,7 +14943,27 @@
           ],
           "description": "Ensure elements with an ARIA role that require parent roles are contained by them",
           "help": "Certain ARIA roles must be contained by particular parents",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-parent?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-parent?application=playwright",
+          "nodes": []
+        },
+        {
+          "id": "aria-tab-name",
+          "impact": null,
+          "tags": [
+            "cat.aria",
+            "wcag2a",
+            "wcag412",
+            "TTv5",
+            "TT5.c",
+            "EN-301-549",
+            "EN-9.4.1.2",
+            "ACT",
+            "RGAAv4",
+            "RGAA-7.1.1"
+          ],
+          "description": "Ensure every ARIA tab node has an accessible name",
+          "help": "ARIA tab nodes must have an accessible name",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-tab-name?application=playwright",
           "nodes": []
         },
         {
@@ -14785,7 +14983,7 @@
           ],
           "description": "Ensure every ARIA toggle field has an accessible name",
           "help": "ARIA toggle fields must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-toggle-field-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-toggle-field-name?application=playwright",
           "nodes": []
         },
         {
@@ -14800,7 +14998,7 @@
           ],
           "description": "Ensure every ARIA tooltip node has an accessible name",
           "help": "ARIA tooltip nodes must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-tooltip-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-tooltip-name?application=playwright",
           "nodes": []
         },
         {
@@ -14818,7 +15016,7 @@
           ],
           "description": "Ensure the autocomplete attribute is correct and suitable for the form field",
           "help": "autocomplete attribute must be used correctly",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/autocomplete-valid?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/autocomplete-valid?application=playwright",
           "nodes": []
         },
         {
@@ -14834,7 +15032,7 @@
           ],
           "description": "Ensure that text spacing set through style attributes can be adjusted with custom stylesheets",
           "help": "Inline text spacing must be adjustable with custom stylesheets",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/avoid-inline-spacing?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/avoid-inline-spacing?application=playwright",
           "nodes": []
         },
         {
@@ -14851,7 +15049,7 @@
           ],
           "description": "Ensure <dl> elements are structured correctly",
           "help": "<dl> elements must only directly contain properly-ordered <dt> and <dd> groups, <script>, <template> or <div> elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/definition-list?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/definition-list?application=playwright",
           "nodes": []
         },
         {
@@ -14868,7 +15066,7 @@
           ],
           "description": "Ensure <dt> and <dd> elements are contained by a <dl>",
           "help": "<dt> and <dd> elements must be contained by a <dl>",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/dlitem?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/dlitem?application=playwright",
           "nodes": []
         },
         {
@@ -14887,7 +15085,7 @@
           ],
           "description": "Ensure <frame> and <iframe> elements with focusable content do not have tabindex=-1",
           "help": "Frames with focusable content must not have tabindex=-1",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-focusable-content?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-focusable-content?application=playwright",
           "nodes": []
         },
         {
@@ -14906,7 +15104,7 @@
           ],
           "description": "Ensure <iframe> and <frame> elements contain a unique title attribute",
           "help": "Frames must have a unique title attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title-unique?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-title-unique?application=playwright",
           "nodes": []
         },
         {
@@ -14927,7 +15125,7 @@
           ],
           "description": "Ensure <iframe> and <frame> elements have an accessible name",
           "help": "Frames must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/frame-title?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/frame-title?application=playwright",
           "nodes": []
         },
         {
@@ -14945,7 +15143,7 @@
           ],
           "description": "Ensure that HTML elements with both valid lang and xml:lang attributes agree on the base language of the page",
           "help": "HTML elements with lang and xml:lang must have the same base language",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-xml-lang-mismatch?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-xml-lang-mismatch?application=playwright",
           "nodes": []
         },
         {
@@ -14968,7 +15166,7 @@
           ],
           "description": "Ensure <img> elements have alternative text or a role of none or presentation",
           "help": "Images must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/image-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/image-alt?application=playwright",
           "nodes": []
         },
         {
@@ -14990,7 +15188,7 @@
           ],
           "description": "Ensure input buttons have discernible text",
           "help": "Input buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/input-button-name?application=playwright",
           "nodes": []
         },
         {
@@ -15014,7 +15212,7 @@
           ],
           "description": "Ensure <input type=\"image\"> elements have alternative text",
           "help": "Image buttons must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/input-image-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/input-image-alt?application=playwright",
           "nodes": []
         },
         {
@@ -15033,7 +15231,7 @@
           ],
           "description": "Ensure links are distinguished from surrounding text in a way that does not rely on color",
           "help": "Links must be distinguishable without relying on color",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-in-text-block?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-in-text-block?application=playwright",
           "nodes": []
         },
         {
@@ -15050,7 +15248,7 @@
           ],
           "description": "Ensure that lists are structured correctly",
           "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/list?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/list?application=playwright",
           "nodes": []
         },
         {
@@ -15067,7 +15265,7 @@
           ],
           "description": "Ensure <li> elements are used semantically",
           "help": "<li> elements must be contained in a <ul> or <ol>",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/listitem?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/listitem?application=playwright",
           "nodes": []
         },
         {
@@ -15086,7 +15284,7 @@
           ],
           "description": "Ensure <marquee> elements are not used",
           "help": "<marquee> elements are deprecated and must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/marquee?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/marquee?application=playwright",
           "nodes": []
         },
         {
@@ -15105,7 +15303,7 @@
           ],
           "description": "Ensure <meta http-equiv=\"refresh\"> is not used for delayed refresh",
           "help": "Delayed refresh under 20 hours must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-refresh?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/meta-refresh?application=playwright",
           "nodes": []
         },
         {
@@ -15124,7 +15322,7 @@
           ],
           "description": "Ensure <object> elements have alternative text",
           "help": "<object> elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/object-alt?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/object-alt?application=playwright",
           "nodes": []
         },
         {
@@ -15144,9 +15342,9 @@
             "RGAAv4",
             "RGAA-1.1.1"
           ],
-          "description": "Ensure [role=\"img\"] elements have alternative text",
-          "help": "[role=\"img\"] elements must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/role-img-alt?application=playwright",
+          "description": "Ensure [role=\"img\"] and [role=\"image\"] elements have alternative text",
+          "help": "[role=\"img\"] and [role=\"image\"] elements must have alternative text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/role-img-alt?application=playwright",
           "nodes": []
         },
         {
@@ -15165,9 +15363,9 @@
             "RGAAv4",
             "RGAA-7.3.2"
           ],
-          "description": "Ensure elements that have scrollable content are accessible by keyboard",
+          "description": "Ensure elements that have scrollable content are accessible by keyboard in Safari",
           "help": "Scrollable region must have keyboard access",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/scrollable-region-focusable?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/scrollable-region-focusable?application=playwright",
           "nodes": []
         },
         {
@@ -15189,7 +15387,7 @@
           ],
           "description": "Ensure select element has an accessible name",
           "help": "Select element must have an accessible name",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/select-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/select-name?application=playwright",
           "nodes": []
         },
         {
@@ -15210,7 +15408,7 @@
           ],
           "description": "Ensure that server-side image maps are not used",
           "help": "Server-side image maps must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/server-side-image-map?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/server-side-image-map?application=playwright",
           "nodes": []
         },
         {
@@ -15229,7 +15427,7 @@
           ],
           "description": "Ensure summary elements have discernible text",
           "help": "Summary elements must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/summary-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/summary-name?application=playwright",
           "nodes": []
         },
         {
@@ -15249,9 +15447,9 @@
             "RGAAv4",
             "RGAA-1.1.5"
           ],
-          "description": "Ensure <svg> elements with an img, graphics-document or graphics-symbol role have accessible text",
-          "help": "<svg> elements with an img role must have alternative text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/svg-img-alt?application=playwright",
+          "description": "Ensure <svg> elements with an img, image, graphics-document or graphics-symbol role have accessible text",
+          "help": "<svg> elements with an img or image role must have alternative text",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/svg-img-alt?application=playwright",
           "nodes": []
         },
         {
@@ -15271,7 +15469,7 @@
           ],
           "description": "Ensure lang attributes have valid values",
           "help": "lang attribute must have a valid value",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/valid-lang?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/valid-lang?application=playwright",
           "nodes": []
         },
         {
@@ -15292,7 +15490,7 @@
           ],
           "description": "Ensure <video> elements have captions",
           "help": "<video> elements must have captions",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/video-caption?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/video-caption?application=playwright",
           "nodes": []
         },
         {
@@ -15312,7 +15510,7 @@
           ],
           "description": "Ensure <video> or <audio> elements do not autoplay audio for more than 3 seconds without a control mechanism to stop or mute the audio",
           "help": "<video> or <audio> elements must not play automatically",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/no-autoplay-audio?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/no-autoplay-audio?application=playwright",
           "nodes": []
         },
         {
@@ -15398,7 +15596,7 @@
           ],
           "description": "Ensure an element's role supports its ARIA attributes",
           "help": "Elements must only use supported ARIA attributes",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-allowed-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-allowed-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -15409,6 +15607,20 @@
                   "relatedNodes": [],
                   "impact": "critical",
                   "message": "ARIA attributes are used correctly for the defined role"
+                },
+                {
+                  "id": "aria-allowed-attr-elm",
+                  "data": null,
+                  "relatedNodes": [],
+                  "message": "ARIA attributes are allowed for this element",
+                  "impact": "critical"
+                },
+                {
+                  "id": "aria-no-deprecated-attr",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "critical",
+                  "message": "No deprecated ARIA attributes are used"
                 }
               ],
               "none": [
@@ -15435,6 +15647,20 @@
                   "relatedNodes": [],
                   "impact": "critical",
                   "message": "ARIA attributes are used correctly for the defined role"
+                },
+                {
+                  "id": "aria-allowed-attr-elm",
+                  "data": null,
+                  "relatedNodes": [],
+                  "message": "ARIA attributes are allowed for this element",
+                  "impact": "critical"
+                },
+                {
+                  "id": "aria-no-deprecated-attr",
+                  "data": null,
+                  "relatedNodes": [],
+                  "impact": "critical",
+                  "message": "No deprecated ARIA attributes are used"
                 }
               ],
               "none": [
@@ -15468,7 +15694,7 @@
           ],
           "description": "Ensure ARIA attributes are used as described in the specification of the element's role",
           "help": "ARIA attributes must be used as specified for the element's role",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-conditional-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-conditional-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -15522,7 +15748,7 @@
           ],
           "description": "Ensure elements do not use deprecated roles",
           "help": "Deprecated ARIA roles must not be used",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-deprecated-role?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-deprecated-role?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -15560,7 +15786,7 @@
           ],
           "description": "Ensure aria-hidden=\"true\" is not present on the document body.",
           "help": "aria-hidden=\"true\" must not be present on the document body",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-body?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-hidden-body?application=playwright",
           "nodes": [
             {
               "any": [
@@ -15598,7 +15824,7 @@
           ],
           "description": "Ensure aria-hidden elements are not focusable nor contain focusable elements",
           "help": "ARIA hidden element must not be focusable or contain focusable elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-hidden-focus?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-hidden-focus?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -15808,7 +16034,7 @@
           ],
           "description": "Ensure ARIA attributes are not prohibited for an element's role",
           "help": "Elements must only use permitted ARIA attributes",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-prohibited-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-prohibited-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -15862,7 +16088,7 @@
           ],
           "description": "Ensure elements with ARIA roles have all required ARIA attributes",
           "help": "Required ARIA attributes must be provided",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-required-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-required-attr?application=playwright",
           "nodes": [
             {
               "any": [
@@ -15898,7 +16124,7 @@
           ],
           "description": "Ensure all elements with a role attribute use a valid value",
           "help": "ARIA roles used must conform to valid values",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-roles?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-roles?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -15948,7 +16174,7 @@
           ],
           "description": "Ensure all ARIA attributes have valid values",
           "help": "ARIA attributes must conform to valid values",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr-value?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr-value?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -16030,7 +16256,7 @@
           ],
           "description": "Ensure attributes that begin with aria- are valid ARIA attributes",
           "help": "ARIA attributes must conform to valid names",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/aria-valid-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr?application=playwright",
           "nodes": [
             {
               "any": [
@@ -16089,7 +16315,7 @@
           ],
           "description": "Ensure buttons have discernible text",
           "help": "Buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -16219,7 +16445,7 @@
           ],
           "description": "Ensure each page has at least one mechanism for a user to bypass navigation and jump straight to the content",
           "help": "Page must have means to bypass repeated blocks",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/bypass?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/bypass?application=playwright",
           "nodes": [
             {
               "any": [
@@ -16292,7 +16518,7 @@
           ],
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
           "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "nodes": [
             {
               "any": [
@@ -17288,7 +17514,7 @@
           ],
           "description": "Ensure each HTML document contains a non-empty <title> element",
           "help": "Documents must have <title> element to aid in navigation",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/document-title?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/document-title?application=playwright",
           "nodes": [
             {
               "any": [
@@ -17324,7 +17550,7 @@
           ],
           "description": "Ensure every id attribute value used in ARIA and in labels is unique",
           "help": "IDs used in ARIA and labels must be unique",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/duplicate-id-aria?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/duplicate-id-aria?application=playwright",
           "nodes": [
             {
               "any": [
@@ -17362,7 +17588,7 @@
           ],
           "description": "Ensure form field does not have multiple label elements",
           "help": "Form field must not have multiple label elements",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/form-field-multiple-labels?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/form-field-multiple-labels?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -17401,7 +17627,7 @@
           ],
           "description": "Ensure every HTML document has a lang attribute",
           "help": "<html> element must have a lang attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-has-lang?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-has-lang?application=playwright",
           "nodes": [
             {
               "any": [
@@ -17440,7 +17666,7 @@
           ],
           "description": "Ensure the lang attribute of the <html> element has a valid value",
           "help": "<html> element must have a valid value for the lang attribute",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/html-lang-valid?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/html-lang-valid?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -17483,7 +17709,7 @@
           ],
           "description": "Ensure links have discernible text",
           "help": "Links must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -17736,7 +17962,7 @@
           ],
           "description": "Ensure <meta name=\"viewport\"> does not disable text scaling and zooming",
           "help": "Zooming and scaling must not be disabled",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/meta-viewport?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/meta-viewport?application=playwright",
           "nodes": [
             {
               "any": [
@@ -17774,7 +18000,7 @@
           ],
           "description": "Ensure interactive controls are not nested as they are not always announced by screen readers or can cause focus problems for assistive technologies",
           "help": "Interactive controls must not be nested",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/nested-interactive?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/nested-interactive?application=playwright",
           "nodes": [
             {
               "any": [
@@ -17940,7 +18166,7 @@
           ],
           "description": "Ensure that each cell in a table that uses the headers attribute refers only to other <th> elements in that table",
           "help": "Table cell headers attributes must refer to other <th> elements in the same table",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/td-headers-attr?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/td-headers-attr?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -17980,7 +18206,7 @@
           ],
           "description": "Ensure that <th> elements and elements with role=columnheader/rowheader have data cells they describe",
           "help": "Table headers in a data table must refer to data cells",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/th-has-data-cells?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/th-has-data-cells?application=playwright",
           "nodes": [
             {
               "any": [],
@@ -18024,7 +18250,7 @@
           ],
           "description": "Ensure buttons have discernible text",
           "help": "Buttons must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/button-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -18259,7 +18485,7 @@
           ],
           "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
           "help": "Elements must meet minimum color contrast ratio thresholds",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/color-contrast?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
           "nodes": [
             {
               "any": [
@@ -18345,9 +18571,9 @@
                 {
                   "id": "color-contrast",
                   "data": {
-                    "fgColor": "#a0a0a0",
+                    "fgColor": "#9a9a9a",
                     "bgColor": "#ffffff",
-                    "contrastRatio": 2.61,
+                    "contrastRatio": 2.81,
                     "fontSize": "10.8pt (14.4px)",
                     "fontWeight": "normal",
                     "messageKey": null,
@@ -18362,17 +18588,17 @@
                     }
                   ],
                   "impact": "serious",
-                  "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1"
                 }
               ],
               "all": [],
               "none": [],
               "impact": "serious",
-              "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+              "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
               "target": [
                 "#upload-hint"
               ],
-              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
               "ancestors": [
                 {
                   "tag": "div",
@@ -18417,6 +18643,9 @@
                 "via": "self"
               },
               "matchedRules": [
+                {
+                  "selectorText": ".muted"
+                },
                 {
                   "selectorText": ".hint"
                 }
@@ -18503,7 +18732,7 @@
           ],
           "description": "Ensure every form element has a label",
           "help": "Form elements must have labels",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/label?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
           "nodes": [
             {
               "any": [
@@ -18641,7 +18870,7 @@
           ],
           "description": "Ensure links have discernible text",
           "help": "Links must have discernible text",
-          "helpUrl": "https://dequeuniversity.com/rules/axe/4.11/link-name?application=playwright",
+          "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
           "nodes": [
             {
               "any": [
@@ -18919,7 +19148,7 @@
         }
       ]
     },
-    "timestamp": "2026-10-11T06:10:08.736Z",
+    "timestamp": "2026-10-21T14:55:33.630Z",
     "timing": {
       "elapsedSinceNavigationMs": 1
     }

@@ -1,3 +1,14 @@
+diff --git a/src/Shell.jsx b/src/Shell.jsx
+--- a/src/Shell.jsx
++++ b/src/Shell.jsx
+@@ -32,7 +32,6 @@
+         <a href="https://example.com/benefits-yt" id="social-yt"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"/></svg></a>
+       </div>
+       <p className="fine">Benefits Portal · demo. A demonstration site. No real agency, no real data.</p>
+-      {/* DEBT color-contrast: 2.8:1 muted text */}
+       <p className="muted" id="last-updated">Last updated October 3, 2026</p>
+     </footer>
+   );
 diff --git a/src/pages/Status.jsx b/src/pages/Status.jsx
 --- a/src/pages/Status.jsx
 +++ b/src/pages/Status.jsx
@@ -6,7 +17,7 @@ diff --git a/src/pages/Status.jsx b/src/pages/Status.jsx
          <div className="title-row">
            <h2 id="upload-title">Upload documents</h2>
 -          <button type="button" className="icon-btn" id="upload-close" onClick={onClose}><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="2"/></svg></button>
-+          <button type="button" className="icon-btn" id="upload-close" aria-label="Close" onClick={onClose}><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="2"/></svg></button>
++          <button type="button" className="icon-btn" id="upload-close" aria-label="Close dialog" onClick={onClose}><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="2"/></svg></button>
          </div>
          <p>Case {caseId}. We accept PDF, JPG and PNG.</p>
 -        <input type="file" id="upload-file" />
@@ -14,7 +25,7 @@ diff --git a/src/pages/Status.jsx b/src/pages/Status.jsx
 +          <label htmlFor="upload-file">Choose files</label>
 +          <input type="file" id="upload-file" aria-describedby="upload-hint" />
 +        </div>
-         <p className="hint" id="upload-hint">Max 10 MB per file. Up to 5 files.</p>
+         <p className="hint muted" id="upload-hint">Max 10 MB per file. Up to 5 files.</p>
          <div className="actions">
            <button type="button" className="btn btn-primary" onClick={onClose}>Upload</button>
 @@ -37,8 +40,7 @@
@@ -23,19 +34,16 @@ diff --git a/src/pages/Status.jsx b/src/pages/Status.jsx
          <h1>Check a case</h1>
 -        {/* DEBT button-name: icon-only refresh button */}
 -        <button type="button" className="icon-btn" id="refresh"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><path d="M3 9a6 6 0 1 1 2 4.5" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M3 14v-4h4" fill="none" stroke="currentColor" strokeWidth="2"/></svg></button>
-+        <button type="button" className="icon-btn" id="refresh" aria-label="Refresh case list"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><path d="M3 9a6 6 0 1 1 2 4.5" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M3 14v-4h4" fill="none" stroke="currentColor" strokeWidth="2"/></svg></button>
++        <button type="button" className="icon-btn" id="refresh" aria-label="Refresh case status"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><path d="M3 9a6 6 0 1 1 2 4.5" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M3 14v-4h4" fill="none" stroke="currentColor" strokeWidth="2"/></svg></button>
        </div>
        <table className="cases">
          <thead><tr><th scope="col">Case</th><th scope="col">Program</th><th scope="col">Filed</th><th scope="col">Status</th><th scope="col">We still need</th><th scope="col">Documents</th></tr></thead>
 diff --git a/src/styles.css b/src/styles.css
 --- a/src/styles.css
 +++ b/src/styles.css
-@@ -58,7 +58,7 @@
- .modal { background: #fff; padding: 1.5rem; border-radius: 8px; width: min(480px, 90vw); }
- .modal h2 { margin-top: 0; }
- .modal .actions { margin-top: 1rem; }
--.hint { color: #a0a0a0; font-size: .9rem; }
-+.hint { color: #595959; font-size: .9rem; }
- 
- /* home — federal classic */
- .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; padding: 2rem 0; }
+@@ -1,4 +1,4 @@
+-:root { --navy: #1f4e79; --navy-dark: #15375a; --green: #2e7d4f; --amber: #c97a1a; --ink: #1b1b1b; --paper: #fff; --line: #d9dde3; --muted-bad: #9a9a9a; }
++:root { --navy: #1f4e79; --navy-dark: #15375a; --green: #2e7d4f; --amber: #c97a1a; --ink: #1b1b1b; --paper: #fff; --line: #d9dde3; --muted-bad: #555555; }
+ * { box-sizing: border-box; }
+ body { margin: 0; font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.5; }
+ a { color: var(--navy); }

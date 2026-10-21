@@ -22,7 +22,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:27.267Z",
+          "timestamp": "2026-10-21T14:55:23.338Z",
           "url": "http://localhost:4173/",
           "toolOptions": {
             "rules": {
@@ -1801,7 +1801,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:27.383Z",
+          "timestamp": "2026-10-21T14:55:23.461Z",
           "url": "http://localhost:4173/",
           "toolOptions": {
             "rules": {
@@ -3395,7 +3395,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:27.502Z",
+          "timestamp": "2026-10-21T14:55:23.586Z",
           "url": "http://localhost:4173/",
           "toolOptions": {
             "rules": {
@@ -5689,7 +5689,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:27.622Z",
+          "timestamp": "2026-10-21T14:55:23.709Z",
           "url": "http://localhost:4173/",
           "toolOptions": {
             "rules": {
@@ -7461,7 +7461,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:27.735Z",
+          "timestamp": "2026-10-21T14:55:23.827Z",
           "url": "http://localhost:4173/",
           "toolOptions": {
             "rules": {
@@ -9007,9 +9007,9 @@
         }
       }
     ],
-    "timestamp": "2026-10-11T06:51:27.825Z",
+    "timestamp": "2026-10-21T14:55:23.922Z",
     "timing": {
-      "elapsedSinceNavigationMs": 220
+      "elapsedSinceNavigationMs": 255
     }
   },
   {
@@ -9035,7 +9035,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:44.755Z",
+          "timestamp": "2026-10-21T14:55:26.000Z",
           "url": "http://localhost:4173/apply",
           "toolOptions": {
             "rules": {
@@ -10814,7 +10814,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:44.869Z",
+          "timestamp": "2026-10-21T14:55:26.120Z",
           "url": "http://localhost:4173/apply",
           "toolOptions": {
             "rules": {
@@ -12408,7 +12408,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:44.988Z",
+          "timestamp": "2026-10-21T14:55:26.244Z",
           "url": "http://localhost:4173/apply",
           "toolOptions": {
             "rules": {
@@ -16038,7 +16038,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:45.129Z",
+          "timestamp": "2026-10-21T14:55:26.393Z",
           "url": "http://localhost:4173/apply",
           "toolOptions": {
             "rules": {
@@ -17810,7 +17810,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:45.248Z",
+          "timestamp": "2026-10-21T14:55:26.517Z",
           "url": "http://localhost:4173/apply",
           "toolOptions": {
             "rules": {
@@ -20991,9 +20991,9 @@
         }
       }
     ],
-    "timestamp": "2026-10-11T06:51:45.363Z",
+    "timestamp": "2026-10-21T14:55:26.635Z",
     "timing": {
-      "elapsedSinceNavigationMs": 241
+      "elapsedSinceNavigationMs": 245
     }
   },
   {
@@ -21019,7 +21019,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:59.833Z",
+          "timestamp": "2026-10-21T14:55:28.698Z",
           "url": "http://localhost:4173/status",
           "toolOptions": {
             "rules": {
@@ -22798,7 +22798,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:51:59.947Z",
+          "timestamp": "2026-10-21T14:55:28.817Z",
           "url": "http://localhost:4173/status",
           "toolOptions": {
             "rules": {
@@ -24392,7 +24392,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:00.066Z",
+          "timestamp": "2026-10-21T14:55:28.940Z",
           "url": "http://localhost:4173/status",
           "toolOptions": {
             "rules": {
@@ -26942,7 +26942,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:00.184Z",
+          "timestamp": "2026-10-21T14:55:29.063Z",
           "url": "http://localhost:4173/status",
           "toolOptions": {
             "rules": {
@@ -28714,7 +28714,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:00.303Z",
+          "timestamp": "2026-10-21T14:55:29.187Z",
           "url": "http://localhost:4173/status",
           "toolOptions": {
             "rules": {
@@ -31045,9 +31045,9 @@
         }
       }
     ],
-    "timestamp": "2026-10-11T06:52:00.396Z",
+    "timestamp": "2026-10-21T14:55:29.284Z",
     "timing": {
-      "elapsedSinceNavigationMs": 214
+      "elapsedSinceNavigationMs": 200
     }
   },
   {
@@ -31073,7 +31073,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:18.557Z",
+          "timestamp": "2026-10-21T14:55:31.284Z",
           "url": "http://localhost:4173/signin",
           "toolOptions": {
             "rules": {
@@ -32852,7 +32852,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:18.669Z",
+          "timestamp": "2026-10-21T14:55:31.405Z",
           "url": "http://localhost:4173/signin",
           "toolOptions": {
             "rules": {
@@ -34446,7 +34446,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:18.779Z",
+          "timestamp": "2026-10-21T14:55:31.520Z",
           "url": "http://localhost:4173/signin",
           "toolOptions": {
             "rules": {
@@ -36241,7 +36241,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:18.896Z",
+          "timestamp": "2026-10-21T14:55:31.642Z",
           "url": "http://localhost:4173/signin",
           "toolOptions": {
             "rules": {
@@ -38013,7 +38013,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:19.007Z",
+          "timestamp": "2026-10-21T14:55:31.758Z",
           "url": "http://localhost:4173/signin",
           "toolOptions": {
             "rules": {
@@ -39765,9 +39765,9 @@
         }
       }
     ],
-    "timestamp": "2026-10-11T06:52:19.101Z",
+    "timestamp": "2026-10-21T14:55:31.857Z",
     "timing": {
-      "elapsedSinceNavigationMs": 207
+      "elapsedSinceNavigationMs": 212
     }
   },
   {
@@ -39793,7 +39793,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:29.578Z",
+          "timestamp": "2026-10-21T14:55:33.665Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -41572,7 +41572,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:29.692Z",
+          "timestamp": "2026-10-21T14:55:33.788Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -43166,7 +43166,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:29.814Z",
+          "timestamp": "2026-10-21T14:55:33.913Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -46205,9 +46205,9 @@
                     {
                       "id": "color-contrast",
                       "data": {
-                        "fgColor": "#a0a0a0",
+                        "fgColor": "#9a9a9a",
                         "bgColor": "#ffffff",
-                        "contrastRatio": 2.61,
+                        "contrastRatio": 2.81,
                         "fontSize": "10.8pt (14.4px)",
                         "fontWeight": "normal",
                         "messageKey": null,
@@ -46222,17 +46222,17 @@
                         }
                       ],
                       "impact": "serious",
-                      "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1"
+                      "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1"
                     }
                   ],
                   "all": [],
                   "none": [],
                   "impact": "serious",
-                  "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+                  "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
                   "target": [
                     "#upload-hint"
                   ],
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                   "ancestors": [
                     {
                       "tag": "div",
@@ -46277,6 +46277,9 @@
                     "via": "self"
                   },
                   "matchedRules": [
+                    {
+                      "selectorText": ".muted"
+                    },
                     {
                       "selectorText": ".hint"
                     }
@@ -46456,7 +46459,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:29.937Z",
+          "timestamp": "2026-10-21T14:55:34.042Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -48228,7 +48231,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:30.051Z",
+          "timestamp": "2026-10-21T14:55:34.162Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -50074,9 +50077,9 @@
                     {
                       "id": "color-contrast",
                       "data": {
-                        "fgColor": "#a0a0a0",
+                        "fgColor": "#9a9a9a",
                         "bgColor": "#ffffff",
-                        "contrastRatio": 2.61,
+                        "contrastRatio": 2.81,
                         "fontSize": "10.8pt (14.4px)",
                         "fontWeight": "normal",
                         "messageKey": null,
@@ -50091,17 +50094,17 @@
                         }
                       ],
                       "impact": "serious",
-                      "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1"
+                      "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1"
                     }
                   ],
                   "all": [],
                   "none": [],
                   "impact": "serious",
-                  "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+                  "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
                   "target": [
                     "#upload-hint"
                   ],
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                   "ancestors": [
                     {
                       "tag": "div",
@@ -50146,6 +50149,9 @@
                     "via": "self"
                   },
                   "matchedRules": [
+                    {
+                      "selectorText": ".muted"
+                    },
                     {
                       "selectorText": ".hint"
                     }
@@ -50325,7 +50331,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:30.166Z",
+          "timestamp": "2026-10-21T14:55:34.284Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -52171,9 +52177,9 @@
                     {
                       "id": "color-contrast",
                       "data": {
-                        "fgColor": "#a0a0a0",
+                        "fgColor": "#9a9a9a",
                         "bgColor": "#ffffff",
-                        "contrastRatio": 2.61,
+                        "contrastRatio": 2.81,
                         "fontSize": "10.8pt (14.4px)",
                         "fontWeight": "normal",
                         "messageKey": null,
@@ -52188,17 +52194,17 @@
                         }
                       ],
                       "impact": "serious",
-                      "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1"
+                      "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1"
                     }
                   ],
                   "all": [],
                   "none": [],
                   "impact": "serious",
-                  "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+                  "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
                   "target": [
                     "#upload-hint"
                   ],
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                   "ancestors": [
                     {
                       "tag": "div",
@@ -52243,6 +52249,9 @@
                     "via": "self"
                   },
                   "matchedRules": [
+                    {
+                      "selectorText": ".muted"
+                    },
                     {
                       "selectorText": ".hint"
                     }
@@ -52422,7 +52431,7 @@
             "orientationAngle": 0,
             "orientationType": "landscape-primary"
           },
-          "timestamp": "2026-10-11T06:52:30.286Z",
+          "timestamp": "2026-10-21T14:55:34.411Z",
           "url": "http://localhost:4173/status?upload=BP-2026-10882",
           "toolOptions": {
             "rules": {
@@ -54753,9 +54762,9 @@
         }
       }
     ],
-    "timestamp": "2026-10-11T06:52:30.382Z",
+    "timestamp": "2026-10-21T14:55:34.510Z",
     "timing": {
-      "elapsedSinceNavigationMs": 220
+      "elapsedSinceNavigationMs": 202
     }
   }
 ]

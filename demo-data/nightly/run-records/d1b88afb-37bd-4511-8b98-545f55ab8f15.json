@@ -1,7 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "7357195b-a6cf-4a0d-8956-16034bbee0eb",
-  "startedAt": "2026-10-11T06:10:01.798Z",
+  "id": "d1b88afb-37bd-4511-8b98-545f55ab8f15",
+  "startedAt": "2026-10-21T14:58:50.398Z",
+  "name": "Nightly",
   "urls": [
     "http://localhost:4173/",
     "http://localhost:4173/apply",
@@ -16,11 +17,12 @@
       "wcag2aa",
       "wcag21a",
       "wcag21aa"
-    ]
+    ],
+    "extended": true
   },
   "status": "finished",
-  "token": "2026-10-11T06-10-09-665Z",
-  "finishedAt": "2026-10-11T06:10:09.759Z",
+  "token": "2026-10-21T15-00-12-698Z",
+  "finishedAt": "2026-10-21T15:00:12.827Z",
   "pages": [
     {
       "url": "http://localhost:4173/"

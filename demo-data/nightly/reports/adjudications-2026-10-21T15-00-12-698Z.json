@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "sourceReportTimestamp": "2026-10-21T15-00-12-698Z",
+  "adjudications": [
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#dob",
+      "verdict": "likely-violation",
+      "rationale": "The dob input's focus ring measures 1.66:1 (rgb(255,190,46) on white), the only identification reported, with no border or fill contrast recorded to carry the cue."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#first-name",
+      "verdict": "likely-violation",
+      "rationale": "The only focus identification measured on this text input is outline rgb(255,190,46) on white at 1.66:1, far under 3:1, and no border or fill cue was reported alongside it."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#household-size",
+      "verdict": "likely-violation",
+      "rationale": "The select's focus outline rgb(255,190,46) on rgb(255,255,255) measures 1.66:1, the only identification reported for the control, with nothing else recorded above 3:1."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#income",
+      "verdict": "likely-violation",
+      "rationale": "The income input's focus outline rgb(255,190,46) on white is 1.66:1 — the single cue measured, and the form-wide pattern repeats the same insufficient ring."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#last-name",
+      "verdict": "likely-violation",
+      "rationale": "Focus is shown by outline rgb(255,190,46) on rgb(255,255,255) at 1.66:1 — the sole cue measured for this input, and well below 3:1 against the white surface."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#ssn",
+      "verdict": "likely-violation",
+      "rationale": "Same yellow focus outline rgb(255,190,46) on white at 1.66:1 as the other fields in this fieldset, and it is the only cue measured for this input."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "The header's class=\"skip\" link points at #main-content, but no element carries that id or name; the page's landmark is main#main. The skip link itself moves focus nowhere."
+    },
+    {
+      "key": "http://localhost:4173/signin|::|non-text-contrast-border|::|#email",
+      "verdict": "likely-violation",
+      "rationale": "The email input's focus is identified only by outline rgb(255,190,46) on rgb(255,255,255) at 1.66:1, with no border or fill contrast measured to supply a cue at 3:1."
+    },
+    {
+      "key": "http://localhost:4173/signin|::|non-text-contrast-border|::|#password",
+      "verdict": "likely-violation",
+      "rationale": "The password input shows the same 1.66:1 yellow outline (rgb(255,190,46)) on the white surface as the only focus identification measured for the field."
+    },
+    {
+      "key": "http://localhost:4173/signin|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "The header skip link targets #main-content while the page's landmark is main#main; no element has that id or name, so pressing Enter leaves focus in the header."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "The case link in table.cases drives the upload state reflected in this URL; it is in-page content in a td, not a mechanism to bypass repeated blocks, so the concern does not apply."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(2) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "A case-id link in the second row's first cell of table.cases — content markup inside the page, not a bypass mechanism ahead of the repeated blocks."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(3) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Third-row case link in table.cases within div.page. Its placement in tabular content, not before the repeated blocks, puts it outside the bypass-blocks question."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(4) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Fourth-row case link in a td of table.cases — a row data link, not a skip mechanism, so the rule's bypass-blocks concern does not apply to this element."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "In this state too the header's class=\"skip\" link references #main-content and no element has that id or name, so the skip link does not move focus past the repeated header."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "A case-id link in the first cell of a row in table.cases — a data link within page content, not a mechanism placed to bypass repeated blocks, so this rule's concern does not apply."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(2) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Link text #BP-2026-10431 sits in a td of table.cases, inside the page body. It is row content, not a bypass mechanism offered before the repeated blocks."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(3) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Third case row's id link inside table.cases > tbody > tr > td — content markup within the page, outside the role of a skip mechanism, so the bypass-blocks question does not apply."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(4) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "Fourth case row link in table.cases, nested in td/tr/tbody within div.page — a data cell link, not a mechanism for bypassing repeated blocks."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "Same header skip link, href=\"#main-content\", and after Enter no element has that id or name. The one mechanism the page offers ahead of its repeated blocks is broken."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "First element in header, class=\"skip\", href=\"#main-content\" — no element on the page has that id or name, while the landmark present is main#main. The page's own declared bypass mechanism lands nowhere for keyboard users."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|main#main > section:nth-of-type(3) > ul > li:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "This is a content link inside a ul in section.news, deep within main — not a bypass mechanism placed ahead of repeated blocks. The bypass-blocks concern does not apply to this element."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|main#main > section:nth-of-type(3) > ul > li:nth-of-type(2) > a",
+      "verdict": "likely-pass",
+      "rationale": "A list-item link inside section.news within main, one of three identical #news links — content markup, not a mechanism offered to bypass repeated blocks, so the rule's concern does not apply here."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|main#main > section:nth-of-type(3) > ul > li:nth-of-type(3) > a",
+      "verdict": "likely-pass",
+      "rationale": "Third of three identical #news links in a ul inside section.news within main. Its position in page content, not ahead of the repeated blocks, means it is not a bypass mechanism."
+    }
+  ],
+  "skipped": [],
+  "counts": {
+    "likelyViolation": 13,
+    "likelyPass": 11,
+    "cannotTell": 0,
+    "skipped": 0
+  },
+  "provenance": {
+    "provider": "claude-code",
+    "endpoint": "api.anthropic.com",
+    "tier": "standard",
+    "requested": {
+      "model": "claude-opus-5"
+    },
+    "model": "claude-opus-5",
+    "mechanism": "structured_outputs"
+  }
+}

@@ -2,11 +2,11 @@
   "fullPage": [
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-11T06:51:27.121Z",
+      "timestamp": "2026-10-21T14:55:23.169Z",
       "summary": {
         "totalViolations": 3,
         "totalPasses": 18,
-        "totalIncomplete": 1,
+        "totalIncomplete": 0,
         "totalInapplicable": 50,
         "critical": 1,
         "serious": 2,
@@ -1051,264 +1051,7 @@
           }
         }
       ],
-      "needsReview": [
-        {
-          "ruleId": "skip-link-works",
-          "impact": "serious",
-          "impactDescription": "Creates significant barriers for users with disabilities — should fix.",
-          "help": "Make the skip link's target exist and be rendered, and let the browser follow the link to it.",
-          "helpUrl": "https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html",
-          "description": "A skip link must move keyboard focus, or the point sequential navigation starts from, to its target.",
-          "affectedElements": 4,
-          "wcagCriteria": [
-            {
-              "sc": "2.4.1",
-              "title": "Bypass Blocks",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "WCAG 2.0 Level A",
-            "WCAG 2.4.1",
-            "extended"
-          ],
-          "nodes": [
-            {
-              "html": "<a class=\"skip\" href=\"#main-content\">",
-              "target": [
-                "div#root > header > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#main-content\": after Enter, no element has the id or name \"main-content\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "header",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/Shell.jsx",
-                "startLine": 8,
-                "endLine": 8,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                },
-                {
-                  "selectorText": ".skip"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "main-content"
-                  },
-                  "message": "Skip link to \"#main-content\": after Enter, no element has the id or name \"main-content\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#news\">",
-              "target": [
-                "main#main > section:nth-of-type(3) > ul > li:nth-of-type(1) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#news\": after Enter, no element has the id or name \"news\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "li",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "ul",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "section",
-                  "classes": [
-                    "news"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Home.jsx",
-                "startLine": 55,
-                "endLine": 55,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "news"
-                  },
-                  "message": "Skip link to \"#news\": after Enter, no element has the id or name \"news\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#news\">",
-              "target": [
-                "main#main > section:nth-of-type(3) > ul > li:nth-of-type(2) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#news\": after Enter, no element has the id or name \"news\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "li",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "ul",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "section",
-                  "classes": [
-                    "news"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Home.jsx",
-                "startLine": 55,
-                "endLine": 55,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "news"
-                  },
-                  "message": "Skip link to \"#news\": after Enter, no element has the id or name \"news\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#news\">",
-              "target": [
-                "main#main > section:nth-of-type(3) > ul > li:nth-of-type(3) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#news\": after Enter, no element has the id or name \"news\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "li",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "ul",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "section",
-                  "classes": [
-                    "news"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "main",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "main"
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/pages/Home.jsx",
-                "startLine": 55,
-                "endLine": 55,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "news"
-                  },
-                  "message": "Skip link to \"#news\": after Enter, no element has the id or name \"news\".",
-                  "relatedTargets": []
-                }
-              ]
-            }
-          ]
-        }
-      ],
+      "needsReview": [],
       "passedRuleIds": [
         "aria-allowed-attr",
         "aria-conditional-attr",
@@ -1386,11 +1129,11 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-11T06:51:44.591Z",
+      "timestamp": "2026-10-21T14:55:25.826Z",
       "summary": {
         "totalViolations": 4,
         "totalPasses": 22,
-        "totalIncomplete": 2,
+        "totalIncomplete": 1,
         "totalInapplicable": 43,
         "critical": 2,
         "serious": 2,
@@ -3219,76 +2962,6 @@
               }
             }
           ]
-        },
-        {
-          "ruleId": "skip-link-works",
-          "impact": "serious",
-          "impactDescription": "Creates significant barriers for users with disabilities — should fix.",
-          "help": "Make the skip link's target exist and be rendered, and let the browser follow the link to it.",
-          "helpUrl": "https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html",
-          "description": "A skip link must move keyboard focus, or the point sequential navigation starts from, to its target.",
-          "affectedElements": 1,
-          "wcagCriteria": [
-            {
-              "sc": "2.4.1",
-              "title": "Bypass Blocks",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "WCAG 2.0 Level A",
-            "WCAG 2.4.1",
-            "extended"
-          ],
-          "nodes": [
-            {
-              "html": "<a class=\"skip\" href=\"#main-content\">",
-              "target": [
-                "div#root > header > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#main-content\": after Enter, no element has the id or name \"main-content\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "header",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/Shell.jsx",
-                "startLine": 8,
-                "endLine": 8,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                },
-                {
-                  "selectorText": ".skip"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "main-content"
-                  },
-                  "message": "Skip link to \"#main-content\": after Enter, no element has the id or name \"main-content\".",
-                  "relatedTargets": []
-                }
-              ]
-            }
-          ]
         }
       ],
       "passedRuleIds": [
@@ -3377,11 +3050,11 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-11T06:51:59.696Z",
+      "timestamp": "2026-10-21T14:55:28.557Z",
       "summary": {
         "totalViolations": 3,
         "totalPasses": 18,
-        "totalIncomplete": 1,
+        "totalIncomplete": 0,
         "totalInapplicable": 51,
         "critical": 1,
         "serious": 2,
@@ -4622,326 +4295,7 @@
           }
         }
       ],
-      "needsReview": [
-        {
-          "ruleId": "skip-link-works",
-          "impact": "serious",
-          "impactDescription": "Creates significant barriers for users with disabilities — should fix.",
-          "help": "Make the skip link's target exist and be rendered, and let the browser follow the link to it.",
-          "helpUrl": "https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html",
-          "description": "A skip link must move keyboard focus, or the point sequential navigation starts from, to its target.",
-          "affectedElements": 5,
-          "wcagCriteria": [
-            {
-              "sc": "2.4.1",
-              "title": "Bypass Blocks",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "WCAG 2.0 Level A",
-            "WCAG 2.4.1",
-            "extended"
-          ],
-          "nodes": [
-            {
-              "html": "<a class=\"skip\" href=\"#main-content\">",
-              "target": [
-                "div#root > header > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#main-content\": after Enter, no element has the id or name \"main-content\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "header",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/Shell.jsx",
-                "startLine": 8,
-                "endLine": 8,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                },
-                {
-                  "selectorText": ".skip"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "main-content"
-                  },
-                  "message": "Skip link to \"#main-content\": after Enter, no element has the id or name \"main-content\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#BP-2026-10882\">",
-              "target": [
-                "div > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#BP-2026-10882\": after Enter, no element has the id or name \"BP-2026-10882\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "td",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tr",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tbody",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "table",
-                  "classes": [
-                    "cases"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "BP-2026-10882"
-                  },
-                  "message": "Skip link to \"#BP-2026-10882\": after Enter, no element has the id or name \"BP-2026-10882\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#BP-2026-10431\">",
-              "target": [
-                "div > table > tbody > tr:nth-of-type(2) > td:nth-of-type(1) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#BP-2026-10431\": after Enter, no element has the id or name \"BP-2026-10431\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "td",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tr",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tbody",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "table",
-                  "classes": [
-                    "cases"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "BP-2026-10431"
-                  },
-                  "message": "Skip link to \"#BP-2026-10431\": after Enter, no element has the id or name \"BP-2026-10431\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#BP-2026-09977\">",
-              "target": [
-                "div > table > tbody > tr:nth-of-type(3) > td:nth-of-type(1) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#BP-2026-09977\": after Enter, no element has the id or name \"BP-2026-09977\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "td",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tr",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tbody",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "table",
-                  "classes": [
-                    "cases"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "BP-2026-09977"
-                  },
-                  "message": "Skip link to \"#BP-2026-09977\": after Enter, no element has the id or name \"BP-2026-09977\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#BP-2026-09120\">",
-              "target": [
-                "div > table > tbody > tr:nth-of-type(4) > td:nth-of-type(1) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#BP-2026-09120\": after Enter, no element has the id or name \"BP-2026-09120\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "td",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tr",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tbody",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "table",
-                  "classes": [
-                    "cases"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "BP-2026-09120"
-                  },
-                  "message": "Skip link to \"#BP-2026-09120\": after Enter, no element has the id or name \"BP-2026-09120\".",
-                  "relatedTargets": []
-                }
-              ]
-            }
-          ]
-        }
-      ],
+      "needsReview": [],
       "passedRuleIds": [
         "aria-allowed-attr",
         "aria-conditional-attr",
@@ -5020,11 +4374,11 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-11T06:52:18.421Z",
+      "timestamp": "2026-10-21T14:55:31.140Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 20,
-        "totalIncomplete": 2,
+        "totalIncomplete": 1,
         "totalInapplicable": 45,
         "critical": 0,
         "serious": 2,
@@ -6002,76 +5356,6 @@
               }
             }
           ]
-        },
-        {
-          "ruleId": "skip-link-works",
-          "impact": "serious",
-          "impactDescription": "Creates significant barriers for users with disabilities — should fix.",
-          "help": "Make the skip link's target exist and be rendered, and let the browser follow the link to it.",
-          "helpUrl": "https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html",
-          "description": "A skip link must move keyboard focus, or the point sequential navigation starts from, to its target.",
-          "affectedElements": 1,
-          "wcagCriteria": [
-            {
-              "sc": "2.4.1",
-              "title": "Bypass Blocks",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "WCAG 2.0 Level A",
-            "WCAG 2.4.1",
-            "extended"
-          ],
-          "nodes": [
-            {
-              "html": "<a class=\"skip\" href=\"#main-content\">",
-              "target": [
-                "div#root > header > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#main-content\": after Enter, no element has the id or name \"main-content\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "header",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/Shell.jsx",
-                "startLine": 8,
-                "endLine": 8,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                },
-                {
-                  "selectorText": ".skip"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "main-content"
-                  },
-                  "message": "Skip link to \"#main-content\": after Enter, no element has the id or name \"main-content\".",
-                  "relatedTargets": []
-                }
-              ]
-            }
-          ]
         }
       ],
       "passedRuleIds": [
@@ -6148,11 +5432,11 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-11T06:52:29.437Z",
+      "timestamp": "2026-10-21T14:55:33.516Z",
       "summary": {
         "totalViolations": 4,
         "totalPasses": 23,
-        "totalIncomplete": 1,
+        "totalIncomplete": 0,
         "totalInapplicable": 42,
         "critical": 2,
         "serious": 2,
@@ -6667,12 +5951,12 @@
                 }
               },
               {
-                "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+                "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
                 "target": [
                   "#upload-hint"
                 ],
                 "impact": "serious",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                 "violationId": 11,
                 "ancestors": [
                   {
@@ -6719,6 +6003,9 @@
                 },
                 "matchedRules": [
                   {
+                    "selectorText": ".muted"
+                  },
+                  {
                     "selectorText": ".hint"
                   }
                 ],
@@ -6726,15 +6013,15 @@
                   {
                     "id": "color-contrast",
                     "data": {
-                      "fgColor": "#a0a0a0",
+                      "fgColor": "#9a9a9a",
                       "bgColor": "#ffffff",
-                      "contrastRatio": 2.61,
+                      "contrastRatio": 2.81,
                       "fontSize": "10.8pt (14.4px)",
                       "fontWeight": "normal",
                       "messageKey": null,
                       "expectedContrastRatio": "4.5:1"
                     },
-                    "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                     "relatedTargets": [
                       [
                         "#upload-dialog"
@@ -7477,12 +6764,12 @@
               }
             },
             {
-              "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+              "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
               "target": [
                 "#upload-hint"
               ],
               "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
               "violationId": 11,
               "ancestors": [
                 {
@@ -7529,6 +6816,9 @@
               },
               "matchedRules": [
                 {
+                  "selectorText": ".muted"
+                },
+                {
                   "selectorText": ".hint"
                 }
               ],
@@ -7536,15 +6826,15 @@
                 {
                   "id": "color-contrast",
                   "data": {
-                    "fgColor": "#a0a0a0",
+                    "fgColor": "#9a9a9a",
                     "bgColor": "#ffffff",
-                    "contrastRatio": 2.61,
+                    "contrastRatio": 2.81,
                     "fontSize": "10.8pt (14.4px)",
                     "fontWeight": "normal",
                     "messageKey": null,
                     "expectedContrastRatio": "4.5:1"
                   },
-                  "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                  "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                   "relatedTargets": [
                     [
                       "#upload-dialog"
@@ -8075,326 +7365,7 @@
           }
         }
       ],
-      "needsReview": [
-        {
-          "ruleId": "skip-link-works",
-          "impact": "serious",
-          "impactDescription": "Creates significant barriers for users with disabilities — should fix.",
-          "help": "Make the skip link's target exist and be rendered, and let the browser follow the link to it.",
-          "helpUrl": "https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html",
-          "description": "A skip link must move keyboard focus, or the point sequential navigation starts from, to its target.",
-          "affectedElements": 5,
-          "wcagCriteria": [
-            {
-              "sc": "2.4.1",
-              "title": "Bypass Blocks",
-              "level": "A"
-            }
-          ],
-          "wcagTags": [
-            "WCAG 2.0 Level A",
-            "WCAG 2.4.1",
-            "extended"
-          ],
-          "nodes": [
-            {
-              "html": "<a class=\"skip\" href=\"#main-content\">",
-              "target": [
-                "div#root > header > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#main-content\": after Enter, no element has the id or name \"main-content\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "header",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [],
-                  "dataAttrs": [],
-                  "id": "root"
-                }
-              ],
-              "source": {
-                "file": "src/Shell.jsx",
-                "startLine": 8,
-                "endLine": 8,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                },
-                {
-                  "selectorText": ".skip"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "main-content"
-                  },
-                  "message": "Skip link to \"#main-content\": after Enter, no element has the id or name \"main-content\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#BP-2026-10882\">",
-              "target": [
-                "div > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#BP-2026-10882\": after Enter, no element has the id or name \"BP-2026-10882\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "td",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tr",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tbody",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "table",
-                  "classes": [
-                    "cases"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "BP-2026-10882"
-                  },
-                  "message": "Skip link to \"#BP-2026-10882\": after Enter, no element has the id or name \"BP-2026-10882\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#BP-2026-10431\">",
-              "target": [
-                "div > table > tbody > tr:nth-of-type(2) > td:nth-of-type(1) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#BP-2026-10431\": after Enter, no element has the id or name \"BP-2026-10431\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "td",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tr",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tbody",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "table",
-                  "classes": [
-                    "cases"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "BP-2026-10431"
-                  },
-                  "message": "Skip link to \"#BP-2026-10431\": after Enter, no element has the id or name \"BP-2026-10431\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#BP-2026-09977\">",
-              "target": [
-                "div > table > tbody > tr:nth-of-type(3) > td:nth-of-type(1) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#BP-2026-09977\": after Enter, no element has the id or name \"BP-2026-09977\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "td",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tr",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tbody",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "table",
-                  "classes": [
-                    "cases"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "BP-2026-09977"
-                  },
-                  "message": "Skip link to \"#BP-2026-09977\": after Enter, no element has the id or name \"BP-2026-09977\".",
-                  "relatedTargets": []
-                }
-              ]
-            },
-            {
-              "html": "<a href=\"#BP-2026-09120\">",
-              "target": [
-                "div > table > tbody > tr:nth-of-type(4) > td:nth-of-type(1) > a"
-              ],
-              "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Skip link to \"#BP-2026-09120\": after Enter, no element has the id or name \"BP-2026-09120\".",
-              "violationId": 0,
-              "ancestors": [
-                {
-                  "tag": "td",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tr",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "tbody",
-                  "classes": [],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "table",
-                  "classes": [
-                    "cases"
-                  ],
-                  "dataAttrs": []
-                },
-                {
-                  "tag": "div",
-                  "classes": [
-                    "page"
-                  ],
-                  "dataAttrs": []
-                }
-              ],
-              "source": {
-                "file": "src/pages/Status.jsx",
-                "startLine": 48,
-                "endLine": 48,
-                "via": "self"
-              },
-              "matchedRules": [
-                {
-                  "selectorText": "a"
-                }
-              ],
-              "toDecide": "whether another mechanism bypasses the same blocks — a heading, a landmark or a collapsible block",
-              "checks": [
-                {
-                  "id": "skip-link-moves-focus",
-                  "data": {
-                    "fragment": "BP-2026-09120"
-                  },
-                  "message": "Skip link to \"#BP-2026-09120\": after Enter, no element has the id or name \"BP-2026-09120\".",
-                  "relatedTargets": []
-                }
-              ]
-            }
-          ]
-        }
-      ],
+      "needsReview": [],
       "passedRuleIds": [
         "aria-allowed-attr",
         "aria-conditional-attr",
@@ -8483,7 +7454,7 @@
   "components": [
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-11T06:51:27.267Z",
+      "timestamp": "2026-10-21T14:55:23.338Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 8,
@@ -8582,7 +7553,7 @@
     },
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-11T06:51:27.383Z",
+      "timestamp": "2026-10-21T14:55:23.461Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -8681,7 +7652,7 @@
     },
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-11T06:51:27.502Z",
+      "timestamp": "2026-10-21T14:55:23.586Z",
       "summary": {
         "totalViolations": 1,
         "totalPasses": 11,
@@ -9019,7 +7990,7 @@
     },
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-11T06:51:27.622Z",
+      "timestamp": "2026-10-21T14:55:23.709Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 2,
@@ -9909,7 +8880,7 @@
     },
     {
       "url": "http://localhost:4173/",
-      "timestamp": "2026-10-11T06:51:27.735Z",
+      "timestamp": "2026-10-21T14:55:23.827Z",
       "summary": {
         "totalViolations": 1,
         "totalPasses": 3,
@@ -10247,7 +9218,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-11T06:51:44.755Z",
+      "timestamp": "2026-10-21T14:55:26.000Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 8,
@@ -10346,7 +9317,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-11T06:51:44.869Z",
+      "timestamp": "2026-10-21T14:55:26.120Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -10445,7 +9416,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-11T06:51:44.988Z",
+      "timestamp": "2026-10-21T14:55:26.244Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 14,
@@ -11577,7 +10548,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-11T06:51:45.129Z",
+      "timestamp": "2026-10-21T14:55:26.393Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 2,
@@ -12467,7 +11438,7 @@
     },
     {
       "url": "http://localhost:4173/apply",
-      "timestamp": "2026-10-11T06:51:45.248Z",
+      "timestamp": "2026-10-21T14:55:26.517Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 7,
@@ -13599,7 +12570,7 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-11T06:51:59.833Z",
+      "timestamp": "2026-10-21T14:55:28.698Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 8,
@@ -13698,7 +12669,7 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-11T06:51:59.947Z",
+      "timestamp": "2026-10-21T14:55:28.817Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -13797,7 +12768,7 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-11T06:52:00.066Z",
+      "timestamp": "2026-10-21T14:55:28.940Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 7,
@@ -14403,7 +13374,7 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-11T06:52:00.184Z",
+      "timestamp": "2026-10-21T14:55:29.063Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 2,
@@ -15293,7 +14264,7 @@
     },
     {
       "url": "http://localhost:4173/status",
-      "timestamp": "2026-10-11T06:52:00.303Z",
+      "timestamp": "2026-10-21T14:55:29.187Z",
       "summary": {
         "totalViolations": 1,
         "totalPasses": 6,
@@ -15624,7 +14595,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-11T06:52:18.557Z",
+      "timestamp": "2026-10-21T14:55:31.284Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 8,
@@ -15723,7 +14694,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-11T06:52:18.669Z",
+      "timestamp": "2026-10-21T14:55:31.405Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -15822,7 +14793,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-11T06:52:18.779Z",
+      "timestamp": "2026-10-21T14:55:31.520Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -16090,7 +15061,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-11T06:52:18.896Z",
+      "timestamp": "2026-10-21T14:55:31.642Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 2,
@@ -16980,7 +15951,7 @@
     },
     {
       "url": "http://localhost:4173/signin",
-      "timestamp": "2026-10-11T06:52:19.007Z",
+      "timestamp": "2026-10-21T14:55:31.758Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -17248,7 +16219,7 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-11T06:52:29.578Z",
+      "timestamp": "2026-10-21T14:55:33.665Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 8,
@@ -17347,7 +16318,7 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-11T06:52:29.692Z",
+      "timestamp": "2026-10-21T14:55:33.788Z",
       "summary": {
         "totalViolations": 0,
         "totalPasses": 7,
@@ -17446,7 +16417,7 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-11T06:52:29.814Z",
+      "timestamp": "2026-10-21T14:55:33.913Z",
       "summary": {
         "totalViolations": 3,
         "totalPasses": 17,
@@ -17965,12 +16936,12 @@
                 }
               },
               {
-                "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+                "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
                 "target": [
                   "#upload-hint"
                 ],
                 "impact": "serious",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                 "violationId": 11,
                 "ancestors": [
                   {
@@ -18017,6 +16988,9 @@
                 },
                 "matchedRules": [
                   {
+                    "selectorText": ".muted"
+                  },
+                  {
                     "selectorText": ".hint"
                   }
                 ],
@@ -18024,15 +16998,15 @@
                   {
                     "id": "color-contrast",
                     "data": {
-                      "fgColor": "#a0a0a0",
+                      "fgColor": "#9a9a9a",
                       "bgColor": "#ffffff",
-                      "contrastRatio": 2.61,
+                      "contrastRatio": 2.81,
                       "fontSize": "10.8pt (14.4px)",
                       "fontWeight": "normal",
                       "messageKey": null,
                       "expectedContrastRatio": "4.5:1"
                     },
-                    "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                     "relatedTargets": [
                       [
                         "#upload-dialog"
@@ -18415,12 +17389,12 @@
               }
             },
             {
-              "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+              "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
               "target": [
                 "#upload-hint"
               ],
               "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
               "violationId": 11,
               "ancestors": [
                 {
@@ -18467,6 +17441,9 @@
               },
               "matchedRules": [
                 {
+                  "selectorText": ".muted"
+                },
+                {
                   "selectorText": ".hint"
                 }
               ],
@@ -18474,15 +17451,15 @@
                 {
                   "id": "color-contrast",
                   "data": {
-                    "fgColor": "#a0a0a0",
+                    "fgColor": "#9a9a9a",
                     "bgColor": "#ffffff",
-                    "contrastRatio": 2.61,
+                    "contrastRatio": 2.81,
                     "fontSize": "10.8pt (14.4px)",
                     "fontWeight": "normal",
                     "messageKey": null,
                     "expectedContrastRatio": "4.5:1"
                   },
-                  "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                  "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                   "relatedTargets": [
                     [
                       "#upload-dialog"
@@ -18742,7 +17719,7 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-11T06:52:29.937Z",
+      "timestamp": "2026-10-21T14:55:34.042Z",
       "summary": {
         "totalViolations": 2,
         "totalPasses": 2,
@@ -19632,7 +18609,7 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-11T06:52:30.051Z",
+      "timestamp": "2026-10-21T14:55:34.162Z",
       "summary": {
         "totalViolations": 3,
         "totalPasses": 14,
@@ -19971,12 +18948,12 @@
             ],
             "nodes": [
               {
-                "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+                "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
                 "target": [
                   "#upload-hint"
                 ],
                 "impact": "serious",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                 "violationId": 11,
                 "ancestors": [
                   {
@@ -20023,6 +19000,9 @@
                 },
                 "matchedRules": [
                   {
+                    "selectorText": ".muted"
+                  },
+                  {
                     "selectorText": ".hint"
                   }
                 ],
@@ -20030,15 +19010,15 @@
                   {
                     "id": "color-contrast",
                     "data": {
-                      "fgColor": "#a0a0a0",
+                      "fgColor": "#9a9a9a",
                       "bgColor": "#ffffff",
-                      "contrastRatio": 2.61,
+                      "contrastRatio": 2.81,
                       "fontSize": "10.8pt (14.4px)",
                       "fontWeight": "normal",
                       "messageKey": null,
                       "expectedContrastRatio": "4.5:1"
                     },
-                    "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                     "relatedTargets": [
                       [
                         "#upload-dialog"
@@ -20241,12 +19221,12 @@
           ],
           "nodes": [
             {
-              "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+              "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
               "target": [
                 "#upload-hint"
               ],
               "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
               "violationId": 11,
               "ancestors": [
                 {
@@ -20293,6 +19273,9 @@
               },
               "matchedRules": [
                 {
+                  "selectorText": ".muted"
+                },
+                {
                   "selectorText": ".hint"
                 }
               ],
@@ -20300,15 +19283,15 @@
                 {
                   "id": "color-contrast",
                   "data": {
-                    "fgColor": "#a0a0a0",
+                    "fgColor": "#9a9a9a",
                     "bgColor": "#ffffff",
-                    "contrastRatio": 2.61,
+                    "contrastRatio": 2.81,
                     "fontSize": "10.8pt (14.4px)",
                     "fontWeight": "normal",
                     "messageKey": null,
                     "expectedContrastRatio": "4.5:1"
                   },
-                  "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                  "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                   "relatedTargets": [
                     [
                       "#upload-dialog"
@@ -20568,7 +19551,7 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-11T06:52:30.166Z",
+      "timestamp": "2026-10-21T14:55:34.284Z",
       "summary": {
         "totalViolations": 3,
         "totalPasses": 14,
@@ -20907,12 +19890,12 @@
             ],
             "nodes": [
               {
-                "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+                "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
                 "target": [
                   "#upload-hint"
                 ],
                 "impact": "serious",
-                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                 "violationId": 11,
                 "ancestors": [
                   {
@@ -20959,6 +19942,9 @@
                 },
                 "matchedRules": [
                   {
+                    "selectorText": ".muted"
+                  },
+                  {
                     "selectorText": ".hint"
                   }
                 ],
@@ -20966,15 +19952,15 @@
                   {
                     "id": "color-contrast",
                     "data": {
-                      "fgColor": "#a0a0a0",
+                      "fgColor": "#9a9a9a",
                       "bgColor": "#ffffff",
-                      "contrastRatio": 2.61,
+                      "contrastRatio": 2.81,
                       "fontSize": "10.8pt (14.4px)",
                       "fontWeight": "normal",
                       "messageKey": null,
                       "expectedContrastRatio": "4.5:1"
                     },
-                    "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                    "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                     "relatedTargets": [
                       [
                         "#upload-dialog"
@@ -21177,12 +20163,12 @@
           ],
           "nodes": [
             {
-              "html": "<p class=\"hint\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
+              "html": "<p class=\"hint muted\" id=\"upload-hint\">Max 10 MB per file. Up to 5 files.</p>",
               "target": [
                 "#upload-hint"
               ],
               "impact": "serious",
-              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
               "violationId": 11,
               "ancestors": [
                 {
@@ -21229,6 +20215,9 @@
               },
               "matchedRules": [
                 {
+                  "selectorText": ".muted"
+                },
+                {
                   "selectorText": ".hint"
                 }
               ],
@@ -21236,15 +20225,15 @@
                 {
                   "id": "color-contrast",
                   "data": {
-                    "fgColor": "#a0a0a0",
+                    "fgColor": "#9a9a9a",
                     "bgColor": "#ffffff",
-                    "contrastRatio": 2.61,
+                    "contrastRatio": 2.81,
                     "fontSize": "10.8pt (14.4px)",
                     "fontWeight": "normal",
                     "messageKey": null,
                     "expectedContrastRatio": "4.5:1"
                   },
-                  "message": "Element has insufficient color contrast of 2.61 (foreground color: #a0a0a0, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
+                  "message": "Element has insufficient color contrast of 2.81 (foreground color: #9a9a9a, background color: #ffffff, font size: 10.8pt (14.4px), font weight: normal). Expected contrast ratio of 4.5:1",
                   "relatedTargets": [
                     [
                       "#upload-dialog"
@@ -21504,7 +20493,7 @@
     },
     {
       "url": "http://localhost:4173/status?upload=BP-2026-10882",
-      "timestamp": "2026-10-11T06:52:30.286Z",
+      "timestamp": "2026-10-21T14:55:34.411Z",
       "summary": {
         "totalViolations": 1,
         "totalPasses": 6,
@@ -21888,12 +20877,11 @@
       "wcag21a",
       "wcag21aa"
     ],
-    "extended": true,
+    "extended": false,
     "experimental": false,
     "defaultRules": [
       "non-text-contrast-border"
     ],
-    "name": "Nightly",
     "mantaVersion": "0.1.0",
     "viewport": {
       "width": 1280,

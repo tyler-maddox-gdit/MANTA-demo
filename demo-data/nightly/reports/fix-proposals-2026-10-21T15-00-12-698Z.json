@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "sourceReportTimestamp": "2026-10-11T06-52-50-206Z",
+  "sourceReportTimestamp": "2026-10-21T15-00-12-698Z",
   "proposals": [
     {
       "id": "proposal-1",
@@ -10,7 +10,7 @@
       "kind": "source-diff",
       "fixTarget": {
         "kind": "template",
-        "value": "src/Shell.jsx — Footer() div.social icon links"
+        "value": "src/Shell.jsx — Footer() footer.site-footer > div.social links (lines 30-32)"
       },
       "members": [
         "http://localhost:4173/apply|::|link-name|::|#social-fb",
@@ -30,12 +30,13 @@
         "http://localhost:4173/|::|link-name|::|#social-yt"
       ],
       "conventionsDetected": [
-        "Social icon links identified by id in a social-<network> pattern (#social-x, #social-fb, #social-yt), styled by the .social a descendant selector in src/styles.css",
-        "Decorative inline SVG icons marked aria-hidden=\"true\" (same convention as the header's span.seal)",
-        "Known-issue markers written as {/* DEBT <rule-id>: ... */} comments above the offending markup"
+        "Icon-only links wrap an inline <svg aria-hidden=\"true\"> sized 16×16 with fill=\"currentColor\"",
+        "Stable hyphenated ids per network (social-x, social-fb, social-yt) on the footer anchors",
+        "Lowercase hyphenated class names (site-footer, social, gov-strip) styled by descendant selectors such as .social a",
+        "{/* DEBT <rule-id>: ... */} comments flag known accessibility debt at the markup that causes it"
       ],
       "domSpec": {
-        "domInstruction": "In the shared Footer() in src/Shell.jsx, the three icon-only links in div.social wrap a single aria-hidden=\"true\" SVG circle and carry no text, so each has no accessible name on every page the Shell renders. Give each anchor an aria-label naming the destination — aria-label=\"Benefits Portal on X\" on #social-x, aria-label=\"Benefits Portal on Facebook\" on #social-fb, aria-label=\"Benefits Portal on YouTube\" on #social-yt — and leave the SVGs aria-hidden so the label is the only name. One edit to this footer clears all fifteen nodes, since the same three anchors are the only source of the violation.",
+        "domInstruction": "In the shared Footer in src/Shell.jsx, give each of the three icon-only social anchors an accessible name: aria-label=\"Benefits Portal on X\" on #social-x, aria-label=\"Benefits Portal on Facebook\" on #social-fb and aria-label=\"Benefits Portal on YouTube\" on #social-yt. Leave the inner <svg aria-hidden=\"true\"> decorative as it is — the label on the anchor is the whole accessible name, and because Footer renders on every route this one change clears all 15 nodes across /, /apply, /status, /signin and /status?upload=BP-2026-10882.",
         "testAssertion": "React Testing Library: render(<Toggle />); expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false').",
         "verificationAssertion": "Re-run axe rules link-name against the 15 listed selectors; all must pass.",
         "verifySelectors": [

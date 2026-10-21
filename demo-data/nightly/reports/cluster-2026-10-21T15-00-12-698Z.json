@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "sourceReportTimestamp": "2026-10-11T06-52-50-206Z",
+  "sourceReportTimestamp": "2026-10-21T15-00-12-698Z",
   "leverageSummary": {
     "totalViolations": 30,
     "clusters": 3,
-    "standalone": 7
+    "standalone": 6
   },
   "clusters": [
     {
@@ -18,9 +18,9 @@
       "leverageScore": 45,
       "fixTarget": {
         "kind": "template",
-        "value": "src/Shell.jsx — footer div.social icon links"
+        "value": "src/Shell.jsx footer.site-footer div.social links (lines 30-32)"
       },
-      "hypothesis": "Shared footer template's social links wrap only aria-hidden SVGs, supplying no aria-label, so they are unnamed everywhere.",
+      "hypothesis": "Shared footer social links wrap aria-hidden SVGs only, so every instance renders with no accessible name.",
       "members": [
         "http://localhost:4173/apply|::|link-name|::|#social-fb",
         "http://localhost:4173/apply|::|link-name|::|#social-x",
@@ -45,18 +45,19 @@
       "ruleIds": [
         "color-contrast"
       ],
-      "affectedElements": 5,
+      "affectedElements": 6,
       "worstImpact": "serious",
-      "leverageScore": 15,
+      "leverageScore": 18,
       "fixTarget": {
         "kind": "selector",
-        "value": "p.muted"
+        "value": ".muted"
       },
-      "hypothesis": "The .muted text style resolves to #9a9a9a on white, giving 2.81:1 in the shared footer.",
+      "hypothesis": "The shared .muted text class sets foreground #9a9a9a, giving 2.81:1 against white surfaces.",
       "members": [
         "http://localhost:4173/apply|::|color-contrast|::|#last-updated",
         "http://localhost:4173/signin|::|color-contrast|::|#last-updated",
         "http://localhost:4173/status?upload=BP-2026-10882|::|color-contrast|::|#last-updated",
+        "http://localhost:4173/status?upload=BP-2026-10882|::|color-contrast|::|#upload-hint",
         "http://localhost:4173/status|::|color-contrast|::|#last-updated",
         "http://localhost:4173/|::|color-contrast|::|#last-updated"
       ]
@@ -74,7 +75,7 @@
         "kind": "selector",
         "value": "button.icon-btn"
       },
-      "hypothesis": "The .icon-btn icon-only button pattern in Status.jsx renders glyph-only content without any aria-label.",
+      "hypothesis": "The icon-btn pattern in Status.jsx emits icon-only buttons with no text or aria-label.",
       "members": [
         "http://localhost:4173/status?upload=BP-2026-10882|::|button-name|::|#refresh",
         "http://localhost:4173/status?upload=BP-2026-10882|::|button-name|::|#upload-close",
@@ -98,14 +99,6 @@
       "page": "http://localhost:4173/apply",
       "firstTarget": "#household-size",
       "summary": "Select element must have an accessible name"
-    },
-    {
-      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|color-contrast|::|#upload-hint",
-      "ruleId": "color-contrast",
-      "impact": "serious",
-      "page": "http://localhost:4173/status?upload=BP-2026-10882",
-      "firstTarget": "#upload-hint",
-      "summary": "Elements must meet minimum color contrast ratio thresholds"
     },
     {
       "key": "http://localhost:4173/status?upload=BP-2026-10882|::|color-contrast|::|.badge-pending",
