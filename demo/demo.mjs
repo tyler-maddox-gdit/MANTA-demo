@@ -355,7 +355,8 @@ async function fix(flags) {
   heading('Step 1', 'cluster', 'group findings that share one cause');
   console.log('    ' + lev.totalViolations + ' findings in this run come down to ' + lev.clusters + ' shared causes and ' + lev.standalone + ' one-offs.');
   await pause(500);
-  for (const c of clusters.clusters ?? []) {
+  const touched = (c) => targetsOf(c).some((t) => isNew.has(t));
+  for (const c of [...(clusters.clusters ?? [])].sort((a, b) => Number(touched(b)) - Number(touched(a)))) {
     const fresh = targetsOf(c).filter((t) => isNew.has(t));
     const old = targetsOf(c).length - fresh.length;
     const [name] = clusterKind(c);

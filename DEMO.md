@@ -114,10 +114,16 @@ npm run demo -- fix
 claude-code`. Three lines as it reads: **Reading the run** (3 new violations on the upload page, 27 tolerated
 by the baseline), **Reading the project** (React 18, react-router 6, Vite 5, plain CSS in `src/styles.css`,
 source stamps on) and **Conventions found** (the button class naming, the `aria-hidden` icons, the stable ids,
-the `DEBT` comments). Then three fixes, each titled by what a user hits, with the rule, impact and element on
-the right: **1 · Close button with no name** (the refresh button has the same problem; one fix, two
-`aria-label`s), **2 · Hint text too faint to read** (2.61:1, darkened to #595959, 7.0:1, in the stylesheet),
-**3 · File field with no label** (a visible "Choose files" label, `aria-describedby` to the hint). Under each:
+the `DEBT` comments). Then the two skills, one after the other. **Step 1 · cluster** (group findings that
+share one cause): "30 findings in this run come down to 3 shared causes and 7 one-offs", then the three
+causes: **Icon buttons with no name** with a green dot, marked "Contains a new finding (#upload-close) and 2
+existing ones", and **Icon links with no name** and **Text too faint to read** with hollow dots, "Existing
+debt in the baseline… Left alone." **Step 2 · fix** (write the change for each new finding): three fixes, each
+titled by what a user hits, with the rule, impact and element on the right and a grey line saying where it
+came from. **1 · Close button with no name** ("From cluster Icon buttons with no name": the refresh button
+has the same problem; one fix, two `aria-label`s), **2 · Hint text too faint to read** (2.61:1, darkened to #595959, 7.0:1, in the stylesheet),
+**3 · File field with no label** (a visible "Choose files" label, `aria-describedby` to the hint); fixes 2 and 3
+say "Standalone: no other finding shares its cause." Under each:
 the problem in plain words, the fix in plain words, and the diff, red and green, with the file and line. Then
 `3 fixes · 2 files` and the question `Apply these 3 fixes? [y/N]`. Read the fixes aloud first; then type `y`:
 `Applied to src/pages/Status.jsx and src/styles.css. Nothing committed.` and the diff summary. The output
@@ -125,9 +131,11 @@ never says so itself, so you do: this answer is **pre-run**.
 - "This is MANTA's fix skill, **pre-run** on this run: no AI runs on this laptop today. With a key or the Claude
   command line here, the same command runs it live, in a minute or two."
 - "It read the run, then the project: the stack, the stylesheet, how this team writes buttons and form rows
-  and marks its known debt. Then, for each problem: what a user hits, what to change, and the change itself,
-  on the exact line that wrote the element. The close button and the old refresh button are one pattern, so
-  one fix covers both; the contrast fix goes to the stylesheet."
+  and marks its known debt. Then two skills. **Cluster** groups findings by cause: thirty findings, three
+  causes. Only one of those causes holds something new, the icon buttons, so the other two are left alone.
+  **Fix** then writes the change for each new finding, in plain words and as the diff, on the exact line that
+  wrote the element. The close button and the old refresh button share a cause, so cluster handed them to fix
+  together and one change covers both. The hint and the file field share nothing, so fix took them alone."
 - "It asks. Nothing is applied until the developer has read the diff and said yes; nothing is committed."
 
 **3 · Green.** Type:

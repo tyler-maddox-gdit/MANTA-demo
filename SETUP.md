@@ -160,8 +160,8 @@ opens is one of the things to note. Then:
 npm run demo -- fix                              (tab 2)
 npx manta gate --base http://localhost:5173      (tab 2)
 ```
-**Expect** the fix skill's answer: a header, Reading the run, Reading the project, Conventions found, then
-three fixes with a plain-language problem and fix and a red and green diff each, `3 fixes · 2 files`, then
+**Expect** the fix skill's answer: a header, Reading the run, Reading the project, Conventions found, Step 1
+(cluster: three causes, one with a green dot) and Step 2 (fix), three fixes with a plain-language problem and fix and a red and green diff each, `3 fixes · 2 files`, then
 `Apply these 3 fixes? [y/N]`: type `y`. **Expect** `Applied to src/pages/Status.jsx and src/styles.css.
 Nothing committed.` and a diff summary; then the second gate: `New 0`, `Fixed 2`, `Gate passed`, `exit 0`. Ctrl+C in
 tab 1 stops the dev server.

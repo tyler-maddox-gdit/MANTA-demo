@@ -123,16 +123,23 @@ Expect the step stream (five pages), then **New 3**, **Fixed 0**, **Tolerated 27
 **Beat 2 · The AI skills.** Type `npm run demo -- fix`.
 
 Expect the fix skill's answer, top to bottom: the header with the run and the model; **Reading the run**,
-**Reading the project**, **Conventions found**; then three fixes, each titled by what a user hits, with the
-problem and the fix in plain words and the diff in red and green; then `3 fixes · 2 files` and the question
+**Reading the project**, **Conventions found**; **Step 1 · cluster** (30 findings, 3 shared causes, 7 one-offs;
+only the icon-buttons cause has a green dot, the other two say "Left alone"); **Step 2 · fix** with three fixes,
+each titled by what a user hits and tagged "From cluster…" or "Standalone…", with the problem and the fix in
+plain words and the diff in red and green; then `3 fixes · 2 files` and the question
 `Apply these 3 fixes? [y/N]`. Stop there. The output does not say pre-run; you do.
 
 - "Pre-run. MANTA's fix skill ran on this run earlier; this is its answer."
 - **Reading the project**: "Before it wrote anything it read the project: React, Vite, where the stylesheet
   is, how this team names buttons, marks icons, lays out form rows, flags its known debt. The fix is in this
   project's conventions, not a generic one."
-- **1 · Close button with no name**: "What a user hits, in plain words, then the change. And it noticed the
-  refresh button that was already there is the same pattern, so one fix covers both: an `aria-label` on each."
+- **Step 1 · cluster**: "First skill: it groups findings by cause, not by page. Thirty findings, three causes.
+  Two are the footer's old debt, so they are left alone. The green one holds our new close button and two
+  old refresh buttons, all built from the same icon-button pattern."
+- **Step 2 · fix**: "Second skill: it writes the change for each new finding. Cluster handed it the icon
+  buttons together; the hint and the file field have no shared cause, so it took them alone."
+- **1 · Close button with no name**: "What a user hits, in plain words, then the change. The refresh button
+  that was already there is the same pattern, so one fix covers both: an `aria-label` on each."
 - **2 · Hint text too faint to read**: "2.6 to 1. Fixed in the stylesheet, where the colour is set, to 7 to 1,
   so every hint on the site gets it."
 - **3 · File field with no label**: "A visible label, Choose files, in the wrapper the other form rows use,
