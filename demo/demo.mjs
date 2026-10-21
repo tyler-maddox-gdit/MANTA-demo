@@ -267,8 +267,8 @@ async function fix(flags) {
     const rules = part(1);
     console.log('');
     console.log('  Fix ' + (i + 1) + ' · ' + rules.map(plainRule).join('; ') + ': ' + part(2).join(', ') + '  (' + rules.map((r) => impactOf[r] ?? cluster?.worstImpact ?? 'new').join(', ') + ')');
-    console.log(wrap('Why: ' + (cluster?.hypothesis ?? firstSentence(p.domSpec?.domInstruction ?? '')), '    '));
-    for (const c of (p.conventionsDetected ?? []).slice(0, 2)) console.log(wrap('Noticed first: ' + c, '    '));
+    if (cluster?.hypothesis) console.log(wrap('One cause: ' + cluster.hypothesis, '    '));
+    for (const c of (p.conventionsDetected ?? []).slice(0, 2)) console.log('    Noticed first: ' + clip(c, 92));
     for (const e of p.edits ?? []) {
       console.log('    ' + e.file + ', line ' + e.startLine + ':');
       for (const l of e.original.split('\n')) console.log('      before  ' + clip(l.trim(), 90));
@@ -277,7 +277,7 @@ async function fix(flags) {
   });
   const files = [...new Set((proposals.proposals ?? []).flatMap((p) => (p.edits ?? []).map((e) => e.file)))];
   console.log('');
-  console.log('The patch, ' + files.join(' and ') + ': ' + patch);
+  console.log('Patch written for ' + files.join(' and ') + '.');
   if (!run('git', ['apply', '--check', patch], { capture: true }).ok) die('The patch does not apply: already applied? npm run demo -- stage dev starts over.');
   if (!/^y(es)?$/i.test(await ask('\nApply the patch? [y/N] '))) {
     console.log('Nothing applied. To apply it later: git apply ' + patch + '\n');
