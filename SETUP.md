@@ -178,7 +178,7 @@ npx manta gate --base http://localhost:5173      (tab 2)
 ```
 **Expect** the fix skill's answer: a header, a framed Reading box (the run, the project, conventions found), Step 1
 (cluster: three causes, two with a green dot) and Step 2 (fix), three fixes with a plain-language problem and
-fix and a red and green diff each, `3 fixes · 2 files`, then `Apply these 3 fixes? [y/N]`: type `y`.
+fix and a red and green diff each, `3 fixes · 3 files`, then `Apply these 3 fixes? [y/N]`: type `y`.
 **Expect** `Applied to src/styles.css and src/pages/Status.jsx. Nothing committed.` and a diff
 summary; then the second gate: `New 0`, `Fixed 7`, `Tolerated 20`, `Gate passed`, `exit 0`. Ctrl+C in
 tab 1 stops the dev server.

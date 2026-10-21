@@ -21,9 +21,9 @@ the legacy debt: MANTA tolerates it and blocks anything new.
 
 | # | What a user hits | Rule, impact | Where | The fix MANTA writes |
 |---|---|---|---|---|
-| 1 | The dialog's close button is an icon only. A screen reader says "button" and nothing else. | `button-name`, critical, P1 (WCAG 4.1.2) | `src/pages/Status.jsx:18`, `#upload-close` | `aria-label="Close upload dialog"` on the button, and the same on the old refresh button (two edits); the SVGs stay `aria-hidden` |
-| 2 | The file field has no label. "Edit, file upload" with no name: upload what? | `label`, critical, P1 (WCAG 1.3.1, 4.1.2) | `src/pages/Status.jsx:21`, `#upload-file` | A visible `<label for="upload-file">Choose files to upload</label>` in the project's `.field` wrapper, plus `aria-describedby="upload-hint"` so the limits are read with the field |
-| 3 | The hint "Max 10 MB per file. Up to 5 files." is light grey on white, 2.81:1. It reuses the site's shared `.muted` style, the same grey as the footer's "Last updated" line. | `color-contrast`, serious, P2 (WCAG 1.4.3) | `src/pages/Status.jsx:22`, `#upload-hint`; the colour is the shared `--muted-bad` token on `src/styles.css:1` | One edit: `--muted-bad` `#9a9a9a` → `#595959` (7.0:1). It clears the new hint and the five tolerated "Last updated" lines |
+| 1 | The dialog's close button is an icon only. A screen reader says "button" and nothing else. | `button-name`, critical, P1 (WCAG 4.1.2) | `src/pages/Status.jsx:19`, `#upload-close`; the cause is the shared `IconButton` in `src/components/IconButton.jsx` | One edit: the component renders the `label` every caller already passes as `aria-label`. It names the close button and the old refresh button; the SVGs stay `aria-hidden` |
+| 2 | The file field has no label. "Edit, file upload" with no name: upload what? | `label`, critical, P1 (WCAG 1.3.1, 4.1.2) | `src/pages/Status.jsx:22`, `#upload-file` | A visible `<label for="upload-file">Choose files to upload</label>`, plus `aria-describedby="upload-hint"` so the limits are read with the field |
+| 3 | The hint "Max 10 MB per file. Up to 5 files." is light grey on white, 2.81:1. It reuses the site's shared `.muted` style, the same grey as the footer's "Last updated" line. | `color-contrast`, serious, P2 (WCAG 1.4.3) | `src/pages/Status.jsx:23`, `#upload-hint`; the colour is the shared `--muted-bad` token on `src/styles.css:1` | One edit: `--muted-bad` `#9a9a9a` → `#767676` (4.54:1). It clears the new hint and the five tolerated "Last updated" lines |
 
 Impact and priority are axe's and MANTA's words for the same thing: critical = P1, serious = P2.
 
@@ -33,7 +33,7 @@ Impact and priority are axe's and MANTA's words for the same thing: critical = P
 |---|---|---|
 | Footer social links are icons with no name (`link-name`, serious) | 15 | 3 links × 5 pages, `src/Shell.jsx:30-32` |
 | Footer "Last updated" line, grey 2.81:1, the same `.muted` style the new hint reuses (`color-contrast`, serious) | 5 | 1 × 5 pages, `src/Shell.jsx:36` |
-| Refresh button on Check a case is an icon with no name (`button-name`, critical) | 2 | `/status` and `/status?upload=…`, `src/pages/Status.jsx:41` |
+| Refresh button on Check a case is an icon with no name (`button-name`, critical) | 2 | `/status` and `/status?upload=…`, `src/pages/Status.jsx:41`; it goes through the same `IconButton` |
 | "Pending" badge, amber on white (`color-contrast`, serious) | 2 | `/status` and `/status?upload=…`, `.badge-pending` |
 | Hero image with no alt (`image-alt`, critical) | 1 | Home, `src/pages/Home.jsx:27` |
 | SSN field: visible text not associated with the field (`label`, critical) | 1 | Apply, `#ssn` |
@@ -41,8 +41,8 @@ Impact and priority are axe's and MANTA's words for the same thing: critical = P
 
 Two of these are the thread from Act 1 to Act 4. The tester sees them in the backlog in Act 1. In Act 2 the
 "Last updated" line turns out to share one colour with the new hint, so the one colour edit that fixes the new
-defect also clears five tolerated findings, and the refresh button is the same icon-button pattern as the close
-button, so MANTA fixes it in the same pass (its own edit, its own label). **Fixed 7** on the second gate is those
+defect also clears five tolerated findings, and the refresh button goes through the same `IconButton` component as the close
+button, which takes each caller's label and drops it, so the one line in the component that fixes the close button names it too. **Fixed 7** on the second gate is those
 two together: 5 + 2. In Act 4 they are gone from the tester's backlog, with the same grey on the account page: 33 → 25, and nobody
 filed a ticket.
 
@@ -85,7 +85,7 @@ purpose only from context).
 | Act 2, laptop, first gate | 5 | **3** (P1 2, P2 1) | 0 | 27 | `Gate failed: 3 new violations at or above minor.  exit 1` |
 | Act 2, laptop, after the fix | 5 | 0 | **7** (5 "Last updated" lines, 2 refresh buttons) | 20 | `Gate passed`, `exit 0` |
 | Act 3, pull request, first run | 1 (the upload page only; the workflow narrows the config to the page the change touches) | **3** | 0 | 6 | red, `MANTA gate · failed: 3 new violations at or above minor` |
-| Act 3, after the one-click apply | 1 | 0 | 1 | 5 | green, `MANTA gate · passed: no new violations` |
+| Act 3, after the one-click apply | 1 | 0 | 2 | 4 | green, `MANTA gate · passed: no new violations` |
 | Act 4, the next Nightly run (Workbench) | 5 + `/account`, extended rules on | not a gate: **25** open issues: 20 on the 5 pages, 5 on `/account` (its "Last updated" line is fixed too) | | | the backlog after the merge |
 
 The pull request tolerates 6 because it scans one page: that page's refresh button, Pending badge, "Last
@@ -182,7 +182,7 @@ Expect the fix skill's answer, top to bottom: the header with the run and the mo
 **Reading** (the run, the project, conventions found); **Step 1 · cluster** (30 findings, 3 shared causes, 6 one-offs;
 the text-too-faint and icon-buttons causes have a green dot, the footer links say "Left alone"); **Step 2 · fix**
 with three fixes, each titled by what a user hits and tagged "From cluster…" or "Standalone…", with the problem
-and the fix in plain words and the diff in red and green; then `3 fixes · 2 files` and the question
+and the fix in plain words and the diff in red and green; then `3 fixes · 3 files` and the question
 `Apply these 3 fixes? [y/N]`. Stop there. The output does not say pre-run; you do.
 
 - "Pre-run. MANTA's fix skill ran on this run earlier; this is its answer."
@@ -192,18 +192,20 @@ and the fix in plain words and the diff in red and green; then `3 fixes · 2 fil
 - **Step 1 · cluster**: "First skill: it groups findings by cause, the same grouping the tester saw this
   morning. Thirty: the backlog's 27 and our 3. The two green ones each hold one finding of ours and some of the
   tester's backlog that shares its cause: our hint with the five 'Last updated' lines, our close button with the
-  old refresh buttons. Remember those two."
+  old refresh button, through the same component. Remember those two."
 - **Step 2 · fix**: "Second skill: it writes the change for each new finding. Cluster handed it the shared
   causes; the file field has no partner, so it took it alone."
 - **1 · Hint text too faint to read**: "This is the one to land. The new hint reuses the site's muted grey, the
   same one as the footer's last-updated line on every page. So one edit, the shared colour in the stylesheet,
-  2.8 to 1 up to 7 to 1, fixes our new problem and five from the backlog. One edit, six findings."
-- **2 · Close button with no name**: "What a user hits, in plain words, then the change. The refresh button
-  from the backlog is the same pattern, so the same pass fixes both, with a label each: two edits."
-- **3 · File field with no label**: "A visible label, Choose files to upload, in the wrapper the other form
-  rows use, and the size limits tied to the field so they are read with it."
-- "It asks. The developer reads the diff and says yes." Type `y`: `Applied to src/styles.css and
-  src/pages/Status.jsx. Nothing committed.`, then the diff summary.
+  2.8 to 1 up to 4.5 to 1, fixes our new problem and five from the backlog. One edit, six findings."
+- **2 · Close button with no name**: "What a user hits, in plain words, then the change. Every icon button on
+  this site goes through one shared component, IconButton. Our close button passes it a label, Close upload
+  dialog; the old refresh button passes it one too. The component takes the label and drops it. One line in the
+  component, and every icon button on the site has its name: ours and the backlog's. One edit, three findings."
+- **3 · File field with no label**: "A visible label, Choose files to upload, and the size limits tied to
+  the field so they are read with it."
+- "It asks. The developer reads the diff and says yes." Type `y`: `Applied to src/styles.css,
+  src/components/IconButton.jsx and src/pages/Status.jsx. Nothing committed.`, then the diff summary.
 
 **Beat 3 · Green.** Type the gate again.
 
@@ -249,10 +251,9 @@ golden PR's. Open the live PR.
 - The **github-advanced-security** alerts on the changed lines, and the second check, Code scanning results.
   "Accessibility findings in GitHub's Security tab, in SARIF, beside every other scanner."
 - MANTA's review, `3 suggested fixes from MANTA.`, each on its line: the shared colour on line 1 of the
-  stylesheet, the close button's `aria-label="Close upload dialog"`, the file field's label. "The same fixes the
-  developer got, now where the reviewer lives: on the diff. The first one is the grey from the tester's
-  backlog." Only edits on lines the pull request changed can be suggestions; the rest (the old refresh button)
-  are listed in MANTA's comment under Also fixable.
+  stylesheet, the `aria-label={label}` line in the IconButton component, the file field's label. "The same
+  fixes the developer got, now where the reviewer lives: on the diff. The first one is the grey from the
+  tester's backlog; the second names the old refresh button too."
 
 **Beat 4 · One click.** The green Tip under the review: tick **Apply all 3 suggested fixes**. About 30 s
 later a commit appears in your name.

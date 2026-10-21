@@ -52,7 +52,7 @@ release lights again.
 ## The story
 
 One backlog, one change, three seats, and back to the first. Three threads run through it: the five tolerated
-"Last updated" lines that share one grey, the refresh button that shares the close button's pattern, and the
+"Last updated" lines that share one grey, the refresh button that goes through the close button's component, and the
 tester's judgment.
 
 **Opening, on the slide, everything lit (2 min).** "The Benefits Portal has 27 known accessibility problems.
@@ -179,13 +179,14 @@ ones". **Icon links with no name** has a hollow dot: "Existing debt in the basel
 fix** (write the change for each new finding): three fixes, each titled by what a user hits, with the rule,
 impact and elements on the right and a grey line saying where it came from. **1 · Hint text too faint to read**
 ("From cluster Text too faint to read: fixes the new finding and its 5 existing partners in one edit": the
-shared colour `--muted-bad`, 2.81:1 darkened to #595959, 7.0:1, one edit on line 1 of the stylesheet),
-**2 · Close button with no name** ("…its 2 existing partners in 2 edits, one per element": an `aria-label` on
-the close button and on the old refresh button), **3 · File field with no label** (a visible "Choose files to
+shared colour `--muted-bad`, 2.81:1 darkened to #767676, 4.54:1, one edit on line 1 of the stylesheet),
+**2 · Close button with no name** ("…its 2 existing partners in one edit": the shared `IconButton` component
+renders the label each caller passes as `aria-label`, which names the close button and the old refresh button),
+**3 · File field with no label** (a visible "Choose files to
 upload" label, `aria-describedby` to the hint; "Standalone: no other finding shares its cause."). Under each:
 the problem in plain words, the fix in plain words, and the diff, red and green, with the file and line. Then
-`3 fixes · 2 files` and the question `Apply these 3 fixes? [y/N]`. Read the fixes aloud first; then type `y`:
-`Applied to src/styles.css and src/pages/Status.jsx. Nothing committed.` and the diff summary. The output
+`3 fixes · 3 files` and the question `Apply these 3 fixes? [y/N]`. Read the fixes aloud first; then type `y`:
+`Applied to src/styles.css, src/components/IconButton.jsx and src/pages/Status.jsx. Nothing committed.` and the diff summary. The output
 never says so itself, so you do: this answer is **pre-run**.
 - "This is MANTA's fix skill, **pre-run** on this run: no AI runs on this laptop today. With a key or the Claude
   command line here, the same command runs it live, in a minute or two."
@@ -195,8 +196,9 @@ never says so itself, so you do: this answer is **pre-run**.
   change for each new finding, in plain words and as the diff, on the exact line that wrote the element."
 - "Land the first fix: the new hint reuses the site's muted grey, the same grey as the footer's last-updated
   line on every page. Cluster saw that, so fix changed the one shared colour: one edit, six findings, the new
-  one and five that were already there. The close button and the old refresh button share a pattern, so the
-  same pass labels both. The file field shares nothing, so fix took it alone."
+  one and five that were already there. The close button and the old refresh button both go through one
+  component, IconButton, which takes the label each passes and drops it: one line in the component names both.
+  The file field shares nothing, so fix took it alone."
 - "It asks. Nothing is applied until the developer has read the diff and said yes; nothing is committed."
 
 **3 · Green.** Type:
@@ -204,7 +206,7 @@ never says so itself, so you do: this answer is **pre-run**.
 npx manta gate --base http://localhost:5173
 ```
 **See.** `New 0`, **Fixed 7** (the five "Last updated" lines that shared the grey, and the refresh button on two
-pages, labelled in the same pass), **Tolerated 20**, and `Gate passed`, `exit 0`.
+pages, named by the component fix), **Tolerated 20**, and `Gate passed`, `exit 0`.
 - "Fixed before anyone else saw it, by a developer who never read WCAG. The count only goes down; the pull
   request will come in green."
 
@@ -261,10 +263,10 @@ as it goes. It ends `Gate failed: 3 new violations at or above minor`.
   pull request.
 
 **4 · Apply the fixes, in one click.** MANTA's review, `3 suggested fixes from MANTA.`, shows each suggestion on its
-lines in the Conversation tab: the shared colour on line 1 of `styles.css`, the close button's name and the file
-field's label in `Status.jsx`. Read one aloud (the close button's `aria-label="Close upload dialog"`). The old
-refresh button's label is not a suggestion, because GitHub can only suggest on lines the pull request changed;
-MANTA lists it in its comment under **Also fixable**.
+lines in the Conversation tab: the shared colour on line 1 of `styles.css`, `aria-label={label}` in
+`src/components/IconButton.jsx` (the pull request changed that line to pass `onClick` through, so the fix can be
+a suggestion), and the file field's label in `Status.jsx`. Read one aloud (the IconButton line: it names the close
+button and the old refresh button).
 - "Each suggestion is an edit to the exact source line that wrote the element. The contrast fix goes to the
   stylesheet, where the shared colour is set, so it clears this hint and the old last-updated lines too."
 

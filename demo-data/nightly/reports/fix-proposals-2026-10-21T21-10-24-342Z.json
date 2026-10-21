@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 2,
+  "sourceReportTimestamp": "2026-10-21T21-10-24-342Z",
+  "proposals": [
+    {
+      "id": "proposal-1",
+      "scope": "cluster",
+      "scopeId": "cluster-1",
+      "stack": "react",
+      "kind": "source-diff",
+      "fixTarget": {
+        "kind": "template",
+        "value": "src/Shell.jsx — Footer() `.social` icon links (lines 30-32)"
+      },
+      "members": [
+        "http://localhost:4173/apply|::|link-name|::|#social-fb",
+        "http://localhost:4173/apply|::|link-name|::|#social-x",
+        "http://localhost:4173/apply|::|link-name|::|#social-yt",
+        "http://localhost:4173/signin|::|link-name|::|#social-fb",
+        "http://localhost:4173/signin|::|link-name|::|#social-x",
+        "http://localhost:4173/signin|::|link-name|::|#social-yt",
+        "http://localhost:4173/status?upload=BP-2026-10882|::|link-name|::|#social-fb",
+        "http://localhost:4173/status?upload=BP-2026-10882|::|link-name|::|#social-x",
+        "http://localhost:4173/status?upload=BP-2026-10882|::|link-name|::|#social-yt",
+        "http://localhost:4173/status|::|link-name|::|#social-fb",
+        "http://localhost:4173/status|::|link-name|::|#social-x",
+        "http://localhost:4173/status|::|link-name|::|#social-yt",
+        "http://localhost:4173/|::|link-name|::|#social-fb",
+        "http://localhost:4173/|::|link-name|::|#social-x",
+        "http://localhost:4173/|::|link-name|::|#social-yt"
+      ],
+      "conventionsDetected": [
+        "Icon-only footer links identified by a `social-<network>` id scheme and styled through the shared `.social a` rule in src/styles.css",
+        "Decorative inline SVG icons are hidden with aria-hidden=\"true\" rather than given titles (same pattern as the `.seal` span in Header)",
+        "Known gaps are tagged inline with `{/* DEBT <ruleId>: ... */}` comments above the offending markup"
+      ],
+      "domSpec": {
+        "domInstruction": "In the shared Footer of src/Shell.jsx, give each of the three `.social` anchors an explicit accessible name, since their only content is an `aria-hidden=\"true\"` SVG that contributes no text: aria-label=\"Benefits Portal on X\" on #social-x, aria-label=\"Benefits Portal on Facebook\" on #social-fb and aria-label=\"Benefits Portal on YouTube\" on #social-yt. Leave the `aria-hidden=\"true\"` on the inline SVGs as is so the icon is not announced twice; because Footer renders on every route, this one change clears the nodes on /, /apply, /status, /signin and /status?upload=BP-2026-10882.",
+        "testAssertion": "React Testing Library: render(<Toggle />); expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'false').",
+        "verificationAssertion": "Re-run axe rules link-name against the 15 listed selectors; all must pass.",
+        "verifySelectors": [
+          "#social-fb",
+          "#social-x",
+          "#social-yt",
+          "#social-fb",
+          "#social-x",
+          "#social-yt",
+          "#social-fb",
+          "#social-x",
+          "#social-yt",
+          "#social-fb",
+          "#social-x",
+          "#social-yt",
+          "#social-fb",
+          "#social-x",
+          "#social-yt"
+        ]
+      },
+      "edits": [
+        {
+          "file": "src/Shell.jsx",
+          "startLine": 29,
+          "endLine": 32,
+          "original": "        {/* DEBT link-name: icon-only links with no accessible name */}\n        <a href=\"https://example.com/benefits-x\" id=\"social-x\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"><circle cx=\"8\" cy=\"8\" r=\"6\" fill=\"currentColor\"/></svg></a>\n        <a href=\"https://example.com/benefits-fb\" id=\"social-fb\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"><circle cx=\"8\" cy=\"8\" r=\"6\" fill=\"currentColor\"/></svg></a>\n        <a href=\"https://example.com/benefits-yt\" id=\"social-yt\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"><circle cx=\"8\" cy=\"8\" r=\"6\" fill=\"currentColor\"/></svg></a>",
+          "replacement": "        <a href=\"https://example.com/benefits-x\" id=\"social-x\" aria-label=\"Benefits Portal on X\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"><circle cx=\"8\" cy=\"8\" r=\"6\" fill=\"currentColor\"/></svg></a>\n        <a href=\"https://example.com/benefits-fb\" id=\"social-fb\" aria-label=\"Benefits Portal on Facebook\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"><circle cx=\"8\" cy=\"8\" r=\"6\" fill=\"currentColor\"/></svg></a>\n        <a href=\"https://example.com/benefits-yt\" id=\"social-yt\" aria-label=\"Benefits Portal on YouTube\"><svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"><circle cx=\"8\" cy=\"8\" r=\"6\" fill=\"currentColor\"/></svg></a>",
+          "context": {
+            "before": [
+              "  return (",
+              "    <footer className=\"site-footer\">",
+              "      <div className=\"social\">"
+            ],
+            "after": [
+              "      </div>",
+              "      <p className=\"fine\">Benefits Portal · demo. A demonstration site. No real agency, no real data.</p>",
+              "      {/* DEBT color-contrast: 2.8:1 muted text */}"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "orphans": [],
+  "coverage": {
+    "clusters": 1,
+    "ruleGroups": 0,
+    "violations": 15
+  },
+  "total": {
+    "clusters": 2,
+    "ruleGroups": 5,
+    "violations": 27
+  },
+  "provenance": {
+    "provider": "claude-code",
+    "endpoint": "api.anthropic.com",
+    "tier": "standard",
+    "requested": {
+      "model": "claude-opus-5"
+    },
+    "model": "claude-opus-5",
+    "mechanism": "structured_outputs",
+    "scope": "top-cluster",
+    "iterations": 1
+  }
+}

@@ -293,7 +293,9 @@ function explain(rule, targets, p) {
       return {
         title: cap(noun(first)) + ' with no name',
         problem: 'The ' + noun(first) + ' is an icon with no text, so a screen reader announces it as "button" and nothing else. A person who cannot see the icon has no way to know what it does.' + (rest.length ? ' The ' + rest.map(noun).join(' and ') + ' on the same page ' + (rest.length === 1 ? 'has' : 'have') + ' the same problem, for the same reason.' : ''),
-        fix: 'Give each icon button an accessible name with aria-label' + (labels.length ? ' (' + labels.join(', ') + ')' : '') + '. The SVG stays aria-hidden, so the label is the only thing announced.',
+        fix: /aria-label=\{label\}/.test(replacement)
+          ? 'Every icon button goes through the shared IconButton component, which takes a label from each caller and drops it. One line in the component renders it as aria-label, so every icon button on the site gets its name.'
+          : 'Give each icon button an accessible name with aria-label' + (labels.length ? ' (' + labels.join(', ') + ')' : '') + '. The SVG stays aria-hidden, so the label is the only thing announced.',
       };
     }
     case 'label': {
@@ -301,7 +303,7 @@ function explain(rule, targets, p) {
       return {
         title: cap(noun(first)) + ' with no label',
         problem: 'The ' + noun(first) + ' has no label. A screen reader announces it with no name, the hint under it is not connected to it, and clicking the words does nothing.',
-        fix: 'Add a visible label' + (text ? ', "' + text + '",' : '') + ' tied to the field by its id, in the wrapper the other form rows use' + (/aria-describedby/.test(replacement) ? ', and point aria-describedby at the hint so the limits are read with the field.' : '.'),
+        fix: 'Add a visible label' + (text ? ', "' + text + '",' : '') + ' tied to the field by its id' + (/className="field"/.test(replacement) ? ', in the wrapper the other form rows use' : '') + (/aria-describedby/.test(replacement) ? ', and point aria-describedby at the hint so the limits are read with the field.' : '.'),
       };
     }
     case 'color-contrast': {

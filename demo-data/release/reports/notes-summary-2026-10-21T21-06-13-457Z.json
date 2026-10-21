@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "sourceReportTimestamp": "2026-10-21T21-06-13-457Z",
+  "skill": {
+    "id": "summary",
+    "label": "Summary"
+  },
+  "unit": "run",
+  "entries": [
+    {
+      "key": "run",
+      "text": "This scan found 20 issues on 20 elements across 5 pages, and all of them are critical or serious (3 critical, 17 serious). Fix the social icon links in the shared footer first (src/Shell.jsx, footer.site-footer social links, lines 30-32): each one wraps a hidden icon and carries no text or label, so screen readers announce nothing a visitor can act on. That markup is shared, so one fix there clears all 15 of those at once. Next, the low-contrast text on two pages, then the image with no description, the unlabelled form field and the unnamed dropdown."
+    }
+  ],
+  "coverage": {
+    "groups": 1,
+    "findings": 20
+  },
+  "provenance": {
+    "provider": "claude-code",
+    "endpoint": "api.anthropic.com",
+    "tier": "standard",
+    "requested": {
+      "model": "claude-opus-5"
+    },
+    "model": "claude-opus-5",
+    "mechanism": "structured_outputs"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "sourceReportTimestamp": "2026-10-21T21-10-24-342Z",
+  "skill": {
+    "id": "explain",
+    "label": "Explain the barrier"
+  },
+  "unit": "cluster",
+  "grouping": "cluster",
+  "entries": [
+    {
+      "key": "cluster-1",
+      "text": "Someone listening with a screen reader tabs into the footer and hears three stops announced only as \"link\" — the icons inside are hidden from them, so nothing says Facebook, X or YouTube. The same three silent stops repeat in the footer of every page, including apply, sign-in and status, so a listener must tab past unlabelled links and guess, or open them blind, to leave the page they came to use."
+    },
+    {
+      "key": "cluster-2",
+      "text": "Someone with low vision reading the footer sees \"Last updated October 3, 2026\" in pale grey on white at small size — faint enough to vanish in glare or on a dim screen, leaving them unable to tell how current the benefits information is. It reads the same washed-out way on the home, apply, sign-in and status pages, so there is nowhere they can check the date reliably."
+    }
+  ],
+  "coverage": {
+    "groups": 2,
+    "findings": 20
+  },
+  "provenance": {
+    "provider": "claude-code",
+    "endpoint": "api.anthropic.com",
+    "tier": "standard",
+    "requested": {
+      "model": "claude-opus-5"
+    },
+    "model": "claude-opus-5",
+    "mechanism": "structured_outputs"
+  }
+}

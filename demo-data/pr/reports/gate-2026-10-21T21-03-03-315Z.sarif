@@ -1,0 +1,824 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "MANTA",
+          "version": "0.1.0",
+          "informationUri": "https://github.com/tyler-maddox-gdit/MANTA",
+          "rules": [
+            {
+              "id": "button-name",
+              "shortDescription": {
+                "text": "Buttons must have discernible text."
+              },
+              "helpUri": "https://dequeuniversity.com/rules/axe/4.13/button-name?application=playwright",
+              "properties": {
+                "tags": [
+                  "accessibility",
+                  "wcag:4.1.2"
+                ],
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "color-contrast",
+              "shortDescription": {
+                "text": "Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text)."
+              },
+              "helpUri": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
+              "properties": {
+                "tags": [
+                  "accessibility",
+                  "wcag:1.4.3"
+                ],
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "image-alt",
+              "shortDescription": {
+                "text": "Images must have alternative text."
+              },
+              "helpUri": "https://dequeuniversity.com/rules/axe/4.13/image-alt?application=playwright",
+              "properties": {
+                "tags": [
+                  "accessibility",
+                  "wcag:1.1.1"
+                ],
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "label",
+              "shortDescription": {
+                "text": "Form inputs must have associated labels."
+              },
+              "helpUri": "https://dequeuniversity.com/rules/axe/4.13/label?application=playwright",
+              "properties": {
+                "tags": [
+                  "accessibility",
+                  "wcag:4.1.2"
+                ],
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "link-name",
+              "shortDescription": {
+                "text": "Links must have discernible text."
+              },
+              "helpUri": "https://dequeuniversity.com/rules/axe/4.13/link-name?application=playwright",
+              "properties": {
+                "tags": [
+                  "accessibility",
+                  "wcag:2.4.4",
+                  "wcag:4.1.2"
+                ],
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "select-name",
+              "shortDescription": {
+                "text": "Select element must have an accessible name"
+              },
+              "helpUri": "https://dequeuniversity.com/rules/axe/4.13/select-name?application=playwright",
+              "properties": {
+                "tags": [
+                  "accessibility",
+                  "wcag:4.1.2"
+                ],
+                "problem.severity": "error"
+              }
+            }
+          ]
+        }
+      },
+      "automationDetails": {
+        "id": "manta/wcag2a-wcag2aa-wcag21a-wcag21aa/"
+      },
+      "results": [
+        {
+          "ruleId": "button-name",
+          "level": "error",
+          "message": {
+            "text": "/status?upload=BP-2026-10882 — #upload-close: Buttons must have discernible text. (new)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/components/IconButton.jsx"
+                },
+                "region": {
+                  "startLine": 6,
+                  "endLine": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "8b7af47041f92a0da0b964c58114c550e7bc60b898b1a56c1ca64851863af6bb"
+          }
+        },
+        {
+          "ruleId": "color-contrast",
+          "level": "error",
+          "message": {
+            "text": "/status?upload=BP-2026-10882 — #upload-hint: Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text). (new)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/pages/Status.jsx"
+                },
+                "region": {
+                  "startLine": 23,
+                  "endLine": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "6382bb91902ed6438554583e74b7819178f61de32ed253ea5047f8e4ec5aead4"
+          }
+        },
+        {
+          "ruleId": "label",
+          "level": "error",
+          "message": {
+            "text": "/status?upload=BP-2026-10882 — #upload-file: Form inputs must have associated labels. (new)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/pages/Status.jsx"
+                },
+                "region": {
+                  "startLine": 22,
+                  "endLine": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "35d1660093f653ac7a34f57872496da010f8cd74463332d1f7887bc4ac4fcaad"
+          }
+        },
+        {
+          "ruleId": "color-contrast",
+          "level": "warning",
+          "message": {
+            "text": "/ — #last-updated: Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text). (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 36,
+                  "endLine": 36
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a338e7a6d6e335495fc36bec11d76d45cf1767267d471e08270f78225429dbbb"
+          }
+        },
+        {
+          "ruleId": "image-alt",
+          "level": "warning",
+          "message": {
+            "text": "/ — #hero-image: Images must have alternative text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/pages/Home.jsx"
+                },
+                "region": {
+                  "startLine": 27,
+                  "endLine": 27
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "255785c2c80c0d8be6391352528119d773d8ed266ee78ff2153c8cbd957bfdbd"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/ — #social-fb: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 31,
+                  "endLine": 31
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "26795b78bbd693466fd910b7969dd8c2f80d828e3aae444deba410b296336d79"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/ — #social-x: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 30,
+                  "endLine": 30
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "8c28ef2da11ca32b84f3aff37a18eb63bcada156594f52acbe686b04b9b386b2"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/ — #social-yt: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 32,
+                  "endLine": 32
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "1ee43a9b2d17c6a9bfffa3b6b393df9c1fbeba23b870c25a72e2af881605e550"
+          }
+        },
+        {
+          "ruleId": "color-contrast",
+          "level": "warning",
+          "message": {
+            "text": "/apply — #last-updated: Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text). (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 36,
+                  "endLine": 36
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "80240cae2f8a75d415afc96e97876ee406bdb368c29dd3492e15355b07182814"
+          }
+        },
+        {
+          "ruleId": "label",
+          "level": "warning",
+          "message": {
+            "text": "/apply — #ssn: Form inputs must have associated labels. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/pages/Apply.jsx"
+                },
+                "region": {
+                  "startLine": 19,
+                  "endLine": 19
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "9d5fe9f3d7609599b4de42f2b4353a0fc77044b5b46c50a863d9e05777bbf0ba"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/apply — #social-fb: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 31,
+                  "endLine": 31
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "fd60615a1bd9a7d89f0b8417b31d06dc077b313bd18097d58528f9b72f5c57d4"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/apply — #social-x: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 30,
+                  "endLine": 30
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "350cb6acae18e616c0c99d6f7c63901ebd7cfc82016c88a245a3ef89299e92bd"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/apply — #social-yt: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 32,
+                  "endLine": 32
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "6ba6a6b4bfe3ebda7fe9499582a07c4a206a18cac25e4992d62007da7252c974"
+          }
+        },
+        {
+          "ruleId": "select-name",
+          "level": "warning",
+          "message": {
+            "text": "/apply — #household-size: Select element must have an accessible name (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/pages/Apply.jsx"
+                },
+                "region": {
+                  "startLine": 25,
+                  "endLine": 25
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "d520b85ac5373291d558f248a3ac053d414d443f2f1ac27889837933c51c2182"
+          }
+        },
+        {
+          "ruleId": "color-contrast",
+          "level": "warning",
+          "message": {
+            "text": "/signin — #last-updated: Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text). (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 36,
+                  "endLine": 36
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "fd19663a0734dd0a3ef9d3e606cefbc44eb4a7488c42bd9a4f0db782d4a8f80f"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/signin — #social-fb: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 31,
+                  "endLine": 31
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "e1655162c8fef444aa664ecc9c5f8f29c0b969b2c5a1329e66aa66785c96c176"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/signin — #social-x: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 30,
+                  "endLine": 30
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "77b9c83362dfb0c1d0767bf330f7b1f6fc250825d62b841cabd4c2e201d03ea5"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/signin — #social-yt: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 32,
+                  "endLine": 32
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "ed0fe086dcc7f0cbbf34eb969d50ead3512e78639c2d2d7198f77d0c61db2307"
+          }
+        },
+        {
+          "ruleId": "button-name",
+          "level": "warning",
+          "message": {
+            "text": "/status — #refresh: Buttons must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/components/IconButton.jsx"
+                },
+                "region": {
+                  "startLine": 6,
+                  "endLine": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "639f8ae495a33ca451a83475bf2f77267b7d5c0e75fa76c049197f30431a38c6"
+          }
+        },
+        {
+          "ruleId": "color-contrast",
+          "level": "warning",
+          "message": {
+            "text": "/status — #last-updated: Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text). (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 36,
+                  "endLine": 36
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "7dae54cee5aa1620954f00426e5cf53d418399bf1a19cd3e574c31e9b6a66484"
+          }
+        },
+        {
+          "ruleId": "color-contrast",
+          "level": "warning",
+          "message": {
+            "text": "/status — .badge-pending: Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text). (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/pages/Status.jsx"
+                },
+                "region": {
+                  "startLine": 52,
+                  "endLine": 52
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "9366161d8cc9886352570b591c0fd7f661d85b3fddc35d2c158eae7553ee4ff4"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/status — #social-fb: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 31,
+                  "endLine": 31
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "98478338b01016d28c6223e281638d3d599b3881e07b243caed53d5ff8500f17"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/status — #social-x: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 30,
+                  "endLine": 30
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "b7c169992f64261bf38f1b5209b035b734abff37cf23cb8b78d60f61e97eb3a6"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/status — #social-yt: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 32,
+                  "endLine": 32
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "28e3577d6b5615138971aca9799dc18ef21cb2e0810efe4cb156387ea27f75f0"
+          }
+        },
+        {
+          "ruleId": "button-name",
+          "level": "warning",
+          "message": {
+            "text": "/status?upload=BP-2026-10882 — #refresh: Buttons must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/components/IconButton.jsx"
+                },
+                "region": {
+                  "startLine": 6,
+                  "endLine": 6
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "86fdab43ecda6e84310844aa7061e5f951335c83e85aa1838e686e5911fb36ff"
+          }
+        },
+        {
+          "ruleId": "color-contrast",
+          "level": "warning",
+          "message": {
+            "text": "/status?upload=BP-2026-10882 — #last-updated: Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text). (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 36,
+                  "endLine": 36
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "30b3d9efbb7abdcb78d45f272798a3656819ef9a22f1a68d9b2262f79ecd6b99"
+          }
+        },
+        {
+          "ruleId": "color-contrast",
+          "level": "warning",
+          "message": {
+            "text": "/status?upload=BP-2026-10882 — .badge-pending: Elements must meet minimum contrast ratio (4.5:1 for normal text, 3:1 for large text). (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/pages/Status.jsx"
+                },
+                "region": {
+                  "startLine": 52,
+                  "endLine": 52
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "895c18ce6d6ab01d9d61e85d9ef85f1d96acb78e51a9ada752b61c923eea2d24"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/status?upload=BP-2026-10882 — #social-fb: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 31,
+                  "endLine": 31
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "94eb07f948a5a96587dd8e8984b044c17bef0854c65ff4000b9de45ad8a1516b"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/status?upload=BP-2026-10882 — #social-x: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 30,
+                  "endLine": 30
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "2710f0f9dbbeb5089ea655efaa173df8da25ecc216ff3ce3e6b5a8dd35a21248"
+          }
+        },
+        {
+          "ruleId": "link-name",
+          "level": "warning",
+          "message": {
+            "text": "/status?upload=BP-2026-10882 — #social-yt: Links must have discernible text. (tolerated)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Shell.jsx"
+                },
+                "region": {
+                  "startLine": 32,
+                  "endLine": 32
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "f0f51fa654d71635f29e664f3ced6e32ab460629f1cfde574a28d626089bb49e"
+          }
+        }
+      ],
+      "properties": {
+        "totals": {
+          "new": {
+            "P1": 2,
+            "P2": 1,
+            "P3": 0,
+            "P4": 0
+          },
+          "fixed": {
+            "P1": 0,
+            "P2": 0,
+            "P3": 0,
+            "P4": 0
+          },
+          "tolerated": {
+            "P1": 5,
+            "P2": 22,
+            "P3": 0,
+            "P4": 0
+          }
+        },
+        "failOn": "minor",
+        "exitCode": 1,
+        "baseline": {
+          "at": "2026-10-14T00-56-59-837Z"
+        }
+      }
+    }
+  ]
+}
