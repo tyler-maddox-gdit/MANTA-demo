@@ -1,4 +1,5 @@
 import React from 'react';
+import IconButton from '../components/IconButton.jsx';
 
 const CASES = [
   { id: 'BP-2026-10882', program: 'Food assistance', filed: 'Oct 2, 2026', status: 'Pending', needs: 'Proof of income' },
@@ -12,8 +13,7 @@ export default function Status() {
     <div className="page">
       <div className="title-row">
         <h1>Check a case</h1>
-        {/* DEBT button-name: icon-only refresh button */}
-        <button type="button" className="icon-btn" id="refresh"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><path d="M3 9a6 6 0 1 1 2 4.5" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M3 14v-4h4" fill="none" stroke="currentColor" strokeWidth="2"/></svg></button>
+        <IconButton id="refresh" label="Refresh case list"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18"><path d="M3 9a6 6 0 1 1 2 4.5" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M3 14v-4h4" fill="none" stroke="currentColor" strokeWidth="2"/></svg></IconButton>
       </div>
       <table className="cases">
         <thead><tr><th scope="col">Case</th><th scope="col">Program</th><th scope="col">Filed</th><th scope="col">Status</th><th scope="col">We still need</th></tr></thead>
