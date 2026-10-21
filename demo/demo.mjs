@@ -217,8 +217,6 @@ async function stageQa(flags) {
 
 const firstSentence = (text) => (text.match(/^.*?[.!?](\s|$)/) ?? [text])[0].trim();
 const clip = (text, n = 110) => (text.length > n ? text.slice(0, n - 1) + '…' : text);
-const PLAIN_RULE = { 'button-name': 'a button with no name', label: 'a form field with no label', 'color-contrast': 'text too faint to read', 'link-name': 'a link with no name', 'image-alt': 'an image with no alt text', 'select-name': 'a dropdown with no name' };
-const plainRule = (id) => PLAIN_RULE[id] ?? id;
 function wrap(text, indent, width = 100) {
   const lines = [];
   let cur = '';
@@ -239,52 +237,133 @@ async function ask(question) {
  * the clusters, what the fix skill noticed about the project before writing, each edit; then it asks before
  * applying the patch, so the gate can run again. With --live the skills run here through the claude CLI.
  */
+const TTY = process.stdout.isTTY === true;
+const paint = (code, text) => (TTY ? '\x1b[' + code + 'm' + text + '\x1b[0m' : text);
+const bold = (t) => paint('1', t);
+const dim = (t) => paint('2', t);
+const red = (t) => paint('31', t);
+const green = (t) => paint('32', t);
+const cyan = (t) => paint('36', t);
+const pause = (ms) => (TTY ? new Promise((r) => setTimeout(r, ms)) : Promise.resolve());
+const cols = () => process.stdout.columns ?? 110;
+const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+const NOUN = { '#upload-close': 'close button', '#refresh': 'refresh button', '#upload-file': 'file field', '#upload-hint': 'hint text' };
+const noun = (selector) => NOUN[selector] ?? selector;
+
+/** The developer's explanation of one proposal: a title, the problem as a user meets it, and the fix, from the rule and the edit itself. */
+function explain(rule, targets, p) {
+  const replacement = (p.edits ?? []).map((e) => e.replacement).join('\n');
+  const [first, ...rest] = targets;
+  switch (rule) {
+    case 'button-name': {
+      const labels = [...replacement.matchAll(/aria-label="([^"]+)"/g)].map((m) => '"' + m[1] + '"');
+      return {
+        title: cap(noun(first)) + ' with no name',
+        problem: 'The ' + noun(first) + ' is an icon with no text, so a screen reader announces it as "button" and nothing else. A person who cannot see the icon has no way to know what it does.' + (rest.length ? ' The ' + rest.map(noun).join(' and ') + ' on the same page ' + (rest.length === 1 ? 'has' : 'have') + ' the same problem, for the same reason.' : ''),
+        fix: 'Give each icon button an accessible name with aria-label' + (labels.length ? ' (' + labels.join(', ') + ')' : '') + '. The SVG stays aria-hidden, so the label is the only thing announced.',
+      };
+    }
+    case 'label': {
+      const text = replacement.match(/<label[^>]*>([^<]+)<\/label>/)?.[1];
+      return {
+        title: cap(noun(first)) + ' with no label',
+        problem: 'The ' + noun(first) + ' has no label. A screen reader announces it with no name, the hint under it is not connected to it, and clicking the words does nothing.',
+        fix: 'Add a visible label' + (text ? ', "' + text + '",' : '') + ' tied to the field by its id, in the wrapper the other form rows use' + (/aria-describedby/.test(replacement) ? ', and point aria-describedby at the hint so the limits are read with the field.' : '.'),
+      };
+    }
+    case 'color-contrast': {
+      const ratios = [...(p.domSpec?.domInstruction ?? '').matchAll(/(\d+(?:\.\d+)?):1/g)].map((m) => m[1] + ':1');
+      const hex = replacement.match(/#[0-9a-f]{3,6}\b/i)?.[0];
+      return {
+        title: cap(noun(first)) + ' too faint to read',
+        problem: 'The ' + noun(first) + ' is ' + (ratios[0] ?? 'under 4.5:1') + ' against its background; the minimum for text this size is 4.5:1. Hard to read with low vision, and on a dim screen hard for anyone.',
+        fix: 'Darken the colour' + (hex ? ' to ' + hex : '') + (ratios[1] ? ' (' + ratios[1] + ')' : '') + ' in the shared rule in the stylesheet, where it is set, so everything that uses it gets the fix.',
+      };
+    }
+    default:
+      return { title: cap(noun(first)) + ': ' + rule, problem: firstSentence(p.domSpec?.domInstruction ?? ''), fix: '' };
+  }
+}
+
+/** What the project is, read from its own files: the frameworks and versions, the stylesheet, whether source stamping is on. */
+function stackLine() {
+  const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
+  const major = (name) => (pkg.dependencies?.[name] ?? pkg.devDependencies?.[name] ?? '').replace(/^[\^~]/, '').split('.')[0];
+  const config = JSON.parse(readFileSync(join(ROOT, '.manta', 'config.json'), 'utf8'));
+  const vite = existsSync(join(ROOT, 'vite.config.js')) ? readFileSync(join(ROOT, 'vite.config.js'), 'utf8') : '';
+  return [
+    major('react') && 'React ' + major('react'),
+    major('react-router-dom') && 'react-router ' + major('react-router-dom'),
+    major('vite') && 'Vite ' + major('vite'),
+    (config.styles ?? []).length && 'plain CSS in ' + config.styles.join(', '),
+    /mantaSource/.test(vite) && 'source stamps on',
+  ].filter(Boolean).join(' · ');
+}
+
+/**
+ * The fix skill's answer over the developer's run, as the developer reads it: what it read, the stack and
+ * conventions it found, then each fix with the problem and the change in plain words and the diff itself,
+ * and a question before anything is applied. Without --live nothing runs: the answer is the skill's own
+ * output from the pr snapshot (DEMO.md says "pre-run" out loud). With --live the skill runs here through the
+ * claude CLI.
+ */
 async function fix(flags) {
   if (out('git', ['rev-parse', '--abbrev-ref', 'HEAD']) !== FEATURE.branch) die('fix runs on ' + FEATURE.branch + ': npm run demo -- stage dev first.');
   if (flags.live) return fixLive();
   const dir = join(ROOT, 'demo-data', 'pr', 'reports');
   const token = tokensIn(dir).pop();
   if (!token) die('demo-data/pr holds no run: see DEMO.md, Refreshing a snapshot.');
-  const artifact = (stem) => 'demo-data/pr/reports/' + stem + '-' + token;
   const proposals = JSON.parse(readFileSync(join(dir, 'fix-proposals-' + token + '.json'), 'utf8'));
-  const clusters = JSON.parse(readFileSync(join(dir, 'cluster-' + token + '.json'), 'utf8'));
-  const patch = artifact('fix') + '.patch';
-  const prov = proposals.provenance ?? {};
   const gate = JSON.parse(readFileSync(join(dir, 'gate-' + token + '.json'), 'utf8'));
+  const patch = 'demo-data/pr/reports/fix-' + token + '.patch';
+  const prov = proposals.provenance ?? {};
   const impactOf = Object.fromEntries((gate.new ?? []).map((n) => [n.ruleId, n.impact]));
-  const lev = clusters.leverageSummary ?? {};
-  const byId = Object.fromEntries((clusters.clusters ?? []).map((c) => [c.id, c]));
+  const pages = [...new Set((gate.new ?? []).map((n) => n.page))];
+  const list = proposals.proposals ?? [];
+  const files = [...new Set(list.flatMap((p) => (p.edits ?? []).map((e) => e.file)))];
+  const label = (name, text) => console.log(dim(name.padEnd(22)) + text);
+  const width = cols();
+
   console.log('');
-  console.log(wrap('Pre-run: no AI runs on this laptop. MANTA\'s AI skills ran over this gate result earlier, with ' + (prov.provider ?? 'an AI provider') + ' (' + (prov.model ?? 'model not recorded') + '). This is what they wrote. With the claude CLI here, npm run demo -- fix --live runs them now instead.', ''));
+  console.log(bold('MANTA fix') + dim(' · run ' + token + ' · ' + (prov.model ?? 'model not recorded') + ' via ' + (prov.provider ?? 'an AI provider')));
   console.log('');
-  console.log('Step 1 · cluster: group the findings by cause.');
-  if (lev.clusters !== undefined) console.log('  ' + lev.totalViolations + ' findings come down to ' + lev.clusters + ' shared causes and ' + lev.standalone + ' one-offs.');
-  console.log('');
-  console.log('Step 2 · fix: for each new finding, read the project, then write the change in its conventions.');
-  (proposals.proposals ?? []).forEach((p, i) => {
-    const cluster = p.scope === 'cluster' ? byId[p.scopeId] : undefined;
+  await pause(500);
+  label('Reading the run', (gate.new ?? []).length + ' new violation' + ((gate.new ?? []).length === 1 ? '' : 's') + ' on ' + pages.join(', ') + ' · ' + (gate.tolerated ?? []).length + ' tolerated by the baseline');
+  await pause(700);
+  label('Reading the project', stackLine());
+  await pause(600);
+  const conventions = [...new Set(list.flatMap((p) => p.conventionsDetected ?? []))].slice(0, 4);
+  conventions.forEach((c, i) => label(i === 0 ? 'Conventions found' : '', clip(c, width - 22)));
+  await pause(400);
+
+  for (const [i, p] of list.entries()) {
     const part = (k) => [...new Set((p.members ?? []).map((m) => m.split('|::|')[k]))];
     const rules = part(1);
+    const targets = part(2);
+    const e = explain(rules[0], targets, p);
+    const right = rules.join(', ') + ' · ' + rules.map((r) => impactOf[r] ?? 'new').join(', ') + ' · ' + targets.join(', ');
+    const left = (i + 1) + ' · ' + e.title;
     console.log('');
-    console.log('  Fix ' + (i + 1) + ' · ' + rules.map(plainRule).join('; ') + ': ' + part(2).join(', ') + '  (' + rules.map((r) => impactOf[r] ?? cluster?.worstImpact ?? 'new').join(', ') + ')');
-    if (cluster?.hypothesis) console.log(wrap('One cause: ' + cluster.hypothesis, '    '));
-    for (const c of (p.conventionsDetected ?? []).slice(0, 2)) console.log('    Noticed first: ' + clip(c, 92));
-    for (const e of p.edits ?? []) {
-      console.log('    ' + e.file + ', line ' + e.startLine + ':');
-      for (const l of e.original.split('\n')) console.log('      before  ' + clip(l.trim(), 90));
-      for (const l of e.replacement.split('\n')) console.log('      after   ' + clip(l.trim(), 90));
+    console.log(bold(left) + dim(' '.repeat(Math.max(2, width - left.length - right.length)) + right));
+    console.log(wrap(e.problem, '    ', width));
+    if (e.fix) console.log(wrap('Fix: ' + e.fix, '    ', width));
+    for (const edit of p.edits ?? []) {
+      console.log('');
+      console.log('    ' + cyan(edit.file + ':' + edit.startLine));
+      for (const l of edit.original.split('\n')) console.log('    ' + red('- ' + clip(l.trim(), width - 6)));
+      for (const l of edit.replacement.split('\n')) console.log('    ' + green('+ ' + clip(l.trim(), width - 6)));
     }
-  });
-  const files = [...new Set((proposals.proposals ?? []).flatMap((p) => (p.edits ?? []).map((e) => e.file)))];
+    await pause(300);
+  }
   console.log('');
-  console.log('Patch written for ' + files.join(' and ') + '.');
+  console.log(bold(list.length + ' fix' + (list.length === 1 ? '' : 'es')) + dim(' · ' + files.length + ' file' + (files.length === 1 ? '' : 's') + ' · ' + files.join(', ')));
   if (!run('git', ['apply', '--check', patch], { capture: true }).ok) die('The patch does not apply: already applied? npm run demo -- stage dev starts over.');
-  if (!/^y(es)?$/i.test(await ask('\nApply the patch? [y/N] '))) {
-    console.log('Nothing applied. To apply it later: git apply ' + patch + '\n');
+  if (!/^y(es)?$/i.test(await ask('\nApply ' + (list.length === 1 ? 'this fix' : 'these ' + list.length + ' fixes') + '? [y/N] '))) {
+    console.log('Nothing applied. The patch is at ' + patch + '\n');
     return;
   }
   must('git', ['apply', patch]);
-  console.log('Applied (git apply), nothing committed:');
+  console.log('Applied to ' + files.join(' and ') + '. Nothing committed.');
   must('git', ['diff', '--stat']);
   console.log('\nRun the gate again: ' + GATE_LINE + '\n');
 }
