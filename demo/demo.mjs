@@ -30,16 +30,16 @@ const MANTA_PKG = join(ROOT, 'node_modules', '@usps', '508-toolkit');
 const WORKBENCH_PORT = 3508;
 
 // ── The cues (DEMO.md says the same) ───────────────────────────────────────
-const GATE_LINE = 'npx manta gate --base ' + DEV_ORIGIN;
+const GATE_LINE = 'npx manta gate --base ' + DEV_ORIGIN + ' --no-screenshots';
 const SLIDE = 'presentation/index.html';
 const PREVIEW_PORT = 4173;
 const PREVIEW_ORIGIN = 'http://localhost:' + PREVIEW_PORT;
 const workbenchLine = (name) => 'npm run demo -- workbench ' + name + '   (opens the Workbench on it; Ctrl+C stops it)';
 const CUES = {
   qa: {
-    title: 'Stage · QA and release: the Workbench',
+    title: 'Stage · QA: the backlog in the Workbench',
     type: [],
-    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. Launcher: paste ' + PREVIEW_ORIGIN + '/ (and /apply, /status, /signin,\n  /status?upload=BP-2026-10882), press Start. Then the Nightly run: its AI notes (say "pre-run"), Focus order on\n  the upload page, a verdict, Rescan, attest, Export (ACR draft, defects). Ctrl+C stops both servers.',
+    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is main, before the upload change. Launcher: paste ' + PREVIEW_ORIGIN + '/,\n  press Start. Then the Nightly run: 27 on five pages and /account, its AI notes (say "pre-run"), the five "Last\n  updated" lines, a verdict, add an issue, Rescan, a checklist. Ctrl+C stops both servers.',
   },
   devops: {
     title: 'Stage · DevOps: the pull request gate',
@@ -51,8 +51,13 @@ const CUES = {
     type: ['npm run dev                 (in a second terminal; leave it running)', GATE_LINE + '      → New 3, Gate failed, exit 1', 'npm run demo -- fix         → the AI skills\' proposals (pre-run); answer y to apply the patch', GATE_LINE + '      → passed, exit 0'],
     next: 'With the claude CLI on this machine, npm run demo -- fix --live runs the skills here instead.',
   },
+  release: {
+    title: 'Stage · Release: the next night',
+    type: [],
+    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is the upload change with its fixes, as merged. The Nightly run:\n  20 on five pages, the "Last updated" lines and the refresh button gone. Pages → Focus order on\n  /status?upload=BP-2026-10882, a verdict on 2.4.3, attest, Export (ACR draft). Ctrl+C stops both servers.',
+  },
 };
-const STAGE_LIST = 'Stages: npm run demo -- stage dev | devops | qa   (any order; each sets itself up)';
+const STAGE_LIST = 'Stages: npm run demo -- stage qa | dev | devops | release   (any order; each sets itself up)';
 
 function printCue(name) {
   const cue = CUES[name];
@@ -166,7 +171,7 @@ function prepare() {
 }
 
 async function stage(name, flags) {
-  if (!CUES[name]) die('stage takes qa, devops or dev.');
+  if (!CUES[name]) die('stage takes qa, dev, devops or release.');
   prepare();
   if (name === 'devops') {
     // Closed before the push: a force-push to an open pull request's branch starts a gate run that posts on it later.
@@ -179,7 +184,18 @@ async function stage(name, flags) {
     console.log('Golden PR (fallback): ' + (golden ?? 'none open: see DEMO.md, Setup Tyler does once'));
     return printCue('devops');
   }
-  if (name === 'qa') return await stageQa(flags);
+  if (name === 'qa') {
+    // The backlog: main as it is, before the upload change.
+    must('git', ['checkout', '--quiet', '--detach', MAIN.tag]);
+    console.log('[DONE] On ' + MAIN.tag + ' (detached): the site before the upload change.');
+    return await serveStage('qa', 'nightly', flags);
+  }
+  if (name === 'release') {
+    // The next night: the upload change with the fixes the developer applied, as it merges.
+    must('git', ['apply', prPatch()]);
+    console.log('[DONE] The fixes applied to ' + FEATURE.branch + ': the site as it merges.');
+    return await serveStage('release', 'release', flags);
+  }
   printCue('dev');
 }
 
@@ -190,20 +206,20 @@ const portFree = (port) => new Promise((resolve) => {
   probe.listen(port, '127.0.0.1', () => probe.close(() => resolve(true)));
 });
 
-/** The QA stage: the preview build on 4173 and the Workbench on the nightly snapshot, both in this process until Ctrl+C. */
-async function stageQa(flags) {
+/** The QA and release stages: the preview build on 4173 and the Workbench on a snapshot, both in this process until Ctrl+C. */
+async function serveStage(name, snapshotName, flags) {
   const port = flags.port ?? WORKBENCH_PORT;
   for (const [p, what] of [[PREVIEW_PORT, 'the preview'], [port, 'the Workbench']]) {
-    if (!(await portFree(p))) die('Port ' + p + ' is in use, so ' + what + ' cannot start. Stop what holds it' + (p === port ? ', or: npm run demo -- stage qa --port ' + (port + 100) : '') + '.');
+    if (!(await portFree(p))) die('Port ' + p + ' is in use, so ' + what + ' cannot start. Stop what holds it' + (p === port ? ', or: npm run demo -- stage ' + name + ' --port ' + (port + 100) : '') + '.');
   }
   const vite = join(ROOT, 'node_modules', 'vite', 'bin', 'vite.js');
   if (!existsSync(vite)) die('vite is not installed here: run npm ci first.');
-  const dataDir = join(ROOT, 'demo-data', 'nightly');
+  const dataDir = join(ROOT, 'demo-data', snapshotName);
   if (!existsSync(join(dataDir, 'reports'))) die('No reports/ in ' + dataDir + ': see DEMO.md, Refreshing a snapshot.');
   if (!existsSync(join(MANTA_PKG, 'ui', 'cli.ts'))) die('MANTA is not installed here: run npm ci first.');
   const tsx = createRequire(join(MANTA_PKG, 'package.json')).resolve('tsx/cli');
   must(process.execPath, [vite, 'build']);
-  printCue('qa');
+  printCue(name);
   // Only node is spawned (npm and vite are .cmd shims on Windows, which spawn cannot run without a shell).
   const children = [
     spawn(process.execPath, [vite, 'preview', '--port', String(PREVIEW_PORT)], { cwd: ROOT, stdio: 'inherit' }),
@@ -336,6 +352,13 @@ function stackLine() {
  * output from the pr snapshot (DEMO.md says "pre-run" out loud). With --live the skill runs here through the
  * claude CLI.
  */
+/** The fix skill's patch in the pr snapshot: what `fix` applies and what the release stage builds. */
+function prPatch() {
+  const token = tokensIn(join(ROOT, 'demo-data', 'pr', 'reports')).pop();
+  if (!token) die('demo-data/pr holds no run: see DEMO.md, Refreshing a snapshot.');
+  return 'demo-data/pr/reports/fix-' + token + '.patch';
+}
+
 async function fix(flags) {
   if (out('git', ['rev-parse', '--abbrev-ref', 'HEAD']) !== FEATURE.branch) die('fix runs on ' + FEATURE.branch + ': npm run demo -- stage dev first.');
   if (flags.live) return fixLive();
@@ -344,7 +367,7 @@ async function fix(flags) {
   if (!token) die('demo-data/pr holds no run: see DEMO.md, Refreshing a snapshot.');
   const proposals = JSON.parse(readFileSync(join(dir, 'fix-proposals-' + token + '.json'), 'utf8'));
   const gate = JSON.parse(readFileSync(join(dir, 'gate-' + token + '.json'), 'utf8'));
-  const patch = 'demo-data/pr/reports/fix-' + token + '.patch';
+  const patch = prPatch();
   const prov = proposals.provenance ?? {};
   const impactOf = Object.fromEntries((gate.new ?? []).map((n) => [n.ruleId, n.impact]));
   const isNew = new Set((gate.new ?? []).map((n) => n.target));
@@ -480,7 +503,7 @@ function ciRun(runId, flags) {
 /** The Workbench on one snapshot (demo-data/<name>) or on ci-run/, from the MANTA package npm ci installed. */
 function workbench(name = 'nightly', flags) {
   const dataDir = name === 'ci-run' ? join(ROOT, 'ci-run') : join(ROOT, 'demo-data', name);
-  if (!existsSync(join(dataDir, 'reports'))) die('No reports/ in ' + dataDir + ': name a snapshot (nightly or pr) or ci-run.');
+  if (!existsSync(join(dataDir, 'reports'))) die('No reports/ in ' + dataDir + ': name a snapshot (nightly, release or pr) or ci-run.');
   if (!existsSync(join(MANTA_PKG, 'ui', 'cli.ts'))) die('MANTA is not installed here: run npm ci first.');
   const tsx = createRequire(join(MANTA_PKG, 'package.json')).resolve('tsx/cli');
   console.log('Workbench on ' + dataDir + '. Open the URL below, then the run\'s report. Ctrl+C stops it.');
@@ -526,7 +549,7 @@ function status() {
   const dirty = dirtyFiles();
   say(dirty.length === 0, dirty.length ? dirty.length + ' changed files:\n' + dirty.map((f) => '          ' + f).join('\n') : 'clean');
   console.log('Snapshots');
-  for (const name of ['pr', 'nightly']) {
+  for (const name of ['pr', 'nightly', 'release']) {
     const tokens = tokensIn(join(ROOT, 'demo-data', name, 'reports'));
     say(tokens.length > 0, 'demo-data/' + name + ': ' + (tokens.join(', ') || 'empty'));
   }
@@ -549,16 +572,17 @@ function help() {
 
   reset [--force]          Back to the start: story branches to their tags (force-pushed), live PRs closed,
                            snapshots restored, local runs removed. --force discards local changes.
-  stage <dev|devops|qa>    Set a stage up, whatever ran before, and print what to type next. dev leaves the
-         [--port n]        feature branch checked out, clean; devops opens the live PR; qa runs the preview
-                           build and the Workbench on the nightly snapshot until Ctrl+C.
+  stage <name>             Set a stage up, whatever ran before, and print what to type next: qa, dev, devops,
+         [--port n]        release. qa runs main's preview build and the Workbench on the nightly snapshot until
+                           Ctrl+C; dev leaves the feature branch checked out, clean; devops opens the live PR;
+                           release runs the feature branch with the fixes and the Workbench on the release snapshot.
   fix [--live]             The AI skills over the developer's run: pre-run from demo-data/pr, printed and
                            its patch applied. --live runs cluster and fix here through the claude CLI.
   snapshot <name> [run]    Copy a run into demo-data/<name>/: a workflow run's artifact when [run] is given
          [--artifact a]    (manta-run by default, or manta-nightly), else this folder's reports/, run-records/, sites/.
   ci-run [run]             Download a workflow run's artifact into ci-run/ (the latest nightly by default)
          [--artifact a]    and print the command that opens it in the Workbench.
-  workbench [name]         The Workbench on demo-data/<name> (nightly by default, or pr), or on ci-run.
+  workbench [name]         The Workbench on demo-data/<name> (nightly by default, release or pr), or on ci-run.
          [--port n]        Port 3508 unless given.
   status                   The day-of check: branches against tags, open PRs, changes, snapshots, tools, gh.
   setup-github             The one-time GitHub setup: secrets, deploy key, ruleset (needs a repo admin).
