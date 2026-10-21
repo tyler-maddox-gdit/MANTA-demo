@@ -1,6 +1,6 @@
 # Setting up the demo PC
 
-A step-by-step setup of a Windows PC to present the demo from, ending in a dry run of all three stages. Plan
+A step-by-step setup of a Windows PC to present the demo from, ending in a dry run of every stage. Plan
 on about an hour the first time, most of it downloads. Everything here is typed into **PowerShell in Windows
 Terminal** (Start → "Terminal"). Lines in code blocks are typed as shown; **Expect** says what you should see.
 
@@ -129,7 +129,7 @@ nightly to show.
 ## Part 5 · Dry run of every stage (about 30 minutes)
 
 This is the real thing: the DevOps stage opens a live pull request on GitHub, and the reset at the end closes
-it. The three stages stand on their own; run them in the order below, then once more in another order, to see
+it. The four stages stand on their own; run them in the order below, then once more in another order, to see
 that each sets itself up. Open **two Terminal tabs**, both in `C:\demo\MANTA-demo` (Ctrl+Shift+T opens a tab;
 `cd C:\demo\MANTA-demo` in it). Call them **tab 1** and **tab 2**. In tab 2, also check that Git will not
 rewrite line endings, or the Dev stage's patch will not apply:
@@ -146,11 +146,22 @@ npm run demo -- reset
 **Expect** `[DONE] Reset: main at story/main, …` and the stage list. It force-pushes `main` and the feature
 branch to their tags; that is how every rehearsal starts.
 
+**Stage QA** (tab 2):
+```
+npm run demo -- stage qa
+```
+**Expect** `[DONE] On story/main (detached)`, the build, then the preview on http://localhost:4173 and the
+Workbench's URL. Open http://127.0.0.1:3508/ in the browser. The site has no Documents column (it is `main`). In
+the launcher paste `http://localhost:4173/` and press Start; **expect** the scan to run and a report to open with
+5 violations. Then the **Nightly** run's report: **expect** 27 on the five pages; try each thing DEMO.md's QA stage
+lists: add an issue on the account page; a verdict on the skip link; **Rescan** the Pending badge's contrast issue
+on `/status`; open a criterion's checklist. Ctrl+C in tab 2 stops both servers.
+
 **Stage Dev**:
 ```
 npm run demo -- stage dev                        (tab 2: the feature branch, clean)
 npm run dev                                      (tab 1: leave it running)
-npx manta gate --base http://localhost:5173      (tab 2)
+npx manta gate --base http://localhost:5173 --no-screenshots   (tab 2)
 ```
 **Expect** the scan's steps, then `New 3 ✗ P1 2 · P2 1`, `Tolerated 27`, the three violations on
 `/status?upload=BP-2026-10882` (`#upload-close`, `#upload-file`, `#upload-hint`) and
@@ -158,12 +169,12 @@ npx manta gate --base http://localhost:5173      (tab 2)
 opens is one of the things to note. Then:
 ```
 npm run demo -- fix                              (tab 2)
-npx manta gate --base http://localhost:5173      (tab 2)
+npx manta gate --base http://localhost:5173 --no-screenshots   (tab 2)
 ```
 **Expect** the fix skill's answer: a header, Reading the run, Reading the project, Conventions found, Step 1
 (cluster: three causes, two with a green dot) and Step 2 (fix), three fixes with a plain-language problem and
-fix and a red and green diff each, `3 fixes · 3 files`, then `Apply these 3 fixes? [y/N]`: type `y`.
-**Expect** `Applied to src/styles.css, src/Shell.jsx and src/pages/Status.jsx. Nothing committed.` and a diff
+fix and a red and green diff each, `3 fixes · 2 files`, then `Apply these 3 fixes? [y/N]`: type `y`.
+**Expect** `Applied to src/styles.css and src/pages/Status.jsx. Nothing committed.` and a diff
 summary; then the second gate: `New 0`, `Fixed 7`, `Tolerated 20`, `Gate passed`, `exit 0`. Ctrl+C in
 tab 1 stops the dev server.
 
@@ -179,17 +190,15 @@ review, tick **Apply all 3 suggested fixes**, and wait about half a minute for t
 run again and turn green, and MANTA's comment to say `passed: no new violations`. Never tick the admin's "Merge
 without waiting" box, and never press anything on the golden PR.
 
-**Stage QA** (tab 2):
+**Stage Release** (tab 2; the dev server in tab 1 stopped):
 ```
-npm run demo -- stage qa
+npm run demo -- stage release
 ```
-**Expect** the build, then the preview on http://localhost:4173 and the Workbench's URL. Open
-http://127.0.0.1:3508/ in the browser. In the launcher paste `http://localhost:4173/` and press Start; **expect**
-the scan to run and a report to open. Then the **Nightly** run's report: try each thing DEMO.md's QA stage
-lists: add an issue on the account page; a verdict on an issue; **Rescan** the Pending badge's contrast issue
-on `/status`; attest a criterion; open a criterion's checklist; the Pages dialog's **Focus order** column on
-the upload page; **Export** on the Nightly run. **Expect** the ACR draft (`.docx`) and the USPS defects export
-to download and open in Word. Ctrl+C in tab 2 stops both servers.
+**Expect** `[DONE] The fixes applied to feature/upload-documents`, the build, then both servers. Open
+http://127.0.0.1:3508/. The **Nightly** run: **expect** 20 on the five pages. The Pages dialog's **Focus order**
+column on the upload page: 21 stops, the dialog at 15 to 18. A verdict on 2.4.3; attest a criterion; **Export** on
+the Nightly run. **Expect** the ACR draft (`.docx`) and the USPS defects export to download and open in Word.
+Ctrl+C in tab 2 stops both servers.
 
 **Finish** (tab 2):
 ```
@@ -217,7 +226,7 @@ for anything that failed, the command and the exact error text (copy it from Ter
 | `npm run install-browser-gdit`: "unable to get local issuer certificate" | The network re-signs HTTPS with a company certificate Node does not trust, and the script's `--use-system-ca` did not cover it. Check `node --version` is 22.15 or later. Failing that, `npm config get cafile`: if it names a file, `$env:NODE_EXTRA_CA_CERTS = "<that file>"` (or the `.pem` IT gives you), then install again. Last resort, for that one download only: `$env:NODE_TLS_REJECT_UNAUTHORIZED = "0"`, install, close the window. |
 | A scan or the Workbench: `Executable doesn't exist at …\ms-playwright\chromium_headless_shell-<build>\…` | The browser was installed by another Playwright version than MANTA's. Run `npm run install-browser-gdit` in this folder. |
 | `npm run install-browser-gdit` hangs or fails | The network blocks the download: set `$env:HTTPS_PROXY`, or ask IT to allow Playwright's download hosts. `npm run demo -- status` says when Chromium is missing. |
-| The gate: "could not load" `localhost:5173` | `npm run dev` is not running in tab 1. Or gate the built site instead: `npm run build`, `npm run preview`, `npx manta gate --base http://localhost:4173`. |
+| The gate: "could not load" `localhost:5173` | `npm run dev` is not running in tab 1. Or gate the built site instead: `npm run build`, `npm run preview`, `npx manta gate --base http://localhost:4173 --no-screenshots`. |
 | Stage DevOps: no **Pre-run AI fixes** comment or review on the live PR | The PR's branch is not the story's (`npm run demo -- stage devops` again), or the gate job failed before posting: open its log under **Checks**. On stage, show the golden PR instead. |
 | Stage Dev: `fix` says the patch does not apply | It was applied already, or Git rewrote line endings: `npm run demo -- stage dev` again; check `git config core.autocrlf` (Part 5). |
 | The Workbench: port 3508 in use | `npm run demo -- workbench nightly --port 3600`, then open http://127.0.0.1:3600/. |

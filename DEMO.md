@@ -1,11 +1,12 @@
 # The demo runbook
 
-MANTA across the software lifecycle, shown on the Benefits Portal demo site in three stages that stand on their
-own: **Dev** (the developer's gate and MANTA's AI skills), **DevOps** (the pull request gate) and **QA** (the
-Workbench). Each stage is set up by one command, whatever ran before it, so show any of them, in any order. The
-story below runs them Dev → DevOps → QA, the order the lifecycle runs, about 25 minutes, ending on the tester;
-the slide, [presentation/index.html](presentation/index.html), moves left to right through the same three. What to
-say at each beat, and what every finding is, is in [SCRIPT.md](SCRIPT.md).
+MANTA across the software lifecycle, shown on the Benefits Portal demo site in stages that stand on their own:
+**QA** (the backlog in the Workbench), **Dev** (the developer's gate and MANTA's AI skills), **DevOps** (the pull
+request gate) and **Release** (the Workbench again, the morning after the change merges). Each stage is set up by
+one command, whatever ran before it, so show any of them, in any order. The story below runs them QA → Dev →
+DevOps → Release, about 26 minutes, starting and ending on the tester, where most of this audience sits; the
+slide, [presentation/index.html](presentation/index.html), lights each one. What to say at each beat, and what every
+finding is, is in [SCRIPT.md](SCRIPT.md).
 
 Every stage runs without an AI key. Where the audience sees AI output that was produced earlier, say
 **"pre-run"** out loud; never describe pre-run output as live.
@@ -24,14 +25,13 @@ Do these before the audience arrives, in this order.
 - [ ] The night before: `npm run demo -- reset` ran once. (After a DevOps rehearsal, `status` is rightly
       **Not ready** until `reset` runs: a live PR is open and origin's feature branch is a commit ahead.)
 - [ ] `npm run demo -- status` ends with **Ready.**: both story branches at their tags, no open live PR, a clean
-      working tree, both snapshots listing a run token, `gh` signed in, Node 20 or later.
+      working tree, all three snapshots listing a run token, `gh` signed in, Node 20 or later.
 - [ ] `gh auth status` shows you signed in as a collaborator on `tyler-maddox-gdit/MANTA-demo`.
 - [ ] The repo secret `MANTA_SECRET_DEMO_PW` is set (Settings → Secrets and variables → Actions).
 - [ ] The repo secret `MANTA_READ_TOKEN` has not expired. It expires on: **2099-01-01** (see "Setup Tyler does once").
 - [ ] Chromium is installed: `npm run install-browser-gdit`.
 - [ ] `npm run dev` opens the site at http://localhost:5173. Stop it again (Ctrl+C).
 - [ ] The golden PR is open (its link is in `npm run demo -- status`).
-- [ ] The Actions tab shows last night's **Nightly** run green (spoken to in the DevOps stage).
 - [ ] A browser is signed in to GitHub, with two tabs ready: the repo's pull requests, and the golden PR.
 - [ ] The slide is open in a browser tab: `presentation/index.html`. **Next stage** or `→` moves it on.
 - [ ] The terminal font is large and the theme is light.
@@ -41,41 +41,93 @@ Do these before the audience arrives, in this order.
 ## The slide
 
 `presentation/index.html` is one page: the lifecycle as a pipeline (Plan, Develop, Integrate, Test, Release),
-MANTA's part at every stage, and the three demo stages as groups over it. **Next stage** cycles all → Development →
-DevOps → QA and release; any stage is clickable; `→`, `←`, `0`, `1`, `2`, `3` work; and `#qa`, `#devops`, `#dev` on the
-URL open a stage directly, which is what each `stage` command prints. Show it with everything lit for the
-opening, then light the stage you are about to demo.
+MANTA's part at every stage, and the three demo stages as groups over it. **Next stage** cycles all → QA and
+release → Development → DevOps; any stage is clickable; `→`, `←`, `0`, `1`, `2`, `3` work; and `#qa`, `#devops`, `#dev`
+on the URL open a stage directly, which is what each `stage` command prints. Show it with everything lit for the
+opening, then light the stage you are about to demo. For the Release stage, press **Release** (or `1`): QA and
+release lights again.
 
 ---
 
 ## The story
 
-One upload dialog, three seats, in the order the lifecycle runs. The same three defects every time; what
-changes is what MANTA puts in front of each person.
+One backlog, one change, three seats, and back to the first. Three threads run through it: the five tolerated
+"Last updated" lines that share one grey, the refresh button that shares the close button's pattern, and the
+tester's judgment.
 
-**Opening, on the slide, everything lit (2 min).** "A developer builds an upload dialog for the Benefits
-Portal. It ships with three defects: a file field with no label, a close button with no name, hint text too
-faint to read. Today we follow that one dialog through three seats: the developer's laptop, the pull request,
-and the tester's Workbench. Where you see AI output I will say **pre-run**: no AI runs on this laptop today."
-Light Development.
+**Opening, on the slide, everything lit (2 min).** "The Benefits Portal has 27 known accessibility problems.
+Today a developer adds an upload dialog to it, and we watch that one change from three seats: the tester's, the
+developer's, and the pull request's. Then we go back to the tester the morning after. Where you see AI output I
+will say **pre-run**: no AI runs on this laptop today." Light QA and release.
 
-**Development, the developer's seat (6 min).** Red gate, the AI skills, green gate. Lands on: fixed before
-anyone else saw it, by a developer who never read WCAG.
+**QA, the tester's seat (8 min).** The Workbench on `main`, before the change: a scan from the browser, the
+Nightly's 27, the AI notes, the "Last updated" grey on five pages and the refresh button ("remember these two"),
+an added issue, a verdict, a rescan, a checklist. Hands off with: 27 on the list, and nobody owns one.
 
-**DevOps, the reviewer's seat (8 min).** The rewind, said plainly: the gate on the laptop is a courtesy, and
+**Development, the developer's seat (6 min).** Red gate (Tolerated 27: the tester's backlog), the AI skills,
+whose cluster step pulls the grey and the refresh button in with the new defects, green gate: **Fixed 7**,
+Tolerated 20. Lands on: fixed before anyone else saw it, by a developer who never read WCAG.
+
+**DevOps, the reviewer's seat (6 min).** The rewind, said plainly: the gate on the laptop is a courtesy, and
 say this developer pushed the dialog as it was. The same three on the pull request, the fixes where the
-reviewer lives, one click, green. Lands on: policy, not a person.
+reviewer lives, one click, green. Lands on: policy, not a person. Hands off with: say it merges; that night
+the nightly runs again.
 
-**QA and release, the tester's seat (8 min).** The handoff: the site behind the Workbench is the build the
-nightly scanned last night, defects and all. The scan from the browser, the verdicts, then the turn: three
-defects the machine found and fixed, and here is the fourth, the one no rule fires on. The ACR drafted from
-the run. Lands on: the scan is evidence, the tester is the judgment, the paperwork is drafted from both.
+**Release, back in the tester's seat (3 min).** The next Nightly: 27 became 20, and nobody filed a ticket.
+Then the fourth defect, the one no rule fires on: focus walks out of the dialog. The tester's verdict, and the
+ACR drafted from the run. Lands on: the scan is evidence, the tester is the judgment, the paperwork is drafted
+from both.
 
-**Close, on the slide, everything lit (1 min).** "One dialog, three seats, one record."
+**Close, on the slide, everything lit (1 min).** "One backlog, one change. The tester saw the debt, the
+developer cleared seven of it on the way past, the pull request would have stopped the new three, and the
+tester found the one no rule can."
 
-The rewind and the handoff are true of the mechanics: `stage devops` discards any local fix and pushes the
-branch as tagged, and `stage qa` builds that same branch, so the launcher finds the three defects and a rescan
-of them still fails.
+The stages make the story true: `stage qa` builds `main`, so the launcher finds the backlog and no dialog;
+`stage devops` discards any local fix and pushes the branch as tagged; `stage release` builds the branch with
+the fixes applied, the site as it merges, which is the build the release snapshot scanned.
+
+---
+
+## Stage · QA: the backlog in the Workbench (about 8 min)
+
+**Setup.**
+```
+npm run demo -- stage qa
+```
+It checks out `main` at its story tag (detached: the site before the upload change), builds it, then runs the
+preview on http://localhost:4173 and MANTA's Workbench on the **nightly snapshot** (a nightly run of that build,
+made as CI makes it, with its AI notes **pre-run** afterwards) together, until Ctrl+C. The Workbench runs from the MANTA
+`npm ci` installed; no MANTA checkout is needed.
+
+**Type.** Nothing more. Open http://127.0.0.1:3508/.
+
+**See, in order.**
+1. **The launcher.** Paste `http://localhost:4173/`, pick the conformance level, press **Start**. One row, the
+   current step, then the report: 5 violations on Home. "A scan launched from the browser: no command line, and
+   the same scan core the command line and the pipeline run."
+2. **The Nightly run** (the run list, then its report): **27** on the five pages, and `/account` reached through
+   the Sign in path. The plain-language notes beside each issue, the summary and the adjudications, all
+   **pre-run** by MANTA's AI skills on this snapshot. Point at the "Last updated" contrast finding on all five
+   pages (one grey, one cause) and the refresh button on Check a case: "remember these two".
+3. **What only a tester does.** Add an issue on the account page (the two **Read** links); give a verdict on the
+   skip link (adjudicated likely violation); **Rescan** the Pending badge's contrast issue on `/status` (still
+   failing; it reloads the page from the preview); open a criterion's checklist.
+
+**Say.**
+- "This is the backlog: 27 known problems on the five pages, scanned every night, tolerated by the gate, nobody's
+  ticket."
+- "The scan is evidence; the human is the judgment. QA adds what no rule can see, decides what the scan could
+  only flag, and re-measures a fix on the spot."
+- "Everything QA does is recorded on the run itself: who decided what, and when. The record is the run."
+- Hand off: "27 on the list, and nobody owns one. Watch what happens when a developer touches the page next to
+  them."
+
+Ctrl+C stops both servers before the next stage.
+
+**If it goes wrong.** The Workbench will not start: open `demo-data\nightly\reports\index.html` from disk. It
+is read-only (no verdicts or rescans), but every finding and the AI notes are there. Port 3508 in
+use: `npm run demo -- stage qa --port 3600`. The export dialog fails: open the committed ACR draft in
+`demo-data\nightly\reports\`.
 
 ---
 
@@ -91,16 +143,18 @@ It puts the feature branch, `feature/upload-documents`, in the working tree, cle
 **1 · The gate.** Type:
 ```
 npm run dev        (in a second terminal; leave it running)
-npx manta gate --base http://localhost:5173
+npx manta gate --base http://localhost:5173 --no-screenshots
 ```
-**See.** MANTA's step stream as it scans each page, then the terminal summary: **New 3** (P1 2 · P2 1),
+**See.** MANTA's step stream as it scans each page (about 8 seconds; `--no-screenshots` skips the screenshots
+the report would carry, which halves it), then the terminal summary: **New 3** (P1 2 · P2 1),
 **Fixed 0**, **Tolerated** with the same number as the README's badge, the three new violations listed on
 `/status?upload=BP-2026-10882`, and the last line `Gate failed: 3 new violations at or above minor.  exit 1`.
 - "Accessibility is part of the definition of done: before anyone wrote a line of this dialog, a WCAG checklist
   was its acceptance criteria, and this is the check the developer runs against it."
 - "The developer runs MANTA on their own machine, against the site as it runs on their laptop. This is the
   **gate**: a scan compared against the saved list of the problems we already know about, the baseline. It
-  passes or fails the change, the way a unit test does. Legacy debt tolerated, new debt blocked."
+  passes or fails the change, the way a unit test does. Legacy debt tolerated, new debt blocked. Tolerated 27:
+  the tester's backlog you just saw."
 - "The upload dialog added three new problems: a file field with no label, a close button with no name, and hint
   text too faint to read. The developer learns that now, before the pull request does."
 - "Now: this developer is not an accessibility specialist. `button-name`, `label`, `color-contrast`: what do
@@ -127,8 +181,8 @@ shared colour `--muted-bad`, 2.81:1 darkened to #595959, 7.0:1, one edit on line
 the close button and on the old refresh button), **3 · File field with no label** (a visible "Choose files to
 upload" label, `aria-describedby` to the hint; "Standalone: no other finding shares its cause."). Under each:
 the problem in plain words, the fix in plain words, and the diff, red and green, with the file and line. Then
-`3 fixes · 3 files` and the question `Apply these 3 fixes? [y/N]`. Read the fixes aloud first; then type `y`:
-`Applied to src/styles.css, src/Shell.jsx and src/pages/Status.jsx. Nothing committed.` and the diff summary. The output
+`3 fixes · 2 files` and the question `Apply these 3 fixes? [y/N]`. Read the fixes aloud first; then type `y`:
+`Applied to src/styles.css and src/pages/Status.jsx. Nothing committed.` and the diff summary. The output
 never says so itself, so you do: this answer is **pre-run**.
 - "This is MANTA's fix skill, **pre-run** on this run: no AI runs on this laptop today. With a key or the Claude
   command line here, the same command runs it live, in a minute or two."
@@ -144,7 +198,7 @@ never says so itself, so you do: this answer is **pre-run**.
 
 **3 · Green.** Type:
 ```
-npx manta gate --base http://localhost:5173
+npx manta gate --base http://localhost:5173 --no-screenshots
 ```
 **See.** `New 0`, **Fixed 7** (the five "Last updated" lines that shared the grey, and the refresh button on two
 pages, labelled in the same pass), **Tolerated 20**, and `Gate passed`, `exit 0`.
@@ -152,7 +206,7 @@ pages, labelled in the same pass), **Tolerated 20**, and `Gate passed`, `exit 0`
   request will come in green."
 
 **If it goes wrong.** The dev server will not start: in the second terminal run `npm run build` then
-`npm run preview`, and gate the preview build instead: `npx manta gate --base http://localhost:4173`. `fix`
+`npm run preview`, and gate the preview build instead: `npx manta gate --base http://localhost:4173 --no-screenshots`. `fix`
 says the patch does not apply: `npm run demo -- stage dev` starts the stage over. The second gate still fails:
 read what it names; `git diff` shows what was applied.
 
@@ -162,7 +216,7 @@ two). Say "the skills ran here". Their wording differs from run to run.
 
 ---
 
-## Stage · DevOps: the pull request gate (about 8 min)
+## Stage · DevOps: the pull request gate (about 6 min)
 
 The one live GitHub Action of the demo: the gate runs on a pull request, MANTA posts what it found and the
 fixes, the fixes are applied from the pull request's Conversation tab, and the gate goes green.
@@ -223,10 +277,10 @@ starts the gate again.)
 comment rewrites itself to `MANTA gate · passed: no new violations`, and the code scanning alerts show as fixed.
 - "Policy, not a person. New debt cannot merge; legacy debt can only shrink. And this time it was fixed before
   it ever landed."
-- "And every night, on its own, the same scanner signs in to the site with a password kept as a secret and scans
-  the account page no pull request touches, with the rules that press keys and walk the focus. Last night's run
-  is in the Actions tab." (Open it if there is time: **Nightly**, the **Scan** step, the Sign in path ending on
-  `/account`, the `manta-nightly` artifact QA opens in the Workbench.)
+- Hand off: "Say it merges. That night the nightly the tester showed you runs again, on main: the same
+  scanner, signed in with a password kept as a secret, with the rules that press keys and walk the focus. And
+  the tester opens it in the morning." (Open it if there is time: Actions → **Nightly**, the **Scan** step, the
+  Sign in path ending on `/account`, the `manta-nightly` artifact the Workbench opens.)
 
 Never press **Merge**, and never tick **Merge without waiting for requirements to be met (bypass rules)**, which
 appears because you are an admin. The next `stage devops` or `reset` closes this pull request; never `git pull`
@@ -244,49 +298,39 @@ Say "the fix skill ran in this job and posted these itself". Their wording diffe
 
 ---
 
-## Stage · QA and release: the Workbench (about 8 min)
+## Stage · Release: the next morning, back in the Workbench (about 3 min)
 
-**Setup.**
+**Setup.** Ctrl+C the dev server from the Development stage first (port 4173 and 3508 must be free; the dev
+server's 5173 is not in the way, but the stage discards its applied patch). It can run during the DevOps
+stage's gate wait: it only touches this PC.
 ```
-npm run demo -- stage qa
+npm run demo -- stage release
 ```
-It puts the feature branch (the upload dialog) in the working tree, builds the site, then runs the preview on
-http://localhost:4173 and MANTA's Workbench on the **nightly snapshot** (a real nightly run, downloaded and
-committed, with its AI notes **pre-run** afterwards) together, until Ctrl+C. The Workbench runs from the MANTA
-`npm ci` installed; no MANTA checkout is needed.
+It puts the feature branch in the working tree, applies the developer's fixes (the same patch `fix` applies),
+builds it, then runs the preview on http://localhost:4173 and the Workbench on the **release snapshot** (a
+nightly run of that build: the site as it merges, AI notes **pre-run**), until Ctrl+C.
 
 **Type.** Nothing more. Open http://127.0.0.1:3508/.
 
 **See, in order.**
-1. **The launcher.** Paste the site's pages, one per line (`http://localhost:4173/`, `/apply`, `/status`,
-   `/signin`, `/status?upload=BP-2026-10882`), pick the conformance level, press **Start**. One row per page,
-   the current step, then the report. "A scan launched from the browser: no command line, and the same scan
-   core the command line and the pipeline run."
-2. **The Nightly run** (the run list, then its report): the plain-language notes beside each issue, the summary
-   and the adjudications, all **pre-run** by MANTA's AI skills on this snapshot. Add an issue on the account
-   page; give a verdict on an issue; **Rescan** the Pending badge's contrast issue on `/status` (still
-   failing; it reloads the page from the preview); attest a criterion; open a criterion's checklist.
-3. **Focus order.** The Pages dialog's **Focus order** column on `/status?upload=BP-2026-10882`: the numbered
-   stops walk out of the open dialog into the page behind it.
-4. **Export** on the Nightly run: the ACR draft (a Word document) and the USPS defects export.
+1. **The Nightly run**: **20** on the five pages. The "Last updated" lines and the refresh button are gone.
+2. **Focus order.** The Pages dialog's **Focus order** column on `/status?upload=BP-2026-10882`: the numbered
+   stops walk past the page behind the open dialog, into the dialog at 15 to 18, and straight out into the footer.
+   Record a verdict on 2.4.3 with the checklist, and attest.
+3. **Export** on the Nightly run: the ACR draft (a Word document) and the USPS defects export.
 
 **Say.**
-- "The dialog reaches test. The site behind the Workbench is the build the nightly scanned last night, defects and
-  all, so you can see how a tester meets them."
-- "The scan is evidence; the human is the judgment. QA adds what no rule can see, decides what the scan could
-  only flag, and re-measures a fix on the spot."
-- "Everything QA does is recorded on the run itself: who decided what, and when. The record is the run."
-- "Three defects the machine found and the machine fixed. Here is the fourth. No rule fires on a dialog that lets
-  focus walk out of it. MANTA recorded the walk; QA judges it against
-  WCAG 2.4.3, Focus Order, with the checklist."
+- "Yesterday 27, this morning 20. Nobody filed a ticket: the developer fixed seven on the way past."
+- "Three defects the machine found and the machine fixed. Every gate is green. Here is the fourth. No rule
+  fires on a dialog that lets focus walk out of it, so no gate stopped it and no AI fixed it. MANTA recorded the
+  walk; QA judges it against WCAG 2.4.3, Focus Order, with the checklist."
 - "The conformance paperwork comes from the same run QA just worked in: an ACR, the accessibility conformance
-  report a buyer asks for, drafted from the evidence; nothing retyped. The verdicts and attestations QA made a
-  minute ago are in it."
+  report a buyer asks for, drafted from the evidence; nothing retyped. The verdict QA made a minute ago is in it."
 
-**If it goes wrong.** The Workbench will not start: open `demo-data\nightly\reports\index.html` from disk. It
-is read-only (no verdicts or rescans), but every finding and the Focus order picture are there. Port 3508 in
-use: `npm run demo -- stage qa --port 3600`. The export dialog fails: open the committed ACR draft in
-`demo-data\nightly\reports\`.
+**If it goes wrong.** The Workbench will not start: open `demo-data\release\reports\index.html` from disk. It
+is read-only, but every finding and the Focus order picture are there. Port 3508 in use:
+`npm run demo -- stage release --port 3600`. The export dialog fails: open the committed ACR draft in
+`demo-data\release\reports\`.
 
 ---
 
@@ -365,7 +409,8 @@ so it is safe to run again: when the read token expires, or to make a fresh depl
 
 - The baseline: on `main`, `npm run build`, `npm run preview`, `npx manta baseline --base http://localhost:4173`, `node .github/scripts/badge.mjs`, commit `.manta/`.
 - The pr snapshot: on `feature/upload-documents`, build and preview, `npx manta gate --base http://localhost:4173`, then `npm run demo -- fix --live` (or, from a MANTA checkout, `node $MANTA/node_modules/tsx/dist/cli.mjs $MANTA/ai/cli.ts --skills cluster,fix --scope new --provider claude-code`), `git checkout -- src` to undo the applied patch, then `npm run demo -- snapshot pr` and commit `demo-data/pr` to `main`.
-- The nightly snapshot: on `golden/upload-documents` (the dialog exists there; `main` lists the page but has no dialog), build and preview, `MANTA_SECRET_DEMO_PW=benefits-demo npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name Nightly`, then the full pass (`--skills cluster,fix,explain,summary,adjudicate,acr --provider claude-code`), then `npm run demo -- snapshot nightly` and commit to `main`. A CI-made one works the same: `gh workflow run nightly.yml --ref golden/upload-documents`, then `npm run demo -- snapshot nightly <run id> --artifact manta-nightly` and the pass over it.
+- The nightly snapshot: on `main` (the backlog; no upload dialog), build and preview, `MANTA_SECRET_DEMO_PW=benefits-demo npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name Nightly`, then the full pass (`node node_modules/tsx/dist/cli.mjs node_modules/@usps/508-toolkit/ai/cli.ts --skills cluster,fix,explain,summary,adjudicate,acr --provider claude-code`), then `npm run demo -- snapshot nightly` and commit to `main`. A CI-made one works the same: `gh workflow run nightly.yml --ref main`, then `npm run demo -- snapshot nightly <run id> --artifact manta-nightly` and the pass over it.
+- The release snapshot: the same, on `feature/upload-documents` with the pr snapshot's patch applied first (`git apply demo-data/pr/reports/fix-<token>.patch`; so refresh `pr` first), then `npm run demo -- snapshot release` and `git checkout -- src`.
 - The story tags, after any commit to `main` (the stage commands run the `demo/demo.mjs` of the branch they check out, so the feature branch must carry `main`'s): `git rebase main feature/upload-documents`, `git tag -f story/main main`, `git tag -f story/feature feature/upload-documents`, `git push -f origin main feature/upload-documents story/main story/feature`. The golden branch stays where it is unless its PR is being remade.
 - The golden PR's post: `GITHUB_REPOSITORY=tyler-maddox-gdit/MANTA-demo GITHUB_TOKEN=$(gh auth token) npx manta post --pr <n> --run <token>` from the repo root with the pr snapshot's `reports/` copied to `reports/`. Never close the PR, never push to its branch, never press Commit suggestion.
 

@@ -16,15 +16,17 @@ fresh scan. What a snapshot shows as AI output is **pre-run**.
   hint's `--muted-bad` colour, and the refresh button), and `reports/fix-<token>.patch`. The Gate workflow posts these fixes onto the live PR as
   pre-run suggestions when the repo has no AI key (the DevOps stage), `npm run demo -- fix` prints and applies them
   (the Dev stage), and the golden PR was posted from this run.
-- **`nightly/`** — one nightly run of the upload dialog's source (the golden branch's), made on the Mac as CI makes it (`--extended`, the Sign in path replayed to
-  `/account`, the upload page included), with `cluster,fix,explain,summary,adjudicate,acr` added on the Mac
-  afterwards. The QA stage opens it.
+- **`nightly/`** — one nightly run of `main` (the backlog, before the upload change: 27 on five pages), made on
+  the Mac as CI makes it (`--extended`, the Sign in path replayed to `/account`), with
+  `cluster,fix,explain,summary,adjudicate,acr` added on the Mac afterwards (2026-10-21). The QA stage opens it.
+- **`release/`** — the same, on `feature/upload-documents` with the `pr` snapshot's fix patch applied: the site
+  as it merges (20 on five pages, and the upload dialog's focus order). The Release stage opens it.
 
-Both are filled by `npm run demo -- snapshot <name> [<run id>]` (DEMO.md, "Refreshing a snapshot" and
+All three are filled by `npm run demo -- snapshot <name> [<run id>]` (DEMO.md, "Refreshing a snapshot" and
 "Setup Tyler does once"); until then this folder holds only this file.
 
 The Workbench writes into a snapshot as QA works (attestations, added issues, verdicts, rescans).
-`npm run demo -- reset` restores both folders to what is committed.
+`npm run demo -- reset`, or any stage command, restores them to what is committed.
 
 `ci-run/` at the repo root (gitignored) is where `npm run demo -- ci-run` downloads a workflow run's artifact
 to look at without committing it.
