@@ -26,7 +26,8 @@ runs:
         GIT_CONFIG_VALUE_3: ''
 
     # Chromium is kept between runs, keyed by the Playwright MANTA installs: a hit skips its download (about 5 s).
-    # Its system libraries come from apt on every runner either way, with the man-db rebuild apt triggers skipped.
+    # Its system libraries are already on ubuntu-latest (Chrome ships on the image), so apt is never run: the only
+    # packages `playwright install-deps` added were CJK and Thai fonts, 26 MB from a mirror that once took 10 minutes.
     - name: Find Playwright's version
       id: playwright
       run: echo "version=$(node -p "require('playwright-core/package.json').version")" >> "$GITHUB_OUTPUT"
@@ -39,13 +40,8 @@ runs:
         key: chromium-${{ runner.os }}-${{ steps.playwright.outputs.version }}
 
     - name: Install Chromium
-      run: |
-        sudo rm -f /var/lib/man-db/auto-update
-        if [ "${{ steps.chromium.outputs.cache-hit }}" = true ]; then
-          npx playwright install-deps chromium
-        else
-          npx playwright install chromium --with-deps --only-shell
-        fi
+      if: steps.chromium.outputs.cache-hit != 'true'
+      run: npx playwright install chromium --only-shell
       shell: bash
 
     - run: npm run build
