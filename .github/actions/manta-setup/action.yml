@@ -1,0 +1,58 @@
+name: MANTA setup
+description: Installs MANTA and Chromium, builds the site and serves it on localhost:4173.
+
+inputs:
+  manta-read-token:
+    description: Token that can read MANTA's private repository; npm installs MANTA with it.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    # npm installs MANTA from its private repository over git, and the lockfile pins it as git+ssh. For this
+    # step alone: every form of github.com goes over HTTPS with the read token, and the credential header the
+    # checkout left (this repo's GITHUB_TOKEN, which cannot read MANTA) is cleared, or git sends it instead.
+    - run: npm ci
+      shell: bash
+      env:
+        GIT_CONFIG_COUNT: '4'
+        GIT_CONFIG_KEY_0: 'url.https://x-access-token:${{ inputs.manta-read-token }}@github.com/.insteadOf'
+        GIT_CONFIG_VALUE_0: 'https://github.com/'
+        GIT_CONFIG_KEY_1: 'url.https://x-access-token:${{ inputs.manta-read-token }}@github.com/.insteadOf'
+        GIT_CONFIG_VALUE_1: 'ssh://git@github.com/'
+        GIT_CONFIG_KEY_2: 'url.https://x-access-token:${{ inputs.manta-read-token }}@github.com/.insteadOf'
+        GIT_CONFIG_VALUE_2: 'git@github.com:'
+        GIT_CONFIG_KEY_3: 'http.https://github.com/.extraheader'
+        GIT_CONFIG_VALUE_3: ''
+
+    # Chromium is kept between runs, keyed by the Playwright MANTA installs: a hit skips its download (about 5 s).
+    # Its system libraries come from apt on every runner either way, with the man-db rebuild apt triggers skipped.
+    - name: Find Playwright's version
+      id: playwright
+      run: echo "version=$(node -p "require('playwright-core/package.json').version")" >> "$GITHUB_OUTPUT"
+      shell: bash
+
+    - uses: actions/cache@v6
+      id: chromium
+      with:
+        path: ~/.cache/ms-playwright
+        key: chromium-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+
+    - name: Install Chromium
+      run: |
+        sudo rm -f /var/lib/man-db/auto-update
+        if [ "${{ steps.chromium.outputs.cache-hit }}" = true ]; then
+          npx playwright install-deps chromium
+        else
+          npx playwright install chromium --with-deps --only-shell
+        fi
+      shell: bash
+
+    - run: npm run build
+      shell: bash
+
+    - name: Serve the build on localhost:4173
+      run: |
+        nohup npm run preview > preview.log 2>&1 &
+        node -e "const t=Date.now();(async()=>{for(;;){try{if((await fetch('http://localhost:4173')).ok)return}catch{}if(Date.now()-t>60000){console.error('The preview server did not answer on http://localhost:4173 within 60 s.');process.exit(1)}await new Promise(r=>setTimeout(r,1000))}})()"
+      shell: bash
