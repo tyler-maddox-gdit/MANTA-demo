@@ -4,7 +4,7 @@ Committed **snapshot runs**: each folder is one MANTA run with its artifacts, la
 (`reports/`, `run-records/`, `sites/`), so MANTA's Workbench opens it offline:
 
 ```
-npm run demo -- workbench <name>       (nightly or pr; runs the MANTA that npm ci installed)
+npm run demo -- workbench <name>       (nightly, release or pr; runs the MANTA that npm ci installed)
 ```
 
 Every AI artifact in a snapshot is gated on its run's token: it belongs to that run and cannot sit beside a
@@ -23,7 +23,7 @@ fresh scan. What a snapshot shows as AI output is **pre-run**.
   as it merges (20 on five pages, and the upload dialog's focus order). The Release stage opens it.
 
 All three are filled by `npm run demo -- snapshot <name> [<run id>]` (DEMO.md, "Refreshing a snapshot" and
-"Setup Tyler does once"); until then this folder holds only this file.
+"Setup Tyler does once").
 
 The Workbench writes into a snapshot as QA works (attestations, added issues, verdicts, rescans).
 `npm run demo -- reset`, or any stage command, restores them to what is committed.

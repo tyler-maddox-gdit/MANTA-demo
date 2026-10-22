@@ -293,7 +293,7 @@ function fixLive() {
 }
 
 function snapshot(name, runId, flags) {
-  if (!name || !/^[a-z0-9-]+$/.test(name)) die('snapshot takes a name: pr or nightly (lowercase letters, digits and hyphens).');
+  if (!name || !/^[a-z0-9-]+$/.test(name)) die('snapshot takes a name: pr, nightly or release (lowercase letters, digits and hyphens).');
   const dest = join(ROOT, 'demo-data', name);
   let src = ROOT;
   let tmp;
