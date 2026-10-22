@@ -10,6 +10,7 @@
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "demo": "node demo/demo.mjs",
+    "test": "node --test",
     "install-browser-gdit": "manta install-browser --profile gdit"
   },
   "dependencies": {
