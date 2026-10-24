@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "sourceReportTimestamp": "nightly",
+  "entries": [
+    {
+      "kind": "work-note",
+      "id": "a5770168",
+      "issues": [
+        "MANTA-a338e7a6",
+        "MANTA-80240cae",
+        "MANTA-fd19663a",
+        "MANTA-639f8ae4",
+        "MANTA-7dae54ce",
+        "MANTA-86fdab43",
+        "MANTA-30b3d9ef"
+      ],
+      "text": "On the way past the upload dialog: the Last updated grey and the refresh button's name.",
+      "at": "2026-10-24T04:13:05.557Z",
+      "by": {
+        "name": "Tyler Maddox",
+        "email": "tyler.maddox@gmail.com"
+      },
+      "source": "gate",
+      "date": "2026-10-24T04-14-35-956Z"
+    }
+  ]
+}

@@ -66,14 +66,16 @@ an added issue, a verdict, a rescan, a checklist. Hands off with: 33 on the list
 
 **Development, the developer's seat (6 min).** Red gate (Tolerated 27: the tester's backlog), the AI skills,
 whose cluster step pulls the grey and the refresh button in with the new defects, green gate: **Fixed 7**,
-Tolerated 20. Lands on: fixed before anyone else saw it, by a developer who never read WCAG.
+Tolerated 20, then one `manta note` line over the seven for the tester. Lands on: fixed before anyone else saw
+it, by a developer who never read WCAG.
 
 **DevOps, the reviewer's seat (6 min).** The rewind, said plainly: the gate on the laptop is a courtesy, and
 say this developer pushed the dialog as it was. The same three on the pull request, the fixes where the
 reviewer lives, one click, green. Lands on: policy, not a person. Hands off with: say it merges; that night
 the nightly runs again.
 
-**Release, back in the tester's seat (3 min).** The next Nightly: 33 became 25, and nobody filed a ticket.
+**Release, back in the tester's seat (3 min).** The next Nightly: 33 became 25, nobody filed a ticket, and the
+developer's note sits on the seven in Changes.
 Then the fourth defect, the one no rule fires on: focus walks out of the dialog. The tester's verdict, and the
 ACR drafted from the run. Lands on: the scan is evidence, the tester is the judgment, the paperwork is drafted
 from both.
@@ -210,6 +212,20 @@ pages, named by the component fix), **Tolerated 20**, and `Gate passed`, `exit 0
 - "Fixed before anyone else saw it, by a developer who never read WCAG. The count only goes down; the pull
   request will come in green."
 
+**4 · The note.** Type:
+```
+npx manta note "On the way past the upload dialog: the Last updated grey and the refresh button's name."
+```
+**See.** `Wrote .manta/work-notes/<id>.json: a note by Tyler Maddox on 7 violations the gate fixed (run <token>).`,
+the seven listed by rule and page, and `Commit it with the fix: the next date of a series scanned from this
+checkout imports it.` A **work note** is one timestamped line from a person over one or more findings; this one
+names the seven the gate just fixed, by their ids, so the nightly that scans `main` after the merge can lay it
+on the same seven.
+- "Seven of the tester's findings just went away without a ticket. One line from the developer says why, over
+  exactly those seven. It is a file in the repository; it travels with the fix; the nightly picks it up and the
+  tester reads it in the morning." Say "they commit it with the fix": the demo commits nothing here, and the
+  next stage removes the file.
+
 **If it goes wrong.** The dev server will not start: in the second terminal run `npm run build` then
 `npm run preview`, and gate the preview build instead: `npx manta gate --base http://localhost:4173`. `fix`
 says the patch does not apply: `npm run demo -- stage dev` starts the stage over. The second gate still fails:
@@ -318,8 +334,12 @@ nightly run of that build: the site as it merges, AI notes **pre-run**), until C
 **Type.** Nothing more. Open http://127.0.0.1:3508/.
 
 **See, in order.**
-1. **The Nightly run**: **25** open issues (was 33). The "Last updated" lines, the account page's too, and the
-   refresh button are gone.
+1. **The Nightly series**, its newest date: **25** open issues (was 33); the masthead names the series and lists
+   both dates. Open **Changes**, under the overview: `Changes since "Nightly" · 33 → 25 open issues · 1 found ·
+   8 closed · 1 work note` (the one found is a needs-review contrast question on the dialog's hint), by page, and the
+   developer's **work note** on each page it names (Tyler Maddox, the gate, its issues, the text typed in the
+   Development stage). The account page's grey is closed by the scan with no note. **Notes** on a closed "Last
+   updated" row shows the same note in the issue's activity.
 2. **Focus order.** The Pages dialog's **Focus order** column on `/status?upload=BP-2026-10882`: the numbered
    stops walk past the page behind the open dialog, into the dialog at 15 to 18, and straight out into the footer.
    Record a verdict on 2.4.3 with the checklist, and attest.
@@ -327,7 +347,8 @@ nightly run of that build: the site as it merges, AI notes **pre-run**), until C
 
 **Say.**
 - "Yesterday 33, this morning 25. Eight: the seven the developer's gate counted, and the same grey on the
-  account page the gate never scans. Nobody filed a ticket."
+  account page the gate never scans. Nobody filed a ticket, and nobody has to ask: the developer's note came
+  with the fix, over exactly the seven."
 - "Three defects the machine found and the machine fixed. Every gate is green. Here is the fourth. No rule
   fires on a dialog that lets focus walk out of it, so no gate stopped it and no AI fixed it. MANTA recorded the
   walk; QA judges it against WCAG 2.4.3, Focus Order, with the checklist."
@@ -364,9 +385,10 @@ golden PR's number never changes.
 
 ## Refreshing a snapshot
 
-A snapshot is a committed copy of one MANTA run (`reports/`, `run-records/`, `sites/`) under `demo-data/`.
-Refresh one after MANTA or the site changes, then commit it to `main` and move the story tags (see the last
-section).
+A snapshot is a committed copy of a MANTA data dir (`reports/`, `run-records/`, `sites/`) under `demo-data/`:
+`pr` holds one run; `nightly` holds the first date of the series `nightly`, and `release` holds both its dates,
+with the series log (`issues-nightly.json`) that carries the developer's work note. Refresh one after MANTA or
+the site changes, then commit it to `main` and move the story tags (see the last section).
 
 - **From a workflow run's artifact:** `npm run demo -- snapshot nightly <run id> --artifact manta-nightly`
   (or `snapshot pr <run id>` for a gate run's `manta-run`).
@@ -416,8 +438,13 @@ so it is safe to run again: when the read token expires, or to make a fresh depl
 
 - The baseline: on `main`, `npm run build`, `npm run preview`, `npx manta baseline --base http://localhost:4173`, `node .github/scripts/badge.mjs`, commit `.manta/`.
 - The pr snapshot: on `feature/upload-documents`, build and preview, `npx manta gate --base http://localhost:4173`, then `npm run demo -- fix --live` (or, from a MANTA checkout, `node $MANTA/node_modules/tsx/dist/cli.mjs $MANTA/ai/cli.ts --skills cluster,fix --scope new --provider claude-code`), `git checkout -- src` to undo the applied patch, then `npm run demo -- snapshot pr` and commit `demo-data/pr` to `main`.
-- The nightly snapshot: on `main` (the backlog; no upload dialog), build and preview, `MANTA_SECRET_DEMO_PW=benefits-demo npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name Nightly`, then the full pass (`node node_modules/tsx/dist/cli.mjs node_modules/@usps/508-toolkit/ai/cli.ts --skills cluster,fix,explain,summary,adjudicate,acr --provider claude-code`), then `npm run demo -- snapshot nightly` and commit to `main`. A CI-made one works the same: `gh workflow run nightly.yml --ref main`, then `npm run demo -- snapshot nightly <run id> --artifact manta-nightly` and the pass over it.
-- The release snapshot: the same, on `feature/upload-documents` with the pr snapshot's patch applied first (`git apply demo-data/pr/reports/fix-<token>.patch`; so refresh `pr` first), then `npm run demo -- snapshot release` and `git checkout -- src`.
+- The nightly snapshot, the series' first date: on `main` (the backlog; no upload dialog), with no root `reports/`, build and preview, `MANTA_SECRET_DEMO_PW=benefits-demo npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name Nightly --series nightly`, then the full pass (`node node_modules/tsx/dist/cli.mjs node_modules/@usps/508-toolkit/ai/cli.ts --skills cluster,fix,explain,summary,adjudicate,acr --provider claude-code`), then `npm run demo -- snapshot nightly` and commit to `main`. A CI-made one works the same: `gh workflow run nightly.yml --ref main`, then `npm run demo -- snapshot nightly <run id> --artifact manta-nightly` and the pass over it.
+- The release snapshot, the series' second date, with the developer's note: on `feature/upload-documents` with the pr snapshot's patch applied (`git apply demo-data/pr/reports/fix-<token>.patch`; so refresh `pr` first), build and preview, then
+  1. `npx manta gate --base http://localhost:4173` (Fixed 7) and `npx manta note "<the Development stage's text>"`, which writes `.manta/work-notes/<id>.json` over the seven (the tree is dirty, so no commit is named);
+  2. empty the root `reports/` and `run-records/` and copy `demo-data/nightly/reports` and `run-records` in their place, so the first date is present and the scan becomes the second;
+  3. the same scan line as the nightly's, which ends `[NOTE] Imported 1 work note from .manta/work-notes/.`, then the pass with `--skills cluster,fix,explain,summary,acr` (adjudicate is not needed on this date, and the claude-code provider often times out on it);
+  4. `npm run demo -- snapshot release`, `git checkout -- src`, `rm -r .manta/work-notes`, and commit to `main`.
+  The note file is never committed: the live pull request would show it before the fix exists.
 - The story tags, after any commit to `main` (the stage commands run the `demo/demo.mjs` of the branch they check out, so the feature branch must carry `main`'s): `git rebase main feature/upload-documents`, `git tag -f story/main main`, `git tag -f story/feature feature/upload-documents`, `git push -f origin main feature/upload-documents story/main story/feature`. The golden branch stays where it is unless its PR is being remade.
 - The golden PR's post: `GITHUB_REPOSITORY=tyler-maddox-gdit/MANTA-demo GITHUB_TOKEN=$(gh auth token) npx manta post --pr <n> --run <token>` from the repo root with the pr snapshot's `reports/` copied to `reports/`. Never close the PR, never push to its branch, never press Commit suggestion.
 

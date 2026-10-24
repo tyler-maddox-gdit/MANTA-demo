@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "id": "dc18414f-2fd4-4935-8664-d81448ae46ab",
+  "startedAt": "2026-10-24T04:05:55.921Z",
+  "name": "Nightly",
+  "series": "nightly",
+  "urls": [
+    "http://localhost:4173/",
+    "http://localhost:4173/apply",
+    "http://localhost:4173/status",
+    "http://localhost:4173/signin",
+    "http://localhost:4173/status?upload=BP-2026-10882"
+  ],
+  "options": {
+    "headless": true,
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa"
+    ],
+    "extended": true
+  },
+  "status": "finished",
+  "token": "2026-10-24T04-07-10-352Z",
+  "finishedAt": "2026-10-24T04:07:10.493Z",
+  "pages": [
+    {
+      "url": "http://localhost:4173/"
+    },
+    {
+      "url": "http://localhost:4173/apply"
+    },
+    {
+      "url": "http://localhost:4173/status"
+    },
+    {
+      "url": "http://localhost:4173/signin"
+    },
+    {
+      "url": "http://localhost:4173/status?upload=BP-2026-10882"
+    }
+  ],
+  "passes": [
+    {
+      "startedAt": "2026-10-24T04:07:34.668Z",
+      "status": "finished",
+      "ai": {
+        "provider": "claude-code",
+        "skills": [
+          "cluster",
+          "fix",
+          "adjudicate",
+          "explain",
+          "summary",
+          "acr"
+        ],
+        "effort": "standard",
+        "scope": "top-cluster",
+        "costTier": "high"
+      },
+      "finishedAt": "2026-10-24T04:10:08.117Z",
+      "skills": [
+        {
+          "id": "cluster",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/cluster-2026-10-24T04-07-10-352Z.json"
+        },
+        {
+          "id": "fix",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/fix-proposals-2026-10-24T04-07-10-352Z.json",
+          "exports": [
+            {
+              "ext": "patch",
+              "file": "/Users/tyler/Projects/MANTA-demo/reports/fix-2026-10-24T04-07-10-352Z.patch"
+            }
+          ],
+          "iterations": [
+            {
+              "id": "fix",
+              "status": "written",
+              "iteration": {
+                "key": "cluster-1",
+                "index": 0,
+                "total": 1
+              }
+            }
+          ],
+          "coverage": {
+            "covered": {
+              "clusters": 1,
+              "ruleGroups": 0,
+              "violations": 15
+            },
+            "total": {
+              "clusters": 2,
+              "ruleGroups": 5,
+              "violations": 27
+            },
+            "dropped": []
+          }
+        },
+        {
+          "id": "adjudicate",
+          "status": "failed",
+          "reason": "timeout",
+          "message": "Provider \"claude-code\" did not reply within 120000ms"
+        },
+        {
+          "id": "explain",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/notes-explain-2026-10-24T04-07-10-352Z.json"
+        },
+        {
+          "id": "summary",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/notes-summary-2026-10-24T04-07-10-352Z.json"
+        },
+        {
+          "id": "acr",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/acr-2026-10-24T04-07-10-352Z.json",
+          "exports": [
+            {
+              "ext": "docx",
+              "file": "/Users/tyler/Projects/MANTA-demo/reports/acr-2026-10-24T04-07-10-352Z.docx"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "startedAt": "2026-10-24T04:10:41.895Z",
+      "status": "finished",
+      "ai": {
+        "provider": "claude-code",
+        "skills": [
+          "adjudicate"
+        ],
+        "effort": "standard",
+        "costTier": "low"
+      },
+      "finishedAt": "2026-10-24T04:12:14.523Z",
+      "skills": [
+        {
+          "id": "adjudicate",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/adjudications-2026-10-24T04-07-10-352Z.json"
+        }
+      ]
+    }
+  ]
+}

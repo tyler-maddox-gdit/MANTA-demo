@@ -33,6 +33,11 @@ const WORKBENCH_PORT = 3508;
 
 // ── The cues (DEMO.md says the same) ───────────────────────────────────────
 const GATE_LINE = 'npx manta gate --base ' + DEV_ORIGIN;
+/** The developer's work note after the green gate (SCRIPT.md, Act 2); the release snapshot carries the same text, imported by its nightly. */
+const NOTE_TEXT = 'On the way past the upload dialog: the Last updated grey and the refresh button\'s name.';
+const NOTE_LINE = 'npx manta note "' + NOTE_TEXT + '"';
+/** Where `manta note` writes; never committed here, so every stage and reset removes what a rehearsal wrote. */
+const WORK_NOTES = join(ROOT, '.manta', 'work-notes');
 const SLIDE = 'presentation/index.html';
 const PREVIEW_PORT = 4173;
 const PREVIEW_ORIGIN = 'http://localhost:' + PREVIEW_PORT;
@@ -50,14 +55,14 @@ const CUES = {
   },
   dev: {
     title: 'Stage · Development: the developer\'s gate',
-    type: ['npm run dev                 (in a second terminal; leave it running)', GATE_LINE + '      → New 3, Gate failed, exit 1', 'npm run demo -- fix         → the AI skills\' proposals (pre-run); answer y to apply the patch', GATE_LINE + '      → passed, exit 0'],
+    type: ['npm run dev                 (in a second terminal; leave it running)', GATE_LINE + '      → New 3, Gate failed, exit 1', 'npm run demo -- fix         → the AI skills\' proposals (pre-run); answer y to apply the patch', GATE_LINE + '      → New 0, Fixed 7, passed, exit 0', NOTE_LINE, '                            → a work note over the 7 the gate fixed, for the tester\'s next nightly'],
     next: 'With the claude CLI on this machine, npm run demo -- fix --live runs the skills here instead.',
   },
   release: {
     slide: 'qa',
     title: 'Stage · Release: the next night',
     type: [],
-    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is the upload change with its fixes, as merged. The Nightly run:\n  25 open issues (was 33), the "Last updated" lines and the refresh button gone. Pages → Focus order on\n  /status?upload=BP-2026-10882, a verdict on 2.4.3, attest, Export (ACR draft). Ctrl+C stops both servers.',
+    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is the upload change with its fixes, as merged. The nightly series,\n  its newest date: 25 open issues (was 33). Open Changes: 33 → 25 open issues · 8 closed · 1 work note, the developer\'s, on the\n  seven; the account page\'s grey closed by the scan alone. Pages → Focus order on /status?upload=BP-2026-10882,\n  a verdict on 2.4.3, attest, Export (ACR draft). Ctrl+C stops both servers.',
   },
 };
 const STAGE_LIST = 'Stages: npm run demo -- stage qa | dev | devops | release   (any order; each sets itself up)';
@@ -136,6 +141,7 @@ function reset(flags) {
   must('git', ['checkout', '--', 'demo-data']);
   must('git', ['clean', '-fdx', '--quiet', 'demo-data']);
   for (const dir of ['reports', 'run-records', 'ci-run']) rmSync(join(ROOT, dir), { recursive: true, force: true });
+  rmSync(WORK_NOTES, { recursive: true, force: true });
   const sites = join(ROOT, 'sites');
   if (existsSync(sites)) for (const f of readdirSync(sites)) if (f !== SITE_STORE) rmSync(join(sites, f), { recursive: true, force: true });
   console.log('[DONE] Reset: main at ' + MAIN.tag + ', ' + FEATURE.branch + ' at ' + FEATURE.tag + ', no live PR, snapshots restored.');
@@ -155,6 +161,7 @@ function prepare() {
   must('git', ['checkout', '--quiet', '--', '.']);
   must('git', ['clean', '-fdx', '--quiet', 'demo-data']);
   for (const dir of RUN_DIRS.filter((d) => d !== 'sites').concat('ci-run')) rmSync(join(ROOT, dir), { recursive: true, force: true });
+  rmSync(WORK_NOTES, { recursive: true, force: true });
   const sites = join(ROOT, 'sites');
   if (existsSync(sites)) for (const f of readdirSync(sites)) if (f !== SITE_STORE) rmSync(join(sites, f), { recursive: true, force: true });
   // Detach first: git refuses to move the checked-out branch.

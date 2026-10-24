@@ -38,11 +38,11 @@ jobs:
       # 5d1e7a42 is the "Sign in" path in sites/http_localhost_4173.json.
       - name: Scan, with the AI pass
         if: env.ANTHROPIC_API_KEY != ''
-        run: npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name "Nightly" --skills cluster,fix,explain,summary,adjudicate,acr --provider anthropic-api --no-nudge
+        run: npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name "Nightly" --series nightly --skills cluster,fix,explain,summary,adjudicate,acr --provider anthropic-api --no-nudge
 
       - name: Scan
         if: env.ANTHROPIC_API_KEY == ''
-        run: npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name "Nightly" --no-nudge
+        run: npx manta scan --base http://localhost:4173 --extended --paths 5d1e7a42 --name "Nightly" --series nightly --no-nudge
 
       - name: Name the artifact
         if: always()

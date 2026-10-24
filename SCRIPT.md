@@ -216,6 +216,17 @@ Expect **New 0**, **Fixed 7**, **Tolerated 20**, `Gate passed`, `exit 0`.
   only goes down."
 - Land it: "Fixed before anyone else saw it, by a developer who never read WCAG."
 
+**Beat 4 · The note.** Type `npx manta note "On the way past the upload dialog: the Last updated grey and the
+refresh button's name."`
+
+Expect `Wrote .manta/work-notes/<id>.json: a note by Tyler Maddox on 7 violations the gate fixed (run …)`, the
+seven listed (`color-contrast` on each of the five pages, `button-name` on `/status` and the upload page), and
+`Commit it with the fix: the next date of a series scanned from this checkout imports it.`
+
+- "Seven of the tester's findings just went away without a ticket. One line says why, from the developer, over
+  exactly the seven the gate fixed. It is a file; it travels with the fix; the nightly picks it up. The tester
+  reads it tomorrow." (Say "they commit it with the fix"; the demo commits nothing here.)
+
 If it goes wrong: DEMO.md, the Development stage. The dev server will not start: gate the preview build instead. `fix` refuses:
 `stage dev` again.
 
@@ -280,12 +291,20 @@ Setup, before the audience or during Act 3's gate wait (Ctrl+C the dev server fr
 `npm run demo -- stage release`. It builds the upload change with the developer's fixes, the site as it
 merges, at http://localhost:4173, and starts the Workbench on the release snapshot at http://127.0.0.1:3508/.
 
-**Beat 1 · The backlog moved.** Open the **Nightly** run.
+**Beat 1 · The backlog moved.** Open the **Nightly** series, its newest date (the masthead names the series and
+lists both dates). Then open **Changes**, under the overview.
 
-- "Yesterday 33. This morning 25. The last-updated lines and the refresh buttons are gone from the
-  tester's list. Eight: the seven the developer's gate counted, and the same grey on the account page, which
-  the gate never scans and the nightly does. Nobody filed a ticket: the developer fixed them on the way past,
-  because MANTA saw they shared a cause with something new."
+- "Yesterday 33. This morning 25." Changes: `Changes since "Nightly" · 33 → 25 open issues · 1 found · 8 closed ·
+  1 work note`, then by page. "The last-updated lines and the refresh buttons are gone from the tester's list.
+  Eight: the seven the developer's gate counted, and the same grey on the account page, which the gate never
+  scans and the nightly does." (The one found is a needs-review contrast question on the dialog's hint, not a
+  violation: the open count still falls by eight.)
+- **The note.** The developer's work note, one line on each page it names: Tyler Maddox, yesterday, the gate,
+  the issues it names here and where else, then the text: *On the way past the upload dialog: the Last updated
+  grey and the refresh button's name.* "Nobody filed a ticket, and nobody has to ask. The developer said what
+  they did, over exactly the seven, and the nightly carried it here. The account page's grey has no note: the
+  nightly found that one closed on its own." Press **Notes** on a closed "Last updated" row: the same note in
+  the issue's own activity, with the scan's `Found` and `Closed by the scan` around it.
 
 **Beat 2 · The fourth defect.** The Pages dialog, the **Focus order** column, on
 `/status?upload=BP-2026-10882`.

@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "id": "dfc9f7d1-04d0-4fbd-9318-f8b84278e310",
+  "startedAt": "2026-10-24T04:13:14.043Z",
+  "name": "Nightly",
+  "series": "nightly",
+  "urls": [
+    "http://localhost:4173/",
+    "http://localhost:4173/apply",
+    "http://localhost:4173/status",
+    "http://localhost:4173/signin",
+    "http://localhost:4173/status?upload=BP-2026-10882"
+  ],
+  "options": {
+    "headless": true,
+    "tags": [
+      "wcag2a",
+      "wcag2aa",
+      "wcag21a",
+      "wcag21aa"
+    ],
+    "extended": true
+  },
+  "status": "finished",
+  "token": "2026-10-24T04-14-35-956Z",
+  "finishedAt": "2026-10-24T04:14:36.157Z",
+  "pages": [
+    {
+      "url": "http://localhost:4173/"
+    },
+    {
+      "url": "http://localhost:4173/apply"
+    },
+    {
+      "url": "http://localhost:4173/status"
+    },
+    {
+      "url": "http://localhost:4173/signin"
+    },
+    {
+      "url": "http://localhost:4173/status?upload=BP-2026-10882"
+    }
+  ],
+  "passes": [
+    {
+      "startedAt": "2026-10-24T04:15:16.072Z",
+      "status": "finished",
+      "ai": {
+        "provider": "claude-code",
+        "skills": [
+          "cluster",
+          "fix",
+          "explain",
+          "summary",
+          "acr"
+        ],
+        "effort": "standard",
+        "scope": "top-cluster",
+        "costTier": "high"
+      },
+      "finishedAt": "2026-10-24T04:16:17.212Z",
+      "skills": [
+        {
+          "id": "cluster",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/cluster-2026-10-24T04-14-35-956Z.json"
+        },
+        {
+          "id": "fix",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/fix-proposals-2026-10-24T04-14-35-956Z.json",
+          "exports": [
+            {
+              "ext": "patch",
+              "file": "/Users/tyler/Projects/MANTA-demo/reports/fix-2026-10-24T04-14-35-956Z.patch"
+            }
+          ],
+          "iterations": [
+            {
+              "id": "fix",
+              "status": "written",
+              "iteration": {
+                "key": "cluster-1",
+                "index": 0,
+                "total": 1
+              }
+            }
+          ],
+          "coverage": {
+            "covered": {
+              "clusters": 1,
+              "ruleGroups": 0,
+              "violations": 15
+            },
+            "total": {
+              "clusters": 1,
+              "ruleGroups": 4,
+              "violations": 20
+            },
+            "dropped": []
+          }
+        },
+        {
+          "id": "explain",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/notes-explain-2026-10-24T04-14-35-956Z.json"
+        },
+        {
+          "id": "summary",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/notes-summary-2026-10-24T04-14-35-956Z.json"
+        },
+        {
+          "id": "acr",
+          "status": "written",
+          "file": "/Users/tyler/Projects/MANTA-demo/reports/acr-2026-10-24T04-14-35-956Z.json",
+          "exports": [
+            {
+              "ext": "docx",
+              "file": "/Users/tyler/Projects/MANTA-demo/reports/acr-2026-10-24T04-14-35-956Z.docx"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

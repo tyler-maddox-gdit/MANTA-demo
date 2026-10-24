@@ -41,9 +41,10 @@ _Avoid_ "the demo PR": the live PR is the one the DevOps stage opens and a reset
 
 ## Snapshot run
 
-A committed MANTA run under `demo-data/`, laid out as a `--data-dir`: `pr` (the feature branch's gated run with
-its fix), `nightly` (a nightly run of `main` with its AI notes added afterwards) and `release` (the same on the change
-with the fixes applied).
+A committed MANTA data dir under `demo-data/`: `pr` (the feature branch's gated run with its fix), `nightly`
+(the first date of the series `nightly`, a nightly run of `main` with its AI notes added afterwards) and `release`
+(both dates of the series: the same on the change with the fixes applied, with the developer's work note over the
+seven the gate fixed, imported from `.manta/work-notes/` by the scan).
 
 _Avoid_ "fixture" or "recording": it is a real run, copied whole.
 

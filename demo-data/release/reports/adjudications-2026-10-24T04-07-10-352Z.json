@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "sourceReportTimestamp": "2026-10-24T04-07-10-352Z",
+  "adjudications": [
+    {
+      "key": "http://localhost:4173/apply|::|form-field-multiple-labels|::|#dob",
+      "verdict": "cannot-tell",
+      "rationale": "Two labels are named, label[for=\"dob\"] and .hint-label, but whether the first alone carries all necessary information depends on the label and hint wording, and the payload includes no text from either."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#dob",
+      "verdict": "cannot-tell",
+      "rationale": "The reported focus outline is 1.66:1 on white, below 3:1, but the payload carries no border, background or shadow values for the focused state, so a second cue can be neither confirmed nor ruled out."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#first-name",
+      "verdict": "cannot-tell",
+      "rationale": "The outline rgb(255,190,46) measures 1.66:1 on white, below 3:1, but whether a border, fill or shadow change also marks focus on this field is not in the payload; that needs the rendered focused input."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#household-size",
+      "verdict": "cannot-tell",
+      "rationale": "The select's focus outline measures 1.66:1 against white, under 3:1, but no data on border, fill or shadow in the focused state is included, so a second identifying cue cannot be judged here."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#income",
+      "verdict": "cannot-tell",
+      "rationale": "Only the outline is measured, 1.66:1 on rgb(255,255,255). Whether another visual cue identifies focus on this input is not answerable from the html snippet or check data."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#last-name",
+      "verdict": "cannot-tell",
+      "rationale": "Only the outline was measured, 1.66:1 against rgb(255,255,255). Whether some other visual change identifies focus on this input cannot be read from the markup or the check data."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|non-text-contrast-border|::|#ssn",
+      "verdict": "cannot-tell",
+      "rationale": "outline rgb(255,190,46) on white at 1.66:1 is the only measurement; whether another visual cue marks focus on this field requires seeing the rendered input, which the payload does not provide."
+    },
+    {
+      "key": "http://localhost:4173/apply|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "The header a.skip points at \"#main-content\" while no element has that id or name — the landmark here is main#main — so Enter moves focus nowhere and the page's dedicated bypass control does nothing, with no alternative keyboard bypass in evidence."
+    },
+    {
+      "key": "http://localhost:4173/signin|::|non-text-contrast-border|::|#email",
+      "verdict": "cannot-tell",
+      "rationale": "The focus outline measures 1.66:1 on white, below 3:1, but the payload reports nothing about border, fill or shadow changes on this field, so whether another cue identifies focus needs the rendered page."
+    },
+    {
+      "key": "http://localhost:4173/signin|::|non-text-contrast-border|::|#password",
+      "verdict": "cannot-tell",
+      "rationale": "outline rgb(255,190,46) at 1.66:1 against rgb(255,255,255) is the only datum; whether some other visual change marks focus on this input is not in the html snippet or check data."
+    },
+    {
+      "key": "http://localhost:4173/signin|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "The header a.skip links to \"#main-content\" but no element has that id or name — the landmark is main#main — so Enter moves focus nowhere and the page's only dedicated bypass control is inert."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "The anchor is the case-id link in the first cell of a table.cases row, its fragment matching that row's case — content markup inside the table, not a control offered for bypassing repeated blocks."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(2) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "href=\"#BP-2026-10431\" is the row's case-id link in the first td of table.cases: an in-content link, not a bypass mechanism, so the missing target does not make this a bypass-blocks failure."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(3) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "href=\"#BP-2026-09977\" sits in the first cell of the third table.cases row and names that row's case — a content link within the data table rather than a control for bypassing repeated blocks."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(4) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "href=\"#BP-2026-09120\" is the case-id link in the fourth row's first cell of table.cases: in-content row markup, not a bypass mechanism for the page's repeated blocks."
+    },
+    {
+      "key": "http://localhost:4173/status?upload=BP-2026-10882|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "On this state too the header a.skip targets \"#main-content\" and no element has that id or name, so Enter does not move focus; the dedicated bypass control is inert and no alternative keyboard bypass is in evidence."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "The anchor is the first cell of a case row in table.cases and its fragment is that row's case id — a per-row content link, not a control offered to bypass repeated blocks, so the missing target is not a bypass failure."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(2) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "href=\"#BP-2026-10431\" sits in the first td of a row in table.cases, matching that row's case id: in-content row link, not a bypass mechanism for the page's repeated blocks."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(3) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "href=\"#BP-2026-09977\" is in the first cell of a table.cases row, matching that row's case id — a content link within the table, not a mechanism for bypassing repeated blocks."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div > table > tbody > tr:nth-of-type(4) > td:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "href=\"#BP-2026-09120\" is the case-id link in the fourth row's first cell of table.cases: an in-content link, not a bypass control, so its missing target does not bear on bypassing blocks."
+    },
+    {
+      "key": "http://localhost:4173/status|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "The header a.skip targets \"#main-content\" and no element on the page has that id or name, so Enter leaves focus in place. The one control offered for bypassing the repeated header is inert, with no other keyboard bypass shown."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|div#root > header > a",
+      "verdict": "likely-violation",
+      "rationale": "The header's a.skip targets \"#main-content\" but no element has that id or name (the landmark is main#main), so Enter moves focus nowhere. The page's one dedicated bypass control is inert and no other keyboard bypass is in evidence."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|main#main > section:nth-of-type(3) > ul > li:nth-of-type(1) > a",
+      "verdict": "likely-pass",
+      "rationale": "This anchor is a list item deep inside main#main > section.news, a content link rather than a bypass control at the top of the page; its missing #news target does not bear on bypassing the repeated blocks, which main and the section structure cover."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|main#main > section:nth-of-type(3) > ul > li:nth-of-type(2) > a",
+      "verdict": "likely-pass",
+      "rationale": "Second of three identical href=\"#news\" links in a ul inside main#main > section.news: an in-content link, not a mechanism offered to bypass repeated blocks, so the missing target does not make this a bypass failure."
+    },
+    {
+      "key": "http://localhost:4173/|::|skip-link-works|::|main#main > section:nth-of-type(3) > ul > li:nth-of-type(3) > a",
+      "verdict": "likely-pass",
+      "rationale": "Third identical href=\"#news\" link in the ul inside main#main > section.news: an in-content link, not a bypass control; the missing #news target does not affect bypassing the page's repeated blocks."
+    }
+  ],
+  "skipped": [],
+  "counts": {
+    "likelyViolation": 5,
+    "likelyPass": 11,
+    "cannotTell": 9,
+    "skipped": 0
+  },
+  "provenance": {
+    "provider": "claude-code",
+    "endpoint": "api.anthropic.com",
+    "tier": "standard",
+    "requested": {
+      "model": "claude-opus-5"
+    },
+    "model": "claude-opus-5",
+    "mechanism": "structured_outputs"
+  }
+}
