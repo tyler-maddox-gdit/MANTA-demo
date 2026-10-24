@@ -287,8 +287,8 @@ Press **Release** on the slide (or `1`): QA and release lights again.
 
 ## Act 4 · Release: back in the tester's seat, the next morning (3 min)
 
-Setup, before the audience or during Act 3's gate wait (Ctrl+C the dev server from Act 2 first):
-`npm run demo -- stage release`. It builds the upload change with the developer's fixes, the site as it
+Setup, before the audience or during Act 3's gate wait: `npm run demo -- stage release`. It stops a QA stage left
+running; the dev server from Act 2 is not in its way. It builds the upload change with the developer's fixes, the site as it
 merges, at http://localhost:4173, and starts the Workbench on the release snapshot at http://127.0.0.1:3508/.
 
 **Beat 1 · The backlog moved.** Open the **Nightly** series, its newest date (the masthead names the series and

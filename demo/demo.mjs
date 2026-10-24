@@ -4,7 +4,7 @@
 // Usage: npm run demo -- <command>   (or: node demo/demo.mjs <command>). `help` lists the commands.
 // The cue strings below are the ones DEMO.md prints; change them in both places.
 import { spawn, spawnSync } from 'node:child_process';
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
@@ -38,6 +38,8 @@ const NOTE_TEXT = 'On the way past the upload dialog: the Last updated grey and 
 const NOTE_LINE = 'npx manta note "' + NOTE_TEXT + '"';
 /** Where `manta note` writes; never committed here, so every stage and reset removes what a rehearsal wrote. */
 const WORK_NOTES = join(ROOT, '.manta', 'work-notes');
+/** The pids of the servers the last stage or `workbench` started, outside the repo so no git command sees the file. */
+const SERVERS_FILE = join(tmpdir(), 'manta-demo-servers.json');
 const SLIDE = 'presentation/index.html';
 const PREVIEW_PORT = 4173;
 const PREVIEW_ORIGIN = 'http://localhost:' + PREVIEW_PORT;
@@ -130,6 +132,7 @@ function reset(flags) {
     must('git', ['reset', '--hard', '--quiet']);
     must('git', ['clean', '-fd', '--quiet']);
   }
+  stopLeftoverServers();
   // Detach first, so neither story branch is the checked-out one while it is moved.
   must('git', ['checkout', '--quiet', '--detach', MAIN.tag]);
   for (const { branch, tag } of [MAIN, FEATURE]) must('git', ['branch', '--force', branch, tag]);
@@ -154,6 +157,7 @@ function reset(flags) {
  * checked out. `main` is never touched; origin is never pushed to here.
  */
 function prepare() {
+  stopLeftoverServers();
   must('git', ['fetch', 'origin', '--prune', '--tags', '--force', '--quiet']);
   if (!revParse('refs/tags/' + FEATURE.tag + '^{commit}')) die('Tag ' + FEATURE.tag + ' is missing. Set the story tags first (DEMO.md, Setup Tyler does once).');
   const dirty = dirtyFiles();
@@ -200,6 +204,24 @@ async function stage(name, flags) {
   printCue('dev');
 }
 
+/** Whether a process with this pid is running. */
+const alive = (pid) => { try { process.kill(pid, 0); return true; } catch (e) { return e.code === 'EPERM'; } };
+
+/** Records this process and its servers, so the next stage can stop them if this one is left running. */
+const recordServers = (children) => writeFileSync(SERVERS_FILE, JSON.stringify([process.pid, ...children.map((c) => c.pid)]));
+const forgetServers = () => rmSync(SERVERS_FILE, { force: true });
+
+/** Stops the preview and Workbench a previous stage or `workbench` left running, by the pids it recorded, so their ports are free here. */
+function stopLeftoverServers() {
+  let pids;
+  try { pids = JSON.parse(readFileSync(SERVERS_FILE, 'utf8')); } catch { return; }
+  forgetServers();
+  const live = (Array.isArray(pids) ? pids : []).filter((pid) => Number.isInteger(pid) && pid !== process.pid && alive(pid));
+  if (!live.length) return;
+  console.log('Stopping the servers the last stage or workbench left running (pid ' + live.join(', ') + ').');
+  for (const pid of live) try { process.kill(pid); } catch { /* gone since the check */ }
+}
+
 /** Whether nothing listens on 127.0.0.1:<port>. */
 const portFree = (port) => new Promise((resolve) => {
   const probe = createServer();
@@ -211,6 +233,8 @@ const portFree = (port) => new Promise((resolve) => {
 async function serveStage(name, snapshotName, flags) {
   const port = flags.port ?? WORKBENCH_PORT;
   for (const [p, what] of [[PREVIEW_PORT, 'the preview'], [port, 'the Workbench']]) {
+    // A server stopped just now lets go of its port a moment later.
+    for (let i = 0; i < 20 && !(await portFree(p)); i++) await new Promise((r) => setTimeout(r, 250));
     if (!(await portFree(p))) die('Port ' + p + ' is in use, so ' + what + ' cannot start. Stop what holds it' + (p === port ? ', or: npm run demo -- stage ' + name + ' --port ' + (port + 100) : '') + '.');
   }
   const vite = join(ROOT, 'node_modules', 'vite', 'bin', 'vite.js');
@@ -226,7 +250,8 @@ async function serveStage(name, snapshotName, flags) {
     spawn(process.execPath, [vite, 'preview', '--port', String(PREVIEW_PORT)], { cwd: ROOT, stdio: 'inherit' }),
     spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(port), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit' }),
   ];
-  const stop = () => { for (const c of children) if (c.exitCode === null && !c.killed) c.kill(); };
+  recordServers(children);
+  const stop = () => { for (const c of children) if (c.exitCode === null && !c.killed) c.kill(); forgetServers(); };
   process.on('SIGINT', () => { stop(); process.exit(130); });
   process.on('exit', stop);
   for (const c of children) c.on('exit', (code) => { if (code) console.error('[ERROR] A server stopped (see above); the other was stopped too. Fix it and run the stage again.'); stop(); if (code) process.exitCode = code; });
@@ -341,9 +366,14 @@ function workbench(name = 'nightly', flags) {
   if (!existsSync(join(dataDir, 'reports'))) die('No reports/ in ' + dataDir + ': name a snapshot (nightly, release or pr) or ci-run.');
   if (!existsSync(join(MANTA_PKG, 'ui', 'cli.ts'))) die('MANTA is not installed here: run npm ci first.');
   const tsx = createRequire(join(MANTA_PKG, 'package.json')).resolve('tsx/cli');
+  stopLeftoverServers();
   console.log('Workbench on ' + dataDir + '. Open the URL below, then the run\'s report. Ctrl+C stops it.');
-  const r = spawnSync(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(flags.port ?? WORKBENCH_PORT), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit', shell: false });
-  process.exitCode = r.status ?? 0;
+  const child = spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(flags.port ?? WORKBENCH_PORT), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit' });
+  recordServers([child]);
+  const stop = () => { if (child.exitCode === null && !child.killed) child.kill(); forgetServers(); };
+  process.on('SIGINT', () => { stop(); process.exit(130); });
+  process.on('exit', stop);
+  child.on('exit', (code) => { stop(); process.exitCode = code ?? 0; });
 }
 
 /** Whether the Chromium MANTA scans with is installed: MANTA's own Playwright launches it headless, as a scan does, and closes it. */

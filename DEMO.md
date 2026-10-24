@@ -126,7 +126,9 @@ made as CI makes it, with its AI notes **pre-run** afterwards) together, until C
 - Hand off: "33 on the list, and nobody owns one. Watch what happens when a developer touches the page next to
   them."
 
-Ctrl+C stops both servers before the next stage.
+Ctrl+C stops both servers before the next stage. Forgotten, they are stopped by the next stage command or `reset`:
+every stage starts by stopping the preview and Workbench the last one left running (their pids are kept in a file
+in the system temp folder), so the ports 4173 and 3508 are free again. Only something else on those ports stops a stage.
 
 **If it goes wrong.** The Workbench will not start: open `demo-data\nightly\reports\index.html` from disk. It
 is read-only (no verdicts or rescans), but every finding and the AI notes are there. Port 3508 in
@@ -321,9 +323,9 @@ Say "the fix skill ran in this job and posted these itself". Their wording diffe
 
 ## Stage · Release: the next morning, back in the Workbench (about 3 min)
 
-**Setup.** Ctrl+C the dev server from the Development stage first (port 4173 and 3508 must be free; the dev
-server's 5173 is not in the way, but the stage discards its applied patch). It can run during the DevOps
-stage's gate wait: it only touches this PC.
+**Setup.** The dev server from the Development stage (5173) is not in the way, and a QA stage left running is
+stopped by this command; Ctrl+C the dev server when convenient (the stage discards its applied patch, which the
+dev server would reload). It can run during the DevOps stage's gate wait: it only touches this PC.
 ```
 npm run demo -- stage release
 ```
