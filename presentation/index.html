@@ -85,7 +85,9 @@
   .node[data-phase="test"]      { left: 26.49%; top: 82.36%; }
   .node[data-phase="release"]   { left: 11.96%; top: 37.64%; }
 
-  footer { margin-top: 1rem; color: var(--ink-soft); font-size: .85em; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  footer { margin-top: 1rem; color: var(--ink-soft); font-size: .85em; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .brand { display: inline-flex; background: #000; padding: .55rem 1rem; border-radius: 6px; }
+  .brand img { display: block; height: 1.5rem; width: auto; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   @media (max-width: 860px) {
@@ -94,7 +96,8 @@
   }
   @media (max-height: 900px) and (min-width: 861px) {
     body { font-size: clamp(15px, 1.1vw, 18px); padding-top: 12px; }
-    footer { display: none; }
+    footer { margin-top: .5rem; }
+    footer #status { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; }
@@ -174,7 +177,7 @@
 </main>
 
 <footer>
-  <span>MANTA, the Section 508 accessibility toolkit. The Benefits Portal is a demonstration site for no real agency.</span>
+  <span class="brand"><img alt="GDIT" width="360" height="74" src="data:image/png;base64,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"></span>
   <span id="status">The whole loop</span>
 </footer>
 
