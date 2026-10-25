@@ -14,7 +14,7 @@
         "MANTA-86fdab43",
         "MANTA-30b3d9ef"
       ],
-      "text": "On the way past the upload dialog: the Last updated grey and the refresh button's name.",
+      "text": "During dev on upload dialog I fixed a few backlog issues with cluster",
       "at": "2026-10-24T04:13:05.557Z",
       "by": {
         "name": "Tyler Maddox",

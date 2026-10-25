@@ -215,8 +215,7 @@ Expect **New 0**, **Fixed 7**, **Tolerated 20**, `Gate passed`, `exit 0`.
   only goes down."
 - Land it: "Fixed before anyone else saw it, by a developer who never read WCAG."
 
-**Beat 4 · The note.** Type `npx manta note "On the way past the upload dialog: the Last updated grey and the
-refresh button's name."`
+**Beat 4 · The note.** Type `npx manta note "During dev on upload dialog I fixed a few backlog issues with cluster"`
 
 Expect `Wrote .manta/work-notes/<id>.json: a note by Tyler Maddox on 7 violations the gate fixed (run …)`, the
 seven listed (`color-contrast` on each of the five pages, `button-name` on `/status` and the upload page), and
@@ -302,8 +301,8 @@ lists both dates). Then open **Changes**, under the overview.
   scans and the nightly does." (The one found is a needs-review contrast question on the dialog's hint, not a
   violation: the open count still falls by eight.)
 - **The note.** The developer's work note, one line on each page it names: Tyler Maddox, yesterday, the gate,
-  the issues it names here and where else, then the text: *On the way past the upload dialog: the Last updated
-  grey and the refresh button's name.* "Nobody filed a ticket, and nobody has to ask. The developer said what
+  the issues it names here and where else, then the text: *During dev on upload dialog I fixed a few backlog issues
+  with cluster.* "Nobody filed a ticket, and nobody has to ask. The developer said what
   they did, over exactly the seven, and the nightly carried it here. The account page's grey has no note: the
   nightly found that one closed on its own." Press **Notes** on a closed "Last updated" row: the same note in
   the issue's own activity, with the scan's `Found` and `Closed by the scan` around it.

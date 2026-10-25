@@ -35,7 +35,7 @@ const WORKBENCH_PORT = 3508;
 // ── The cues (DEMO.md says the same) ───────────────────────────────────────
 const GATE_LINE = 'npx manta gate --base ' + DEV_ORIGIN;
 /** The developer's work note after the green gate (SCRIPT.md, Act 2); the release snapshot carries the same text, imported by its nightly. */
-const NOTE_TEXT = 'On the way past the upload dialog: the Last updated grey and the refresh button\'s name.';
+const NOTE_TEXT = 'During dev on upload dialog I fixed a few backlog issues with cluster';
 const NOTE_LINE = 'npx manta note "' + NOTE_TEXT + '"';
 /** Where `manta note` writes; never committed here, so every stage and reset removes what a rehearsal wrote. */
 const WORK_NOTES = join(ROOT, '.manta', 'work-notes');

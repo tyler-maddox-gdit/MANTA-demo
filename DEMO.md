@@ -217,7 +217,7 @@ pages, named by the component fix), **Tolerated 20**, and `Gate passed`, `exit 0
 
 **4 · The note.** Type:
 ```
-npx manta note "On the way past the upload dialog: the Last updated grey and the refresh button's name."
+npx manta note "During dev on upload dialog I fixed a few backlog issues with cluster"
 ```
 **See.** `Wrote .manta/work-notes/<id>.json: a note by Tyler Maddox on 7 violations the gate fixed (run <token>).`,
 the seven listed by rule and page, and `Commit it with the fix: the next date of a series scanned from this

@@ -44,7 +44,7 @@ npm run demo -- stage dev
 npx manta gate --base http://localhost:5173
 npm run demo -- fix
 npx manta gate --base http://localhost:5173
-npx manta note "On the way past the upload dialog: the Last updated grey and the refresh button's name."
+npx manta note "During dev on upload dialog I fixed a few backlog issues with cluster"
 ```
 
 `fix` asks `Apply these 3 fixes? [y/N]`: `y`. Gates: `New 3` exit 1, then `New 0 · Fixed 7 · Tolerated 20` exit 0. `note`: `Wrote .manta/work-notes/… a note by Tyler Maddox on 7 violations`. Ctrl+C `npm run dev` when done.
