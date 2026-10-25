@@ -12,6 +12,7 @@ import { dirname, join, resolve } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import { fileURLToPath } from 'node:url';
 import { renderFixAnswer } from './fix-answer.mjs';
+import { recordedRemarks, startPreRunModel, THINKING_MS } from './pre-run-model.mjs';
 import { readRun, tokensIn } from './snapshot-run.mjs';
 
 // ── Constants ───────────────────────────────────────────────────────────────
@@ -64,7 +65,7 @@ const CUES = {
     slide: 'test',
     title: 'Stage · Release: the next night',
     type: [],
-    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is the upload change with its fixes, as merged. The nightly series,\n  its newest date: 25 open issues (was 33). Open Changes: 33 → 25 open issues · 8 closed · 1 work note, the developer\'s, on the\n  seven; the account page\'s grey closed by the scan alone. Pages → Focus order on /status?upload=BP-2026-10882,\n  a verdict on 2.4.3, attest, Export (ACR draft). Ctrl+C stops both servers.',
+    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is the upload change with its fixes, as merged. The nightly series,\n  its newest date: 25 open issues (was 33). Open Changes: 33 → 25 open issues · 8 closed · 1 work note, the developer\'s, on the\n  seven; the account page\'s grey closed by the scan alone. Pages → Focus order on /status?upload=BP-2026-10882,\n  a verdict on 2.4.3, attest, Export → Draft ACR: the pre-run model on this PC answers from the recording in ' + THINKING_MS / 1000 + ' s (say "pre-run").\n  Ctrl+C stops both servers.',
   },
 };
 const STAGE_LIST = 'Stages: npm run demo -- stage qa | dev | devops | release   (any order; each sets itself up)';
@@ -244,14 +245,15 @@ async function serveStage(name, snapshotName, flags) {
   if (!existsSync(join(MANTA_PKG, 'ui', 'cli.ts'))) die('MANTA is not installed here: run npm ci first.');
   const tsx = createRequire(join(MANTA_PKG, 'package.json')).resolve('tsx/cli');
   must(process.execPath, [vite, 'build']);
+  const model = await preRunModelFor(snapshotName, dataDir);
   printCue(name);
   // Only node is spawned (npm and vite are .cmd shims on Windows, which spawn cannot run without a shell).
   const children = [
     spawn(process.execPath, [vite, 'preview', '--port', String(PREVIEW_PORT)], { cwd: ROOT, stdio: 'inherit' }),
-    spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(port), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit' }),
+    spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(port), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit', env: { ...process.env, ...model?.env } }),
   ];
   recordServers(children);
-  const stop = () => { for (const c of children) if (c.exitCode === null && !c.killed) c.kill(); forgetServers(); };
+  const stop = () => { for (const c of children) if (c.exitCode === null && !c.killed) c.kill(); model?.close(); forgetServers(); };
   process.on('SIGINT', () => { stop(); process.exit(130); });
   process.on('exit', stop);
   for (const c of children) c.on('exit', (code) => { if (code) console.error('[ERROR] A server stopped (see above); the other was stopped too. Fix it and run the stage again.'); stop(); if (code) process.exitCode = code; });
@@ -361,19 +363,52 @@ function ciRun(runId, flags) {
 }
 
 /** The Workbench on one snapshot (demo-data/<name>) or on ci-run/, from the MANTA package npm ci installed. */
-function workbench(name = 'nightly', flags) {
+async function workbench(name = 'nightly', flags) {
   const dataDir = name === 'ci-run' ? join(ROOT, 'ci-run') : join(ROOT, 'demo-data', name);
   if (!existsSync(join(dataDir, 'reports'))) die('No reports/ in ' + dataDir + ': name a snapshot (nightly, release or pr) or ci-run.');
   if (!existsSync(join(MANTA_PKG, 'ui', 'cli.ts'))) die('MANTA is not installed here: run npm ci first.');
   const tsx = createRequire(join(MANTA_PKG, 'package.json')).resolve('tsx/cli');
   stopLeftoverServers();
+  const model = await preRunModelFor(name, dataDir);
   console.log('Workbench on ' + dataDir + '. Open the URL below, then the run\'s report. Ctrl+C stops it.');
-  const child = spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(flags.port ?? WORKBENCH_PORT), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit' });
+  const child = spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(flags.port ?? WORKBENCH_PORT), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit', env: { ...process.env, ...model?.env } });
   recordServers([child]);
-  const stop = () => { if (child.exitCode === null && !child.killed) child.kill(); forgetServers(); };
+  const stop = () => { if (child.exitCode === null && !child.killed) child.kill(); model?.close(); forgetServers(); };
   process.on('SIGINT', () => { stop(); process.exit(130); });
   process.on('exit', stop);
   child.on('exit', (code) => { stop(); process.exitCode = code ?? 0; });
+}
+
+/**
+ * The release snapshot's ACR, drafted on stage with no model on the PC. The committed draft is taken out of the
+ * snapshot's newest run (its artifact and document, and the pass's acr entry in the run record), so the Export dialog
+ * offers "Draft ACR"; the pre-run model is started holding the remarks that draft recorded, and the Workbench is
+ * pointed at it, so the draft it makes is the same document (demo/pre-run-model.mjs). Any other snapshot: nothing,
+ * and the dialog finds no provider. prepare() and reset put the committed draft back.
+ */
+async function preRunModelFor(snapshotName, dataDir) {
+  if (snapshotName !== 'release') return undefined;
+  const reports = join(dataDir, 'reports');
+  const token = tokensIn(reports).at(-1);
+  const acrPath = 'demo-data/' + snapshotName + '/reports/acr-' + token + '.json';
+  // The recording is the committed draft: on disk it may already be gone, or be a draft this model answered.
+  const acr = out('git', ['show', 'HEAD:' + acrPath]);
+  if (!acr) die('No committed ' + acrPath + ': the release snapshot has no ACR to record (DEMO.md, Refreshing what was done).');
+  for (const ext of ['json', 'docx']) rmSync(join(reports, 'acr-' + token + '.' + ext), { force: true });
+  const records = join(dataDir, 'run-records');
+  for (const f of readdirSync(records)) {
+    const file = join(records, f);
+    const record = JSON.parse(readFileSync(file, 'utf8'));
+    if (record.token !== token) continue;
+    for (const pass of record.passes ?? []) {
+      pass.skills = pass.skills.filter((s) => s.id !== 'acr');
+      pass.ai.skills = pass.ai.skills.filter((s) => s !== 'acr');
+    }
+    writeFileSync(file, JSON.stringify(record, null, 2));
+  }
+  const model = await startPreRunModel(recordedRemarks(JSON.parse(acr)));
+  console.log('[DONE] The ACR taken out of the ' + snapshotName + ' snapshot; the pre-run model holds its remarks at ' + model.origin + ' (Export → Draft ACR, provider Anthropic API).');
+  return model;
 }
 
 /** Whether the Chromium MANTA scans with is installed: MANTA's own Playwright launches it headless, as a scan does, and closes it. */
@@ -475,7 +510,7 @@ switch (command) {
   case 'fix': await fix(flags); break;
   case 'snapshot': snapshot(a, b, flags); break;
   case 'ci-run': ciRun(a, flags); break;
-  case 'workbench': workbench(a, flags); break;
+  case 'workbench': await workbench(a, flags); break;
   case 'status': status(); break;
   case 'setup-github': await import('./setup-github.mjs'); break;
   case 'help': case undefined: help(); break;

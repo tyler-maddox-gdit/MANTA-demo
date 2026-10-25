@@ -332,7 +332,10 @@ npm run demo -- stage release
 ```
 It puts the feature branch in the working tree, applies the developer's fixes (the same patch `fix` applies),
 builds it, then runs the preview on http://localhost:4173 and the Workbench on the **release snapshot** (a
-nightly run of that build: the site as it merges, AI notes **pre-run**), until Ctrl+C.
+nightly run of that build: the site as it merges, AI notes **pre-run**), until Ctrl+C. It also takes the committed ACR out
+of the release snapshot and starts the **pre-run model**, a stand-in for the Anthropic API on this PC
+(`demo/pre-run-model.mjs`) holding that draft's remarks, so **Draft ACR** in the Export dialog runs MANTA's acr skill for
+real, with no model on the PC, and lands on the same document.
 
 **Type.** Nothing more. Open http://127.0.0.1:3508/.
 
@@ -346,7 +349,8 @@ nightly run of that build: the site as it merges, AI notes **pre-run**), until C
 2. **Focus order.** The Pages dialog's **Focus order** column on `/status?upload=BP-2026-10882`: the numbered
    stops walk past the page behind the open dialog, into the dialog at 15 to 18, and straight out into the footer.
    Record a verdict on 2.4.3 with the checklist, and attest.
-3. **Export** on the Nightly run: the ACR draft (a Word document) and the USPS defects export.
+3. **Export** on the Nightly run: **Draft ACR** (provider Anthropic API: the pre-run model answers the acr skill from the
+   recording in about 6 s, say **pre-run**), then the ACR (a Word document) and the USPS defects export.
 
 **Say.**
 - "Yesterday 33, this morning 25. Eight: the seven the developer's gate counted, and the same grey on the
@@ -360,8 +364,8 @@ nightly run of that build: the site as it merges, AI notes **pre-run**), until C
 
 **If it goes wrong.** The Workbench will not start: open `demo-data\release\reports\index.html` from disk. It
 is read-only, but every finding and the Focus order picture are there. Port 3508 in use:
-`npm run demo -- stage release --port 3600`. The export dialog fails: open the committed ACR draft in
-`demo-data\release\reports\`.
+`npm run demo -- stage release --port 3600`. **Draft ACR** or the export dialog fails: the stage took the committed draft
+out of the snapshot; `git checkout -- demo-data` puts it back, then open it from `demo-data\release\reports\`.
 
 ---
 
@@ -447,7 +451,9 @@ so it is safe to run again: when the read token expires, or to make a fresh depl
   2. empty the root `reports/` and `run-records/` and copy `demo-data/nightly/reports` and `run-records` in their place, so the first date is present and the scan becomes the second;
   3. the same scan line as the nightly's, which ends `[NOTE] Imported 1 work note from .manta/work-notes/.`, then the pass with `--skills cluster,fix,explain,summary,acr` (adjudicate is not needed on this date, and the claude-code provider often times out on it);
   4. `npm run demo -- snapshot release`, `git checkout -- src`, `rm -r .manta/work-notes`, and commit to `main`.
-  The note file is never committed: the live pull request would show it before the fix exists.
+  The note file is never committed: the live pull request would show it before the fix exists. The Release stage's **Draft ACR**
+  replays this date's committed `acr-<token>.json` (the model's remarks, minus the scan notes MANTA appends), so refreshing
+  the snapshot refreshes the recording.
 - The story tags, after any commit to `main` (the stage commands run the `demo/demo.mjs` of the branch they check out, so the feature branch must carry `main`'s): `git rebase main feature/upload-documents`, `git tag -f story/main main`, `git tag -f story/feature feature/upload-documents`, `git push -f origin main feature/upload-documents story/main story/feature`. The golden branch stays where it is unless its PR is being remade.
 - The golden PR's post: `GITHUB_REPOSITORY=tyler-maddox-gdit/MANTA-demo GITHUB_TOKEN=$(gh auth token) npx manta post --pr <n> --run <token>` from the repo root with the pr snapshot's `reports/` copied to `reports/`. Never close the PR, never push to its branch, never press Commit suggestion.
 

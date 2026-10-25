@@ -63,7 +63,9 @@ Prints the live PR and golden PR links. Browser from here. Never press Merge.
 npm run demo -- stage release
 ```
 
-Workbench http://127.0.0.1:3508/: Nightly shows 25 (was 33). Ctrl+C when done.
+Workbench http://127.0.0.1:3508/: Nightly shows 25 (was 33). Export → **Draft ACR**: provider Anthropic API is the
+pre-run model this stage started on this PC (no real model; the remarks are the recording's, about 6 s; say "pre-run").
+Only this stage and `workbench release` have it. Ctrl+C when done.
 
 ## Clean-up
 
@@ -84,6 +86,7 @@ npx manta gate --base http://localhost:5173 --no-images   # pictures garbled
 npm run build && npm run preview              # dev server will not start, then:
 npx manta gate --base http://localhost:4173
 npm run demo -- fix --live                    # real AI; claude CLI signed in
+git checkout -- demo-data                     # Draft ACR failed: the committed ACR back in demo-data/release/reports/
 ```
 
 ## Other
@@ -91,6 +94,6 @@ npm run demo -- fix --live                    # real AI; claude CLI signed in
 ```
 npm run demo -- help
 npm run demo -- workbench            # nightly snapshot
-npm run demo -- workbench release
+npm run demo -- workbench release    # also starts the pre-run model for Draft ACR
 npm run demo -- workbench pr
 ```

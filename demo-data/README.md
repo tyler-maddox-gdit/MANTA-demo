@@ -24,7 +24,9 @@ fresh scan. What a snapshot shows as AI output is **pre-run**.
   the `pr` snapshot's fix patch applied, the site as it merges (20 on five pages, and the upload dialog's focus
   order), scanned from a checkout holding the developer's `manta note` over the seven the gate fixed, so the
   series log `reports/issues-nightly.json` carries that work note and the date's Changes reads
-  `33 → 25 open issues · 8 closed`. The Release stage opens it.
+  `33 → 25 open issues · 8 closed`. The Release stage opens it, takes this date's committed ACR out and drafts it again
+  on stage: `demo/pre-run-model.mjs` stands in for the Anthropic API on 127.0.0.1 and answers the acr skill with the
+  remarks recorded in that artifact, so the draft is the same document.
 
 All three are filled by `npm run demo -- snapshot <name> [<run id>]` (DEMO.md, "Refreshing a snapshot" and
 "Setup Tyler does once").

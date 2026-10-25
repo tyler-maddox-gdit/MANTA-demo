@@ -288,7 +288,10 @@ Press **Next**: Test lights, scene 4; before the export, **Next** again: Release
 
 Setup, before the audience or during Act 3's gate wait: `npm run demo -- stage release`. It stops a QA stage left
 running; the dev server from Act 2 is not in its way. It builds the upload change with the developer's fixes, the site as it
-merges, at http://localhost:4173, and starts the Workbench on the release snapshot at http://127.0.0.1:3508/.
+merges, at http://localhost:4173, and starts the Workbench on the release snapshot at http://127.0.0.1:3508/. It also takes
+the committed ACR out of that snapshot and starts the **pre-run model**, a stand-in for the Anthropic API on this PC holding
+that draft's remarks: Beat 3's **Draft ACR** runs MANTA's acr skill for real, with no model on the PC, and lands on the same
+document. Only this stage (and `workbench release`) has it; the QA stage's Export has no provider.
 
 **Beat 1 · The backlog moved.** Open the **Nightly** series, its newest date (the masthead names the series and
 lists both dates). Then open **Changes**, under the overview.
@@ -314,7 +317,8 @@ lists both dates). Then open **Changes**, under the overview.
   fires on that, so no gate stopped it and no AI fixed it. MANTA recorded the walk; the Trusted Tester judges
   it." Record the verdict on 2.4.3 Focus Order, with the checklist, and attest.
 
-**Beat 3 · Export.** On the Nightly run: the ACR draft (Word) and the defects export.
+**Beat 3 · Export.** On the Nightly run: **Draft ACR** (Anthropic API: the pre-run model on this PC answers from the
+recording, about 6 s; say **pre-run** while it runs), then the ACR (Word) and the defects export.
 
 - "The conformance report a buyer asks for, drafted from this run into the VPAT 2.5 template. The criteria
   the scan can speak to carry its evidence and a remark; the ones it cannot reach are left for a person, and
@@ -322,7 +326,8 @@ lists both dates). Then open **Changes**, under the overview.
   watched is in it. Nothing retyped."
 - Land it: "The scan is evidence; the tester is the judgment; the paperwork is drafted from both."
 
-If it goes wrong: open `demo-data/release/reports/index.html` from disk (read-only); port taken: `--port 3600`.
+If it goes wrong: open `demo-data/release/reports/index.html` from disk (read-only); port taken: `--port 3600`. **Draft ACR**
+fails: `git checkout -- demo-data` puts the committed draft back; open it from `demo-data/release/reports/`.
 
 Press **The whole loop** (or `0`).
 

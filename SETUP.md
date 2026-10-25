@@ -202,7 +202,9 @@ npm run demo -- stage release
 **Expect** `[DONE] The fixes applied to feature/upload-documents`, the build, then both servers. Open
 http://127.0.0.1:3508/. The **Nightly** run: **expect** 25 open issues across 6 pages. The Pages dialog's **Focus order**
 column on the upload page: 21 stops, the dialog at 15 to 18. A verdict on 2.4.3; attest a criterion; **Export** on
-the Nightly run. **Expect** the ACR draft (`.docx`) and the USPS defects export to download and open in Word.
+the Nightly run: **expect** no ACR yet, the provider **Anthropic API** sending to 127.0.0.1 (the pre-run model the stage
+started), and **Draft ACR** to end in `ACR drafted.` after about 6 s. **Expect** the ACR draft (`.docx`) and the USPS
+defects export to download and open in Word.
 Ctrl+C in tab 2 stops both servers.
 
 **Finish** (tab 2):
