@@ -61,7 +61,7 @@ const CUES = {
     next: 'With the claude CLI on this machine, npm run demo -- fix --live runs the skills here instead.',
   },
   release: {
-    slide: 'qa',
+    slide: 'test',
     title: 'Stage · Release: the next night',
     type: [],
     next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is the upload change with its fixes, as merged. The nightly series,\n  its newest date: 25 open issues (was 33). Open Changes: 33 → 25 open issues · 8 closed · 1 work note, the developer\'s, on the\n  seven; the account page\'s grey closed by the scan alone. Pages → Focus order on /status?upload=BP-2026-10882,\n  a verdict on 2.4.3, attest, Export (ACR draft). Ctrl+C stops both servers.',

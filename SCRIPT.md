@@ -100,8 +100,7 @@ building.
 
 ## Opening, on the slide (2 min)
 
-The slide with everything lit. Point along the pipeline once: plan, develop, integrate, test, release, and
-MANTA's features at each.
+The slide on the whole loop. Point around the ring once; the green phases are today's.
 
 - "The Benefits Portal has 27 known accessibility problems. Today a developer adds an upload dialog to it, and
   we watch that one change from three seats: the tester's, the developer's, and the pull request's. Then we go
@@ -109,7 +108,7 @@ MANTA's features at each.
 - "Everything you see runs without an AI key. Where you see AI output, I will say **pre-run**: MANTA's AI ran
   on this exact run earlier, and I am showing you what it wrote."
 
-Press **Next stage**: QA and release lights.
+Press **Next**: Maintain lights, scene 1.
 
 ---
 
@@ -151,7 +150,7 @@ the conformance level, Start. One row, the steps, then the report: 5 violations 
 **Handoff.** "33 on the list, and nobody owns one. Watch what happens when a developer touches the page next
 to them."
 
-Ctrl+C stops the preview and the Workbench. Press **Next stage**: Development lights.
+Ctrl+C stops the preview and the Workbench. Press **Next**: Develop lights.
 
 If it goes wrong: open `demo-data/nightly/reports/index.html` from disk (read-only); port taken: `--port 3600`
 (DEMO.md, the QA stage).
@@ -230,7 +229,7 @@ seven listed (`color-contrast` on each of the five pages, `button-name` on `/sta
 If it goes wrong: DEMO.md, the Development stage. The dev server will not start: gate the preview build instead. `fix` refuses:
 `stage dev` again.
 
-Press **Next stage**: DevOps lights.
+Press **Next**: Integrate lights.
 
 ---
 
@@ -281,7 +280,7 @@ violations`; the alerts show as fixed.
 Never press **Merge**. If it goes wrong: switch to the golden PR tab, say "pre-run", and show its comment and
 review without pressing anything (DEMO.md, the DevOps stage).
 
-Press **Release** on the slide (or `1`): QA and release lights again.
+Press **Next**: Test lights, scene 4; before the export, **Next** again: Release, scene 5.
 
 ---
 
@@ -325,7 +324,7 @@ lists both dates). Then open **Changes**, under the overview.
 
 If it goes wrong: open `demo-data/release/reports/index.html` from disk (read-only); port taken: `--port 3600`.
 
-Press **Show all**.
+Press **The whole loop** (or `0`).
 
 ---
 

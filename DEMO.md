@@ -33,19 +33,20 @@ Do these before the audience arrives, in this order.
 - [ ] `npm run dev` opens the site at http://localhost:5173. Stop it again (Ctrl+C).
 - [ ] The golden PR is open (its link is in `npm run demo -- status`).
 - [ ] A browser is signed in to GitHub, with two tabs ready: the repo's pull requests, and the golden PR.
-- [ ] The slide is open in a browser tab: `presentation/index.html`. **Next stage** or `→` moves it on.
+- [ ] The slide is open in a browser tab: `presentation/index.html`. **Next** or `→` moves it on.
 - [ ] The terminal font is large and the theme is light.
 
 ---
 
 ## The slide
 
-`presentation/index.html` is one page: the lifecycle as a pipeline (Plan, Develop, Integrate, Test, Release),
-MANTA's part at every stage, and the three demo stages as groups over it. **Next stage** cycles all → QA and
-release → Development → DevOps; any stage is clickable; `→`, `←`, `0`, `1`, `2`, `3` work; and `#qa`, `#devops`, `#dev`
-on the URL open a stage directly, which is what each `stage` command prints. Show it with everything lit for the
-opening, then light the stage you are about to demo. For the Release stage, press **Release** (or `1`): QA and
-release lights again.
+`presentation/index.html` is one page: the lifecycle as a ring (Plan, Design, Develop, Integrate, Test, Release,
+Maintain), with the five phases the demo visits in green and Plan and Design dashed. The demo is one clockwise pass:
+Maintain (the nightly backlog, `stage qa`) → Develop → Integrate → Test (the next nightly, `stage release`) → Release
+(the ACR). **Next** cycles the whole loop → those five → the whole loop, and the centre shows the scene number; any
+green phase is clickable; `→`, `←`, `0`, `1` to `5` work; and `#qa`, `#dev`, `#devops`, `#test`, `#release` on the
+URL light a phase directly, which is what each `stage` command prints. Show the whole loop for the opening and the
+close, then light the phase you are about to demo.
 
 ---
 
