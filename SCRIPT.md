@@ -100,7 +100,7 @@ building.
 
 ## Opening, on the slide (2 min)
 
-The slide on the whole loop. Point around the ring once; the green phases are today's.
+The slide on the whole loop. Point around the ring once: the five phases are today's.
 
 - "The Benefits Portal has 27 known accessibility problems. Today a developer adds an upload dialog to it, and
   we watch that one change from three seats: the tester's, the developer's, and the pull request's. Then we go

@@ -40,11 +40,11 @@ Do these before the audience arrives, in this order.
 
 ## The slide
 
-`presentation/index.html` is one page: the lifecycle as a ring (Plan, Design, Develop, Integrate, Test, Release,
-Maintain), with the five phases the demo visits in green and Plan and Design dashed. The demo is one clockwise pass:
+`presentation/index.html` is one page: the lifecycle as a ring of five phases (Maintain, Develop, Integrate, Test,
+Release), each with what MANTA does there. The demo is one clockwise pass:
 Maintain (the nightly backlog, `stage qa`) → Develop → Integrate → Test (the next nightly, `stage release`) → Release
 (the ACR). **Next** cycles the whole loop → those five → the whole loop, and the centre shows the scene number; any
-green phase is clickable; `→`, `←`, `0`, `1` to `5` work; and `#qa`, `#dev`, `#devops`, `#test`, `#release` on the
+phase is clickable; `→`, `←`, `0`, `1` to `5` work; and `#qa`, `#dev`, `#devops`, `#test`, `#release` on the
 URL light a phase directly, which is what each `stage` command prints. Show the whole loop for the opening and the
 close, then light the phase you are about to demo.
 
