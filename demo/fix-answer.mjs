@@ -141,7 +141,7 @@ export function renderFixAnswer(run, { stack, width, color }) {
   card('Reading', [
     label('The run', (gate.new ?? []).length + ' new violation' + ((gate.new ?? []).length === 1 ? '' : 's') + ' on ' + pages.join(', ') + ' · ' + (gate.tolerated ?? []).length + ' tolerated by the baseline'),
     label('The project', stack),
-    ...conventions.map((c, i) => label(i === 0 ? 'Conventions found' : '', clip(c, inner - 22))),
+    ...conventions.map((c, i) => label(i === 0 ? 'Conventions found' : '', c)),
   ], width, { bold, dim }).forEach(log);
   flush(600);
 

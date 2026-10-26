@@ -50,3 +50,16 @@ test('wrap breaks words under the width and indents every line', () => {
   assert.deepEqual(out, ['  one two three', '  four five six', '  seven eight', '  nine ten']);
   for (const l of out) assert.ok(l.length <= 16);
 });
+
+test('the Reading box wraps each convention whole inside its frame, never cutting it short', () => {
+  const run = readRun('demo-data/pr/reports');
+  const conventions = [...new Set(run.proposals.proposals.flatMap((p) => p.conventionsDetected ?? []))].slice(0, 4);
+  for (const width of [100, 80]) {
+    const lines = renderFixAnswer(run, { color: false, width, stack: '' }).flatMap((b) => b.lines);
+    const box = lines.slice(lines.findIndex((l) => l.startsWith('╭─ Reading')), lines.findIndex((l) => l.startsWith('╰')) + 1);
+    for (const l of box) assert.equal(visible(l), width, 'not on the frame at ' + width + ': ' + l);
+    assert.ok(!box.some((l) => l.includes('…')), 'cut short at ' + width);
+    const text = box.map((l) => l.slice(1, -1).trim().replace(/^Conventions found\s+/, '')).join(' ');
+    for (const c of conventions) assert.ok(text.includes(c), 'missing at ' + width + ': ' + c);
+  }
+});
