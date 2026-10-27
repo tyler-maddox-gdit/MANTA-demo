@@ -4,9 +4,10 @@
 // Usage: npm run demo -- <command>   (or: node demo/demo.mjs <command>). `help` lists the commands.
 // The cue strings below are the ones DEMO.md prints; change them in both places.
 import { spawn, spawnSync } from 'node:child_process';
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
-import { createServer } from 'node:net';
+import { connect, createServer } from 'node:net';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { createInterface } from 'node:readline/promises';
@@ -26,11 +27,14 @@ const SIGN_IN_PATH = '5d1e7a42'; // the "Sign in" path in sites/http_localhost_4
 const SITE_STORE = 'http_localhost_4173.json'; // the one committed file under sites/
 const ARTIFACTS = { 'manta-run': GATE_WORKFLOW, 'manta-nightly': NIGHTLY_WORKFLOW };
 const RUN_DIRS = ['reports', 'run-records', 'sites']; // what a --data-dir holds
-const DEV_ORIGIN = 'http://localhost:5173';
+const DEV_PORT = 5173; // `npm run dev` and `start` serve the repo folder here
+const DEV_ORIGIN = 'http://localhost:' + DEV_PORT;
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 // MANTA as npm ci installed it: the Workbench (MANTA's reviewer GUI) runs from here, so no MANTA checkout is needed.
 const MANTA_PKG = join(ROOT, 'node_modules', '@usps', '508-toolkit');
 const WORKBENCH_PORT = 3508;
+/** The release Workbench's port: next to QA's, so `start` runs both. */
+const RELEASE_PORT = WORKBENCH_PORT + 1;
 
 // ── The cues (DEMO.md says the same) ───────────────────────────────────────
 const GATE_LINE = 'npx manta gate --base ' + DEV_ORIGIN;
@@ -58,17 +62,27 @@ const CUES = {
   },
   dev: {
     title: 'Stage · Development: the developer\'s gate',
-    type: ['npm run dev                 (in a second terminal; leave it running)', GATE_LINE + '      → New 3, Gate failed, exit 1', 'npm run demo -- fix         → the AI skills\' proposals (pre-run); answer y to apply the patch', GATE_LINE + '      → New 0, Fixed 7, passed, exit 0', NOTE_LINE, '                            → a work note over the 7 the gate fixed, for the tester\'s next nightly'],
+    type: ['npm run dev                 (in a second terminal, unless start is running: it serves ' + DEV_ORIGIN + ' already)', GATE_LINE + '      → New 3, Gate failed, exit 1', 'npm run demo -- fix         → the AI skills\' proposals (pre-run); answer y to apply the patch', GATE_LINE + '      → New 0, Fixed 7, passed, exit 0', NOTE_LINE, '                            → a work note over the 7 the gate fixed, for the tester\'s next nightly'],
     next: 'With the claude CLI on this machine, npm run demo -- fix --live runs the skills here instead.',
   },
   release: {
     slide: 'test',
     title: 'Stage · Release: the next night',
     type: [],
-    next: 'Open http://127.0.0.1:' + WORKBENCH_PORT + '/. The site is the upload change with its fixes, as merged. The nightly series,\n  its newest date: 25 open issues (was 33). Open Changes: 33 → 25 open issues · 8 closed · 1 work note, the developer\'s, on the\n  seven; the account page\'s grey closed by the scan alone. Pages → Focus order on /status?upload=BP-2026-10882,\n  a verdict on 2.4.3, attest, Export → Draft ACR: the pre-run model on this PC answers from the recording in ' + THINKING_MS / 1000 + ' s (say "pre-run").\n  Ctrl+C stops both servers.',
+    next: 'Open http://127.0.0.1:' + RELEASE_PORT + '/. No site is served for it (4173 is QA\'s): do not Rescan or Add issue here. The nightly series,\n  its newest date: 25 open issues (was 33). Open Changes: 33 → 25 open issues · 8 closed · 1 work note, the developer\'s, on the\n  seven; the account page\'s grey closed by the scan alone. Pages → Focus order on /status?upload=BP-2026-10882,\n  a verdict on 2.4.3, attest, Export → Draft ACR: the pre-run model on this PC answers from the recording in ' + THINKING_MS / 1000 + ' s (say "pre-run").\n  Ctrl+C stops it.',
   },
 };
-const STAGE_LIST = 'Stages: npm run demo -- stage qa | dev | devops | release   (any order; each sets itself up)';
+const STAGE_LIST = 'Start: npm run demo -- start   (QA, Dev and Release side by side; stage devops when you get there)';
+
+/** What `start` serves and what to type: QA and Release in the browser, Dev in a second terminal, DevOps when it comes. */
+function printStart(qaPort, releasePort) {
+  console.log('\nStart · QA, Dev and Release, side by side until Ctrl+C   (slide: ' + SLIDE + ')');
+  console.log('  QA       http://127.0.0.1:' + qaPort + '/   the Workbench on the nightly snapshot; the site, main, at ' + PREVIEW_ORIGIN + '/');
+  console.log('  Dev      ' + DEV_ORIGIN + '/   this folder, ' + FEATURE.branch + ', clean. In a second terminal type:');
+  for (const line of CUES.dev.type.slice(1)) console.log('             ' + line);
+  console.log('  DevOps   npm run demo -- stage devops   (in the second terminal, when you get there)');
+  console.log('  Release  http://127.0.0.1:' + releasePort + '/   the Workbench on the release snapshot, Draft ACR on the pre-run model\n');
+}
 
 function printCue(name) {
   const cue = CUES[name];
@@ -87,15 +101,15 @@ function die(message) {
 }
 
 /** Runs a command in the repo root with no shell: its output to the terminal, or captured when `capture`. */
-function run(cmd, args, { capture = false } = {}) {
-  const r = spawnSync(cmd, args, { cwd: ROOT, shell: false, encoding: 'utf8', stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit' });
+function run(cmd, args, { capture = false, cwd = ROOT } = {}) {
+  const r = spawnSync(cmd, args, { cwd, shell: false, encoding: 'utf8', stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit' });
   if (r.error?.code === 'ENOENT') die(cmd + ' is not installed, or not on PATH.');
   return { ok: r.status === 0, stdout: (r.stdout ?? '').trim(), stderr: (r.stderr ?? '').trim() };
 }
 
 /** Runs a command and stops the script when it fails. */
-function must(cmd, args) {
-  if (!run(cmd, args).ok) die(cmd + ' ' + args.join(' ') + ' failed.');
+function must(cmd, args, options) {
+  if (!run(cmd, args, options).ok) die(cmd + ' ' + args.join(' ') + ' failed.');
 }
 
 /** A command's output, or undefined when it failed. */
@@ -153,12 +167,11 @@ function reset(flags) {
 }
 
 /**
- * Every stage's starting state, whatever ran before: tracked files as committed (the dev stage's applied patch
- * and the Workbench's writes into the snapshots discarded), no local runs, the feature branch at its tag and
- * checked out. `main` is never touched; origin is never pushed to here.
+ * The Dev stage's starting state in the repo folder, whatever ran before: tracked files as committed (the applied
+ * patch discarded), no local runs or work notes, the feature branch at its tag and checked out. `main` is never
+ * touched; origin is never pushed to here; the servers `start` runs are left running (QA and Release have their own trees).
  */
 function prepare() {
-  stopLeftoverServers();
   must('git', ['fetch', 'origin', '--prune', '--tags', '--force', '--quiet']);
   if (!revParse('refs/tags/' + FEATURE.tag + '^{commit}')) die('Tag ' + FEATURE.tag + ' is missing. Set the story tags first (DEMO.md, Setup Tyler does once).');
   const dirty = dirtyFiles();
@@ -178,11 +191,14 @@ function prepare() {
 
 async function stage(name, flags) {
   if (!CUES[name]) die('stage takes qa, dev, devops or release.');
-  prepare();
+  if (name === 'qa' || name === 'release') return await serve([name], flags);
   if (name === 'devops') {
+    // The branch as tagged, whatever the repo folder holds: a fix the Dev stage applied there stays where it is.
+    must('git', ['fetch', 'origin', '--prune', '--tags', '--force', '--quiet']);
+    const sha = revParse('refs/tags/' + FEATURE.tag + '^{commit}') ?? die('Tag ' + FEATURE.tag + ' is missing. Set the story tags first (DEMO.md, Setup Tyler does once).');
     // Closed before the push: a force-push to an open pull request's branch starts a gate run that posts on it later.
     for (const pr of openPrs(FEATURE.branch)) must('gh', ['pr', 'close', String(pr.number), '-R', REPO, '--comment', 'Closed by the demo: the next rehearsal opens a new pull request.']);
-    must('git', ['push', '--force', '--quiet', 'origin', FEATURE.branch + ':' + FEATURE.branch]);
+    must('git', ['push', '--force', '--quiet', 'origin', sha + ':refs/heads/' + FEATURE.branch]);
     const r = run('gh', ['pr', 'create', '-R', REPO, '--base', MAIN.branch, '--head', FEATURE.branch, '--title', 'Upload documents', '--body', 'A Documents column and an upload dialog on /status. Opened live by the demo (stage devops).'], { capture: true });
     if (!r.ok) die('gh pr create failed: ' + r.stderr);
     const golden = openPrs(GOLDEN_BRANCH)[0]?.url;
@@ -190,19 +206,29 @@ async function stage(name, flags) {
     console.log('Golden PR (fallback): ' + (golden ?? 'none open: see DEMO.md, Setup Tyler does once'));
     return printCue('devops');
   }
-  if (name === 'qa') {
-    // The backlog: main as it is, before the upload change.
-    must('git', ['checkout', '--quiet', '--detach', MAIN.tag]);
-    console.log('[DONE] On ' + MAIN.tag + ' (detached): the site before the upload change.');
-    return await serveStage('qa', 'nightly', flags);
-  }
-  if (name === 'release') {
-    // The next night: the upload change with the fixes the developer applied, as it merges.
-    must('git', ['apply', prPatch()]);
-    console.log('[DONE] The fixes applied to ' + FEATURE.branch + ': the site as it merges.');
-    return await serveStage('release', 'release', flags);
-  }
+  prepare();
   printCue('dev');
+}
+
+/**
+ * A clean copy of the repo at a story tag, outside the repo folder: a detached git worktree in the system temp folder
+ * (named for this clone, so two clones never share one), reused from run to run, with the repo's node_modules linked in. QA builds and Release's Workbench writes there, so
+ * the folder the developer works in is never touched, and the story branches stay free for reset to move.
+ */
+function stageTree(name, ref) {
+  const dir = join(tmpdir(), 'manta-demo-' + createHash('sha1').update(ROOT).digest('hex').slice(0, 8) + '-' + name);
+  const modules = join(dir, 'node_modules');
+  // Made again when the checkout fails: a worktree whose clone was moved or made again is no longer one git knows.
+  if (!(existsSync(join(dir, '.git')) && run('git', ['-C', dir, 'checkout', '--quiet', '--force', '--detach', ref], { capture: true }).ok)) {
+    rmSync(modules, { force: true }); // the link alone (not recursive): never the repo's node_modules behind it
+    rmSync(dir, { recursive: true, force: true });
+    must('git', ['worktree', 'prune']);
+    must('git', ['worktree', 'add', '--quiet', '--force', '--detach', dir, ref]);
+  }
+  must('git', ['-C', dir, 'clean', '-fdxq', '-e', 'node_modules']);
+  // A junction on Windows needs no admin; elsewhere the type is ignored.
+  if (!existsSync(modules)) symlinkSync(join(ROOT, 'node_modules'), modules, 'junction');
+  return dir;
 }
 
 /** Whether a process with this pid is running. */
@@ -230,33 +256,78 @@ const portFree = (port) => new Promise((resolve) => {
   probe.listen(port, '127.0.0.1', () => probe.close(() => resolve(true)));
 });
 
-/** The QA and release stages: the preview build on 4173 and the Workbench on a snapshot, both in this process until Ctrl+C. */
-async function serveStage(name, snapshotName, flags) {
-  const port = flags.port ?? WORKBENCH_PORT;
-  for (const [p, what] of [[PREVIEW_PORT, 'the preview'], [port, 'the Workbench']]) {
+/** Whether a server answers on localhost:<port>, on either address family (Vite listens on ::1 on macOS). */
+const listening = (port) => new Promise((resolve) => {
+  const socket = connect({ port, host: 'localhost' });
+  socket.once('connect', () => { socket.destroy(); resolve(true); });
+  socket.once('error', () => resolve(false));
+});
+
+/**
+ * The stages' servers, in this process until Ctrl+C, each part on its own ports and in its own tree: `qa` builds main
+ * and runs its preview on 4173 and the Workbench on the nightly snapshot; `release` runs the Workbench on the release
+ * snapshot, one port up when QA runs too, with the pre-run model (no site: the snapshot's pages are 4173's, QA's);
+ * `dev` puts the repo folder at the Dev stage's start and runs the dev server on it, as `npm run dev` does.
+ */
+async function serve(parts, flags) {
+  stopLeftoverServers();
+  const qaPort = flags.port ?? WORKBENCH_PORT;
+  const releasePort = parts.includes('qa') ? qaPort + 1 : flags.port ?? RELEASE_PORT;
+  const ports = [
+    ...(parts.includes('dev') ? [[DEV_PORT, 'the dev server (stop npm run dev: start runs it)']] : []),
+    ...(parts.includes('qa') ? [[PREVIEW_PORT, 'the preview'], [qaPort, 'QA\'s Workbench']] : []),
+    ...(parts.includes('release') ? [[releasePort, 'Release\'s Workbench']] : []),
+  ];
+  for (const [p, what] of ports) {
     // A server stopped just now lets go of its port a moment later.
     for (let i = 0; i < 20 && !(await portFree(p)); i++) await new Promise((r) => setTimeout(r, 250));
-    if (!(await portFree(p))) die('Port ' + p + ' is in use, so ' + what + ' cannot start. Stop what holds it' + (p === port ? ', or: npm run demo -- stage ' + name + ' --port ' + (port + 100) : '') + '.');
+    if (!(await portFree(p))) die('Port ' + p + ' is in use, so ' + what + ' cannot start. Stop what holds it' + (p === qaPort || p === releasePort ? ', or give another port: --port ' + (qaPort + 100) : '') + '.');
   }
   const vite = join(ROOT, 'node_modules', 'vite', 'bin', 'vite.js');
   if (!existsSync(vite)) die('vite is not installed here: run npm ci first.');
-  const dataDir = join(ROOT, 'demo-data', snapshotName);
-  if (!existsSync(join(dataDir, 'reports'))) die('No reports/ in ' + dataDir + ': see DEMO.md, Refreshing a snapshot.');
   if (!existsSync(join(MANTA_PKG, 'ui', 'cli.ts'))) die('MANTA is not installed here: run npm ci first.');
   const tsx = createRequire(join(MANTA_PKG, 'package.json')).resolve('tsx/cli');
-  must(process.execPath, [vite, 'build']);
-  const model = await preRunModelFor(snapshotName, dataDir);
-  printCue(name);
+  if (parts.includes('dev')) prepare();
+  else must('git', ['fetch', 'origin', '--prune', '--tags', '--force', '--quiet']);
   // Only node is spawned (npm and vite are .cmd shims on Windows, which spawn cannot run without a shell).
-  const children = [
-    spawn(process.execPath, [vite, 'preview', '--port', String(PREVIEW_PORT)], { cwd: ROOT, stdio: 'inherit' }),
-    spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(port), '--data-dir', dataDir], { cwd: ROOT, stdio: 'inherit', env: { ...process.env, ...model?.env } }),
-  ];
-  recordServers(children);
-  const stop = () => { for (const c of children) if (c.exitCode === null && !c.killed) c.kill(); model?.close(); forgetServers(); };
+  const children = [];
+  const workbenchOn = (label, port, dir, snapshotName, env) => {
+    const dataDir = join(dir, 'demo-data', snapshotName);
+    if (!existsSync(join(dataDir, 'reports'))) die('No reports/ in ' + dataDir + ': see DEMO.md, Refreshing a snapshot.');
+    return [label, () => spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(port), '--data-dir', dataDir], { cwd: dir, stdio: 'inherit', env: { ...process.env, ...env } })];
+  };
+  if (parts.includes('qa')) {
+    // The backlog: main as it is, before the upload change.
+    const dir = stageTree('qa', MAIN.tag);
+    must(process.execPath, [vite, 'build'], { cwd: dir });
+    console.log('[DONE] QA: ' + MAIN.tag + ' built in ' + dir + ', the site before the upload change.');
+    children.push(['QA\'s preview', () => spawn(process.execPath, [vite, 'preview', '--port', String(PREVIEW_PORT)], { cwd: dir, stdio: 'inherit' })]);
+    children.push(workbenchOn('QA\'s Workbench', qaPort, dir, 'nightly'));
+  }
+  let model;
+  if (parts.includes('release')) {
+    // The next night: the release snapshot, read from the feature branch as tagged.
+    const dir = stageTree('release', FEATURE.tag);
+    model = await preRunModelFor('release', join(dir, 'demo-data', 'release'));
+    console.log('[DONE] Release: ' + FEATURE.tag + ' in ' + dir + '.');
+    children.push(workbenchOn('Release\'s Workbench', releasePort, dir, 'release', model.env));
+  }
+  if (parts.includes('dev')) children.push(['the dev server', () => spawn(process.execPath, [vite, '--port', String(DEV_PORT)], { cwd: ROOT, stdio: 'inherit' })]);
+  const started = children.map(([label, start]) => [label, start()]);
+  recordServers(started.map(([, c]) => c));
+  let stopping = false;
+  const stop = () => { stopping = true; for (const [, c] of started) if (c.exitCode === null && !c.killed) c.kill(); model?.close(); forgetServers(); };
   process.on('SIGINT', () => { stop(); process.exit(130); });
   process.on('exit', stop);
-  for (const c of children) c.on('exit', (code) => { if (code) console.error('[ERROR] A server stopped (see above); the other was stopped too. Fix it and run the stage again.'); stop(); if (code) process.exitCode = code; });
+  // One server stopping leaves the others up: the acts it does not serve go on.
+  for (const [label, c] of started) c.on('exit', (code) => {
+    if (!stopping) { console.error('[ERROR] ' + label + ' stopped (see above); the rest keep running. Ctrl+C, fix it, and run this again.'); process.exitCode = code || 1; }
+    if (started.every(([, other]) => other.exitCode !== null || other.signalCode !== null)) stop();
+  });
+  // The cue last, once every server listens, so their start-up lines do not bury it.
+  for (const [p] of ports) for (let i = 0; i < 120 && !stopping && !(await listening(p)); i++) await new Promise((r) => setTimeout(r, 250));
+  if (parts.length > 1) printStart(qaPort, releasePort);
+  else printCue(parts[0]);
 }
 
 async function ask(question) {
@@ -281,13 +352,6 @@ function stackLine() {
     (config.styles ?? []).length && 'plain CSS in ' + config.styles.join(', '),
     /mantaSource/.test(vite) && 'source stamps on',
   ].filter(Boolean).join(' · ');
-}
-
-/** The fix skill's patch in the pr snapshot: what `fix` applies and what the release stage builds. */
-function prPatch() {
-  const pr = readRun('demo-data/pr/reports');
-  if (!pr) die('demo-data/pr holds no run: see DEMO.md, Refreshing a snapshot.');
-  return pr.patch;
 }
 
 async function fix(flags) {
@@ -391,8 +455,8 @@ async function preRunModelFor(snapshotName, dataDir) {
   const reports = join(dataDir, 'reports');
   const token = tokensIn(reports).at(-1);
   const acrPath = 'demo-data/' + snapshotName + '/reports/acr-' + token + '.json';
-  // The recording is the committed draft: on disk it may already be gone, or be a draft this model answered.
-  const acr = out('git', ['show', 'HEAD:' + acrPath]);
+  // The recording is the committed draft, as tagged: on disk it may already be gone, or be a draft this model answered.
+  const acr = out('git', ['show', FEATURE.tag + ':' + acrPath]);
   if (!acr) die('No committed ' + acrPath + ': the release snapshot has no ACR to record (DEMO.md, Refreshing what was done).');
   for (const ext of ['json', 'docx']) rmSync(join(reports, 'acr-' + token + '.' + ext), { force: true });
   const records = join(dataDir, 'run-records');
@@ -470,12 +534,15 @@ function status() {
 function help() {
   console.log(`MANTA demo — npm run demo -- <command>
 
+  start [--port n]         The show: QA (preview 4173, Workbench 3508, or n), Release (Workbench 3509, or n+1)
+                           and Dev (this folder on the feature branch, clean; the dev server on 5173), side by
+                           side until Ctrl+C. QA and Release run in their own worktrees in the temp folder.
   reset [--force]          Back to the start: story branches to their tags (force-pushed), live PRs closed,
                            snapshots restored, local runs removed. --force discards local changes.
-  stage <name>             Set a stage up, whatever ran before, and print what to type next: qa, dev, devops,
-         [--port n]        release. qa runs main's preview build and the Workbench on the nightly snapshot until
-                           Ctrl+C; dev leaves the feature branch checked out, clean; devops opens the live PR;
-                           release runs the feature branch with the fixes and the Workbench on the release snapshot.
+  stage <name>             One stage alone, and what to type next: qa, dev, devops, release. qa and release run
+         [--port n]        what start runs for them (replacing a running start); dev puts this folder back at the
+                           feature branch, clean (start's servers keep running); devops pushes the branch as tagged
+                           and opens the live PR, leaving this folder alone.
   fix [--live]             The AI skills over the developer's run: pre-run from demo-data/pr, printed and
                            its patch applied. --live runs cluster and fix here through the claude CLI.
   snapshot <name> [run]    Copy a run into demo-data/<name>/: a workflow run's artifact when [run] is given
@@ -505,6 +572,7 @@ for (let i = 0; i < argv.length; i++) {
 }
 const [command, a, b] = words;
 switch (command) {
+  case 'start': await serve(['dev', 'qa', 'release'], flags); break;
   case 'reset': reset(flags); break;
   case 'stage': await stage(a, flags); break;
   case 'fix': await fix(flags); break;

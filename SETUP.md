@@ -133,15 +133,15 @@ nightly to show.
 ## Part 5 · Dry run of every stage (about 30 minutes)
 
 This is the real thing: the DevOps stage opens a live pull request on GitHub, and the reset at the end closes
-it. The four stages stand on their own; run them in the order below, then once more in another order, to see
-that each sets itself up. Open **two Terminal tabs**, both in `C:\demo\MANTA-demo` (Ctrl+Shift+T opens a tab;
+it. One command, `start`, runs QA, Dev and Release side by side for the whole show; DevOps is its own command.
+Open **two Terminal tabs**, both in `C:\demo\MANTA-demo` (Ctrl+Shift+T opens a tab;
 `cd C:\demo\MANTA-demo` in it). Call them **tab 1** and **tab 2**. In tab 2, also check that Git will not
 rewrite line endings, or the Dev stage's patch will not apply:
 ```
 git config core.autocrlf
 ```
 **Expect** nothing or `false`. If it prints `true`: `git config core.autocrlf false`, then
-`git checkout -- .` after the next stage command.
+`git checkout -- .` before `start`.
 
 **Start clean** (tab 2):
 ```
@@ -150,22 +150,24 @@ npm run demo -- reset
 **Expect** `[DONE] Reset: main at story/main, …` and the stage list. It force-pushes `main` and the feature
 branch to their tags; that is how every rehearsal starts.
 
-**Stage QA** (tab 2):
+**Start** (tab 1, left running to the end):
 ```
-npm run demo -- stage qa
+npm run demo -- start
 ```
-**Expect** `[DONE] On story/main (detached)`, the build, then the preview on http://localhost:4173 and the
-Workbench's URL. Open http://127.0.0.1:3508/ in the browser. The site has no Documents column (it is `main`). In
+**Expect** `[DONE] On feature/upload-documents at story/feature, clean.`, the QA build, `[DONE] QA: …`, the pre-run
+model's line, `[DONE] Release: …`, the servers' start-up lines, then the cue: QA on http://127.0.0.1:3508/, Dev on
+http://localhost:5173/, Release on http://127.0.0.1:3509/. The first run makes the two copies in the temp folder
+(a few seconds more). Everything from here is typed in tab 2.
+
+**Stage QA** (browser): Open http://127.0.0.1:3508/ in the browser. The site has no Documents column (it is `main`). In
 the launcher paste `http://localhost:4173/` and press Start; **expect** the scan to run and a report to open with
 5 violations. Then the **Nightly** run's report: **expect** 33 open issues across 6 pages (27 on the five, 6 on `/account`); try each thing DEMO.md's QA stage
 lists: add an issue on the account page; a verdict on the skip link; **Rescan** the Pending badge's contrast issue
-on `/status`; open a criterion's checklist. Ctrl+C in tab 2 stops both servers.
+on `/status`; open a criterion's checklist. Leave it as it is.
 
-**Stage Dev**:
+**Stage Dev** (tab 2):
 ```
-npm run demo -- stage dev                        (tab 2: the feature branch, clean)
-npm run dev                                      (tab 1: leave it running)
-npx manta gate --base http://localhost:5173      (tab 2)
+npx manta gate --base http://localhost:5173
 ```
 **Expect** the manta ray banner, the scan's steps, then `New 3 ✗ P1 2 · P2 1`, `Tolerated 27`, the three violations on
 `/status?upload=BP-2026-10882` (`#upload-close`, `#upload-file`, `#upload-hint`), each with a framed picture of
@@ -180,8 +182,9 @@ npx manta gate --base http://localhost:5173      (tab 2)
 (cluster: three causes, two with a green dot) and Step 2 (fix), three fixes with a plain-language problem and
 fix and a red and green diff each, `3 fixes · 3 files`, then `Apply these 3 fixes? [y/N]`: type `y`.
 **Expect** `Applied to src/styles.css and src/pages/Status.jsx. Nothing committed.` and a diff
-summary; then the second gate: `New 0`, `Fixed 7`, `Tolerated 20`, `Gate passed`, `exit 0`. Ctrl+C in
-tab 1 stops the dev server.
+summary; then the second gate: `New 0`, `Fixed 7`, `Tolerated 20`, `Gate passed`, `exit 0`. Then
+`npx manta note "During dev on upload dialog I fixed a few backlog issues with cluster"`: **expect**
+`Wrote .manta/work-notes/…`. Back in the browser, QA's Workbench is still where you left it.
 
 **Stage DevOps** (tab 2):
 ```
@@ -195,17 +198,12 @@ review, tick **Apply all 3 suggested fixes**, and wait about half a minute for t
 run again and turn green, and MANTA's comment to say `passed: no new violations`. Never tick the admin's "Merge
 without waiting" box, and never press anything on the golden PR.
 
-**Stage Release** (tab 2; the dev server in tab 1 stopped):
-```
-npm run demo -- stage release
-```
-**Expect** `[DONE] The fixes applied to feature/upload-documents`, the build, then both servers. Open
-http://127.0.0.1:3508/. The **Nightly** run: **expect** 25 open issues across 6 pages. The Pages dialog's **Focus order**
+**Stage Release** (browser): Open http://127.0.0.1:3509/. The **Nightly** run: **expect** 25 open issues across 6 pages. The Pages dialog's **Focus order**
 column on the upload page: 21 stops, the dialog at 15 to 18. A verdict on 2.4.3; attest a criterion; **Export** on
 the Nightly run: **expect** no ACR yet, the provider **Anthropic API** sending to 127.0.0.1 (the pre-run model the stage
 started), and **Draft ACR** to end in `ACR drafted.` after about 6 s. **Expect** the ACR draft (`.docx`) and the USPS
 defects export to download and open in Word.
-Ctrl+C in tab 2 stops both servers.
+Ctrl+C in tab 1 stops every server.
 
 **Finish** (tab 2):
 ```
@@ -228,15 +226,15 @@ for anything that failed, the command and the exact error text (copy it from Ter
 |---|---|
 | `npm` : "running scripts is disabled on this system" | `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, or type `npm.cmd` in place of `npm`. |
 | `npm ci`: "Repository not found" / "Authentication failed" for `tyler-maddox-gdit/MANTA` | `gh auth status` must show tyler-maddox-gdit active; then `gh auth setup-git` and `npm ci` again. |
-| `npm ci`: `EPERM` | A file in `node_modules` is in use, so `npm ci` cannot delete it. Stop anything running from this folder (Ctrl+C on `npm run dev`, `npm run preview`, `npm run demo -- workbench`) and close editors open on it. Then `Get-Process node -ErrorAction SilentlyContinue`: if any are listed, `Stop-Process -Name node` (this also stops a MANTA GUI started from another folder). Run `npm ci` again. Still failing: `Remove-Item node_modules -Recurse -Force`, then `npm ci`; a file `Remove-Item` cannot delete names what holds it. |
+| `npm ci`: `EPERM` | A file in `node_modules` is in use, so `npm ci` cannot delete it. Stop anything running from this folder (Ctrl+C on `npm run demo -- start`, `npm run dev`, `npm run preview`, `npm run demo -- workbench`) and close editors open on it. Then `Get-Process node -ErrorAction SilentlyContinue`: if any are listed, `Stop-Process -Name node` (this also stops a MANTA GUI started from another folder). Run `npm ci` again. Still failing: `Remove-Item node_modules -Recurse -Force`, then `npm ci`; a file `Remove-Item` cannot delete names what holds it. |
 | `npm ci`: `ENAMETOOLONG`, "Filename too long" | Clone under `C:\demo`, run `git config --global core.longpaths true`, and try again. Antivirus scanning `node_modules` makes `npm ci` slow, not fail. |
 | `npm run install-browser-gdit`: "unable to get local issuer certificate" | The network re-signs HTTPS with a company certificate Node does not trust, and the script's `--use-system-ca` did not cover it. Check `node --version` is 22.15 or later. Failing that, `npm config get cafile`: if it names a file, `$env:NODE_EXTRA_CA_CERTS = "<that file>"` (or the `.pem` IT gives you), then install again. Last resort, for that one download only: `$env:NODE_TLS_REJECT_UNAUTHORIZED = "0"`, install, close the window. |
 | A scan or the Workbench: `Executable doesn't exist at …\ms-playwright\chromium_headless_shell-<build>\…` | The browser was installed by another Playwright version than MANTA's. Run `npm run install-browser-gdit` in this folder. |
 | `npm run install-browser-gdit` hangs or fails | The network blocks the download: set `$env:HTTPS_PROXY`, or ask IT to allow Playwright's download hosts. `npm run demo -- status` says when Chromium is missing. |
-| The gate: "could not load" `localhost:5173` | `npm run dev` is not running in tab 1. Or gate the built site instead: `npm run build`, `npm run preview`, `npx manta gate --base http://localhost:4173`. |
+| The gate: "could not load" `localhost:5173` | `npm run demo -- start` is not running in tab 1, or it printed `the dev server stopped`. Or gate the built site instead: `npm run build`, `npx vite preview --port 4174`, `npx manta gate --base http://localhost:4174` (4173 is QA's). |
 | Stage DevOps: no **Pre-run AI fixes** comment or review on the live PR | The PR's branch is not the story's (`npm run demo -- stage devops` again), or the gate job failed before posting: open its log under **Checks**. On stage, show the golden PR instead. |
 | Stage Dev: `fix` says the patch does not apply | It was applied already, or Git rewrote line endings: `npm run demo -- stage dev` again; check `git config core.autocrlf` (Part 5). |
-| The Workbench: port 3508 in use | `npm run demo -- workbench nightly --port 3600`, then open http://127.0.0.1:3600/. |
+| `start`: port 3508 or 3509 in use | `npm run demo -- start --port 3600`, then QA is http://127.0.0.1:3600/ and Release http://127.0.0.1:3601/. |
 | `reset`: "The working tree has changes" | `npm run demo -- reset --force` discards them. |
 | `reset`: the push to `main` is rejected | gh is signed in as an account that is not a repo admin: `gh auth switch -u tyler-maddox-gdit`. |
 | Every workflow run fails at `npm ci` | `MANTA_READ_TOKEN` is missing or expired: Part 4. |

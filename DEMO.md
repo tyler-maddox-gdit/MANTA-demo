@@ -30,7 +30,9 @@ Do these before the audience arrives, in this order.
 - [ ] The repo secret `MANTA_SECRET_DEMO_PW` is set (Settings → Secrets and variables → Actions).
 - [ ] The repo secret `MANTA_READ_TOKEN` has not expired. It expires on: **2099-01-01** (see "Setup Tyler does once").
 - [ ] Chromium is installed: `npm run install-browser-gdit`.
-- [ ] `npm run dev` opens the site at http://localhost:5173. Stop it again (Ctrl+C).
+- [ ] Last: `npm run demo -- start` in terminal 1, left running for the whole show (Ctrl+C at the end). It ends
+      with the cue: QA at http://127.0.0.1:3508/, Dev at http://localhost:5173/, Release at http://127.0.0.1:3509/.
+      Terminal 2, in the same folder, is where you type.
 - [ ] The golden PR is open (its link is in `npm run demo -- status`).
 - [ ] A browser is signed in to GitHub, with two tabs ready: the repo's pull requests, and the golden PR.
 - [ ] The slide is open in a browser tab: `presentation/index.html`. **Next** or `→` moves it on.
@@ -85,22 +87,20 @@ from both.
 developer cleared seven of it on the way past, the pull request would have stopped the new three, and the
 tester found the one no rule can."
 
-The stages make the story true: `stage qa` builds `main`, so the launcher finds the backlog and no dialog;
-`stage devops` discards any local fix and pushes the branch as tagged; `stage release` builds the branch with
-the fixes applied, the site as it merges, which is the build the release snapshot scanned.
+`npm run demo -- start`, before the audience, makes the story true and keeps the stages apart: QA builds `main` in its
+own copy of the repo (a git worktree in the temp folder) and serves it on 4173, so the launcher finds the backlog and
+no dialog; Dev is this folder, on the feature branch, clean, served on 5173; Release is the Workbench on the release
+snapshot in a second copy, on 3509. None of them touches another, so all three run side by side until Ctrl+C.
+`stage devops` pushes the branch as tagged, whatever the Dev stage applied in this folder.
 
 ---
 
 ## Stage · QA: the backlog in the Workbench (about 8 min)
 
-**Setup.**
-```
-npm run demo -- stage qa
-```
-It checks out `main` at its story tag (detached: the site before the upload change), builds it, then runs the
-preview on http://localhost:4173 and MANTA's Workbench on the **nightly snapshot** (a nightly run of that build,
-made as CI makes it, with its AI notes **pre-run** afterwards) together, until Ctrl+C. The Workbench runs from the MANTA
-`npm ci` installed; no MANTA checkout is needed.
+**Setup.** `start` (before the audience). Its QA part checks `main` out at its story tag in its own worktree (the
+site before the upload change), builds it, then runs the preview on http://localhost:4173 and MANTA's Workbench on
+the **nightly snapshot** (a nightly run of that build, made as CI makes it, with its AI notes **pre-run** afterwards).
+The Workbench runs from the MANTA `npm ci` installed; no MANTA checkout is needed. Alone: `npm run demo -- stage qa`.
 
 **Type.** Nothing more. Open http://127.0.0.1:3508/.
 
@@ -127,29 +127,25 @@ made as CI makes it, with its AI notes **pre-run** afterwards) together, until C
 - Hand off: "33 on the list, and nobody owns one. Watch what happens when a developer touches the page next to
   them."
 
-Ctrl+C stops both servers before the next stage. Forgotten, they are stopped by the next stage command or `reset`:
-every stage starts by stopping the preview and Workbench the last one left running (their pids are kept in a file
-in the system temp folder), so the ports 4173 and 3508 are free again. Only something else on those ports stops a stage.
+Leave it running: the Workbench stays where you left it while the other stages go on. Ctrl+C on `start` at the end
+stops every server. Forgotten, they are stopped by the next `start`, `stage qa`, `stage release`, `workbench` or
+`reset` (the pids are kept in a file in the system temp folder). Only something else on the ports stops `start`.
 
 **If it goes wrong.** The Workbench will not start: open `demo-data\nightly\reports\index.html` from disk. It
 is read-only (no verdicts or rescans), but every finding and the AI notes are there. Port 3508 in
-use: `npm run demo -- stage qa --port 3600`. The export dialog fails: open the committed ACR draft in
+use: `npm run demo -- start --port 3600` (QA on 3600, Release on 3601). The export dialog fails: open the committed ACR draft in
 `demo-data\nightly\reports\`.
 
 ---
 
 ## Stage · Development: the developer's gate (about 6 min)
 
-**Setup.**
-```
-npm run demo -- stage dev
-```
-It puts the feature branch, `feature/upload-documents`, in the working tree, clean, with no local runs. A
-**branch** is a line of work kept apart from the main code until it is ready.
+**Setup.** `start` (before the audience). Its Dev part puts the feature branch, `feature/upload-documents`, in
+this folder, clean, with no local runs, and runs the dev server on http://localhost:5173. A **branch** is a line of
+work kept apart from the main code until it is ready. Nothing to type until the gate.
 
-**1 · The gate.** Type:
+**1 · The gate.** Type, in terminal 2:
 ```
-npm run dev        (in a second terminal; leave it running)
 npx manta gate --base http://localhost:5173
 ```
 **See.** MANTA's banner (a shaded manta ray beside a MANTA · ACCESSIBILITY GATE wordmark; it needs 77 columns), then its step stream as it
@@ -229,9 +225,10 @@ on the same seven.
   tester reads it in the morning." Say "they commit it with the fix": the demo commits nothing here, and the
   next stage removes the file.
 
-**If it goes wrong.** The dev server will not start: in the second terminal run `npm run build` then
-`npm run preview`, and gate the preview build instead: `npx manta gate --base http://localhost:4173`. `fix`
-says the patch does not apply: `npm run demo -- stage dev` starts the stage over. The second gate still fails:
+**If it goes wrong.** The dev server is down (`start` printed `the dev server stopped`): run `npm run build` then
+`npx vite preview --port 4174`, and gate the preview build instead: `npx manta gate --base http://localhost:4174`
+(4173 is QA's). `fix` says the patch does not apply: `npm run demo -- stage dev` starts the stage over; `start`'s
+servers keep running. The second gate still fails:
 read what it names; `git diff` shows what was applied.
 
 **Live.** On a machine with the `claude` command line, `npm run demo -- fix --live` runs the cluster and fix
@@ -249,14 +246,14 @@ fixes, the fixes are applied from the pull request's Conversation tab, and the g
 ```
 npm run demo -- stage devops
 ```
-It puts the feature branch back at its tag, closes any live PR from an earlier rehearsal, pushes the branch,
-opens the live PR and prints its link and the golden PR's (the fallback). The browser is signed in to GitHub,
+It closes any live PR from an earlier rehearsal, pushes the feature branch as tagged (the fix the Dev stage
+applied stays in this folder, untouched), opens the live PR and prints its link and the golden PR's (the fallback). The browser is signed in to GitHub,
 with the golden PR open in a background tab.
 
 **1 · The pull request.** Open the live PR's link (**Conversation** tab). The checks area shows a yellow dot:
 running.
 - "Now rewind. The gate on the laptop is a courtesy; not every developer runs it. Say this one pushed the dialog
-  as it was." (`stage devops` did exactly that: it discarded the fix and pushed the branch as tagged.)
+  as it was." (`stage devops` did exactly that: it pushed the branch as tagged, without the fix.)
 - "A developer built an upload dialog and opened a **pull request**: how a change asks to join the main code.
   The team reviews it, and automated checks run on it."
 - "A **pull request check** is one of those results, a green tick or a red cross beside the change. MANTA's gate
@@ -324,20 +321,16 @@ Say "the fix skill ran in this job and posted these itself". Their wording diffe
 
 ## Stage · Release: the next morning, back in the Workbench (about 3 min)
 
-**Setup.** The dev server from the Development stage (5173) is not in the way, and a QA stage left running is
-stopped by this command; Ctrl+C the dev server when convenient (the stage discards its applied patch, which the
-dev server would reload). It can run during the DevOps stage's gate wait: it only touches this PC.
-```
-npm run demo -- stage release
-```
-It puts the feature branch in the working tree, applies the developer's fixes (the same patch `fix` applies),
-builds it, then runs the preview on http://localhost:4173 and the Workbench on the **release snapshot** (a
-nightly run of that build: the site as it merges, AI notes **pre-run**), until Ctrl+C. It also takes the committed ACR out
+**Setup.** `start` (before the audience). Its Release part checks the feature branch out at its tag in its own
+worktree and runs the Workbench on the **release snapshot** (a nightly run of the site as it merges: the upload
+change with the developer's fixes, AI notes **pre-run**) on port 3509. No site is served for it: the snapshot's
+pages are `localhost:4173`, QA's, so Rescan or Add issue here would reach `main`; the script uses neither. Alone:
+`npm run demo -- stage release`. It also takes the committed ACR out
 of the release snapshot and starts the **pre-run model**, a stand-in for the Anthropic API on this PC
 (`demo/pre-run-model.mjs`) holding that draft's remarks, so **Draft ACR** in the Export dialog runs MANTA's acr skill for
 real, with no model on the PC, and lands on the same document.
 
-**Type.** Nothing more. Open http://127.0.0.1:3508/.
+**Type.** Nothing. Open http://127.0.0.1:3509/.
 
 **See, in order.**
 1. **The Nightly series**, its newest date: **25** open issues (was 33); the masthead names the series and lists
@@ -363,9 +356,9 @@ real, with no model on the PC, and lands on the same document.
   report a buyer asks for, drafted from the evidence; nothing retyped. The verdict QA made a minute ago is in it."
 
 **If it goes wrong.** The Workbench will not start: open `demo-data\release\reports\index.html` from disk. It
-is read-only, but every finding and the Focus order picture are there. Port 3508 in use:
-`npm run demo -- stage release --port 3600`. **Draft ACR** or the export dialog fails: the stage took the committed draft
-out of the snapshot; `git checkout -- demo-data` puts it back, then open it from `demo-data\release\reports\`.
+is read-only, but every finding and the Focus order picture are there. Port 3509 in use:
+`npm run demo -- start --port 3600` (Release on 3601). **Draft ACR** or the export dialog fails: open the committed draft
+from `demo-data\release\reports\` in this folder (the stage took it out of its own copy only).
 
 ---
 
@@ -381,8 +374,8 @@ It refuses when the working tree has changes; `npm run demo -- reset --force` di
 issue, rescan and attestation made in the Workbench), removes the local `reports/`, `run-records/` and `ci-run/`
 folders and checks out `main`. The golden PR and its branch are never touched.
 
-A stage command does the local part of this on its own (the working tree, the snapshots, the local runs, the
-feature branch), so between stages nothing else is needed. `reset` is for `main`, origin and the night before.
+`start` does the local part of this on its own (this folder, the local runs, the feature branch; fresh copies for QA
+and Release), so between rehearsals nothing else is needed. `reset` is for `main`, origin and the night before.
 
 On GitHub a reset costs one closed pull request, two force pushes and one Baseline run on `main` (which
 commits nothing, since the baseline has not changed). Pull request numbers climb by one per rehearsal; the

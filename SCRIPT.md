@@ -114,8 +114,9 @@ Press **Next**: Maintain lights, scene 1.
 
 ## Act 1 · QA: the tester's seat, the backlog (8 min)
 
-Setup, before the audience: `npm run demo -- stage qa`. It builds `main` (the site before the upload change) at
-http://localhost:4173 and starts the Workbench on the nightly snapshot at http://127.0.0.1:3508/.
+Setup, before the audience: `npm run demo -- start` in terminal 1, left running for the whole show. For this act it
+builds `main` (the site before the upload change) in its own copy at http://localhost:4173 and starts the Workbench on
+the nightly snapshot at http://127.0.0.1:3508/.
 
 **Beat 1 · A scan from the browser.** The launcher: paste `http://localhost:4173/`, name the run (required), pick
 the conformance level, Start. One row, the steps, then the report: 5 violations on Home.
@@ -159,7 +160,8 @@ If it goes wrong: open `demo-data/nightly/reports/index.html` from disk (read-on
 
 ## Act 2 · Development: the developer's seat (6 min)
 
-Setup, before the audience: `npm run demo -- stage dev`, then `npm run dev` in a second terminal.
+Setup: none. `start` put the feature branch in this folder, clean, and serves it at http://localhost:5173. Type in
+terminal 2.
 
 **Beat 1 · The gate.** Type `npx manta gate --base http://localhost:5173`.
 
@@ -226,7 +228,7 @@ seven listed (`color-contrast` on each of the five pages, `button-name` on `/sta
   reads it tomorrow." (Say "they commit it with the fix"; the demo commits nothing here.)
 
 If it goes wrong: DEMO.md, the Development stage. The dev server will not start: gate the preview build instead. `fix` refuses:
-`stage dev` again.
+`stage dev` again (`start` keeps running).
 
 Press **Next**: Integrate lights.
 
@@ -235,7 +237,7 @@ Press **Next**: Integrate lights.
 ## Act 3 · DevOps: the reviewer's seat (6 min)
 
 Setup, before the audience, or on stage if you want the push seen: `npm run demo -- stage devops`. It
-discards the local fix, pushes the branch as it was, opens the live pull request and prints its link and the
+pushes the branch as tagged, without the local fix (which stays in this folder), opens the live pull request and prints its link and the
 golden PR's. Open the live PR.
 
 **Beat 1 · The rewind.** The Conversation tab, the checks area with a yellow dot.
@@ -285,12 +287,11 @@ Press **Next**: Test lights, scene 4; before the export, **Next** again: Release
 
 ## Act 4 · Release: back in the tester's seat, the next morning (3 min)
 
-Setup, before the audience or during Act 3's gate wait: `npm run demo -- stage release`. It stops a QA stage left
-running; the dev server from Act 2 is not in its way. It builds the upload change with the developer's fixes, the site as it
-merges, at http://localhost:4173, and starts the Workbench on the release snapshot at http://127.0.0.1:3508/. It also takes
+Setup: none. `start` runs the Workbench on the release snapshot (the upload change with the developer's fixes, the site
+as it merges) at http://127.0.0.1:3509/, from its own copy. It also takes
 the committed ACR out of that snapshot and starts the **pre-run model**, a stand-in for the Anthropic API on this PC holding
 that draft's remarks: Beat 3's **Draft ACR** runs MANTA's acr skill for real, with no model on the PC, and lands on the same
-document. Only this stage (and `workbench release`) has it; the QA stage's Export has no provider.
+document. Only Release (and `workbench release`) has it; QA's Export has no provider.
 
 **Beat 1 · The backlog moved.** Open the **Nightly** series, its newest date (the masthead names the series and
 lists both dates). Then open **Changes**, under the overview.
