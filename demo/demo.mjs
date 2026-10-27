@@ -291,10 +291,11 @@ async function serve(parts, flags) {
   else must('git', ['fetch', 'origin', '--prune', '--tags', '--force', '--quiet']);
   // Only node is spawned (npm and vite are .cmd shims on Windows, which spawn cannot run without a shell).
   const children = [];
-  const workbenchOn = (label, port, dir, snapshotName, env) => {
+  // Each Workbench's tabs start with its stage's name (QA · MANTA, Release · Nightly — MANTA), so the two tell apart in the browser.
+  const workbenchOn = (stageName, port, dir, snapshotName, env) => {
     const dataDir = join(dir, 'demo-data', snapshotName);
     if (!existsSync(join(dataDir, 'reports'))) die('No reports/ in ' + dataDir + ': see DEMO.md, Refreshing a snapshot.');
-    return [label, () => spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(port), '--data-dir', dataDir], { cwd: dir, stdio: 'inherit', env: { ...process.env, ...env } })];
+    return [stageName + '\'s Workbench', () => spawn(process.execPath, [tsx, join(MANTA_PKG, 'ui', 'cli.ts'), String(port), '--data-dir', dataDir, '--title', stageName], { cwd: dir, stdio: 'inherit', env: { ...process.env, ...env } })];
   };
   if (parts.includes('qa')) {
     // The backlog: main as it is, before the upload change.
@@ -302,7 +303,7 @@ async function serve(parts, flags) {
     must(process.execPath, [vite, 'build'], { cwd: dir });
     console.log('[DONE] QA: ' + MAIN.tag + ' built in ' + dir + ', the site before the upload change.');
     children.push(['QA\'s preview', () => spawn(process.execPath, [vite, 'preview', '--port', String(PREVIEW_PORT)], { cwd: dir, stdio: 'inherit' })]);
-    children.push(workbenchOn('QA\'s Workbench', qaPort, dir, 'nightly'));
+    children.push(workbenchOn('QA', qaPort, dir, 'nightly'));
   }
   let model;
   if (parts.includes('release')) {
@@ -310,7 +311,7 @@ async function serve(parts, flags) {
     const dir = stageTree('release', FEATURE.tag);
     model = await preRunModelFor('release', join(dir, 'demo-data', 'release'));
     console.log('[DONE] Release: ' + FEATURE.tag + ' in ' + dir + '.');
-    children.push(workbenchOn('Release\'s Workbench', releasePort, dir, 'release', model.env));
+    children.push(workbenchOn('Release', releasePort, dir, 'release', model.env));
   }
   if (parts.includes('dev')) children.push(['the dev server', () => spawn(process.execPath, [vite, '--port', String(DEV_PORT)], { cwd: ROOT, stdio: 'inherit' })]);
   const started = children.map(([label, start]) => [label, start()]);

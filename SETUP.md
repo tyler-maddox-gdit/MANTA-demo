@@ -68,7 +68,7 @@ Sign in as **tyler-maddox-gdit**. That account owns the repo: it can read MANTA'
    cd MANTA-demo
    ```
 
-2. Install the site and MANTA (several minutes; MANTA comes from its private repository, pinned at `v1.12`):
+2. Install the site and MANTA (several minutes; MANTA comes from its private repository, pinned at `v1.13`):
    ```
    npm ci
    ```
