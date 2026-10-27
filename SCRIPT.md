@@ -287,8 +287,8 @@ Press **Next**: Test lights, scene 4; before the export, **Next** again: Release
 
 ## Act 4 · Release: back in the tester's seat, the next morning (3 min)
 
-Setup: none. `start` runs the Workbench on the release snapshot (the upload change with the developer's fixes, the site
-as it merges) at http://127.0.0.1:3509/, from its own copy. It also takes
+Setup: none. `start` builds the upload change with the developer's fixes (the site as it merges) at
+http://localhost:4175 and runs the Workbench on the release snapshot at http://127.0.0.1:3509/, from its own copy. It also takes
 the committed ACR out of that snapshot and starts the **pre-run model**, a stand-in for the Anthropic API on this PC holding
 that draft's remarks: Beat 3's **Draft ACR** runs MANTA's acr skill for real, with no model on the PC, and lands on the same
 document. Only Release (and `workbench release`) has it; QA's Export has no provider.

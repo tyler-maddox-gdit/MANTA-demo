@@ -22,7 +22,7 @@ npm run demo -- start
 
 Uncommitted changes: `npm run demo -- reset --force`. `start` runs in terminal 1 for the whole show, Ctrl+C at the
 end: QA (site `main` on 4173, Workbench 3508), Dev (this folder on the feature branch, clean, dev server on 5173),
-Release (Workbench 3509). QA and Release run from their own copies in the temp folder, so nothing in one touches
+Release (Workbench 3509, site 4175). QA and Release run from their own copies in the temp folder, so nothing in one touches
 another. Type everything below in terminal 2.
 
 ## 1. QA
@@ -53,8 +53,8 @@ Dev fix in this folder stays.
 
 Browser only: Workbench http://127.0.0.1:3509/: Nightly shows 25 (was 33). Export → **Draft ACR**: provider Anthropic API is the
 pre-run model this stage started on this PC (no real model; the remarks are the recording's, about 6 s; say "pre-run").
-Only Release (`start`, `stage release`) and `workbench release` have it. No site behind it: don't Rescan or Add
-issue here (they would reach QA's `main` on 4173).
+Only Release (`start`, `stage release`) and `workbench release` have it. Its site, with the upload dialog and the
+fixes: http://localhost:4175/ (the Workbench's page links and Rescan go there).
 
 ## Clean-up
 

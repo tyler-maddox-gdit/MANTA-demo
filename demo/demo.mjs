@@ -5,7 +5,7 @@
 // The cue strings below are the ones DEMO.md prints; change them in both places.
 import { spawn, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, renameSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { connect, createServer } from 'node:net';
 import { tmpdir } from 'node:os';
@@ -47,6 +47,8 @@ const WORK_NOTES = join(ROOT, '.manta', 'work-notes');
 const SERVERS_FILE = join(tmpdir(), 'manta-demo-servers.json');
 const SLIDE = 'presentation/index.html';
 const PREVIEW_PORT = 4173;
+/** Release's own site, the upload change as merged: not 4173 (QA's main) and not 4174 (the Dev stage's fallback preview). */
+const RELEASE_SITE_PORT = 4175;
 const PREVIEW_ORIGIN = 'http://localhost:' + PREVIEW_PORT;
 const workbenchLine = (name) => 'npm run demo -- workbench ' + name + '   (opens the Workbench on it; Ctrl+C stops it)';
 const CUES = {
@@ -69,7 +71,7 @@ const CUES = {
     slide: 'test',
     title: 'Stage · Release: the next night',
     type: [],
-    next: 'Open http://127.0.0.1:' + RELEASE_PORT + '/. No site is served for it (4173 is QA\'s): do not Rescan or Add issue here. The nightly series,\n  its newest date: 25 open issues (was 33). Open Changes: 33 → 25 open issues · 8 closed · 1 work note, the developer\'s, on the\n  seven; the account page\'s grey closed by the scan alone. Pages → Focus order on /status?upload=BP-2026-10882,\n  a verdict on 2.4.3, attest, Export → Draft ACR: the pre-run model on this PC answers from the recording in ' + THINKING_MS / 1000 + ' s (say "pre-run").\n  Ctrl+C stops it.',
+    next: 'Open http://127.0.0.1:' + RELEASE_PORT + '/. Its site, the upload change with the fixes as merged: http://localhost:' + RELEASE_SITE_PORT + '/. The nightly series,\n  its newest date: 25 open issues (was 33). Open Changes: 33 → 25 open issues · 8 closed · 1 work note, the developer\'s, on the\n  seven; the account page\'s grey closed by the scan alone. Pages → Focus order on /status?upload=BP-2026-10882,\n  a verdict on 2.4.3, attest, Export → Draft ACR: the pre-run model on this PC answers from the recording in ' + THINKING_MS / 1000 + ' s (say "pre-run").\n  Ctrl+C stops it.',
   },
 };
 const STAGE_LIST = 'Start: npm run demo -- start   (QA, Dev and Release side by side; stage devops when you get there)';
@@ -81,7 +83,8 @@ function printStart(qaPort, releasePort) {
   console.log('  Dev      ' + DEV_ORIGIN + '/   this folder, ' + FEATURE.branch + ', clean. In a second terminal type:');
   for (const line of CUES.dev.type.slice(1)) console.log('             ' + line);
   console.log('  DevOps   npm run demo -- stage devops   (in the second terminal, when you get there)');
-  console.log('  Release  http://127.0.0.1:' + releasePort + '/   the Workbench on the release snapshot, Draft ACR on the pre-run model\n');
+  console.log('  Release  http://127.0.0.1:' + releasePort + '/   the Workbench on the release snapshot, Draft ACR on the pre-run model;');
+  console.log('                                  the site, the upload change with the fixes, at http://localhost:' + RELEASE_SITE_PORT + '/\n');
 }
 
 function printCue(name) {
@@ -265,8 +268,9 @@ const listening = (port) => new Promise((resolve) => {
 
 /**
  * The stages' servers, in this process until Ctrl+C, each part on its own ports and in its own tree: `qa` builds main
- * and runs its preview on 4173 and the Workbench on the nightly snapshot; `release` runs the Workbench on the release
- * snapshot, one port up when QA runs too, with the pre-run model (no site: the snapshot's pages are 4173's, QA's);
+ * and runs its preview on 4173 and the Workbench on the nightly snapshot; `release` builds the feature branch with the
+ * fixes, runs its preview on 4175 and the Workbench on the release snapshot (moved to 4175), one port up when QA runs
+ * too, with the pre-run model;
  * `dev` puts the repo folder at the Dev stage's start and runs the dev server on it, as `npm run dev` does.
  */
 async function serve(parts, flags) {
@@ -276,7 +280,7 @@ async function serve(parts, flags) {
   const ports = [
     ...(parts.includes('dev') ? [[DEV_PORT, 'the dev server (stop npm run dev: start runs it)']] : []),
     ...(parts.includes('qa') ? [[PREVIEW_PORT, 'the preview'], [qaPort, 'QA\'s Workbench']] : []),
-    ...(parts.includes('release') ? [[releasePort, 'Release\'s Workbench']] : []),
+    ...(parts.includes('release') ? [[RELEASE_SITE_PORT, 'Release\'s site'], [releasePort, 'Release\'s Workbench']] : []),
   ];
   for (const [p, what] of ports) {
     // A server stopped just now lets go of its port a moment later.
@@ -307,10 +311,17 @@ async function serve(parts, flags) {
   }
   let model;
   if (parts.includes('release')) {
-    // The next night: the release snapshot, read from the feature branch as tagged.
+    // The next night: the feature branch with the developer's fixes, as it merges, and the release snapshot that scanned it.
     const dir = stageTree('release', FEATURE.tag);
-    model = await preRunModelFor('release', join(dir, 'demo-data', 'release'));
-    console.log('[DONE] Release: ' + FEATURE.tag + ' in ' + dir + '.');
+    const pr = readRun(join(dir, 'demo-data', 'pr', 'reports'));
+    if (!pr) die('demo-data/pr holds no run: see DEMO.md, Refreshing a snapshot.');
+    must('git', ['-C', dir, 'apply', pr.patch]);
+    must(process.execPath, [vite, 'build'], { cwd: dir });
+    const dataDir = join(dir, 'demo-data', 'release');
+    moveOrigin(dataDir, RELEASE_SITE_PORT);
+    model = await preRunModelFor('release', dataDir, RELEASE_SITE_PORT);
+    console.log('[DONE] Release: ' + FEATURE.tag + ' with the fixes built in ' + dir + ', its snapshot moved to ' + RELEASE_SITE_PORT + '.');
+    children.push(['Release\'s site', () => spawn(process.execPath, [vite, 'preview', '--port', String(RELEASE_SITE_PORT)], { cwd: dir, stdio: 'inherit' })]);
     children.push(workbenchOn('Release', releasePort, dir, 'release', model.env));
   }
   if (parts.includes('dev')) children.push(['the dev server', () => spawn(process.execPath, [vite, '--port', String(DEV_PORT)], { cwd: ROOT, stdio: 'inherit' })]);
@@ -444,14 +455,35 @@ async function workbench(name = 'nightly', flags) {
   child.on('exit', (code) => { stop(); process.exitCode = code ?? 0; });
 }
 
+/** A snapshot's text with its site moved from 4173 to another port: the URLs in every form a run writes them, and the site store's name. */
+const movedText = (text, port) => text.replaceAll('localhost:' + PREVIEW_PORT, 'localhost:' + port).replaceAll('localhost%3A' + PREVIEW_PORT, 'localhost%3A' + port).replaceAll('localhost_' + PREVIEW_PORT, 'localhost_' + port);
+
+/**
+ * A snapshot pointed at a site on another port, in place: the Workbench has no setting for that, and every link, Rescan
+ * and Add issue goes to the URL a run recorded. MANTA keys issues and elements by page path, never by origin, so
+ * Changes, notes and verdicts still line up. For a stage's own copy only (stageTree): never the committed snapshot.
+ */
+function moveOrigin(dataDir, port) {
+  for (const sub of RUN_DIRS) {
+    const dir = join(dataDir, sub);
+    if (!existsSync(dir)) continue;
+    for (const f of readdirSync(dir)) {
+      const file = join(dir, f);
+      if (/\.(json|html)$/.test(f)) writeFileSync(file, movedText(readFileSync(file, 'utf8'), port));
+      if (f.includes('localhost_' + PREVIEW_PORT)) renameSync(file, join(dir, movedText(f, port)));
+    }
+  }
+}
+
 /**
  * The release snapshot's ACR, drafted on stage with no model on the PC. The committed draft is taken out of the
  * snapshot's newest run (its artifact and document, and the pass's acr entry in the run record), so the Export dialog
  * offers "Draft ACR"; the pre-run model is started holding the remarks that draft recorded, and the Workbench is
  * pointed at it, so the draft it makes is the same document (demo/pre-run-model.mjs). Any other snapshot: nothing,
- * and the dialog finds no provider. prepare() and reset put the committed draft back.
+ * and the dialog finds no provider. prepare() and reset put the committed draft back. `sitePort`: the snapshot was moved
+ * there (moveOrigin), so the recording is read as moved too.
  */
-async function preRunModelFor(snapshotName, dataDir) {
+async function preRunModelFor(snapshotName, dataDir, sitePort) {
   if (snapshotName !== 'release') return undefined;
   const reports = join(dataDir, 'reports');
   const token = tokensIn(reports).at(-1);
@@ -471,7 +503,7 @@ async function preRunModelFor(snapshotName, dataDir) {
     }
     writeFileSync(file, JSON.stringify(record, null, 2));
   }
-  const model = await startPreRunModel(recordedRemarks(JSON.parse(acr)));
+  const model = await startPreRunModel(recordedRemarks(JSON.parse(sitePort ? movedText(acr, sitePort) : acr)));
   console.log('[DONE] The ACR taken out of the ' + snapshotName + ' snapshot; the pre-run model holds its remarks at ' + model.origin + ' (Export → Draft ACR, provider Anthropic API).');
   return model;
 }

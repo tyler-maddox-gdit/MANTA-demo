@@ -198,7 +198,8 @@ review, tick **Apply all 3 suggested fixes**, and wait about half a minute for t
 run again and turn green, and MANTA's comment to say `passed: no new violations`. Never tick the admin's "Merge
 without waiting" box, and never press anything on the golden PR.
 
-**Stage Release** (browser): Open http://127.0.0.1:3509/. The **Nightly** run: **expect** 25 open issues across 6 pages. The Pages dialog's **Focus order**
+**Stage Release** (browser): Open http://localhost:4175/status?upload=BP-2026-10882: **expect** the upload dialog,
+its file field labelled "Choose files to upload" (the fixes are in). Open http://127.0.0.1:3509/. The **Nightly** run: **expect** 25 open issues across 6 pages. The Pages dialog's **Focus order**
 column on the upload page: 21 stops, the dialog at 15 to 18. A verdict on 2.4.3; attest a criterion; **Export** on
 the Nightly run: **expect** no ACR yet, the provider **Anthropic API** sending to 127.0.0.1 (the pre-run model the stage
 started), and **Draft ACR** to end in `ACR drafted.` after about 6 s. **Expect** the ACR draft (`.docx`) and the USPS

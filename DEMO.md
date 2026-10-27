@@ -89,8 +89,8 @@ tester found the one no rule can."
 
 `npm run demo -- start`, before the audience, makes the story true and keeps the stages apart: QA builds `main` in its
 own copy of the repo (a git worktree in the temp folder) and serves it on 4173, so the launcher finds the backlog and
-no dialog; Dev is this folder, on the feature branch, clean, served on 5173; Release is the Workbench on the release
-snapshot in a second copy, on 3509. None of them touches another, so all three run side by side until Ctrl+C.
+no dialog; Dev is this folder, on the feature branch, clean, served on 5173; Release builds the branch with the fixes
+in a second copy, serves it on 4175 and runs the Workbench on the release snapshot, on 3509. None of them touches another, so all three run side by side until Ctrl+C.
 `stage devops` pushes the branch as tagged, whatever the Dev stage applied in this folder.
 
 ---
@@ -322,9 +322,10 @@ Say "the fix skill ran in this job and posted these itself". Their wording diffe
 ## Stage · Release: the next morning, back in the Workbench (about 3 min)
 
 **Setup.** `start` (before the audience). Its Release part checks the feature branch out at its tag in its own
-worktree and runs the Workbench on the **release snapshot** (a nightly run of the site as it merges: the upload
-change with the developer's fixes, AI notes **pre-run**) on port 3509. No site is served for it: the snapshot's
-pages are `localhost:4173`, QA's, so Rescan or Add issue here would reach `main`; the script uses neither. Alone:
+worktree, applies the developer's fixes (the patch `fix` applies), builds it and serves it on http://localhost:4175,
+and runs the Workbench on the **release snapshot** (a nightly run of that build: the site as it merges, AI notes
+**pre-run**) on port 3509. The snapshot recorded its pages on 4173, QA's site, so the stage moves its own copy of it
+to 4175: the Workbench's page links, Rescan and Add issue reach the upload dialog, never `main`. Alone:
 `npm run demo -- stage release`. It also takes the committed ACR out
 of the release snapshot and starts the **pre-run model**, a stand-in for the Anthropic API on this PC
 (`demo/pre-run-model.mjs`) holding that draft's remarks, so **Draft ACR** in the Export dialog runs MANTA's acr skill for
