@@ -1,4 +1,4 @@
-:root { --navy: #1f4e79; --navy-dark: #15375a; --green: #2e7d4f; --amber: #c97a1a; --ink: #1b1b1b; --paper: #fff; --line: #d9dde3; --muted-bad: #9a9a9a; }
+:root { --navy: #1f4e79; --navy-dark: #15375a; --green: #2e7d4f; --amber: #c97a1a; --ink: #1b1b1b; --paper: #fff; --line: #d9dde3; --muted-bad: #767676; --scrim: rgba(0,0,0,.45); }
 * { box-sizing: border-box; }
 body { margin: 0; font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif; color: var(--ink); background: var(--paper); line-height: 1.5; }
 a { color: var(--navy); }
@@ -52,6 +52,13 @@ input:focus, select:focus, button:focus, a:focus { outline: 3px solid #ffbe2e; o
 .kv dd { margin: 0; }
 .avatar { border-radius: 50%; }
 .messages { padding-left: 1.25rem; }
+
+/* upload dialog */
+.backdrop { position: fixed; inset: 0; background: var(--scrim); display: grid; place-items: center; }
+.modal { background: #fff; padding: 1.5rem; border-radius: 8px; width: min(480px, 90vw); }
+.modal h2 { margin-top: 0; }
+.modal .actions { margin-top: 1rem; }
+.hint { font-size: .9rem; }
 
 /* home — federal classic */
 .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; padding: 2rem 0; }
