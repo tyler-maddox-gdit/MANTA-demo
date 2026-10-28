@@ -19,7 +19,8 @@ function UploadModal({ caseId, onClose }) {
           <IconButton id="upload-close" label="Close upload dialog" onClick={onClose}><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="2"/></svg></IconButton>
         </div>
         <p>Case {caseId}. We accept PDF, JPG and PNG.</p>
-        <input type="file" id="upload-file" />
+        <label htmlFor="upload-file">Choose files to upload</label>
+        <input type="file" id="upload-file" aria-describedby="upload-hint" />
         <p className="hint muted" id="upload-hint">Max 10 MB per file. Up to 5 files.</p>
         <div className="actions">
           <button type="button" className="btn btn-primary" onClick={onClose}>Upload</button>
